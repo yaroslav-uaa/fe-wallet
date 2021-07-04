@@ -6,7 +6,22 @@ body {
 }
 
 @media screen and (max-width: 767px) {
-  .MuiTableContainer-root {
+  .makeStyles-table-1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .dashBoardPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .makeStyles-table-12 {
     margin-left: auto;
     margin-right: auto;
   }
