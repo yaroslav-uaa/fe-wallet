@@ -1,0 +1,26 @@
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user__info {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: black;
+  text-transform: capitalize;
+  text-decoration: none;
+}
