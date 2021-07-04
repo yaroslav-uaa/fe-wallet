@@ -1,0 +1,123 @@
+[
+  {
+    "date": "04.06.2021",
+    "category": "Other",
+    "type": "-",
+    "comment": "present for wife",
+    "sum": "+400",
+    "balance": "500"
+  },
+  {
+    "date": "04.07.2021",
+    "category": "Regular +",
+    "type": "+",
+    "comment": "salary for June",
+    "sum": "+25000",
+    "balance": "800"
+  },
+  {
+    "date": "12.06.2021",
+    "category": "Products",
+    "type": "-",
+    "comment": "for dinner",
+    "sum": "-320",
+    "balance": "95789"
+  },
+  {
+    "date": "17.06.2021",
+    "category": "Taking care of yourself",
+    "type": "-",
+    "comment": "shampoo",
+    "sum": "+240",
+    "balance": "567567"
+  },
+  {
+    "date": "19.06.2021",
+    "category": "taking care of children",
+    "type": "-",
+    "comment": "cap",
+    "sum": "+410",
+    "balance": "65y65"
+  },
+  {
+    "date": "19.06.2021",
+    "category": "Household ",
+    "type": "-",
+    "comment": "washing powder",
+    "sum": "-410",
+    "balance": "25235"
+  },
+  {
+    "date": "28.06.2021",
+    "category": "Irregular + ",
+    "type": "+",
+    "comment": "present",
+    "sum": "-4000",
+    "balance": "346876"
+  },
+   {
+    "date": "19.06.2021",
+    "category": "Household ",
+    "type": "-",
+    "comment": "washing powder",
+    "sum": "-410",
+    "balance": "25235"
+  },
+  {
+    "date": "28.06.2021",
+    "category": "Irregular + ",
+    "type": "+",
+    "comment": "present",
+    "sum": "-4000",
+    "balance": "346876"
+  },
+   {
+    "date": "19.06.2021",
+    "category": "Household ",
+    "type": "-",
+    "comment": "washing powder",
+    "sum": "-410",
+    "balance": "25235"
+  },
+  {
+    "date": "28.06.2021",
+    "category": "Irregular + ",
+    "type": "+",
+    "comment": "present",
+    "sum": "-4000",
+    "balance": "346876"
+  },
+   {
+    "date": "19.06.2021",
+    "category": "Household ",
+    "type": "-",
+    "comment": "washing powder",
+    "sum": "-410",
+    "balance": "25235"
+  },
+  {
+    "date": "28.06.2021",
+    "category": "Irregular + ",
+    "type": "+",
+    "comment": "present",
+    "sum": "-4000",
+    "balance": "346876"
+  },
+   {
+    "date": "19.06.2021",
+    "category": "Household ",
+    "type": "+",
+    "comment": "washing powder",
+    "sum": "-410",
+    "balance": "25235"
+  },
+  {
+    "date": "28.06.2021",
+    "category": "Irregular + ",
+    "type": "-",
+    "comment": "present",
+    "sum": "-4000",
+    "balance": "346876"
+  }
+
+]
