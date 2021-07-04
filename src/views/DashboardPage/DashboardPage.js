@@ -1,7 +1,14 @@
 import React from 'react';
+import HomeTab from '../../components/HomeTab';
 
-function DashboardPage() {
-  return <div></div>;
-}
+
+ const DashboardPage = () => {
+     return (
+        <div>
+           <HomeTab />
+        </div>
+    );
+};
 
 export default DashboardPage;
+
