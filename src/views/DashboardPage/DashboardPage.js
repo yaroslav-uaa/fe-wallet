@@ -1,13 +1,14 @@
-// import React from 'react';
-// import HomeTab from '../../components/HomeTab';
+import React from 'react';
+import HomeTab from '../../components/HomeTab';
 
 
-// const DashboardPage = () => {
-//     return (
-//         <div>
-//            <HomeTab />
-//         </div>
-//     );
-// };
+ const DashboardPage = () => {
+     return (
+        <div>
+           <HomeTab />
+        </div>
+    );
+};
 
-// export default DashboardPage;
+export default DashboardPage;
+
