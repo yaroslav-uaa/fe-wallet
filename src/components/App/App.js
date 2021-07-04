@@ -3,7 +3,6 @@ import { Container } from '@material-ui/core';
 import { Route, Switch } from 'react-router';
 import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
-import mainPage from '../../views/mainPage';
 import Header from '../Header';
 import SideBar from '../SideBar';
 
