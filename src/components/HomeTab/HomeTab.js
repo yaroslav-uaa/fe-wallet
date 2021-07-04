@@ -1,5 +1,4 @@
 import { 
-  Container,
   Paper,
   Table,
   TableBody,
@@ -12,13 +11,24 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import TablePaginationActions from './HomeTabPagination';
-import { withStyles } from '@material-ui/core/styles';
-import s from './HomeTab.module.css';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    table: {
+      marginTop: 'auto',
+      marginLeft: 'auto',
+      width: 'fit-content',
+      maxHeight: '60vh',
+      display: 'flex',
+      justifyContent: 'flex-end',
+      color: 'red',
+  },
+});
 
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.dark,
+    // color: theme.palette.primary.dark,
     fontSize: 16,
     fontWeight: 700
   },
@@ -29,13 +39,15 @@ const StyledTableCell = withStyles(theme => ({
 
 const StyledTableRow = withStyles(theme => ({
   root: {
-    
-      backgroundColor: theme.palette.action.selected,
+    width: '65%',
+    padding: '0.5em',
+    backgroundColor: theme.palette.action.selected,
     
   },
 }))(TableRow);
 
 function HomeTab({transactions}) {
+   const s = useStyles();
 //   const [history, setHistory] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -57,9 +69,8 @@ function HomeTab({transactions}) {
 
   return (
     <>
-      <Container maxWidth="md" style={{ marginTop: 15, maxHeight: '60vh', }}>
-        <TableContainer component={Paper}>
-          <Table size="md" aria-label="a dense table">
+        <TableContainer  className={s.table} component={Paper}>
+          <Table  aria-label="a dense table">
             <TableHead>
               <TableRow>
                 <StyledTableCell align="center">Дата</StyledTableCell>
@@ -127,7 +138,6 @@ function HomeTab({transactions}) {
             )}
           </Table>
         </TableContainer>
-      </Container>
     </>
   );
 }
