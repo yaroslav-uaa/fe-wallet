@@ -1,0 +1,30 @@
+.container {
+  min-width: 280px;
+  max-width: 340px;
+  height: 80px;
+  padding: 8px 40px;
+  margin-bottom: 30px;
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: 25px;
+}
+
+.title {
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.balance {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 45px;
+  margin: 0;
+}
