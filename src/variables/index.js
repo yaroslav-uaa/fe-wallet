@@ -18,10 +18,11 @@ export default createMuiTheme({
         primary: {
             main: '#D2BDE8',
             secondary: '#8609F9',
-            dark: '#030124'
+            dark: '#030124',
+            light: '#d2bde8',
         },
         background: {
-            primary: '#311FA0'
+            primary: '#311FA0',
         },
     },
 });

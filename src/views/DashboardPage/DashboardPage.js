@@ -4,6 +4,7 @@ import transactions from '../../transaction.json';
 import SideBar from '../../components/SideBar';
 
 const DashboardPage = () => {
+
   return (
     <div className="dashBoardPage">
       <SideBar />

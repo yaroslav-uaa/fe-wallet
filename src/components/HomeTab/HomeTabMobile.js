@@ -4,156 +4,119 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableFooter,
-  TableHead,
-  TablePagination,
   TableRow,
 } from '@material-ui/core';
-import React, { useState } from 'react';
-import TablePaginationActions from './HomeTabPaginationMobile';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  table: {
-    width: 'fit-content',
-    maxHeight: '60vh',
-    display: 'flex',
-    color: 'red',
-  },
-});
+import React  from 'react'; 
+import { withStyles, } from '@material-ui/core/styles';
 
 const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.primary.main,
-    // color: theme.palette.primary.dark,
-    fontSize: 16,
-    fontWeight: 700,
-  },
-  body: {
-    fontSize: 14,
-  },
+    root: {
+        width: '70%',
+        backgroundColor: 'transparent',
+        fontSize: 16,
+        color: theme.palette.primary.light,
+    }
+  
 }))(TableCell);
 
 const StyledTableRow = withStyles(theme => ({
   root: {
     width: '65%',
     padding: '0.5em',
-    backgroundColor: theme.palette.action.selected,
+    color: theme.palette.primary.light,
+    backgroundColor: 'transparent',
   },
 }))(TableRow);
 
-
+const StyledTableHeadCell = withStyles(theme => ({
+    root: { 
+    backgroundColor: 'rgba(53%, 4%, 98%, 0.3);',
+    width: '30%',
+    color: theme.palette.primary.light,
+    fontSize: 16,
+    textShadow: '2px 2px 3px black',          
+    borderCollapse: 'collapse',
+  },
+}))(TableCell);
 
 function HomeTabMobile({ transactions }) {
-  const s = useStyles();
-  //   const [history, setHistory] = useState([]);
-  const [page, setPage] = useState(0);
-  const [colsPerPage, setColsPerPage] = useState(1);
-
-  //   useEffect(() => {
-  //     const allHistory = JSON.parse(localStorage.getItem('history'));
-  //     console.log(allHistory);
-  //     setHistory(allHistory);
-  //   }, []);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeColsPerPage = e => {
-    setColsPerPage(parseInt(e.target.value, 2));
-    setPage(0);
-  };
-
+    function getRandomColor() {
+    const colors = ['#0091ea', '#004d40', '#cddc39', '#76ff03', '#c6ff00', '#ef6c00', '#ffff00', '#bdbdbd'];
+    const index = Math.floor(Math.random() * colors.length)
+    return colors[index]
+};
   return (
-    <>
-      {/* <TableContainer className={s.table} component={Paper}> */}
-       
+    <>     
           {transactions === null ? (
-            <p>No transactions yet</p>
+            <StyledTableRow>No transactions yet</StyledTableRow> 
           ) : (
             <>
               {transactions.map(transaction => (
-                     <TableContainer  style={{margin: 'auto'}} className={s.table} component={Paper}>
-                      <div style={{display: 'flex', flexDirection: 'column', width: '70vw'}}  >
-                           <Table key={transaction._id}> 
-                                      <TableBody>
-                                          <StyledTableRow>
-                                              <StyledTableCell>
+                      <TableContainer style={{ color: '#d2bde8', display: 'flex', flexDirection: 'column', boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',  backgroundColor: 'transparent' , margin: '20px auto', width: '90vw'}} component={Paper}>
+
+                           <Table key={transaction._id} > 
+                          <TableBody>
+                              <TableCell style={{ maxWidth: '5vw', backgroundColor: getRandomColor()}}></TableCell>
+                              <TableCell>
+                                  <StyledTableRow>
+                                  
+                                              <StyledTableHeadCell align="center">
                                                   Date
-                                              </StyledTableCell>
-                                              <StyledTableCell>
+                                              </StyledTableHeadCell>
+                                              <StyledTableCell align="center">
                                                   {transaction.date}
                                               </StyledTableCell>
-                                          </StyledTableRow>
-                                          <StyledTableRow>
-                                              <StyledTableCell>
-                                                  type
-                                              </StyledTableCell>
-                                              <StyledTableCell>
+                                    </StyledTableRow>
+                                          <StyledTableRow >
+                                              <StyledTableHeadCell align="center">
+                                                  Type
+                                              </StyledTableHeadCell>
+                                              <StyledTableCell align="center">
                                                   {transaction.type}
                                               </StyledTableCell>
                                           </StyledTableRow>
 
                                           <StyledTableRow>
-                                              <StyledTableCell>
-                                                  Categoty
-                                              </StyledTableCell>
-                                              <StyledTableCell>
+                                              <StyledTableHeadCell align="center">
+                                                  Category
+                                              </StyledTableHeadCell>
+                                              <StyledTableCell align="center">
                                                   {transaction.category}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              <StyledTableCell>
-                                                  Comm
-                                              </StyledTableCell>
-                                              <StyledTableCell>
+                                              <StyledTableHeadCell align="center">
+                                                  Comment
+                                              </StyledTableHeadCell>
+                                              <StyledTableCell align="center">
                                                   {transaction.comment}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              <StyledTableCell>
+                                              <StyledTableHeadCell align="center">
                                                   Sum
-                                              </StyledTableCell>
-                                              <StyledTableCell>
+                                              </StyledTableHeadCell>
+                                              <StyledTableCell align="center">
                                                   {transaction.sum}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              < StyledTableCell>
-                                                  balance
-                                              </StyledTableCell>
-                                              < StyledTableCell>
+                                              < StyledTableHeadCell align="center">
+                                                  Balance
+                                              </StyledTableHeadCell>
+                                              < StyledTableCell align="center">
                                                   {transaction.balance}
                                               </StyledTableCell>
                                           </StyledTableRow>
-                                      </TableBody>
-                                              {/* <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    colsPerPageOptions={[5, 10, 20, 30]}
-                    count={transactions !== [] && transactions.length}
-                    colsPerPage={colsPerPage}
-                    page={page}
-                    SelectProps={{
-                      inputProps: { 'aria-label': 'rows per page' },
-                      native: true,
-                    }}
-                    labelRowsPerPage="Transactions per page:"
-                    onChangePage={handleChangePage}
-                    onChangePerPage={handleChangeColsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>    */}
+                              </TableCell>
+                                   
+                                      </TableBody>                                    
                                   </Table>
-                                 </div>
+                
                                     </TableContainer>
                               ))}
             </>
           )}
-    
-      {/* </TableContainer> */}
     </>
   );
 }
