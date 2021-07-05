@@ -9,6 +9,7 @@ const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
+    color: '#d2bde8',
   },
 }));
 
@@ -48,7 +49,7 @@ function TablePaginationActions(props) {
         aria-label="previous page"
       >
         {theme.direction === 'rtl' ? (
-          <KeyboardArrowRight />
+          <KeyboardArrowRight  />
         ) : (
           <KeyboardArrowLeft />
         )}
