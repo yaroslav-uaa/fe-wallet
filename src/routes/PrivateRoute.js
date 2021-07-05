@@ -16,4 +16,4 @@ function PrivateRoute({ component: Component, redirectTo, ...routeProps }) {
   )
 }
 
-export default PrivateRoute;
+// export default PrivateRoute;
