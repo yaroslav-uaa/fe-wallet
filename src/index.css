@@ -24,10 +24,3 @@ body {
 .dashBoardPage {
     padding-top: 4vh;
 }
-@media screen and (max-width: 1279px) {
-  /* ? для дешборда */
-
-}
-.MuiToolbar-root {
-  color:#d2bde8;
-}

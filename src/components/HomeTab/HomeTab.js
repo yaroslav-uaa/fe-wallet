@@ -39,8 +39,7 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.gradient,
     width: 'fit-content',
     margin: 'auto',
-    boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',
-    backgroundColor: 'transparent'
+    boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)', 
   },
   table: {
     color:   theme.palette.primary.light,
@@ -141,7 +140,8 @@ function HomeTab({ transactions }) {
               </>
             )}
           </Table>
-        </TableContainer>) : (<TableContainer className={s.container} component={Paper}>
+          </TableContainer>)
+          : (<TableContainer className={s.container} component={Paper}>
           <Table className={s.container} aria-label="a dense table">
             <TableHead>
               <TableRow className={s.row}>
