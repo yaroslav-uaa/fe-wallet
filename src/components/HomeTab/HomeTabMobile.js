@@ -42,6 +42,8 @@ const StyledTableRow = withStyles(theme => ({
   },
 }))(TableRow);
 
+
+
 function HomeTabMobile({ transactions }) {
   const s = useStyles();
   //   const [history, setHistory] = useState([]);
@@ -65,21 +67,16 @@ function HomeTabMobile({ transactions }) {
 
   return (
     <>
-      <TableContainer className={s.table} component={Paper}>
+      {/* <TableContainer className={s.table} component={Paper}> */}
        
           {transactions === null ? (
             <p>No transactions yet</p>
           ) : (
             <>
-              
-                          {(colsPerPage > 0
-                  ? transactions.slice(
-                      page * colsPerPage,
-                      page * colsPerPage + colsPerPage,
-                    )
-                  : transactions
-                ).map(transaction => (
-                                  <Table key={transaction._id}>
+              {transactions.map(transaction => (
+                     <TableContainer  style={{margin: 'auto'}} className={s.table} component={Paper}>
+                      <div style={{display: 'flex', flexDirection: 'column', width: '70vw'}}  >
+                           <Table key={transaction._id}> 
                                       <TableBody>
                                           <StyledTableRow>
                                               <StyledTableCell>
@@ -131,7 +128,7 @@ function HomeTabMobile({ transactions }) {
                                               </StyledTableCell>
                                           </StyledTableRow>
                                       </TableBody>
-                                              <TableFooter>
+                                              {/* <TableFooter>
                 <TableRow>
                   <TablePagination
                     colsPerPageOptions={[5, 10, 20, 30]}
@@ -148,14 +145,15 @@ function HomeTabMobile({ transactions }) {
                     ActionsComponent={TablePaginationActions}
                   />
                 </TableRow>
-              </TableFooter>   
+              </TableFooter>    */}
                                   </Table>
-                                    
+                                 </div>
+                                    </TableContainer>
                               ))}
             </>
           )}
     
-      </TableContainer>
+      {/* </TableContainer> */}
     </>
   );
 }

@@ -11,8 +11,9 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import TablePaginationActions from './HomeTabPagination';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-
+import { withStyles, makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import HomeTabMobile from './HomeTabMobile'
 const useStyles = makeStyles({
   table: {
     width: 'fit-content',
@@ -43,6 +44,13 @@ const StyledTableRow = withStyles(theme => ({
 }))(TableRow);
 
 function HomeTab({ transactions }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(
+    theme.breakpoints.down(theme.breakpoints.values.md),
+  );
+  const isDesktop = useMediaQuery(
+    theme.breakpoints.up(theme.breakpoints.values.lg),
+  );
   const s = useStyles();
   //   const [history, setHistory] = useState([]);
   const [page, setPage] = useState(0);
@@ -65,76 +73,83 @@ function HomeTab({ transactions }) {
 
   return (
     <>
-      <TableContainer className={s.table} component={Paper}>
-        <Table aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">Дата</StyledTableCell>
-              <StyledTableCell align="center">Тип</StyledTableCell>
-              <StyledTableCell align="center">Категория</StyledTableCell>
-              <StyledTableCell align="center">Комментарий</StyledTableCell>
-              <StyledTableCell align="center">Сумма</StyledTableCell>
-              <StyledTableCell align="center">Баланс</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          {transactions === null ? (
-            <TableRow align="center">No transactions yet</TableRow>
-          ) : (
-            <>
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? transactions.slice(
+      {isMobile ? (
+        <HomeTabMobile
+          transactions={transactions}
+        />
+      ) : (
+        <TableContainer style={{width: 'fit-content', margin: 'auto'}} component={Paper}>
+          <Table aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">Дата</StyledTableCell>
+                <StyledTableCell align="center">Тип</StyledTableCell>
+                <StyledTableCell align="center">Категория</StyledTableCell>
+                <StyledTableCell align="center">Комментарий</StyledTableCell>
+                <StyledTableCell align="center">Сумма</StyledTableCell>
+                <StyledTableCell align="center">Баланс</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            {transactions === null ? (
+              <TableRow align="center">No transactions yet</TableRow>
+            ) : (
+              <>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? transactions.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                  : transactions
-                ).map(transaction => (
-                  <StyledTableRow key={transaction._id}>
-                    <StyledTableCell align="center">
-                      {transaction.date}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.type}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.category}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.comment}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.sum}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.balance}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 20, 30]}
-                    count={transactions !== [] && transactions.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    SelectProps={{
-                      inputProps: { 'aria-label': 'rows per page' },
-                      native: true,
-                    }}
-                    labelRowsPerPage="Transactions per page:"
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>
-            </>
-          )}
-        </Table>
-      </TableContainer>
+                    : transactions
+                  ).map(transaction => (
+                    <StyledTableRow key={transaction._id}>
+                      <StyledTableCell align="center">
+                        {transaction.date}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {transaction.type}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {transaction.category}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {transaction.comment}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {transaction.sum}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {transaction.balance}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+                <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 20, 30]}
+                      count={transactions !== [] && transactions.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      SelectProps={{
+                        inputProps: { 'aria-label': 'rows per page' },
+                        native: true,
+                      }}
+                      labelRowsPerPage="Transactions per page:"
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                      ActionsComponent={TablePaginationActions}
+                    />
+                  </TableRow>
+                </TableFooter>
+              </>
+            )}
+          </Table>
+        </TableContainer>
+    
+      )}
     </>
-  );
+  )
 }
 
 export default HomeTab;

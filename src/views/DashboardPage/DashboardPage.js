@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeTabMobile from '../../components/HomeTab/HomeTabMobile.js';
+import HomeTab from '../../components/HomeTab/HomeTab.js';
 import transactions from '../../transaction.json';
 import SideBar from '../../components/SideBar';
 
@@ -7,7 +7,7 @@ const DashboardPage = () => {
   return (
     <div className="dashBoardPage">
       <SideBar />
-      <HomeTabMobile transactions={transactions} />
+      <HomeTab transactions={transactions} />
     </div>
   );
 };
