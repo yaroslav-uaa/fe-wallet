@@ -11,50 +11,44 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import TablePaginationActions from './HomeTabPagination';
-import { withStyles, useTheme} from '@material-ui/core/styles';
+import { useTheme, makeStyles} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import HomeTabMobile from './HomeTabMobile'
 
-const StyledTableCell = withStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   head: {
-    backgroundColor: 'transparent' ,
-    fontSize: 16,
-    fontWeight: 700,
-    color: theme.palette.primary.light,
+    fontFamily: 'Prompt, sans-serif',
+    fontWeight: 500,
+    color: theme.palette.primary.dark,
+    backgroundColor: 'rgba(53%, 4%, 98%, 0.6);',
+    fontSize: 17,
+    textShadow: '2px 2px 3px grey',          
+    borderCollapse: 'collapse',
   },
-  body: {
-    fontSize: 14,
-    color: theme.palette.primary.light,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
+  row: {
     width: '65%',
     padding: '0.5em',
     color: theme.palette.primary.light,
   },
-}))(TableRow);
-
-const StyledTableHead = withStyles(theme => ({
-  root: {
-    backgroundColor: 'rgba(53%, 4%, 98%, 0.6);',
-    borderRadius: '50%',
-    fontSize: 16,
-    textShadow: '2px 2px 3px black',          
-    borderCollapse: 'collapse',
+  text: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 16, 
   },
-}))(TableHead);
-
-const StyledTable = withStyles(theme => ({
-  root: {
-    margin: '0 auto 20px auto',
-    color: theme.palette.primary.light,
-    borderCollapse: 'collapse',
+  container: {
+    background: theme.palette.background.gradient,
+    width: 'fit-content',
+    margin: 'auto',
+    boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)', 
   },
-}))(Table);
+  table: {
+    color:   theme.palette.primary.light,
+    borderCollapse: 'collapse',
+  }
+}));
 
 function HomeTab({ transactions }) {
+  const s = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(
     theme.breakpoints.down(theme.breakpoints.values.md),
@@ -80,20 +74,20 @@ function HomeTab({ transactions }) {
           transactions={transactions}
         />
       ) : ( isDesktop ? (
-          <TableContainer style={{ width: 'fit-content', margin: 'auto', boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',  backgroundColor: 'transparent' }} component={Paper}>
-          <StyledTable aria-label="a dense table">
-            <StyledTableHead>
-              <TableRow>
-                <StyledTableCell align="center">Date</StyledTableCell>
-                <StyledTableCell align="center">Type</StyledTableCell>
-                <StyledTableCell align="center">Category</StyledTableCell>
-                <StyledTableCell align="center">Comment</StyledTableCell>
-                <StyledTableCell align="center">Sum</StyledTableCell>
-                <StyledTableCell align="center">Balance</StyledTableCell>
+          <TableContainer className={s.container} component={Paper}>
+          <Table className={s.table} aria-label="a dense table">
+            <TableHead>
+              <TableRow className={s.row} >
+                <TableCell className={s.head}  align="center">Date</TableCell>
+                <TableCell className={s.head} align="center">Type</TableCell>
+                <TableCell className={s.head} align="center">Category</TableCell>
+                <TableCell className={s.head} align="center">Comment</TableCell>
+                <TableCell className={s.head} align="center">Sum</TableCell>
+                <TableCell className={s.head} align="center">Balance</TableCell>
               </TableRow>
-            </StyledTableHead>
+            </TableHead>
             {transactions === null ? (
-              <TableRow align="center">No transactions yet</TableRow>
+              <TableRow className={s.row} align="center">No transactions yet</TableRow>
             ) : (
               <>
                 <TableBody>
@@ -104,26 +98,26 @@ function HomeTab({ transactions }) {
                     )
                     : transactions
                   ).map(transaction => (
-                    <StyledTableRow key={transaction._id}>
-                      <StyledTableCell align="center">
+                    <TableRow className={s.row} key={transaction._id}>
+                      <TableCell className={s.text} align="center">
                         {transaction.date}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
                         {transaction.type}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
                         {transaction.category}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
                         {transaction.comment}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
                         {transaction.sum}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
                         {transaction.balance}
-                      </StyledTableCell>
-                    </StyledTableRow>
+                      </TableCell>
+                    </TableRow>
                   ))}
                 </TableBody>
                 <TableFooter>
@@ -145,19 +139,20 @@ function HomeTab({ transactions }) {
                 </TableFooter>
               </>
             )}
-          </StyledTable>
-        </TableContainer>) : (<TableContainer style={{width: 'fit-content', boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',  backgroundColor: 'transparent' }} component={Paper}>
-          <StyledTable aria-label="a dense table">
-            <StyledTableHead>
-              <TableRow>
-                <StyledTableCell align="center">Date</StyledTableCell>
-                <StyledTableCell align="center">Type</StyledTableCell>
-                <StyledTableCell align="center">Category</StyledTableCell>
-                <StyledTableCell align="center">Comment</StyledTableCell>
-                <StyledTableCell align="center">Sum</StyledTableCell>
-                <StyledTableCell align="center">Balance</StyledTableCell>
+          </Table>
+          </TableContainer>)
+          : (<TableContainer className={s.container} component={Paper}>
+          <Table className={s.container} aria-label="a dense table">
+            <TableHead>
+              <TableRow className={s.row}>
+                <TableCell className={s.head} align="center">Date</TableCell>
+                <TableCell className={s.head} align="center">Type</TableCell>
+                <TableCell className={s.head} align="center">Category</TableCell>
+                <TableCell className={s.head} align="center">Comment</TableCell>
+                <TableCell className={s.head} align="center">Sum</TableCell>
+                <TableCell className={s.head}align="center">Balance</TableCell>
               </TableRow>
-            </StyledTableHead>
+            </TableHead>
             {transactions === null ? (
               <TableRow align="center">No transactions yet</TableRow>
             ) : (
@@ -170,26 +165,26 @@ function HomeTab({ transactions }) {
                     )
                     : transactions
                   ).map(transaction => (
-                    <StyledTableRow key={transaction._id}>
-                      <StyledTableCell align="center">
+                    <TableRow  key={transaction._id}>
+                      <TableCell className={s.text}  align="center">
                         {transaction.date}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text}  align="center">
                         {transaction.type}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text}  align="center">
                         {transaction.category}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell  className={s.text} align="center">
                         {transaction.comment}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text}   align="center">
                         {transaction.sum}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell className={s.text}  align="center">
                         {transaction.balance}
-                      </StyledTableCell>
-                    </StyledTableRow>
+                      </TableCell>
+                    </TableRow>
                   ))}
                 </TableBody>
                 <TableFooter>
@@ -211,7 +206,7 @@ function HomeTab({ transactions }) {
                 </TableFooter>
               </>
             )}
-          </StyledTable>
+          </Table>
         </TableContainer>)
     
       )}
