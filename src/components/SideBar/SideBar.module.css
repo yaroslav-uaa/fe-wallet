@@ -1,0 +1,26 @@
+@media screen and (min-width: 1280px) {
+  .sidebar {
+    width: 378px;
+  }
+}
+
+@media screen and (max-width: 1279px) and (min-width: 768px) {
+  .sidebar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+  }
+
+  .box {
+    margin-right: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sidebar {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+}
