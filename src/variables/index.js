@@ -23,6 +23,7 @@ export default createMuiTheme({
         },
         background: {
             primary: '#311FA0',
+            gradient: 'linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.01))'
         },
     },
 });

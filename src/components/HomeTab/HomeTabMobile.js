@@ -7,7 +7,19 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React  from 'react'; 
-import { withStyles, } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  head: {
+    fontFamily: 'Prompt, sans-serif',
+    fontWeight: 500,
+  },
+  text: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 16, 
+  },
+});
 
 const StyledTableCell = withStyles(theme => ({
     root: {
@@ -41,6 +53,7 @@ const StyledTableHeadCell = withStyles(theme => ({
 }))(TableCell);
 
 function HomeTabMobile({ transactions }) {
+    const s = useStyles();
     function getRandomColor() {
     const colors = ['#0091ea', '#004d40', '#cddc39', '#76ff03', '#c6ff00', '#ef6c00', '#ffff00', '#bdbdbd'];
     const index = Math.floor(Math.random() * colors.length)
@@ -61,51 +74,51 @@ function HomeTabMobile({ transactions }) {
                                 <TableCell >
                                   <StyledTableRow>
                                   
-                                              <StyledTableHeadCell align="left">
+                                              <StyledTableHeadCell className={s.head} align="left">
                                                   Date
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="right">
+                                              <StyledTableCell className={s.text} align="right">
                                                   {transaction.date}
                                               </StyledTableCell>
                                     </StyledTableRow>
                                           <StyledTableRow >
-                                              <StyledTableHeadCell align="left">
+                                              <StyledTableHeadCell className={s.head} align="left">
                                                   Type
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="right">
+                                              <StyledTableCell className={s.text} align="right">
                                                   {transaction.type}
                                               </StyledTableCell>
                                           </StyledTableRow>
 
                                           <StyledTableRow>
-                                              <StyledTableHeadCell align="left">
+                                              <StyledTableHeadCell className={s.head} align="left">
                                                   Category
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="right">
+                                              <StyledTableCell className={s.text} align="right">
                                                   {transaction.category}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              <StyledTableHeadCell align="left">
+                                              <StyledTableHeadCell className={s.head} align="left">
                                                   Comment
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="right">
+                                              <StyledTableCell className={s.text} align="right">
                                                   {transaction.comment}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              <StyledTableHeadCell align="left">
+                                              <StyledTableHeadCell className={s.head} align="left">
                                                   Sum
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="right">
+                                              <StyledTableCell className={s.text} align="right">
                                                   {transaction.sum}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              < StyledTableHeadCell align="left">
+                                              < StyledTableHeadCell className={s.head} align="left">
                                                   Balance
                                               </StyledTableHeadCell>
-                                              < StyledTableCell align="right">
+                                              < StyledTableCell className={s.text} align="right">
                                                   {transaction.balance}
                                               </StyledTableCell>
                                           </StyledTableRow>
