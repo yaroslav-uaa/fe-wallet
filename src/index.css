@@ -15,13 +15,15 @@ body {
 }
 
 @media screen and (min-width: 1280px) {
-  .dashBoardPage {
+  .dashBoardPage { 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 }
-
+.dashBoardPage {
+    padding-top: 4vh;
+}
 @media screen and (max-width: 1279px) {
   /* ? для дешборда */
 

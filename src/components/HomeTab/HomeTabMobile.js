@@ -11,7 +11,7 @@ import { withStyles, } from '@material-ui/core/styles';
 
 const StyledTableCell = withStyles(theme => ({
     root: {
-        width: '70%',
+        width: '100%',
         backgroundColor: 'transparent',
         fontSize: 16,
         color: theme.palette.primary.light,
@@ -21,7 +21,8 @@ const StyledTableCell = withStyles(theme => ({
 
 const StyledTableRow = withStyles(theme => ({
   root: {
-    width: '65%',
+    width: '100%',
+    margin: '0 auto', 
     padding: '0.5em',
     color: theme.palette.primary.light,
     backgroundColor: 'transparent',
@@ -52,59 +53,59 @@ function HomeTabMobile({ transactions }) {
           ) : (
             <>
               {transactions.map(transaction => (
-                      <TableContainer style={{ color: '#d2bde8', display: 'flex', flexDirection: 'column', boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',  backgroundColor: 'transparent' , margin: '20px auto', width: '90vw'}} component={Paper}>
+                      <TableContainer style={{ color: '#d2bde8', display: 'flex', flexDirection: 'column', boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',  backgroundColor: 'transparent' , margin: '20px auto', maxWidth: '400px'}} component={Paper}>
 
                            <Table key={transaction._id} > 
                           <TableBody>
-                              <TableCell style={{ maxWidth: '5vw', backgroundColor: getRandomColor()}}></TableCell>
-                              <TableCell>
+                              <TableCell style={{ maxWidth: '10px', backgroundColor: getRandomColor()}}></TableCell>
+                                <TableCell >
                                   <StyledTableRow>
                                   
-                                              <StyledTableHeadCell align="center">
+                                              <StyledTableHeadCell align="left">
                                                   Date
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="center">
+                                              <StyledTableCell align="right">
                                                   {transaction.date}
                                               </StyledTableCell>
                                     </StyledTableRow>
                                           <StyledTableRow >
-                                              <StyledTableHeadCell align="center">
+                                              <StyledTableHeadCell align="left">
                                                   Type
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="center">
+                                              <StyledTableCell align="right">
                                                   {transaction.type}
                                               </StyledTableCell>
                                           </StyledTableRow>
 
                                           <StyledTableRow>
-                                              <StyledTableHeadCell align="center">
+                                              <StyledTableHeadCell align="left">
                                                   Category
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="center">
+                                              <StyledTableCell align="right">
                                                   {transaction.category}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              <StyledTableHeadCell align="center">
+                                              <StyledTableHeadCell align="left">
                                                   Comment
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="center">
+                                              <StyledTableCell align="right">
                                                   {transaction.comment}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              <StyledTableHeadCell align="center">
+                                              <StyledTableHeadCell align="left">
                                                   Sum
                                               </StyledTableHeadCell>
-                                              <StyledTableCell align="center">
+                                              <StyledTableCell align="right">
                                                   {transaction.sum}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                           <StyledTableRow>
-                                              < StyledTableHeadCell align="center">
+                                              < StyledTableHeadCell align="left">
                                                   Balance
                                               </StyledTableHeadCell>
-                                              < StyledTableCell align="center">
+                                              < StyledTableCell align="right">
                                                   {transaction.balance}
                                               </StyledTableCell>
                                           </StyledTableRow>
