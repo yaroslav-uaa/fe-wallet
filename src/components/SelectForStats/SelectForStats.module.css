@@ -1,0 +1,24 @@
+.select {
+  display: inline-block;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.selectMounth {
+  background-color: #fff;
+  min-width: 280px !important;
+  min-height: 58px;
+  border-radius: 29px;
+  margin-bottom: 20px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .selectMounth {
+    min-width: 166px !important;
+  }
+
+  .selectMounth:not(:last-child) {
+    margin-right: 20px !important;
+  }
+}

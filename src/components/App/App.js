@@ -25,7 +25,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact component={DashboardPage} />
-        <Route path="stats" exact component={Stats} />
+        <Route path="/stats" exact component={Stats} />
         {isTabletOrMobile ? (
           <Route path="/currency" component={Currency} />
         ) : (

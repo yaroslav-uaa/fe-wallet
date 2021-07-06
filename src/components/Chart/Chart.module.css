@@ -1,0 +1,21 @@
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 45px;
+  color: #000000;
+}
+
+.chart {
+  position: relative;
+  /* outline: 1px solid green; */
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .chart {
+    margin-right: 35px;
+  }
+}
