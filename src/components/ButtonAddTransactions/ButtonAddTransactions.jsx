@@ -8,9 +8,13 @@ import FormAddTransaction from '../FormAddTransaction';
 const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1),
+    color: '#8609F9',
+    background: '#d2bde8',
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
+ 
+
   },
 }));
 
@@ -29,7 +33,6 @@ export default function ButtonAddTransactions() {
     <>
       <Fab
         onClick={openModal}
-        color="secondary"
         aria-label="add"
         className={classes.margin}
       >
@@ -38,7 +41,7 @@ export default function ButtonAddTransactions() {
 
       {showModal && (
         <Modal onClose={onCloseModal}>
-          <FormAddTransaction />
+          <FormAddTransaction  />
         </Modal>
       )}
     </>

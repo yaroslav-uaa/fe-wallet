@@ -106,6 +106,32 @@
       "comment": "",
       "sum": "",
       "id": 12
+    },
+    {
+      "date": "2021-07-06T21:43:18.361Z",
+      "category": "Select the category",
+      "type": false,
+      "comment": "fhghgh",
+      "sum": "dfhfghf",
+      "id": 13
+    },
+    {
+      "date": "2021-07-06T21:48:51.717Z",
+      "category": "Select the category",
+      "type": false,
+      "comment": "fghfgh",
+      "sum": "ghfgh",
+      "undefined": 0,
+      "id": 14
+    },
+    {
+      "date": "2021-07-06T21:56:22.635Z",
+      "category": "Select the category",
+      "type": true,
+      "comment": "jghjg",
+      "sum": "gghjg",
+      "undefined": 0,
+      "id": 15
     }
   ]
 }

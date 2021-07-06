@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import DashboardPage from '../../views/DashboardPage/DashboardPage';
 import Stats from '../../views/Stats/Stats';
 import CurrencyPage from '../../views/CurrencyPage/CurrencyPage';
+import ButtonAddTransactions from '../ButtonAddTransactions';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 
@@ -23,6 +24,7 @@ function App() {
       }}
     >
       <Header />
+      <ButtonAddTransactions/>
 
       <Switch>
         <Route path="/" exact component={DashboardPage} />

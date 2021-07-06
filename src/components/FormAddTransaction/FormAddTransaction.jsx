@@ -4,12 +4,17 @@ import styles from './FormAddTransaction.module.css';
 import operationsTransactions from '../../redux/transaction/operations-transactions';
 import Select from './Select/Select';
 import Switch from './Switch/Switch';
+import DatePicker from 'react-date-picker';
+
+
+
+
 
 export default function FormAddTransaction() {
   const initialState = {
     date: new Date(),
-    category: 'Выберите категорию',
-    type: true,
+    category: 'Select the category',
+    isIncome: false,
     comment: '',
     sum: '',
   };
@@ -18,14 +23,19 @@ export default function FormAddTransaction() {
   const [transaction, setTransaction] = useState(initialState);
 
   const handleInput = useCallback(evt => {
-    console.log(evt.target.type);
-    const value =
-      evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
+    const value = evt.target.value
     const name = evt.target.name;
-    console.log(name);
-    console.log(value);
     setTransaction(prev => ({ ...prev, [name]: value }));
   }, []);
+
+  const handleDate = (value) => {
+    setTransaction({date:value , ...transaction})
+  }
+
+  const handleInputSwitch = (event) => {
+    console.log(event.target.checked)
+    setTransaction(prevState=>({...prevState ,isIncome:event.target.checked , category:'Select the category' }))
+  }
 
   const addTransaction = useCallback(
     data => {
@@ -44,16 +54,18 @@ export default function FormAddTransaction() {
     [transaction, addTransaction, initialState],
   );
 
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <p className={styles.form_label}>Добавить транзакцию</p>
-      <Switch />
+      <p className={styles.form_label}>Adding Transactions</p>
+      <div>
+        <Switch isChecked={transaction.isIncome} onSwitch={handleInputSwitch}/>
+      </div>
       <Select
-        listCategory={spendingCategory}
+        listCategory={transaction.type ? revenuesCategory :spendingCategory }
         handleInput={handleInput}
         category={transaction.category}
       />
-      {/* <Select /> */}
       <div className={styles.input_box}>
         <input
           type="text"
@@ -63,37 +75,35 @@ export default function FormAddTransaction() {
           onChange={handleInput}
           className={styles.form_input_sum}
         />
-        <label>
-          <input
-            type="date"
-            name="date"
-            onChange={handleInput}
-            value={transaction.date}
-          />
-        </label>
+        <DatePicker
+        onChange={handleDate}
+        value={transaction.date}
+          name='date'
+          styles={{border:'none'}}
+      />
       </div>
       <input
         type="text"
         name="comment"
         value={transaction.comment}
         onChange={handleInput}
-        placeholder="Коментарий"
+        placeholder="Comment"
         className={styles.form_input}
       />
-      <button className={styles.form_btn_add}> Добавить</button>
-      <button className={styles.form_btn_reject}>Отмена</button>
+      <button className={styles.form_btn_add}> Add</button>
+      <button className={styles.form_btn_reject}>Reject</button>
     </form>
   );
 }
 
 const spendingCategory = [
-  'Основной',
-  'Еда',
-  'Авто',
-  'Развитие',
-  'Дети',
-  'Дом',
-  'Образование',
-  'Остальное',
+  'Basic',
+  'Food',
+  'Auto',
+  'Development',
+  'children',
+  'House',
+  'Education',
+  'The rest',
 ];
-const revenuesCategoty = ['Регулярный доход', 'Неpегулярный доход'];
+const revenuesCategory = ['Regular income ', 'Non-regular income'];

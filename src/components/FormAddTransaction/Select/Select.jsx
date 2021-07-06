@@ -1,91 +1,49 @@
-import styles from './Select.module.css';
-import { v4 as uuidv4 } from 'uuid';
 
-export default function Select({ listCategory, category, handleInput }) {
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles({
+  inputRoot:{
+    background: 'inherit',
+    padding: '5px',
+    minWidth: '380px',
+    color:'#5515a8'
+  },
+  input: {
+    width: '100%',
+    color: '4c0085',
+    backgroundColor:'inherit'
+  },
+  option: {
+    backgroundColor: '4c0085',
+    width: '100%',
+     borderBottom: "1px solid #5515a8",
+  },
+  options:{
+    backgroundColor:'#5515a8'
+  }
+
+
+ 
+ 
+});
+
+
+export default function Select({ listCategory, handleInput }) {
+   const styles = useStyles();
   return (
-    <div className={styles.select_box}>
-      <select
-        name="category"
-        value={category}
-        onChange={handleInput}
-        className={styles.form_select}
-      >
-        <option value="hide">Выберите категорию</option>
-        {listCategory.map(item => {
-          return (
-            <option key={uuidv4()} value={item} name="category">
-              {item}
-            </option>
-          );
-        })}
-      </select>
-    </div>
+    <Autocomplete
+      id="combo-box-demo"
+      options={listCategory}
+      getOptionLabel={(listCategory) => listCategory}
+      onChange={handleInput}
+      classes={{ ...styles }}
+      className={styles.option}
+     
+      renderInput={(params) => <TextField {...params} label="Category"  />}
+    />
   );
 }
 
-// import React from 'react';
-// import chroma from 'chroma-js';
-// import { colourOptions } from '../data';
 
-// import Select from 'react-select';
-
-// const dot = (color = '#ccc') => ({
-//   alignItems: 'center',
-//   display: 'flex',
-
-//   ':before': {
-//     backgroundColor: color,
-//     borderRadius: 10,
-//     content: '" "',
-//     display: 'block',
-//     marginRight: 8,
-//     height: 10,
-//     width: 10,
-//   },
-// });
-
-// const colourStyles = {
-//   control: styles => ({ ...styles, backgroundColor: 'white' }),
-//   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-//     const color = chroma(data.color);
-//     return {
-//       ...styles,
-//       backgroundColor: isDisabled
-//         ? null
-//         : isSelected
-//         ? data.color
-//         : isFocused
-//         ? color.alpha(0.1).css()
-//         : null,
-//       color: isDisabled
-//         ? '#ccc'
-//         : isSelected
-//         ? chroma.contrast(color, 'white') > 2
-//           ? 'white'
-//           : 'black'
-//         : data.color,
-//       cursor: isDisabled ? 'not-allowed' : 'default',
-
-//       ':active': {
-//         ...styles[':active'],
-//         backgroundColor:
-//           !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
-//       },
-//     };
-//   },
-//   input: styles => ({ ...styles, ...dot() }),
-//   placeholder: styles => ({ ...styles, ...dot() }),
-//   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
-// };
-
-// export default function SelectList({ listCategory, handleInput }) {
-//   return (
-//     <Select
-//       defaultValue={listCategory[2]}
-//       label="Выберите категорию"
-//       options={listCategory}
-//       styles={colourStyles}
-//       onChange={handleInput}
-//     />
-//   );
-// }
