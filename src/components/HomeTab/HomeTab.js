@@ -9,11 +9,17 @@ import {
   TablePagination,
   TableRow,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TablePaginationActions from './HomeTabPagination';
 import { useTheme, makeStyles} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import HomeTabMobile from './HomeTabMobile'
+ 
+// import { useSelector } from 'react-redux';
+// import selectors from '../../redux/transaction/selectors-transaction';
+// import sortBy from 'lodash.sortby';
+// import TableSortLabel from '@material-ui/core/TableSortLabel';
+
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -48,6 +54,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function HomeTab({ transactions }) {
+  // const items = useSelector(selectors.getVisibleTransaction);
+  // const [setItemSort] = useState([]);
+  // useEffect(() => {
+  //   setItemSort({ transactions });
+  // });
+  // const sortByUp = value => {
+  //   const lodash = sortBy(items, [
+  //     function (o) {
+  //       return o[value];
+  //     },
+  //   ]);
+  //   setItemSort(lodash);
+  // };
+
+  // const sortByDown = value => {
+  //   const lodash = sortBy(items, [
+  //     function (o) {
+  //       return o[value];
+  //     },
+  //   ]);
+  //   setItemSort(lodash.reverse());
+  // };
+
+
   const s = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(
@@ -78,7 +108,13 @@ function HomeTab({ transactions }) {
           <Table className={s.table} aria-label="a dense table">
             <TableHead>
               <TableRow className={s.row} >
-                <TableCell className={s.head}  align="center">Date</TableCell>
+                  <TableCell className={s.head} align="center">Date
+                    {/* <button type="button" onClick={() => sortByUp('id')}>
+                +
+              </button>  <button type="button" onClick={() => sortByDown('id')}>
+                -
+                    </button> */}
+                  </TableCell>
                 <TableCell className={s.head} align="center">Type</TableCell>
                 <TableCell className={s.head} align="center">Category</TableCell>
                 <TableCell className={s.head} align="center">Comment</TableCell>
