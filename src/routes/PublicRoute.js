@@ -20,4 +20,4 @@ function PublicRoute({ component: Component, redirectTo, ...routeProps }) {
   );
 }
 
-export default PublicRoute;
+// export default PublicRoute;

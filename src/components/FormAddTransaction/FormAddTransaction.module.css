@@ -1,0 +1,71 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_label {
+  font-size: 25px;
+  line-height: 1, 5;
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  text-align: center;
+  color: #5515a8;
+}
+.form_input {
+  width: 100%;
+  padding: 5px 10px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  margin-top: 20px;
+}
+.input_box {
+  display: flex;
+}
+.form_input_sum {
+  width: calc(100% / 2);
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+.form_input_sum::placeholder {
+  text-align: center;
+}
+
+.form_btn_add {
+  width: 70%;
+  font-family: Circe;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 30px;
+  border-radius: 20px;
+  background: rgb(30, 210, 141);
+  border: inherit;
+  outline: none;
+  color: white;
+  margin-top: 20px;
+}
+
+.form_btn_reject {
+  width: 70%;
+  font-family: Circe;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin-top: 20px;
+  background: inherit;
+  border: 2px solid rgb(162, 0, 255);
+  outline: none;
+  color: #5515a8;
+}

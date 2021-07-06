@@ -1,11 +1,11 @@
 import React from 'react';
-import HomeTab from '../../components/HomeTab';
+import HomeTab from '../../components/HomeTab/HomeTab.js';
 import transactions from '../../transaction.json';
 import SideBar from '../../components/SideBar';
 
 const DashboardPage = () => {
   return (
-    <div className="dashBoardPage">
+    <div className="page">
       <SideBar />
       <HomeTab transactions={transactions} />
     </div>

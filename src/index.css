@@ -6,29 +6,18 @@ body {
 }
 
 @media screen and (max-width: 767px) {
-  /* ! для валюти */
-
-  .makeStyles-table-1 {
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 @media screen and (min-width: 1280px) {
-  .dashBoardPage {
+  .page {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 }
 
-@media screen and (max-width: 1279px) {
-  /* ? для дешборда */
-
-  .makeStyles-table-12 {
-    margin-left: auto;
-    margin-right: auto;
-  }
+.page {
+  padding-top: 4vh;
 }
 
 /* .MuiFormControl-root {

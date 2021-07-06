@@ -12,6 +12,12 @@
   border-radius: 25px;
 }
 
+@media screen and (max-width: 1279px) and (min-width: 768px) {
+  .container {
+    margin-bottom: 0;
+  }
+}
+
 .title {
   font-family: Poppins, sans-serif;
   font-weight: 400;

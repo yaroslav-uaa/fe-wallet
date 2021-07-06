@@ -11,48 +11,53 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import TablePaginationActions from './HomeTabPagination';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import HomeTabMobile from './HomeTabMobile'
 
-const useStyles = makeStyles({
-  table: {
-    width: 'fit-content',
-    maxHeight: '60vh',
-    display: 'flex',
-    color: 'red',
-  },
-});
-
-const StyledTableCell = withStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.primary.main,
-    // color: theme.palette.primary.dark,
-    fontSize: 16,
-    fontWeight: 700,
+    fontFamily: 'Prompt, sans-serif',
+    fontWeight: 500,
+    color: theme.palette.primary.dark,
+    backgroundColor: 'rgba(53%, 4%, 98%, 0.6);',
+    fontSize: 17,
+    textShadow: '2px 2px 3px grey',          
+    borderCollapse: 'collapse',
   },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
+  row: {
     width: '65%',
     padding: '0.5em',
-    backgroundColor: theme.palette.action.selected,
+    color: theme.palette.primary.light,
   },
-}))(TableRow);
+  text: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 16, 
+  },
+  container: {
+    background: theme.palette.background.gradient,
+    width: 'fit-content',
+    margin: 'auto',
+    boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)', 
+  },
+  table: {
+    color:   theme.palette.primary.light,
+    borderCollapse: 'collapse',
+  }
+}));
 
 function HomeTab({ transactions }) {
   const s = useStyles();
-  //   const [history, setHistory] = useState([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(
+    theme.breakpoints.down(theme.breakpoints.values.md),
+  ); 
+  const isDesktop = useMediaQuery(
+    theme.breakpoints.down(theme.breakpoints.values.lg),
+  );  
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  //   useEffect(() => {
-  //     const allHistory = JSON.parse(localStorage.getItem('history'));
-  //     console.log(allHistory);
-  //     setHistory(allHistory);
-  //   }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -62,79 +67,151 @@ function HomeTab({ transactions }) {
     setRowsPerPage(parseInt(e.target.value, 5));
     setPage(0);
   };
-
   return (
     <>
-      <TableContainer className={s.table} component={Paper}>
-        <Table aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">Дата</StyledTableCell>
-              <StyledTableCell align="center">Тип</StyledTableCell>
-              <StyledTableCell align="center">Категория</StyledTableCell>
-              <StyledTableCell align="center">Комментарий</StyledTableCell>
-              <StyledTableCell align="center">Сумма</StyledTableCell>
-              <StyledTableCell align="center">Баланс</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          {transactions === null ? (
-            <TableRow align="center">No transactions yet</TableRow>
-          ) : (
-            <>
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? transactions.slice(
+      {isMobile ? (
+        <HomeTabMobile
+          transactions={transactions}
+        />
+      ) : ( isDesktop ? (
+          <TableContainer className={s.container} component={Paper}>
+          <Table className={s.table} aria-label="a dense table">
+            <TableHead>
+              <TableRow className={s.row} >
+                <TableCell className={s.head}  align="center">Date</TableCell>
+                <TableCell className={s.head} align="center">Type</TableCell>
+                <TableCell className={s.head} align="center">Category</TableCell>
+                <TableCell className={s.head} align="center">Comment</TableCell>
+                <TableCell className={s.head} align="center">Sum</TableCell>
+                <TableCell className={s.head} align="center">Balance</TableCell>
+              </TableRow>
+            </TableHead>
+            {transactions === null ? (
+              <TableRow className={s.row} align="center">No transactions yet</TableRow>
+            ) : (
+              <>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? transactions.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                  : transactions
-                ).map(transaction => (
-                  <StyledTableRow key={transaction._id}>
-                    <StyledTableCell align="center">
-                      {transaction.date}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.type}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.category}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.comment}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.sum}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {transaction.balance}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 20, 30]}
-                    count={transactions !== [] && transactions.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    SelectProps={{
-                      inputProps: { 'aria-label': 'rows per page' },
-                      native: true,
-                    }}
-                    labelRowsPerPage="Transactions per page:"
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>
-            </>
-          )}
-        </Table>
-      </TableContainer>
+                    : transactions
+                  ).map(transaction => (
+                    <TableRow className={s.row} key={transaction._id}>
+                      <TableCell className={s.text} align="center">
+                        {transaction.date}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {transaction.type}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {transaction.category}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {transaction.comment}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {transaction.sum}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {transaction.balance}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+                <TableFooter>
+                  <TableRow>
+                     <TablePagination
+                          rowsPerPageOptions={[5,]}
+                          count={transactions !== [] && transactions.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          SelectProps={{
+                            inputProps: { 'aria-label': 'rows per page' },
+                            native: true,
+                          }} 
+                          onChangePage={handleChangePage}
+                          onChangeRowsPerPage={handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActions}
+                    />
+                  </TableRow>
+                </TableFooter>
+              </>
+            )}
+          </Table>
+          </TableContainer>)
+          : (<TableContainer className={s.container} component={Paper}>
+          <Table className={s.container} aria-label="a dense table">
+            <TableHead>
+              <TableRow className={s.row}>
+                <TableCell className={s.head} align="center">Date</TableCell>
+                <TableCell className={s.head} align="center">Type</TableCell>
+                <TableCell className={s.head} align="center">Category</TableCell>
+                <TableCell className={s.head} align="center">Comment</TableCell>
+                <TableCell className={s.head} align="center">Sum</TableCell>
+                <TableCell className={s.head}align="center">Balance</TableCell>
+              </TableRow>
+            </TableHead>
+            {transactions === null ? (
+              <TableRow align="center">No transactions yet</TableRow>
+            ) : (
+              <>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? transactions.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage,
+                    )
+                    : transactions
+                  ).map(transaction => (
+                    <TableRow  key={transaction._id}>
+                      <TableCell className={s.text}  align="center">
+                        {transaction.date}
+                      </TableCell>
+                      <TableCell className={s.text}  align="center">
+                        {transaction.type}
+                      </TableCell>
+                      <TableCell className={s.text}  align="center">
+                        {transaction.category}
+                      </TableCell>
+                      <TableCell  className={s.text} align="center">
+                        {transaction.comment}
+                      </TableCell>
+                      <TableCell className={s.text}   align="center">
+                        {transaction.sum}
+                      </TableCell>
+                      <TableCell className={s.text}  align="center">
+                        {transaction.balance}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+                <TableFooter>
+                  <TableRow>
+                        <TablePagination
+                          rowsPerPageOptions={[5,]}
+                          count={transactions !== [] && transactions.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          SelectProps={{
+                            inputProps: { 'aria-label': 'rows per page' },
+                            native: true,
+                          }} 
+                          onChangePage={handleChangePage}
+                          onChangeRowsPerPage={handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActions}
+                    />
+                  </TableRow>
+                </TableFooter>
+              </>
+            )}
+          </Table>
+        </TableContainer>)
+    
+      )}
     </>
-  );
+  )
 }
 
 export default HomeTab;

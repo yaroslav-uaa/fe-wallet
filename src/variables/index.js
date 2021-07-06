@@ -18,10 +18,13 @@ export default createMuiTheme({
         primary: {
             main: '#D2BDE8',
             secondary: '#8609F9',
-            dark: '#030124'
+            dark: '#030124',
+            light: '#d2bde8',
         },
         background: {
-            primary: '#311FA0'
+            primary: '#311FA0',
+            gradient: 'linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.01))',
+            graidiertTwo: 'linear-gradient(90deg, rgb(19%, 12%, 63%, 0.8), rgba(255, 255, 255, 0.8))'
         },
     },
 });
