@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Container } from '@material-ui/core';
 import { Redirect, Route, Switch } from 'react-router';
 // import PrivateRoute from '../../routes/PrivateRoute';
@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import DashboardPage from '../../views/DashboardPage/DashboardPage';
 import Stats from '../../views/Stats/Stats';
 import CurrencyPage from '../../views/CurrencyPage/CurrencyPage';
+import Loader from '../Loader/Loader';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 
@@ -24,15 +25,17 @@ function App() {
     >
       <Header />
 
-      <Switch>
-        <Route path="/" exact component={DashboardPage} />
-        <Route path="/stats" exact component={Stats} />
-        {isTabletOrMobile ? (
-          <Route path="/currency" component={CurrencyPage} />
-        ) : (
-          <Redirect from="/currency" to="/" />
-        )}
-      </Switch>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route path="/" exact component={DashboardPage} />
+          <Route path="/stats" exact component={Stats} />
+          {isTabletOrMobile ? (
+            <Route path="/currency" component={CurrencyPage} />
+          ) : (
+            <Redirect from="/currency" to="/" />
+          )}
+        </Switch>
+      </Suspense>
     </Container>
   );
 }

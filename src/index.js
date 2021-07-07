@@ -8,11 +8,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store from './redux/store';
+import Loader from './components/Loader/Loader';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store.store}>
-      <PersistGate loading="wait..." persistor={store.persistor}>
+      <PersistGate loading={<Loader />} persistor={store.persistor}>
         <BrowserRouter>
           <ThemeProvider theme={variables}>
             <App />
