@@ -54,14 +54,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function HomeTab() {
-    const dispatch = useDispatch();
+ const dispatch = useDispatch();
 
-  const { filterTransactions } = transactionsSelectors;
+  // const deleteContact = useCallback((id) => dispatch(transactionsOperations.deleteContact(id)), [dispatch]);
 
-  const transactions = useSelector(filterTransactions);
+  const { getIsLoading, filterTransactions } = transactionsSelectors;
+  const loadingTransactions = useSelector(getIsLoading);
+  const transactionList = useSelector(filterTransactions);
 
-  useEffect(() => dispatch(transactionsOperations.getTransactions()), [dispatch])
-
+  useEffect(() => dispatch(transactionsOperations.fetchTransactions()), [dispatch])
   // const items = useSelector(selectors.getVisibleTransaction);
   // const [setItemSort] = useState([]);
   // useEffect(() => {
@@ -108,9 +109,7 @@ function HomeTab() {
   return (
     <>
       {isMobile ? (
-        <HomeTabMobile
-          transactions={transactions}
-        />
+        <HomeTabMobile />
       ) : ( isDesktop ? (
           <TableContainer className={s.container} component={Paper}>
           <Table className={s.table} aria-label="a dense table">
@@ -130,36 +129,36 @@ function HomeTab() {
                 <TableCell className={s.head} align="center">Balance</TableCell>
               </TableRow>
             </TableHead>
-            {transactions === null ? (
+            {transactionList === null ? (
               <TableRow className={s.row} align="center">No transactions yet</TableRow>
             ) : (
               <>
                 <TableBody>
                   {(rowsPerPage > 0
-                    ? transactions.slice(
+                    ? transactionList.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                    : transactions
-                  ).map(transaction => (
-                    <TableRow className={s.row} key={transaction._id}>
+                    : transactionList
+                  ).map(({id, date, type, category, comment, sum, balance} )=> (
+                    <TableRow className={s.row} key={id}>
                       <TableCell className={s.text} align="center">
-                        {transaction.date}
+                        {date}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.type}
+                        {type}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.category}
+                        {category}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.comment}
+                        {comment}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.sum}
+                        {sum}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.balance}
+                        {balance}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -168,7 +167,7 @@ function HomeTab() {
                   <TableRow>
                      <TablePagination
                           rowsPerPageOptions={[5,]}
-                          count={transactions !== [] && transactions.length}
+                          count={transactionList !== [] && transactionList.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
                           SelectProps={{
@@ -197,36 +196,36 @@ function HomeTab() {
                 <TableCell className={s.head}align="center">Balance</TableCell>
               </TableRow>
             </TableHead>
-            {transactions === null ? (
+            {transactionList === null ? (
               <TableRow align="center">No transactions yet</TableRow>
             ) : (
               <>
                 <TableBody>
                   {(rowsPerPage > 0
-                    ? transactions.slice(
+                    ? transactionList.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                    : transactions
-                  ).map(transaction => (
-                    <TableRow  key={transaction._id}>
+                    : transactionList
+                  ).map(({id, date, type, category, comment, sum, balance}) => (
+                    <TableRow  key={id}>
                       <TableCell className={s.text}  align="center">
-                        {transaction.date}
+                        {date}
                       </TableCell>
                       <TableCell className={s.text}  align="center">
-                        {transaction.type}
+                        {type}
                       </TableCell>
                       <TableCell className={s.text}  align="center">
-                        {transaction.category}
+                        {category}
                       </TableCell>
                       <TableCell  className={s.text} align="center">
-                        {transaction.comment}
+                        {comment}
                       </TableCell>
                       <TableCell className={s.text}   align="center">
-                        {transaction.sum}
+                        {sum}
                       </TableCell>
                       <TableCell className={s.text}  align="center">
-                        {transaction.balance}
+                        {balance}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -235,7 +234,7 @@ function HomeTab() {
                   <TableRow>
                         <TablePagination
                           rowsPerPageOptions={[5,]}
-                          count={transactions !== [] && transactions.length}
+                          count={transactionList !== [] && transactionList.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
                           SelectProps={{

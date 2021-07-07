@@ -9,11 +9,10 @@ const getFilter = (state) => state.transactions.filter;
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
   (transactions, filter) => {
-    const normalizedFilter = filter.toLowerCase();
-    return transactions.filter((transaction) =>
-      transaction.name.toLowerCase().includes(normalizedFilter)
+    return transactions.filter(transaction =>
+      transaction.date.toLowerCase().includes(filter.toLowerCase()),
     );
-  }
+  },
 );
 
 
