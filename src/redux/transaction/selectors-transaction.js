@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 const getTransactions = state => state.transactions.listTransactions;
-const getFilter = state => state.transaction.filter;
+const getFilter = state => state.transactions.filter;
 const getIsLoading = (state) => state.contacts.loading;
 
 const filterTransactions  = createSelector(
