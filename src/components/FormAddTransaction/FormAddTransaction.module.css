@@ -14,7 +14,7 @@
   align-items: center;
   text-transform: uppercase;
   text-align: center;
-  color: #5515a8;
+  color: white;
 }
 .form_input {
   width: 100%;
@@ -23,9 +23,11 @@
   border-bottom: 2px solid #470870;
   margin-top: 20px;
   background-color: inherit;
+  color: white;
 }
 .input_box {
   display: flex;
+  margin-top: 20px;
 }
 .form_input_sum {
   width: calc(100% / 2);
@@ -36,6 +38,7 @@
   border-bottom: 2px solid #470870;
   background: inherit;
   outline: transparent;
+  color: white;
 }
 .form_input:hover,
 .form_input:focus,
@@ -46,9 +49,11 @@
 
 .form_input::placeholder {
   text-align: center;
+  color: rgba(255, 255, 255, 0.541);
 }
 .form_input_sum::placeholder {
   text-align: center;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form_btn_add {
@@ -66,7 +71,12 @@
   outline: none;
   color: white;
   margin-top: 20px;
-  background-color: #5515a8;
+  background: linear-gradient(
+    to right,
+    rgba(30, 14, 51, 0.8),
+    rgba(35, 7, 54, 0.2),
+    rgba(42, 15, 68, 0.8)
+  );
 }
 
 .form_btn_add:hover {
@@ -87,9 +97,9 @@
   border-radius: 20px;
   margin-top: 20px;
   background: inherit;
-  border: 2px solid #5515a8;
+  border: 2px solid white;
   outline: none;
-  color: #5515a8;
+  color: white;
 }
 .form_btn_reject:hover {
   background: inherit;
