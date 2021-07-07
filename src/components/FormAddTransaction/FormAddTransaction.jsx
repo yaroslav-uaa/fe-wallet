@@ -5,10 +5,9 @@ import operationsTransactions from '../../redux/transaction/operations-transacti
 import Select from './Select/Select';
 import Switch from './Switch/Switch';
 import DatePicker from 'react-date-picker';
-
-
-
-
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function FormAddTransaction() {
   const initialState = {
@@ -19,23 +18,29 @@ export default function FormAddTransaction() {
     sum: '',
   };
 
+  const notify = text => toast(text);
+
   const dispatch = useDispatch();
   const [transaction, setTransaction] = useState(initialState);
 
   const handleInput = useCallback(evt => {
-    const value = evt.target.value
+    const value = evt.target.value;
     const name = evt.target.name;
     setTransaction(prev => ({ ...prev, [name]: value }));
   }, []);
 
-  const handleDate = (value) => {
-    setTransaction({date:value , ...transaction})
-  }
+  const handleDate = value => {
+    setTransaction({ date: value, ...transaction });
+  };
 
-  const handleInputSwitch = (event) => {
-    console.log(event.target.checked)
-    setTransaction(prevState=>({...prevState ,isIncome:event.target.checked , category:'Select the category' }))
-  }
+  const handleInputSwitch = event => {
+    console.log(event.target.checked);
+    setTransaction(prevState => ({
+      ...prevState,
+      isIncome: event.target.checked,
+      category: 'Select the category',
+    }));
+  };
 
   const addTransaction = useCallback(
     data => {
@@ -50,21 +55,24 @@ export default function FormAddTransaction() {
       console.log(transaction);
       addTransaction(transaction);
       setTransaction(initialState);
+      notify('Transaction added successfully');
     },
     [transaction, addTransaction, initialState],
   );
-
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <p className={styles.form_label}>Adding Transactions</p>
       <div>
-        <Switch isChecked={transaction.isIncome} onSwitch={handleInputSwitch}/>
+        <Switch isChecked={transaction.isIncome} onSwitch={handleInputSwitch} />
       </div>
       <Select
-        listCategory={transaction.type ? revenuesCategory :spendingCategory }
+        listCategory={
+          transaction.isIncome ? revenuesCategory : spendingCategory
+        }
         handleInput={handleInput}
         category={transaction.category}
+        required
       />
       <div className={styles.input_box}>
         <input
@@ -74,13 +82,16 @@ export default function FormAddTransaction() {
           name="sum"
           onChange={handleInput}
           className={styles.form_input_sum}
+          required
         />
         <DatePicker
-        onChange={handleDate}
-        value={transaction.date}
-          name='date'
-          styles={{border:'none'}}
-      />
+          onChange={handleDate}
+          value={transaction.date}
+          name="date"
+          styles={{ border: 'none' }}
+          classNam={styles.date_piker}
+          required
+        />
       </div>
       <input
         type="text"
@@ -91,7 +102,14 @@ export default function FormAddTransaction() {
         className={styles.form_input}
       />
       <button className={styles.form_btn_add}> Add</button>
-      <button className={styles.form_btn_reject}>Reject</button>
+      <button
+        className={styles.form_btn_reject}
+        type="button"
+        onClick={() => notify('transaction record was canceled')}
+      >
+        Reject
+      </button>
+      <ToastContainer />;
     </form>
   );
 }

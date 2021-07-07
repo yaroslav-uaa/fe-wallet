@@ -13,8 +13,6 @@ const useStyles = makeStyles(theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
- 
-
   },
 }));
 
@@ -31,17 +29,13 @@ export default function ButtonAddTransactions() {
 
   return (
     <>
-      <Fab
-        onClick={openModal}
-        aria-label="add"
-        className={classes.margin}
-      >
+      <Fab onClick={openModal} aria-label="add" className={classes.margin}>
         <AddIcon />
       </Fab>
 
       {showModal && (
         <Modal onClose={onCloseModal}>
-          <FormAddTransaction  />
+          <FormAddTransaction />
         </Modal>
       )}
     </>

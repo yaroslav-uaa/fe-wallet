@@ -16,6 +16,7 @@
     "formik": "^2.2.9",
     "json-server": "^0.16.3",
     "prop-types": "^15.7.2",
+    "rc-datepicker": "^5.0.16",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
     "react-date-picker": "^8.2.0",

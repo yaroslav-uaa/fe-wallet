@@ -37,17 +37,18 @@
   background: inherit;
   outline: transparent;
 }
-.form_input:hover , .form_input:focus , .form_input:active{
+.form_input:hover,
+.form_input:focus,
+.form_input:active {
   outline: transparent;
   background: inherit;
 }
 
-.form_input::placeholder{
+.form_input::placeholder {
   text-align: center;
 }
 .form_input_sum::placeholder {
   text-align: center;
-
 }
 
 .form_btn_add {
@@ -60,18 +61,18 @@
   text-transform: uppercase;
   padding: 5px 30px;
   border-radius: 20px;
-  background: rgb(124, 60, 207);
+
   border: 2px solid transparent;
   outline: none;
   color: white;
   margin-top: 20px;
+  background-color: #5515a8;
 }
 
-
-.form_btn_add:hover{
+.form_btn_add:hover {
   background: inherit;
   background: rgb(15, 185, 143);
- box-shadow: 0px 6px 15px rgba(13, 134, 98, 0.5);
+  box-shadow: 0px 6px 15px rgba(13, 134, 98, 0.5);
 }
 
 .form_btn_reject {
@@ -86,15 +87,14 @@
   border-radius: 20px;
   margin-top: 20px;
   background: inherit;
-  border: 2px solid rgb(162, 0, 255);
+  border: 2px solid #5515a8;
   outline: none;
   color: #5515a8;
 }
-.form_btn_reject:hover{
-    background: inherit;
-  border: 2px solid rgba(255, 101, 150, 0.5) ;
+.form_btn_reject:hover {
+  background: inherit;
+  border: 2px solid rgba(255, 101, 150, 0.5);
   color: white;
-    background: #ff6596;
+  background: #ff6596;
   box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
-
 }
