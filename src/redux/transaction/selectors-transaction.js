@@ -2,8 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const getTransactions = state => state.transactions.listTransactions;
 const getFilter = state => state.transaction.filter;
+const getIsLoading = (state) => state.contacts.loading;
 
-const getVisibleTransaction = createSelector(
+const filterContacts  = createSelector(
   [getTransactions, getFilter],
   (transactions, filter) => {
     return transactions.filter(transaction =>
@@ -11,9 +12,10 @@ const getVisibleTransaction = createSelector(
     );
   },
 );
-
-export default {
+const transactionsSelectors = {
   getTransactions,
   getFilter,
-  getVisibleTransaction
+  getIsLoading,
+  filterContacts 
 };
+export default transactionsSelectors;

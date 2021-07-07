@@ -16,11 +16,15 @@ const addTransactionsSuccess = createAction(
 );
 const addTransactionsError = createAction('transactions/addTransactionsError');
 
-export default {
+const filterTransactions = createAction('transactions/Filter');
+
+const transactionsActions =  {
   getTransactionsRequest,
   getTransactionsSuccess,
   getTransactionsError,
   addTransactionsRequest,
   addTransactionsSuccess,
   addTransactionsError,
+  filterTransactions
 };
+export default transactionsActions;

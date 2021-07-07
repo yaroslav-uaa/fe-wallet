@@ -3,29 +3,34 @@ import action from './actions-transactions';
 
 axios.defaults.baseURL = 'http://localhost:4040';
 
-const getTransactions = () => dispatch => {
+const getTransactions = () =>  async (dispatch) => {
   dispatch(action.getTransactionsRequest());
-  axios
-    .get('/transactions')
-    .then(({ data }) => {
-      return dispatch(action.getTransactionsSuccess(data));
-    })
-    .catch(error => dispatch(action.getTransactionsError(error.message)));
+   try {
+    const { data } = await axios.get('/contacts');
+    dispatch(action.getTransactionsSuccess(data));
+  } catch (error) {
+    dispatch(action.getTransactionsError(error.message));
+  }
 };
 
-const addTransactions = item => dispatch => {
+const addTransactions = ({ date, category, type, comment, sum, balance }) => async (dispatch) => {
+  const item = {
+    date, category, type, comment, sum, balance
+  };
+
   dispatch(action.addTransactionsRequest());
-  console.log(item);
-  axios
-    .post('/transactions', item)
-    .then(({ data }) => {
-      console.log(data);
-      return dispatch(action.addTransactionsSuccess(data));
-    })
-    .catch(error => dispatch(action.addTransactionsError(error.message)));
-};
 
-export default {
+  try {
+    const { data } = await axios.post('/transactions', item);
+    dispatch(action.addTransactionsSuccess(data));
+  } catch (error) {
+    dispatch(action.addTransactionsError(error.message));
+  }
+
+};
+const transactionsOperations = {
   getTransactions,
   addTransactions,
 };
+
+export default transactionsOperations;
