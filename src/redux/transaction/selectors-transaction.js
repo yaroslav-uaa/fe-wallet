@@ -1,21 +1,21 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from 'reselect';
 
-const getTransactions = state => state.transactions.listTransactions;
-const getFilter = state => state.transactions.filter;
-const getIsLoading = (state) => state.contacts.loading;
+const getIsLoading = (state) => state.transactions.loading;
 
-const filterTransactions  = createSelector(
-  [getTransactions, getFilter],
+const getAllTransactions = (state) => state.transactions.items;
+
+const getFilter = (state) => state.transactions.filter;
+
+const filterTransactions = createSelector(
+  [getAllTransactions, getFilter],
   (transactions, filter) => {
-    return transactions.filter(transaction =>
-      transaction.name.toLowerCase().includes(filter.toLowerCase()),
+    const normalizedFilter = filter.toLowerCase();
+    return transactions.filter((transaction) =>
+      transaction.name.toLowerCase().includes(normalizedFilter)
     );
-  },
+  }
 );
-const transactionsSelectors = {
-  getTransactions,
-  getFilter,
-  getIsLoading,
-  filterTransactions 
-};
-export default transactionsSelectors;
+
+
+// eslint-disable-next-line
+export default { getIsLoading, getAllTransactions, getFilter, filterTransactions };

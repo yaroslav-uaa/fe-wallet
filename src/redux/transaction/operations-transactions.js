@@ -3,41 +3,53 @@ import {
   getTransactionsRequest,
   getTransactionsSuccess,
   getTransactionsError,
-  addTransactionsRequest,
-  addTransactionsSuccess,
-  addTransactionsError
+  addTransactionRequest,
+  addTransactionSuccess,
+  addTransactionError,
+  deleteTransactionRequest,
+  deleteTransactionSuccess,
+  deleteTransactionError,
 } from './actions-transactions';
 
 axios.defaults.baseURL = 'http://localhost:4040';
 
-const getTransactions = () =>  async (dispatch) => {
+const fetchTransactions = () => async (dispatch) => {
   dispatch(getTransactionsRequest());
-   try {
-    const { data } = await axios.get('/contacts');
-    dispatch(getTransactionsSuccess(data));
-  } catch (error) {
-    dispatch(getTransactionsError(error.message));
-  }
-};
-
-const addTransactions = ({ date, category, type, comment, sum, balance }) => async (dispatch) => {
-  const item = {
-    date, category, type, comment, sum, balance
-  };
-
-  dispatch(addTransactionsRequest());
 
   try {
-    const { data } = await axios.post('/transactions', item);
-    dispatch(addTransactionsSuccess(data));
+    const { data } = await axios.get('/transactions');
+    dispatch(getTransactionsSuccess(data));
   } catch (error) {
-    dispatch(addTransactionsError(error.message));
+    dispatch(getTransactionsError(error));
+  }
+};
+
+const addTransaction = ({ date, type, comment, sum, balance }) => async (dispatch) => {
+  const transaction = {
+    date, type, comment, sum, balance
+  };
+
+  dispatch(addTransactionRequest());
+
+  try {
+    const { data } = await axios.post('/transactions', transaction);
+    dispatch(addTransactionSuccess(data));
+  } catch (error) {
+    dispatch(addTransactionError(error));
   }
 
 };
-const transactionsOperations = {
-  getTransactions,
-  addTransactions,
+
+const deleteTransaction = (transactionId) => async (dispatch) => {
+  dispatch(deleteTransactionRequest());
+
+  try {
+    await axios.delete(`/transactions/${transactionId}`);
+    dispatch(deleteTransactionSuccess(transactionId));
+  } catch (error) {
+    dispatch(deleteTransactionError(error));
+  }
 };
 
-export default transactionsOperations;
+// eslint-disable-next-line
+export default { fetchTransactions, addTransaction, deleteTransaction };
