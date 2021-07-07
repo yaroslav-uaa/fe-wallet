@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import s from './CurrentBalance.module.css';
 
 function CurrentBalance() {
-  const [balance, setBalance] = useState(0);
+  // const [balance, setBalance] = useState(0);
   // useEffect(() => {
   //   effect
   //   return () => {
