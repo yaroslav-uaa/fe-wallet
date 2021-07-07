@@ -1,26 +1,19 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const getTransactionsRequest = createAction(
+export const getTransactionsRequest = createAction(
   'transactions/getTransactionsRequest',
 );
-const getTransactionsSuccess = createAction(
+export const getTransactionsSuccess = createAction(
   'transactions/getTransactionsSuccess',
 );
-const getTransactionsError = createAction('transactions/getTransactionsError');
+export const getTransactionsError = createAction('transactions/getTransactionsError');
 
-const addTransactionsRequest = createAction(
+export const addTransactionsRequest = createAction(
   'transactions/addTransactionsRequest',
 );
-const addTransactionsSuccess = createAction(
+export const addTransactionsSuccess = createAction(
   'transactions/addTransactionsSuccess',
 );
-const addTransactionsError = createAction('transactions/addTransactionsError');
+export const addTransactionsError = createAction('transactions/addTransactionsError');
 
-export default {
-  getTransactionsRequest,
-  getTransactionsSuccess,
-  getTransactionsError,
-  addTransactionsRequest,
-  addTransactionsSuccess,
-  addTransactionsError,
-};
+export const filterTransactions = createAction('transactions/Filter');

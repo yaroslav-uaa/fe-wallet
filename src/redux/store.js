@@ -12,7 +12,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from './auth/auth-reducer';
-import transactionsReducer from './transaction/reducer-transactions';
+import { transactionsReducer } from './transaction';
 
 const middleware = [
   ...getDefaultMiddleware({
