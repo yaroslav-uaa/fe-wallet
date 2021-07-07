@@ -105,7 +105,7 @@ function Currency() {
 
               <TableBody className={s.body}>
                 {currency.map(el => (
-                  <TableRow key={el.name}>
+                  <TableRow key={el.ccy}>
                     <TableCell
                       component="th"
                       scope="row"
