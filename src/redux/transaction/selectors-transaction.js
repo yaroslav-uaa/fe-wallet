@@ -4,7 +4,7 @@ const getTransactions = state => state.transactions.listTransactions;
 const getFilter = state => state.transaction.filter;
 const getIsLoading = (state) => state.contacts.loading;
 
-const filterContacts  = createSelector(
+const filterTransactions  = createSelector(
   [getTransactions, getFilter],
   (transactions, filter) => {
     return transactions.filter(transaction =>
@@ -16,6 +16,6 @@ const transactionsSelectors = {
   getTransactions,
   getFilter,
   getIsLoading,
-  filterContacts 
+  filterTransactions 
 };
 export default transactionsSelectors;

@@ -1,15 +1,22 @@
 import axios from 'axios';
-import action from './actions-transactions';
+import {
+  getTransactionsRequest,
+  getTransactionsSuccess,
+  getTransactionsError,
+  addTransactionsRequest,
+  addTransactionsSuccess,
+  addTransactionsError
+} from './actions-transactions';
 
 axios.defaults.baseURL = 'http://localhost:4040';
 
 const getTransactions = () =>  async (dispatch) => {
-  dispatch(action.getTransactionsRequest());
+  dispatch(getTransactionsRequest());
    try {
     const { data } = await axios.get('/contacts');
-    dispatch(action.getTransactionsSuccess(data));
+    dispatch(getTransactionsSuccess(data));
   } catch (error) {
-    dispatch(action.getTransactionsError(error.message));
+    dispatch(getTransactionsError(error.message));
   }
 };
 
@@ -18,13 +25,13 @@ const addTransactions = ({ date, category, type, comment, sum, balance }) => asy
     date, category, type, comment, sum, balance
   };
 
-  dispatch(action.addTransactionsRequest());
+  dispatch(addTransactionsRequest());
 
   try {
     const { data } = await axios.post('/transactions', item);
-    dispatch(action.addTransactionsSuccess(data));
+    dispatch(addTransactionsSuccess(data));
   } catch (error) {
-    dispatch(action.addTransactionsError(error.message));
+    dispatch(addTransactionsError(error.message));
   }
 
 };

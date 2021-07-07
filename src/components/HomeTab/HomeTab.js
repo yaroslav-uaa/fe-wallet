@@ -13,10 +13,10 @@ import React, { useState, useEffect } from 'react';
 import TablePaginationActions from './HomeTabPagination';
 import { useTheme, makeStyles} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import HomeTabMobile from './HomeTabMobile'
- 
-// import { useSelector } from 'react-redux';
-// import selectors from '../../redux/transaction/selectors-transaction';
+import HomeTabMobile from './HomeTabMobile';
+
+import { transactionsOperations, transactionsSelectors } from '../../redux/transaction';
+import { useSelector, useDispatch } from 'react-redux';
 // import sortBy from 'lodash.sortby';
 // import TableSortLabel from '@material-ui/core/TableSortLabel';
 
@@ -53,7 +53,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function HomeTab({ transactions }) {
+function HomeTab() {
+    const dispatch = useDispatch();
+
+  const { filterTransactions } = transactionsSelectors;
+
+  const transactions = useSelector(filterTransactions);
+
+  useEffect(() => dispatch(transactionsOperations.getTransactions()), [dispatch])
+
   // const items = useSelector(selectors.getVisibleTransaction);
   // const [setItemSort] = useState([]);
   // useEffect(() => {
