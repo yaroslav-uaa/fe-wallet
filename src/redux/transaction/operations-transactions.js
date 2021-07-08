@@ -12,7 +12,7 @@ import {
   deleteTransactionError,
 } from './actions-transactions';
 
-axios.defaults.baseURL = 'http://localhost:4040';
+axios.defaults.baseURL = 'http://localhost:4040/api';
 
 const fetchTransactions = () => async (dispatch) => {
   dispatch(getTransactionsRequest());

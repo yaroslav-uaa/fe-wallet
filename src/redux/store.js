@@ -32,7 +32,7 @@ const authPersistConfig = {
 const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    transactions: transactionsReducer,
+    data: transactionsReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

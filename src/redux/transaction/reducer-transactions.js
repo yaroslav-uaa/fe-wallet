@@ -13,7 +13,7 @@ import {
   changeFilter,
 } from './actions-transactions';
 
-const items = createReducer([], {
+const result = createReducer([], {
   [getTransactionsSuccess]: (_, { payload }) => payload,
   [addTransactionSuccess]: (state, { payload }) => [ payload, ...state],
   [deleteTransactionSuccess]: (state, { payload }) =>
@@ -37,7 +37,7 @@ const loading = createReducer(false, {
 });
 
 export default combineReducers({
-  items,
+  result,
   filter,
   loading,
 });
