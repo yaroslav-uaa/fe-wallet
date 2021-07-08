@@ -1,33 +1,24 @@
 import { createAction } from '@reduxjs/toolkit';
 
 export const getTransactionsRequest = createAction(
-  'transactions/getTransactionsRequest',
+  'transactions/getTransactionsRequest'
 );
 export const getTransactionsSuccess = createAction(
-  'transactions/getTransactionsSuccess',
+  'transactions/getTransactionsSuccess'
 );
-export const getTransactionsError = createAction(
-  'transactions/getTransactionsError',
-);
+export const getTransactionsError = createAction('transactions/getTransactionsError');
 
-export const addTransactionRequest = createAction(
-  'transactions/addTransactionRequest',
-);
-export const addTransactionSuccess = createAction(
-  'transactions/addTransactionSuccess',
-);
-export const addTransactionError = createAction(
-  'transactions/addTransactionError',
-);
+export const addTransactionRequest = createAction('transactions/addTransactionRequest');
+export const addTransactionSuccess = createAction('transactions/addTransactionSuccess');
+export const addTransactionError = createAction('transactions/addTransactionError');
 
 export const deleteTransactionRequest = createAction(
-  'transactions/deleteTransactionRequest',
+  'transactions/deleteTransactionRequest'
 );
 export const deleteTransactionSuccess = createAction(
-  'transactions/deleteTransactionSuccess',
+  'transactions/deleteTransactionSuccess'
 );
-export const deleteTransactionError = createAction(
-  'transactions/deleteTransactionError',
-);
+export const deleteTransactionError = createAction('transactions/deleteTransactionError');
 
 export const changeFilter = createAction('transactions/changeFilter');
+

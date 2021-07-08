@@ -4,10 +4,18 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
   TableRow,
 } from '@material-ui/core';
-import React  from 'react'; 
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import TablePaginationActions from './HomeTabPagination';
+import { useTheme, makeStyles} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery'; 
+
+import { transactionsOperations, transactionsSelectors } from '../../redux/transaction';
+import { useSelector, useDispatch } from 'react-redux'; 
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -45,7 +53,16 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function HomeTabMobile({ transactions }) {
+function HomeTabMobile() {
+  const dispatch = useDispatch();
+
+  // const deleteContact = useCallback((id) => dispatch(transactionsOperations.deleteContact(id)), [dispatch]);
+
+  const { getIsLoading, filterTransactions } = transactionsSelectors;
+  const loadingTransactions = useSelector(getIsLoading);
+  const transactionList = useSelector(filterTransactions);
+
+  useEffect(() => dispatch(transactionsOperations.fetchTransactions()), [dispatch])
     const s = useStyles();
     function getRandomColor() {
     const colors = ['#0091ea', '#004d40', '#cddc39', '#76ff03', '#c6ff00', '#ef6c00', '#ffff00', '#bdbdbd'];
@@ -54,14 +71,14 @@ function HomeTabMobile({ transactions }) {
 };
   return (
     <>     
-          {transactions === null ? (
+          {transactionList === null ? (
             <TableRow className={s.row} >No transactions yet</TableRow> 
           ) : (
             <>
-              {transactions.map(transaction => (
+              {transactionList.map(({id, date, type, category, comment, sum, balance} ) => (
                       <TableContainer className={s.container} component={Paper}>
 
-                           <Table key={transaction._id} > 
+                           <Table key={id} > 
                           <TableBody>
                               <TableCell style={{ maxWidth: '10px', backgroundColor: getRandomColor()}}></TableCell>
                                 <TableCell >
@@ -71,7 +88,7 @@ function HomeTabMobile({ transactions }) {
                                                   Date
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {transaction.date}
+                                                  {date}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
@@ -79,7 +96,7 @@ function HomeTabMobile({ transactions }) {
                                                   Type
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {transaction.type}
+                                                  {type}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
@@ -87,7 +104,7 @@ function HomeTabMobile({ transactions }) {
                                                   Category
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {transaction.category}
+                                                  {category}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
@@ -95,7 +112,7 @@ function HomeTabMobile({ transactions }) {
                                                   Comment
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {transaction.comment}
+                                                  {comment}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
@@ -103,7 +120,7 @@ function HomeTabMobile({ transactions }) {
                                                   Sum
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {transaction.sum}
+                                                  {sum}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
@@ -111,7 +128,7 @@ function HomeTabMobile({ transactions }) {
                                                   Balance
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {transaction.balance}
+                                                  {balance}
                                               </TableCell>
                                     </TableRow>
                               </TableCell>

@@ -9,11 +9,17 @@ import {
   TablePagination,
   TableRow,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TablePaginationActions from './HomeTabPagination';
 import { useTheme, makeStyles} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import HomeTabMobile from './HomeTabMobile'
+import HomeTabMobile from './HomeTabMobile';
+
+import { transactionsOperations, transactionsSelectors } from '../../redux/transaction';
+import { useSelector, useDispatch } from 'react-redux';
+// import sortBy from 'lodash.sortby';
+// import TableSortLabel from '@material-ui/core/TableSortLabel';
+
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -47,7 +53,40 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function HomeTab({ transactions }) {
+function HomeTab() {
+ const dispatch = useDispatch();
+
+  // const deleteContact = useCallback((id) => dispatch(transactionsOperations.deleteContact(id)), [dispatch]);
+
+  const { getIsLoading, filterTransactions } = transactionsSelectors;
+  const loadingTransactions = useSelector(getIsLoading);
+  const transactionList = useSelector(filterTransactions);
+
+  useEffect(() => dispatch(transactionsOperations.fetchTransactions()), [dispatch])
+  // const items = useSelector(selectors.getVisibleTransaction);
+  // const [setItemSort] = useState([]);
+  // useEffect(() => {
+  //   setItemSort({ transactions });
+  // });
+  // const sortByUp = value => {
+  //   const lodash = sortBy(items, [
+  //     function (o) {
+  //       return o[value];
+  //     },
+  //   ]);
+  //   setItemSort(lodash);
+  // };
+
+  // const sortByDown = value => {
+  //   const lodash = sortBy(items, [
+  //     function (o) {
+  //       return o[value];
+  //     },
+  //   ]);
+  //   setItemSort(lodash.reverse());
+  // };
+
+
   const s = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(
@@ -70,15 +109,19 @@ function HomeTab({ transactions }) {
   return (
     <>
       {isMobile ? (
-        <HomeTabMobile
-          transactions={transactions}
-        />
+        <HomeTabMobile />
       ) : ( isDesktop ? (
           <TableContainer className={s.container} component={Paper}>
           <Table className={s.table} aria-label="a dense table">
             <TableHead>
               <TableRow className={s.row} >
-                <TableCell className={s.head}  align="center">Date</TableCell>
+                  <TableCell className={s.head} align="center">Date
+                    {/* <button type="button" onClick={() => sortByUp('id')}>
+                +
+              </button>  <button type="button" onClick={() => sortByDown('id')}>
+                -
+                    </button> */}
+                  </TableCell>
                 <TableCell className={s.head} align="center">Type</TableCell>
                 <TableCell className={s.head} align="center">Category</TableCell>
                 <TableCell className={s.head} align="center">Comment</TableCell>
@@ -86,36 +129,36 @@ function HomeTab({ transactions }) {
                 <TableCell className={s.head} align="center">Balance</TableCell>
               </TableRow>
             </TableHead>
-            {transactions === null ? (
+            {transactionList === null ? (
               <TableRow className={s.row} align="center">No transactions yet</TableRow>
             ) : (
               <>
                 <TableBody>
                   {(rowsPerPage > 0
-                    ? transactions.slice(
+                    ? transactionList.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                    : transactions
-                  ).map(transaction => (
-                    <TableRow className={s.row} key={transaction._id}>
+                    : transactionList
+                  ).map(({id, date, type, category, comment, sum, balance} )=> (
+                    <TableRow className={s.row} key={id}>
                       <TableCell className={s.text} align="center">
-                        {transaction.date}
+                        {date}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.type}
+                        {type}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.category}
+                        {category}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.comment}
+                        {comment}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.sum}
+                        {sum}
                       </TableCell>
                       <TableCell className={s.text} align="center">
-                        {transaction.balance}
+                        {balance}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -124,7 +167,7 @@ function HomeTab({ transactions }) {
                   <TableRow>
                      <TablePagination
                           rowsPerPageOptions={[5,]}
-                          count={transactions !== [] && transactions.length}
+                          count={transactionList !== [] && transactionList.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
                           SelectProps={{
@@ -153,36 +196,36 @@ function HomeTab({ transactions }) {
                 <TableCell className={s.head}align="center">Balance</TableCell>
               </TableRow>
             </TableHead>
-            {transactions === null ? (
+            {transactionList === null ? (
               <TableRow align="center">No transactions yet</TableRow>
             ) : (
               <>
                 <TableBody>
                   {(rowsPerPage > 0
-                    ? transactions.slice(
+                    ? transactionList.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                    : transactions
-                  ).map(transaction => (
-                    <TableRow  key={transaction._id}>
+                    : transactionList
+                  ).map(({id, date, type, category, comment, sum, balance}) => (
+                    <TableRow  key={id}>
                       <TableCell className={s.text}  align="center">
-                        {transaction.date}
+                        {date}
                       </TableCell>
                       <TableCell className={s.text}  align="center">
-                        {transaction.type}
+                        {type}
                       </TableCell>
                       <TableCell className={s.text}  align="center">
-                        {transaction.category}
+                        {category}
                       </TableCell>
                       <TableCell  className={s.text} align="center">
-                        {transaction.comment}
+                        {comment}
                       </TableCell>
                       <TableCell className={s.text}   align="center">
-                        {transaction.sum}
+                        {sum}
                       </TableCell>
                       <TableCell className={s.text}  align="center">
-                        {transaction.balance}
+                        {balance}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -191,7 +234,7 @@ function HomeTab({ transactions }) {
                   <TableRow>
                         <TablePagination
                           rowsPerPageOptions={[5,]}
-                          count={transactions !== [] && transactions.length}
+                          count={transactionList !== [] && transactionList.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
                           SelectProps={{

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { fetchInfo } from '../../services/currencyExchange';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
 import Navigation from '../Navigation';
 import f from '../SideBar/SideBar.module.css';
+import Skeleton from 'react-loading-skeleton';
 
 const useStyles = makeStyles({
   table: {
@@ -64,6 +66,7 @@ const useStyles = makeStyles({
 
 function Currency() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
+  const isDesktopOrTablet = useMediaQuery({ minWidth: 1280 });
   const s = useStyles();
   const [currency, setCurrency] = useState('');
 
@@ -86,22 +89,23 @@ function Currency() {
       <div className={f.sidebar}>
         {isTabletOrMobile && <Navigation />}
         <TableContainer className={s.table}>
-          <Table size="small" aria-label="a dense table">
-            <TableHead className={s.head}>
-              <TableRow>
-                <TableCell className={s.headers}>Currency</TableCell>
-                <TableCell align="center" className={s.headers}>
-                  Buy
-                </TableCell>
-                <TableCell align="center" className={s.headers}>
-                  Sale
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody className={s.body}>
-              {currency.length > 0 &&
-                currency.map(el => (
-                  <TableRow key={el.name}>
+          {currency.length > 0 ? (
+            <Table size="small" aria-label="a dense table">
+              <TableHead className={s.head}>
+                <TableRow>
+                  <TableCell className={s.headers}>Currency</TableCell>
+                  <TableCell align="center" className={s.headers}>
+                    Buy
+                  </TableCell>
+                  <TableCell align="center" className={s.headers}>
+                    Sale
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody className={s.body}>
+                {currency.map(el => (
+                  <TableRow key={el.ccy}>
                     <TableCell
                       component="th"
                       scope="row"
@@ -118,8 +122,19 @@ function Currency() {
                     </TableCell>
                   </TableRow>
                 ))}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          ) : (
+            <Skeleton
+              style={{
+                background:
+                  'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
+              }}
+              duration={2.4}
+              width={isDesktopOrTablet ? 340 : 280}
+              height={174}
+            />
+          )}
         </TableContainer>
       </div>
     </>

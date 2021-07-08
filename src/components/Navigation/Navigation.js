@@ -20,7 +20,7 @@ function Navigation() {
               activeClassName={s.link__active}
             >
               <HomeIcon
-                color={isTabletOrMobile ? 'inherit' : 'primary.dark'}
+                color={isTabletOrMobile ? 'inherit' : 'primary'}
                 fontSize="small"
               />
               {!isTabletOrMobile && <span className={s.text}>Main</span>}
