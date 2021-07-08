@@ -19,11 +19,13 @@ import sortBy from 'lodash.sortby';
 
 const useStyles = makeStyles(theme => ({
     head: {
+        width: '16%',
         fontFamily: 'Prompt, sans-serif',
         fontWeight: 500,
         color: theme.palette.primary.dark,
         backgroundColor: 'rgba(53%, 4%, 98%, 0.6);',
         fontSize: 17,
+        textAlign: 'center',
         textShadow: '2px 2px 3px grey',
         borderCollapse: 'collapse',
     },
@@ -111,7 +113,7 @@ export default function HomeTabLarge() {
                 <Table className={s.table} aria-label="a dense table">
                     <TableHead>
                         <TableRow className={s.row} >
-                            <TableCell className={s.head} align="center">Date 
+                            <TableCell className={s.head} style={{width: '20%' }} align="center">Date 
                                 <button type='button' style={{border: 'none', width: '10px', padding: '0 8px', cursor: 'pointer', backgroundColor: 'transparent'}} className={!isOn ? "btn": "hidden"}  onClick={() => {sortByUp('date'); toggleIsOn()}} > 🠕</button>
                                 <button type='button' style={{border: 'none', width: '10px', padding: '0 8px', cursor: 'pointer', backgroundColor: 'transparent'}} className={isOn ? "btn" : "hidden"} onClick={() => {sortByDown('date'); toggleIsOn()}}> 🠗</button>
                                 

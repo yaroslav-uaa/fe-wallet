@@ -35,5 +35,5 @@ body {
 };
 
 .btn {
-  border: none;
+  position: absolute;
 };
