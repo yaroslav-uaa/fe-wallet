@@ -21,3 +21,4 @@ export const deleteTransactionSuccess = createAction(
 export const deleteTransactionError = createAction('transactions/deleteTransactionError');
 
 export const changeFilter = createAction('transactions/changeFilter');
+

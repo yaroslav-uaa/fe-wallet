@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import mediaQuery from 'css-mediaquery';
 import styles from './Modal.module.css';
 
 const modalRoot = document.getElementById('modal-root');

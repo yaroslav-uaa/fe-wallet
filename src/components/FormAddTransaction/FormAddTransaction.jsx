@@ -1,15 +1,20 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './FormAddTransaction.module.css';
-import operationsTransactions from '../../redux/transaction/operations-transactions';
-import Select from './Select/Select';
+import operationsTransaction from '../../redux/transaction/operations-transactions';
 import Switch from './Switch/Switch';
+import DatePicker from 'react-date-picker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { ToastContainer } from 'react-toastify';
+import Notify from '../Notify/Notify';
+import SelectCategoryIncome from './Select/SelectCategoryIncome';
+import SelectCategoryExpense from './Select/SelectCategoryExpense';
 
 export default function FormAddTransaction() {
   const initialState = {
     date: new Date(),
-    category: 'Выберите категорию',
-    type: true,
+    category: 'Select the category',
+    Income: false,
     comment: '',
     sum: '',
   };
@@ -18,18 +23,26 @@ export default function FormAddTransaction() {
   const [transaction, setTransaction] = useState(initialState);
 
   const handleInput = useCallback(evt => {
-    console.log(evt.target.type);
-    const value =
-      evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
+    const value = evt.target.value;
     const name = evt.target.name;
-    console.log(name);
-    console.log(value);
     setTransaction(prev => ({ ...prev, [name]: value }));
   }, []);
 
+  const handleDate = value => {
+    setTransaction({ date: value, ...transaction });
+  };
+
+  const handleInputSwitch = event => {
+    setTransaction(prevState => ({
+      ...prevState,
+      Income: event.target.checked,
+      category: 'Select the category',
+    }));
+  };
+
   const addTransaction = useCallback(
     data => {
-      dispatch(operationsTransactions.addTransactions(data));
+      dispatch(operationsTransaction.addTransaction(data));
     },
     [dispatch],
   );
@@ -46,14 +59,15 @@ export default function FormAddTransaction() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <p className={styles.form_label}>Добавить транзакцию</p>
-      <Switch />
-      <Select
-        listCategory={spendingCategory}
-        handleInput={handleInput}
-        category={transaction.category}
-      />
-      {/* <Select /> */}
+      <p className={styles.form_label}>Adding Transactions</p>
+      <div>
+        <Switch isChecked={transaction.Income} onSwitch={handleInputSwitch} />
+      </div>
+      {transaction.Income ? (
+        <SelectCategoryIncome />
+      ) : (
+        <SelectCategoryExpense />
+      )}
       <div className={styles.input_box}>
         <input
           type="text"
@@ -62,38 +76,47 @@ export default function FormAddTransaction() {
           name="sum"
           onChange={handleInput}
           className={styles.form_input_sum}
+          required
         />
-        <label>
-          <input
-            type="date"
-            name="date"
-            onChange={handleInput}
-            value={transaction.date}
-          />
-        </label>
+        <DatePicker
+          onChange={handleDate}
+          value={transaction.date}
+          name="date"
+          styles={{ border: 'none' }}
+          classNam={styles.date_piker}
+          required
+        />
+        {/* <Date /> */}
       </div>
       <input
         type="text"
         name="comment"
         value={transaction.comment}
         onChange={handleInput}
-        placeholder="Коментарий"
+        placeholder="Comment"
         className={styles.form_input}
       />
-      <button className={styles.form_btn_add}> Добавить</button>
-      <button className={styles.form_btn_reject}>Отмена</button>
+      <button className={styles.form_btn_add}>Add</button>
+      <button
+        className={styles.form_btn_reject}
+        type="button"
+        onClick={() => Notify.Info('transaction  👋 record was canceled')}
+      >
+        Reject
+      </button>
+      <ToastContainer autoClose={2000} />;
     </form>
   );
 }
 
 const spendingCategory = [
-  'Основной',
-  'Еда',
-  'Авто',
-  'Развитие',
-  'Дети',
-  'Дом',
-  'Образование',
-  'Остальное',
+  'Basic',
+  'Food',
+  'Auto',
+  'Development',
+  'children',
+  'House',
+  'Education',
+  'The rest',
 ];
-const revenuesCategoty = ['Регулярный доход', 'Неpегулярный доход'];
+const revenuesCategory = ['Regular income ', 'Non-regular income'];

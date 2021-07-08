@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-const getIsLoading = (state) => state.transactions.loading;
+const getIsLoading = state => state.transactions.loading;
 
-const getAllTransactions = (state) => state.transactions.items;
+const getAllTransactions = state => state.transactions.items;
 
-const getFilter = (state) => state.transactions.filter;
+const getFilter = state => state.transactions.filter;
 
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
@@ -15,6 +15,10 @@ const filterTransactions = createSelector(
   },
 );
 
-
 // eslint-disable-next-line
-export default { getIsLoading, getAllTransactions, getFilter, filterTransactions };
+export default {
+  getIsLoading,
+  getAllTransactions,
+  getFilter,
+  filterTransactions,
+};

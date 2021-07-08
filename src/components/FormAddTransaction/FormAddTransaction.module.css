@@ -8,32 +8,52 @@
 .form_label {
   font-size: 25px;
   line-height: 1, 5;
-  margin: 5px 0px;
+  margin: 20px 0px;
+  padding: 5px;
   display: flex;
   align-items: center;
   text-transform: uppercase;
   text-align: center;
-  color: #5515a8;
+  color: white;
 }
 .form_input {
   width: 100%;
   padding: 5px 10px;
   border: none;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 2px solid #470870;
   margin-top: 20px;
+  background-color: inherit;
+  color: white;
 }
 .input_box {
   display: flex;
+  margin-top: 20px;
 }
 .form_input_sum {
   width: calc(100% / 2);
   margin-right: 10px;
+  margin-top: 20px;
   padding: 5px 10px;
   border: none;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 2px solid #470870;
+  background: inherit;
+  outline: transparent;
+  color: white;
+}
+.form_input:hover,
+.form_input:focus,
+.form_input:active {
+  outline: transparent;
+  background: inherit;
+}
+
+.form_input::placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.541);
 }
 .form_input_sum::placeholder {
   text-align: center;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form_btn_add {
@@ -46,11 +66,23 @@
   text-transform: uppercase;
   padding: 5px 30px;
   border-radius: 20px;
-  background: rgb(30, 210, 141);
-  border: inherit;
+
+  border: 2px solid transparent;
   outline: none;
   color: white;
   margin-top: 20px;
+  background: linear-gradient(
+    to right,
+    rgba(30, 14, 51, 0.8),
+    rgba(35, 7, 54, 0.2),
+    rgba(42, 15, 68, 0.8)
+  );
+}
+
+.form_btn_add:hover {
+  background: inherit;
+  background: rgb(15, 185, 143);
+  box-shadow: 0px 6px 15px rgba(13, 134, 98, 0.5);
 }
 
 .form_btn_reject {
@@ -65,7 +97,14 @@
   border-radius: 20px;
   margin-top: 20px;
   background: inherit;
-  border: 2px solid rgb(162, 0, 255);
+  border: 2px solid white;
   outline: none;
-  color: #5515a8;
+  color: white;
+}
+.form_btn_reject:hover {
+  background: inherit;
+  border: 2px solid rgba(255, 101, 150, 0.5);
+  color: white;
+  background: #ff6596;
+  box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
 }

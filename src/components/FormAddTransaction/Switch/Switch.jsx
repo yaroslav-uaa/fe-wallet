@@ -1,6 +1,7 @@
 import styles from './Switch.module.css';
 
-export default function Switch({ isChecked, onSwitch }) {
+export default function Switch({ isChecked =false, onSwitch }) {
+  console.log(isChecked)
   return (
     <div className={styles.switch_box}>
       <div>
@@ -10,7 +11,7 @@ export default function Switch({ isChecked, onSwitch }) {
             id="income"
             className={styles.switch}
             checked={isChecked}
-            onChange={onSwitch}
+            onClick={onSwitch}
           />
           <label for="income" className={styles.switch_for}></label>
         </div>

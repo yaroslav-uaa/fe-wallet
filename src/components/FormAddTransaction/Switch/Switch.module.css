@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   width: 100%;
 }
 
@@ -32,6 +32,20 @@
 }
 
 .switch_for::before {
+  right: -70px;
+  top: -10px;
+  background: #ff6596;
+  box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
+  content: '';
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  transition-duration: 300ms;
+}
+
+.switch:checked + .switch_for::before {
   content: '';
   width: 50px;
   height: 50px;
@@ -43,10 +57,4 @@
   top: -10px;
   z-index: 1;
   transition-duration: 300ms;
-}
-
-.switch:checked + .switch_for::before {
-  right: -70px;
-  background: #ff6596;
-  box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
 }

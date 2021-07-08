@@ -36,7 +36,6 @@ const loading = createReducer(false, {
   [deleteTransactionError]: () => false,
 });
 
-
 export default combineReducers({
   items,
   filter,

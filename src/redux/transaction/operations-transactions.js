@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Notify from '../../components/Notify/Notify';
 import {
   getTransactionsRequest,
   getTransactionsSuccess,
@@ -20,24 +21,19 @@ const fetchTransactions = () => async (dispatch) => {
     const { data } = await axios.get('/transactions');
     dispatch(getTransactionsSuccess(data));
   } catch (error) {
-    dispatch(getTransactionsError(error));
+    dispatch(getTransactionsError(Notify.Error(error.message)));
   }
 };
 
-const addTransaction = ({ date, type, comment, sum, balance }) => async (dispatch) => {
-  const transaction = {
-    date, type, comment, sum, balance
-  };
-
+const addTransaction = transaction => async dispatch => {
   dispatch(addTransactionRequest());
-
   try {
     const { data } = await axios.post('/transactions', transaction);
+    Notify.Success('Transaction Add');
     dispatch(addTransactionSuccess(data));
   } catch (error) {
-    dispatch(addTransactionError(error));
+    dispatch(addTransactionError(Notify.Error(error.message)));
   }
-
 };
 
 const deleteTransaction = (transactionId) => async (dispatch) => {
@@ -47,9 +43,10 @@ const deleteTransaction = (transactionId) => async (dispatch) => {
     await axios.delete(`/transactions/${transactionId}`);
     dispatch(deleteTransactionSuccess(transactionId));
   } catch (error) {
-    dispatch(deleteTransactionError(error));
+    dispatch(deleteTransactionError(Notify.Error(error.message)));
   }
 };
 
 // eslint-disable-next-line
 export default { fetchTransactions, addTransaction, deleteTransaction };
+
