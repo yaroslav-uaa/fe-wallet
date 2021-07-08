@@ -15,7 +15,7 @@ import {
 
 const items = createReducer([], {
   [getTransactionsSuccess]: (_, { payload }) => payload,
-  [addTransactionSuccess]: (state, { payload }) => [...state, payload],
+  [addTransactionSuccess]: (state, { payload }) => [ payload, ...state],
   [deleteTransactionSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });

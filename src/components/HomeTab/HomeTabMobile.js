@@ -4,15 +4,10 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableFooter,
-  TableHead,
-  TablePagination,
   TableRow,
 } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
-import TablePaginationActions from './HomeTabPagination';
-import { useTheme, makeStyles} from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery'; 
+import React, { useEffect } from 'react';
+import { makeStyles} from '@material-ui/core/styles';
 
 import { transactionsOperations, transactionsSelectors } from '../../redux/transaction';
 import { useSelector, useDispatch } from 'react-redux'; 
@@ -53,14 +48,9 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function HomeTabMobile() {
+export default function HomeTabMobile() {
   const dispatch = useDispatch();
-
-  // const deleteContact = useCallback((id) => dispatch(transactionsOperations.deleteContact(id)), [dispatch]);
-
-  const { getIsLoading, filterTransactions } = transactionsSelectors;
-  const loadingTransactions = useSelector(getIsLoading);
-  const transactionList = useSelector(filterTransactions);
+  const transactionList = useSelector(transactionsSelectors.filterTransactions);
 
   useEffect(() => dispatch(transactionsOperations.fetchTransactions()), [dispatch])
     const s = useStyles();
@@ -70,11 +60,11 @@ function HomeTabMobile() {
     return colors[index]
 };
   return (
-    <>     
+    <div>     
           {transactionList === null ? (
             <TableRow className={s.row} >No transactions yet</TableRow> 
           ) : (
-            <>
+            <div>
               {transactionList.map(({id, date, type, category, comment, sum, balance} ) => (
                       <TableContainer className={s.container} component={Paper}>
 
@@ -138,10 +128,8 @@ function HomeTabMobile() {
                 
                                     </TableContainer>
                               ))}
-            </>
+            </div>
           )}
-    </>
+    </div>
   );
 }
-
-export default HomeTabMobile;
