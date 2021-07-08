@@ -3,7 +3,7 @@ import Modal from '../Modal';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
-import FormAddTransaction from '../FormAddTransaction';
+import FormAddTransaction from '../FormAddTransaction/FormAddTransaction1';
 
 const useStyles = makeStyles(theme => ({
   margin: {

@@ -5,10 +5,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const SelectCategoryExpense = () => {
-  const [val, setVal] = useState(1);
+const SelectCategoryExpense = value => {
+  const [val, setVal] = useState(value);
 
   const handleChange = event => {
+    console.log(event.target.value);
     setVal(event.target.value);
   };
 
@@ -47,7 +48,7 @@ const SelectCategoryExpense = () => {
         classes={{ root: minimalSelectClasses.select }}
         MenuProps={menuProps}
         IconComponent={iconComponent}
-        value={val}
+        value={val && value}
         onChange={handleChange}
       >
         <MenuItem value={0}>Basic</MenuItem>
