@@ -92,14 +92,16 @@ export default function HomeTabLarge() {
 
     const [isOn, toggleIsOn] = useToggle();
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
     const handleChangeRowsPerPage = e => {
-        setRowsPerPage(parseInt(e.target.value, 5));
+        setRowsPerPage(parseInt(e.target.value, 10));
         setPage(0);
     };
     return (
@@ -153,11 +155,16 @@ export default function HomeTabLarge() {
                                         </TableCell>
                                     </TableRow>
                                 ))}
+                                    {emptyRows > 0 && (
+                                        <TableRow style={{ height: 30 * emptyRows }}>
+                                            <TableCell colSpan={6} />
+                                        </TableRow>
+                                    )}
                             </TableBody>
                                 <TableFooter>
                    <TableRow>
                       <TablePagination
-                          rowsPerPageOptions={[5,]}
+                          rowsPerPageOptions={[10, 15, 20,]}
                           count={transactionList !== [] && transactionList.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
