@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     text: {
         fontFamily: 'Poppins, sans-serif',
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: 15,
     },
     container: {
         background: theme.palette.background.gradient,
@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
     table: {
         color: theme.palette.primary.light,
         borderCollapse: 'collapse',
+        maxWidth: '790px'
     },
 }
 ));
@@ -135,7 +136,7 @@ export default function HomeTabLarge() {
                                     : itemSort
                                 ).map(({ id, date, type, category, comment, sum, balance }) => (
                                     <TableRow className={s.row} key={id}>
-                                        <TableCell className={s.text} align="center">
+                                        <TableCell className={s.text} style={{fontSize: 14}} align="center">
                                             {date}
                                         </TableCell>
                                         <TableCell className={s.text} align="center">
