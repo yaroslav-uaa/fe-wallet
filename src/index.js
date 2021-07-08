@@ -13,13 +13,13 @@ import Loader from './components/Loader/Loader';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store.store}>
-      <PersistGate loading={<Loader />} persistor={store.persistor}>
+//       <PersistGate loading={<Loader />} persistor={store.persistor}>
         <BrowserRouter>
           <ThemeProvider theme={variables}>
             <App />
           </ThemeProvider>
         </BrowserRouter>
-      </PersistGate>
+//       </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
