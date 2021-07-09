@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-const getIsLoading = state => state.transactions.loading;
+const getIsLoading = state => state.data.loading;
 
-const getAllTransactions = state => state.transactions.items;
+const getAllTransactions = state => state.data.result;
 
-const getFilter = state => state.transactions.filter;
+const getFilter = state => state.data.filter;
 
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
