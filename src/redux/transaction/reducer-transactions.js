@@ -13,9 +13,12 @@ import {
   changeFilter,
 } from './actions-transactions';
 
-const items = createReducer([], {
-  [getTransactionsSuccess]: (_, { payload }) => payload,
-  [addTransactionSuccess]: (state, { payload }) => [ payload, ...state],
+const result = createReducer([], {
+  [getTransactionsSuccess]: (_, { payload }) => payload.transactions,
+  [addTransactionSuccess]: (state, { payload }) => [
+    payload.transactions,
+    ...state,
+  ],
   [deleteTransactionSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });
@@ -37,7 +40,7 @@ const loading = createReducer(false, {
 });
 
 export default combineReducers({
-  items,
+  result,
   filter,
   loading,
 });
