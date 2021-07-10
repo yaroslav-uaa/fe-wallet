@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core';
 import { Redirect, Route, Switch } from 'react-router';
 // import PrivateRoute from '../../routes/PrivateRoute';
 // import PublicRoute from '../../routes/PublicRoute';
+import LoadinfForm from '../LoginForm/SignInSide';
 import Header from '../Header';
 import { useMediaQuery } from 'react-responsive';
 import DashboardPage from '../../views/DashboardPage/DashboardPage';
@@ -30,7 +31,7 @@ function App() {
 
       <Suspense fallback={<Loader />}>
         <Switch>
-          <Route path="/" exact component={DashboardPage} />
+          <Route path="/" exact component={LoadinfForm} />
           <Route path="/stats" exact component={Stats} />
           {isTabletOrMobile ? (
             <Route path="/currency" component={CurrencyPage} />
