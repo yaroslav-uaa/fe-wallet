@@ -14,8 +14,11 @@ import {
 } from './actions-transactions';
 
 const result = createReducer([], {
-  [getTransactionsSuccess]: (_, { payload }) => payload,
-  [addTransactionSuccess]: (state, { payload }) => [ payload, ...state],
+  [getTransactionsSuccess]: (_, { payload }) => payload.transactions,
+  [addTransactionSuccess]: (state, { payload }) => [
+    payload.transactions,
+    ...state,
+  ],
   [deleteTransactionSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });
