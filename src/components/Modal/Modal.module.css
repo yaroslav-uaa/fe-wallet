@@ -1,91 +1,56 @@
-/* .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 1200;
+.container {
+  display: block;
+  padding: 0px;
+  margin: 0px;
 }
 
-.modal {
-  position: relative;
-  max-width: calc(100vw - 48px);
-  max-height: calc(100vh - 24px);
-  background: #d2bde8;
-  border-radius: 20px;
-  padding: 3%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-} */
-
-/* .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 1200;
+@media screen and (min-width: 767px) {
+  .container {
+    width: 70%;
+    padding: 5%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-.modal {
-  position: relative;
-  max-width: calc(100vw - 48px);
-  max-height: calc(100vh - 24px);
-  background: #d2bde8;
-  border-radius: 20px;
-  padding: 3%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-} */
-
-/* .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1200;
-}
-
-.modal {
-  position: relative;
-  max-width: calc(100vw - 48px);
-  background-color: rgba(171, 137, 226, 0.938);
-  padding: 20px;
-  border-radius: 20px;
-} */
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1200;
-}
-
-.modal {
-  position: relative;
-  max-width: calc(100vw - 48px);
+.toolbar {
   background: linear-gradient(
-    140deg,
-    rgba(198, 183, 224, 0.925),
-    rgba(81, 26, 133, 0.918)
+    45deg,
+    rgb(110, 25, 154) 10%,
+    rgb(76, 21, 201) 43%,
+    rgb(102, 50, 158)
   );
-  padding: 20px;
-  border-radius: 20px;
+  color: white;
+  text-transform: uppercase;
+  padding: 0px;
+}
+
+.box_btn_rejected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rejected {
+  background: linear-gradient(
+    45deg,
+    rgba(197, 21, 21, 0.849) 10%,
+    rgba(228, 26, 60, 0.897) 43%,
+    rgba(223, 25, 25, 0.795)
+  ) !important;
+  text-transform: uppercase;
+  color: white !important;
+  font-size: 1rem !important;
+  width: 70%;
+  max-width: 300px;
+  border-radius: 5px;
+}
+
+.list_modal {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgb(19%, 12%, 63%, 0.8),
+    rgba(255, 255, 255, 0.8)
+  );
 }

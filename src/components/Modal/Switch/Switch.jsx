@@ -1,7 +1,6 @@
 import styles from './Switch.module.css';
 
-export default function Switch({ isChecked =false, onSwitch }) {
-  console.log(isChecked)
+export default function SwitchMy({ isChecked, onSwitch }) {
   return (
     <div className={styles.switch_box}>
       <div>
