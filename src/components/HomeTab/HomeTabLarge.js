@@ -108,7 +108,7 @@ export default function HomeTabLarge() {
         setPage(0);
     };
     return (
-        <>
+        <div>
             <TableContainer className={s.container} component={Paper}>
                 <Table className={s.table} aria-label="a dense table">
                     <TableHead>
@@ -128,7 +128,7 @@ export default function HomeTabLarge() {
                     {transactionList === null ? (
                         <TableRow className={s.row} align="center">No transactions yet</TableRow>
                     ) : (
-                        <>
+                        <div>
                             <TableBody>
                                 {(rowsPerPage > 0
                                     ? itemSort.slice(
@@ -181,10 +181,10 @@ export default function HomeTabLarge() {
                     />
                   </TableRow>
                 </TableFooter>
-                        </>
+                        </div>
                     )}
                 </Table>
             </TableContainer>
-        </>
+        </div>
     )
 }

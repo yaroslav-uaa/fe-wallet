@@ -85,7 +85,7 @@ function Currency() {
   console.log(currency);
 
   return (
-    <>
+    <div>
       <div className={f.sidebar}>
         {isTabletOrMobile && <Navigation />}
         <TableContainer className={s.table}>
@@ -137,7 +137,7 @@ function Currency() {
           )}
         </TableContainer>
       </div>
-    </>
+    </div>
   );
 }
 

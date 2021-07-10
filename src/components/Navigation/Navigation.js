@@ -9,7 +9,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 function Navigation() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   return (
-    <>
+    <div>
       <div>
         <ul className={s.list}>
           <li>
@@ -50,7 +50,7 @@ function Navigation() {
           )}
         </ul>
       </div>
-    </>
+    </div>
   );
 }
 

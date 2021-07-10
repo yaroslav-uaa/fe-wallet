@@ -40,6 +40,7 @@ export default function Chart({ transactions }) {
           height={280}
           width={280}
         />
+        
       </div>
     </div>
   );

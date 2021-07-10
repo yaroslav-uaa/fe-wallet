@@ -13,7 +13,7 @@
     "@reduxjs/toolkit": "^1.6.0",
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
-    "chart.js": "^3.4.0",
+    "chart.js": "^2.9.4",
     "chroma-js": "^2.1.2",
     "date-fns": "^2.22.1",
     "formik": "^2.2.9",
@@ -23,7 +23,7 @@
     "prop-types": "^15.7.2",
     "rc-datepicker": "^5.0.16",
     "react": "^17.0.2",
-    "react-chartjs-2": "^3.0.3",
+    "react-chartjs-2": "^2.11.2",
     "react-date-picker": "^8.2.0",
     "react-datepicker": "^4.1.1",
     "react-day-picker": "^7.4.10",
@@ -35,7 +35,7 @@
     "react-redux": "^7.2.4",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^1.1.5",
     "react-select": "^4.3.1",
     "react-spinners": "^0.11.0",
     "react-text-mask": "^5.4.3",
@@ -73,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "@expo/webpack-config": "^0.12.82",
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2"

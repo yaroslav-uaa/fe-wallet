@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './Switch.module.css';
 
 export default function Switch({ isChecked =false, onSwitch }) {

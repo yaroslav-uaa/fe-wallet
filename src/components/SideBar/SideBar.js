@@ -8,7 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 function SideBar() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   return (
-    <>
+    <div>
       <div className={s.sidebar}>
         <div className={s.box}>
           <Navigation />
@@ -16,7 +16,7 @@ function SideBar() {
         </div>
         {!isTabletOrMobile && <Currency />}
       </div>
-    </>
+    </div>
   );
 }
 

@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core';
 import { Redirect, Route, Switch } from 'react-router';
 // import PrivateRoute from '../../routes/PrivateRoute';
 // import PublicRoute from '../../routes/PublicRoute';
+import LoginForm from '../LoginForm/SignInSide';
 import Header from '../Header';
 import { useMediaQuery } from 'react-responsive';
 import DashboardPage from '../../views/DashboardPage/DashboardPage';
@@ -16,29 +17,23 @@ import Loader from '../Loader/Loader';
 function App() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   return (
-    <Container
-      maxWidth="xl"
-      disableGutters={false}
-      style={{
-        background: 'linear-gradient(90deg, #8609F9 0%, #311FA0 45%)',
-        minHeight: '100vh',
-      }}
-    >
-      <Header />
-      <ButtonAddTransactions/>
+    // <Container
+    //   maxWidth="xl"
+    //   disableGutters={false}
+    //   style={{
+    //     background: 'linear-gradient(90deg, #8609F9 0%, #311FA0 45%)',
+    //     minHeight: '100vh'
+    //   }}
+    // >
+    //   <Header />
+    //   <ButtonAddTransactions/>
 
       <Suspense fallback={<Loader />}>
         <Switch>
-          <Route path="/" exact component={DashboardPage} />
-          <Route path="/stats" exact component={Stats} />
-          {isTabletOrMobile ? (
-            <Route path="/currency" component={CurrencyPage} />
-          ) : (
-            <Redirect from="/currency" to="/" />
-          )}
+          <Route path="/" exact component={LoginForm}/>
         </Switch>
       </Suspense>
-    </Container>
+    // </Container>
   );
 }
 
@@ -56,3 +51,12 @@ export default App;
 //     <PrivateRoute />
 //   </Switch>
 // </Suspense>;
+
+
+//</Container> <Route path="/" exact component={DashboardPage} />
+//          <Route path="/stats" exact component={Stats} /> 
+//          (isTabletOrMobile)?(
+ //           <Route path="/currency" component={CurrencyPage} />
+ //         ) : (
+ //           <Redirect from="/currency" to="/" />
+ //         )

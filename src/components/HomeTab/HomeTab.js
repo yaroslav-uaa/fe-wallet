@@ -11,11 +11,11 @@ function HomeTab() {
   ); 
  
   return (
-    <>
+    <div>
       {isMobile ? (
         <HomeTabMobile />
       ) : ( <HomeTabLarge />)}
-    </>
+    </div>
   )
 }
 

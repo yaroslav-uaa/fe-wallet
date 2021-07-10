@@ -7,7 +7,7 @@ import s from './Header.module.css';
 
 function Header() {
   return (
-    <>
+    <div>
       <header className={s.header}>
         <div className={s.logo}>
           <AccountBalanceWalletIcon />
@@ -23,7 +23,7 @@ function Header() {
           </IconButton>
         </div>
       </header>
-    </>
+    </div>
   );
 }
 
