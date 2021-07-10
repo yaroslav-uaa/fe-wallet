@@ -1,11 +1,14 @@
 import React from 'react';
 import Currency from '../../components/Currency/Currency';
-
+import Header from '../../components/Header';
 function CurrencyPage() {
   return (
-    <div className="page">
-      <Currency />
-    </div>
+    <>
+      <Header />
+      <div className="page">
+        <Currency />
+      </div>
+    </>
   );
 }
 
