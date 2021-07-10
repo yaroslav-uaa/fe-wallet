@@ -1,0 +1,143 @@
+.zPossition{
+  position: absolute;
+  top: 230px;
+}
+.Marg{
+  position: relative;
+}
+@media screen and (max-width: 767px) {
+    .myConteiner{        
+        width: 320px;
+        height:568px;   
+        margin-left: auto;
+        margin-right: auto;    
+        
+    }
+    Form{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    button{
+      display: inline-block;
+      width:280px;
+      height:50px;
+      border-radius: 20px;
+      background-color:#24CCA7;
+      border: 0px;
+    }
+    button:last-child{
+      margin-top: 20px;
+      background-color:#FFFFFF;
+      border: solid 1px #4A56E2;
+    }
+    .Marg{
+      margin-bottom: 40px;
+      padding-bottom: 10px;
+      width: 280px;
+      height: 34px;
+      
+      border: solid 0px #FFFFFF;
+      border-bottom:solid 2px gray;
+      /* border-radius: 20px; */
+      text-indent: 12px;
+      background: url(../imageForProject/email.svg) no-repeat center left;
+      background-position:5% 50%;
+    padding-left:30px;
+    }
+    .Marg:nth-child(2){
+      background: url(../imageForProject/cloth.svg) no-repeat center left;
+      background-position:5% 50%;
+      padding-left:30px;
+    }
+  }
+  @media screen and (min-width: 768px){
+    body{
+      
+      background: url(../imageForProject/pink.svg) no-repeat top right,
+                  url(../imageForProject/perp.svg) no-repeat bottom left,
+                  url(../imageForProject/imageAsshole.svg) no-repeat 114px 60px; 
+                  background-color: #E5E5E5;
+    }
+    .myConteiner{        
+      width: 768px;
+      height:1024px;   
+      margin-left: auto;
+      margin-right: auto;    
+  }
+  .myLog{
+    width: 540px;
+    height:468px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border:solid #FFFFFF;
+    margin-top: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  Form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  button{
+    display: inline-block;
+    width:300px;
+    height:50px;
+    border-radius: 20px;
+    background-color:#24CCA7;
+    border: 0px;
+  }
+  button:last-child{
+    margin-top: 20px;
+    background-color:#FFFFFF;
+    border: solid 1px #4A56E2;
+  }
+  .Marg{
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    width: 410px;
+    height: 34px;
+    
+    border: solid 0px #FFFFFF;
+    border-bottom:solid 2px gray;
+    text-indent: 12px;
+    background: url(../imageForProject/email.svg) no-repeat center left;
+    background-position:3% 50%;
+  padding-left:30px;
+  }
+  .Marg:nth-child(2){
+    background: url(../imageForProject/cloth.svg) no-repeat center left;
+    background-position:3% 50%;
+    padding-left:30px;
+  }
+  
+  }
+  
+  @media screen and (min-width: 1280px ) {
+    body{
+      background: url(../imageForProject/pink.svg) no-repeat top right,
+                  url(../imageForProject/bigPink.svg) no-repeat top right/720px 720px,  
+                  url(../imageForProject/imageAsshole.svg) no-repeat 70px 150px/435px 420px,            
+                  url(../imageForProject/perp.svg) no-repeat 0 400px;
+                  
+                  background-color: #E5E5E5;
+    }
+    .myConteiner{        
+      width: 1280px;
+      height:720px;   
+      margin-left: auto;
+      margin-right: auto;    
+  }
+  .myLog{    
+    margin-top: 136px;
+    margin-right: 76px;
+  }
+  .Marg:nth-child(2){
+    background: url(../imageForProject/cloth.svg) no-repeat center left;
+    background-position:3% 50%;
+    padding-left:30px;
+  }
+}
