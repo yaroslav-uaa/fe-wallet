@@ -1,0 +1,49 @@
+.title {
+  color: rgb(49, 12, 109);
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 25px;
+}
+.form {
+  padding: 5%;
+  align-items: center;
+  justify-content: center;
+}
+.select {
+  width: 100%;
+  display: flex;
+}
+.date {
+  width: 45%;
+}
+.sum {
+  width: 45%;
+}
+
+.box_time {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn_submit {
+  background: linear-gradient(
+    45deg,
+    rgb(110, 25, 154) 10%,
+    rgb(76, 21, 201) 43%,
+    rgb(102, 50, 158)
+  );
+  text-transform: uppercase;
+  color: white !important;
+  padding: 10px;
+  margin-top: 20px !important;
+  font-size: 1rem !important;
+  width: 70%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.box_btn {
+  text-align: center;
+}

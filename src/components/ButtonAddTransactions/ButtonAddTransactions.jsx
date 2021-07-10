@@ -1,9 +1,6 @@
-import { useState, useCallback } from 'react';
-import Modal from '../Modal';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
-import FormAddTransaction from '../FormAddTransaction';
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -16,28 +13,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAddTransactions() {
+export default function ButtonAddTransactions({ openModal }) {
   const classes = useStyles();
-  const [showModal, setShowModal] = useState(false);
-  const openModal = useCallback(() => {
-    return setShowModal(true);
-  }, []);
-
-  const onCloseModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
-
   return (
     <>
       <Fab onClick={openModal} aria-label="add" className={classes.margin}>
         <AddIcon />
       </Fab>
-
-      {showModal && (
-        <Modal onClose={onCloseModal}>
-          <FormAddTransaction />
-        </Modal>
-      )}
     </>
   );
 }
