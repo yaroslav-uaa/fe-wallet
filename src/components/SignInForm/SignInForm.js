@@ -34,10 +34,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
 
-  input: {
-    color: 'green',
-  },
-
   submit: {
     marginTop: '30px',
     width: '130px',
