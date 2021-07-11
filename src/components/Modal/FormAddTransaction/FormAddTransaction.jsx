@@ -13,7 +13,6 @@ import {
   fieldToTextField,
   TextField,
   TextFieldProps,
-  Switch,
 } from 'formik-material-ui';
 import { DatePicker } from 'formik-material-ui-pickers';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -25,6 +24,7 @@ import s from './Form.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Notify from '../../Notify';
 import SwitchMy from '../Switch';
+import moment from 'moment';
 
 // const operationSchema = values => {
 //   return Yup.object({
@@ -73,8 +73,8 @@ const rangesExpense = [
     label: 'Education',
   },
   {
-    value: 'The rest',
-    label: 'The rest',
+    value: 'The other',
+    label: 'The other',
   },
 ];
 
@@ -93,21 +93,39 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'block',
     width: '100%',
+    color: 'white',
+    background: 'red',
+  },
+  select: {
+    color: 'white',
+    background: 'white',
   },
   uderline: {
-    '&&&:before': {
-      borderBottom: '2px solid rgb(82, 10, 124)',
+    '&:before': {
+      borderBottom: '2px solid white',
+      color: '#fff',
     },
-    '&&:after': {
-      borderBottom: '2px solid rgb(82, 10, 124)',
+    '&:after': {
+      borderBottom: '2px solid white',
     },
   },
   input: {
     width: '100%',
     textAlign: 'center',
     border: 'none',
-    borderBottom: '2px solid rgb(82, 10, 124)',
-    color: ' rgb(49, 12, 109)',
+    borderBottom: '2px solid white',
+    color: 'white',
+    background: 'inherit',
+    '&:activ': {
+      borderBottom: '2px solid white',
+      color: 'white',
+      background: 'inherit',
+    },
+    '&:focus': {
+      borderBottom: '2px solid white',
+      background: 'inherit',
+      color: 'white',
+    },
   },
 }));
 
@@ -129,35 +147,41 @@ function UpperCasingTextField(props: TextFieldProps) {
 const FormAddTransaction = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [chooseSelect, setSelect] = useState(true);
+  const [chooseSelect, setSelect] = useState(false);
   const onSwitchChecked = evt => {
-    console.log(evt.target.checked);
     setSelect(evt.target.checked);
   };
-
-  console.log(chooseSelect);
-
   return (
     <Formik
       initialValues={{
         date: new Date(),
+
+
         category: '',
         income: chooseSelect,
         comment: '',
         sum: '',
+
       }}
       // validate={values => operationSchema(values)}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
-        console.log({ ...values, іncome: chooseSelect });
-        console.log(chooseSelect);
+
+        console.log(values);
+        console.log({
+          ...values,
+          income: chooseSelect,
+          date: moment(values.date).format(),
+
+
         dispatch(
           operationsTransactions.addTransaction({
             ...values,
             income: chooseSelect,
+            date: moment(values.date).format(),
+
           }),
         );
-
         resetForm();
         setSubmitting(false);
       }}
@@ -166,13 +190,16 @@ const FormAddTransaction = () => {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Form className={s.form}>
             <h2 className={s.title}>Add transaction</h2>
-            <Box margin={1}>
-              <SwitchMy
-                // name="Income"
-                onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
-                isChecked={chooseSelect}
-                onClick={chooseSelect => onSwitchChecked(chooseSelect)}
-              />
+            <Box margin={1} className={s.box_switch}>
+              <p className={s.text}>Income</p>
+              <div>
+                <SwitchMy
+                  onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
+                  isChecked={chooseSelect}
+                  onClick={chooseSelect => onSwitchChecked(chooseSelect)}
+                />
+              </div>
+              <p className={s.text}>Expense</p>
             </Box>
             <Box margin={1} className={s.box_select}>
               <Field
@@ -189,7 +216,7 @@ const FormAddTransaction = () => {
                   shrink: true,
                 }}
               >
-                {!chooseSelect
+                {chooseSelect
                   ? createSelect(rangesIncome)
                   : createSelect(rangesExpense)}
               </Field>
@@ -202,7 +229,8 @@ const FormAddTransaction = () => {
                   type="text"
                   label="Sum"
                   width="100%"
-                  className={s.sum}
+                  className={`${s.sum}+${classes.input}`}
+                  // className={classes.input}
                 />
 
                 <Field
@@ -247,7 +275,12 @@ const FormAddTransaction = () => {
 function createSelect(array) {
   return array.map(option => {
     return (
-      <MenuItem key={option.value} value={option.value} width="100%">
+      <MenuItem
+        key={option.value}
+        value={option.value}
+        width="100%"
+        className={s.option}
+      >
         {option.label}
       </MenuItem>
     );

@@ -1,34 +1,30 @@
 .container {
   display: block;
+  height: 100%;
   padding: 0px;
   margin: 0px;
+  border-radius: 20px;
 }
 
 @media screen and (min-width: 767px) {
   .container {
-    width: 70%;
-    padding: 5%;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    height: 80%;
+    margin-top: 50px;
   }
 }
 
-.toolbar {
-  background: linear-gradient(
-    45deg,
-    rgb(110, 25, 154) 10%,
-    rgb(76, 21, 201) 43%,
-    rgb(102, 50, 158)
-  );
-  color: white;
-  text-transform: uppercase;
-  padding: 0px;
+.box {
+  border-radius: 20px;
 }
-
 .box_btn_rejected {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: inherit;
+  margin-bottom: 10px;
 }
 
 .rejected {
@@ -41,16 +37,19 @@
   text-transform: uppercase;
   color: white !important;
   font-size: 1rem !important;
-  width: 70%;
+  width: 60%;
   max-width: 300px;
   border-radius: 5px;
+}
+.box_close_btn {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  color: white;
 }
 
 .list_modal {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgb(19%, 12%, 63%, 0.8),
-    rgba(255, 255, 255, 0.8)
-  );
+  padding: 10px;
+  background: linear-gradient(90deg, #8609f9 20%, #3e2ac0 50%);
 }

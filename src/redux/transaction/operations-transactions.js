@@ -12,9 +12,9 @@ import {
   deleteTransactionError,
 } from './actions-transactions';
 
-axios.defaults.baseURL = 'http://localhost:4040/api';
+axios.defaults.baseURL = 'http://localhost:4040';
 
-const fetchTransactions = () => async (dispatch) => {
+const fetchTransactions = () => async dispatch => {
   dispatch(getTransactionsRequest());
 
   try {
@@ -36,7 +36,7 @@ const addTransaction = transaction => async dispatch => {
   }
 };
 
-const deleteTransaction = (transactionId) => async (dispatch) => {
+const deleteTransaction = transactionId => async dispatch => {
   dispatch(deleteTransactionRequest());
 
   try {
@@ -49,4 +49,3 @@ const deleteTransaction = (transactionId) => async (dispatch) => {
 
 // eslint-disable-next-line
 export default { fetchTransactions, addTransaction, deleteTransaction };
-
