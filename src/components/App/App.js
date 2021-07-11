@@ -1,8 +1,11 @@
-import React, { Suspense } from 'react';
-import { Container } from '@material-ui/core';
+import React, { Suspense, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router';
-// import PrivateRoute from '../../routes/PrivateRoute';
-// import PublicRoute from '../../routes/PublicRoute';
+import authOperations from '../../redux/auth/auth-operations';
+import RegisterView from '../../views/qwertyA/qwertyA';
+import { Container } from '@material-ui/core';
+import PrivateRoute from '../../routes/PrivateRoute';
+import PublicRoute from '../../routes/PublicRoute';
 import LoadinfForm from '../LoginForm/SignInSide';
 import Header from '../Header';
 import { useMediaQuery } from 'react-responsive';
@@ -10,14 +13,18 @@ import DashboardPage from '../../views/DashboardPage/DashboardPage';
 import Stats from '../../views/Stats/Stats';
 import CurrencyPage from '../../views/CurrencyPage/CurrencyPage';
 import Loader from '../Loader/Loader';
-// import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
-// import Modal from '../Modal';
+import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
+import Modal from '../Modal';
+import SignInSide from '../LoginForm/SignInSide';
 import SignInPage from '../../views/qwertyB/qwertyB';
-import RegisterView from '../../views/qwertyA/qwertyA';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
+
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <Container
@@ -28,22 +35,41 @@ function App() {
         minHeight: '100vh',
       }}
     >
-      {/* <Modal /> */}
-
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<p>"wait..."</p>}>
         <Switch>
-          <Route path="/signin" exact component={SignInPage} />
-          <Route path="/signup" exact component={RegisterView} />
-          <Route path="/" exact component={DashboardPage} />
-          <Route path="/" exact component={LoadinfForm} />
-          <Route path="/stats" exact component={Stats} />
-          {isTabletOrMobile ? (
-            <Route path="/currency" component={CurrencyPage} />
-          ) : (
-            <Redirect from="/currency" to="/" />
-          )}
+          <PublicRoute
+            path="/signin"
+            exact
+            component={SignInPage}
+            redirectTo="/"
+            restricted
+          />
+
+          <PublicRoute
+            path="/signup"
+            exact
+            component={RegisterView}
+            redirectTo="/"
+            restricted
+          />
+
+          <PrivateRoute
+            path="/"
+            exact
+            component={DashboardPage}
+            redirectTo="/signin"
+          />
+
+          <PrivateRoute
+            path="/stats"
+            exact
+            component={Stats}
+            redirectTo="/signin"
+          />
         </Switch>
       </Suspense>
+      ;
+      <Modal />
     </Container>
   );
 }

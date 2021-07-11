@@ -64,5 +64,5 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-const operations = { token, signUp, signIn, signOut, getCurrentUser };
-export default operations;
+const authOperations = { token, signUp, signIn, signOut, getCurrentUser };
+export default authOperations;
