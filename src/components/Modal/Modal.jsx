@@ -9,7 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
 import s from './Modal.module.css';
-import FormAddTransaction from './FormAddTransaction/FormAddTransaction';
+import FormAddTransaction from './FormAddTransaction';
 
 const styles = {
   flex: {
@@ -64,6 +64,7 @@ class FullScreenDialog extends React.Component {
                     <CloseIcon />
                   </IconButton>
                 </div>
+
                 <FormAddTransaction />
                 <div className={s.box_btn_rejected}>
                   <Button onClick={this.handleClose} className={s.rejected}>

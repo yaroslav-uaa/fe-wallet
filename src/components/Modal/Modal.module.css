@@ -18,6 +18,7 @@
 
 .box {
   border-radius: 20px;
+  padding: 10px;
 }
 .box_btn_rejected {
   display: flex;
