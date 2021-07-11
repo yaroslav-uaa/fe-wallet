@@ -1,0 +1,30 @@
+.bg {
+  background: url(../../images/back.png),
+    radial-gradient(rgb(255, 255, 255), rgba(133, 9, 249, 0.74));
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 6vh 30px 3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  /* box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.418); */
+}
+
+.title {
+  font-family: Gugi, sans-serif;
+  font-size: 40px;
+  line-height: 1rem;
+  letter-spacing: 0.3rem;
+  color: beige;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(65, 71, 77);
+  letter-spacing: 0.2rem;
+  line-height: 1rem;
+}
