@@ -140,21 +140,21 @@ const FormAddTransaction = () => {
   return (
     <Formik
       initialValues={{
-        sum: '',
-        comment: '',
-        category: '',
         date: new Date(),
-        Income: chooseSelect,
+        category: '',
+        income: chooseSelect,
+        comment: '',
+        sum: '',
       }}
       // validate={values => operationSchema(values)}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
-        console.log({ ...values, Income: chooseSelect });
+        console.log({ ...values, іncome: chooseSelect });
         console.log(chooseSelect);
         dispatch(
           operationsTransactions.addTransaction({
             ...values,
-            Income: chooseSelect,
+            income: chooseSelect,
           }),
         );
 
