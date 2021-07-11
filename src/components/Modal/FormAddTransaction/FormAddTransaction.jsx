@@ -80,8 +80,7 @@ export default function FormAddTransaction() {
         date: moment(selectedDate).format(),
         income: chooseSelect,
         category: category,
-      };
-      console.log(correctValue);
+      }; 
       onFormSubmit(correctValue, resetForm);
     },
   });

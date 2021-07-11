@@ -196,7 +196,7 @@ export default function HomeTabLarge() {
                       page * rowsPerPage + rowsPerPage,
                     )
                   : itemSort
-                ).map(({ id, date, type, category, comment, sum, balance }) => (
+                ).map(({ id, date, income, category, comment, sum, balance }) => (
                   <TableRow className={s.row} key={id}>
                     <TableCell
                       className={s.text}
@@ -206,7 +206,7 @@ export default function HomeTabLarge() {
                       {date}
                     </TableCell>
                     <TableCell className={s.text} align="center">
-                      {type}
+                     {income ? 'income' : 'expenses'}
                     </TableCell>
                     <TableCell className={s.text} align="center">
                       {category}
@@ -215,7 +215,8 @@ export default function HomeTabLarge() {
                       {comment}
                     </TableCell>
                     <TableCell className={s.text} align="center">
-                      {sum}
+                      {income ? `+${sum}` : `-${sum}`}
+                      
                     </TableCell>
                     <TableCell className={s.text} align="center">
                       {balance}
