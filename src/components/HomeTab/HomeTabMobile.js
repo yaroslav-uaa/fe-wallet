@@ -65,7 +65,7 @@ export default function HomeTabMobile() {
             <TableRow className={s.row} >No transactions yet</TableRow> 
           ) : (
             <div>
-              {transactionList.map(({id, date, type, category, comment, sum, balance} ) => (
+              {transactionList.map(({id, date, income, category, comment, sum, balance} ) => (
                       <TableContainer className={s.container} component={Paper}>
 
                            <Table key={id} > 
@@ -86,7 +86,7 @@ export default function HomeTabMobile() {
                                                   Type
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {type}
+                                                  {income ? 'income' : 'expenses'}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
@@ -110,7 +110,7 @@ export default function HomeTabMobile() {
                                                   Sum
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {sum}
+                                                 {income ? `+${sum}` : `-${sum}`}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
