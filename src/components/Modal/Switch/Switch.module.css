@@ -5,11 +5,17 @@
   position: relative;
 }
 
+.box {
+  background: yellow;
+  width: -10px;
+}
+
 .switch_box {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+  /* align-items: center; */
+  /* justify-content: center; */
+  background: chocolate;
+  /* padding: 10px; */
   margin-bottom: 50px;
   width: 100%;
 }

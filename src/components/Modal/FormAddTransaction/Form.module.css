@@ -1,23 +1,64 @@
 .title {
-  color: rgb(49, 12, 109);
+  color: white;
   text-transform: uppercase;
   text-align: center;
   font-size: 25px;
+  margin: 0px;
 }
 .form {
   padding: 5%;
   align-items: center;
   justify-content: center;
 }
+
+.text {
+  color: white;
+  font-size: 15px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.box_switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
 .select {
   width: 100%;
   display: flex;
+  color: white !important;
 }
+.select:active .select:hover {
+  color: white;
+}
+
 .date {
-  width: 45%;
+  width: 100%;
+  color: white !important;
 }
+
 .sum {
-  width: 45%;
+  width: 100%;
+}
+
+@media screen and (min-width: 767px) {
+  .date {
+    width: 45%;
+  }
+  .sum {
+    width: 45%;
+  }
+}
+.option {
+  color: rgb(26, 8, 70);
+  width: 100%;
+}
+.option:focus,
+.option:active,
+option:checked,
+.option:hover {
+  background: rgba(123, 70, 209, 0.493);
 }
 
 .box_time {
@@ -34,9 +75,9 @@
     rgb(76, 21, 201) 43%,
     rgb(102, 50, 158)
   );
+
   text-transform: uppercase;
   color: white !important;
-  padding: 10px;
   margin-top: 20px !important;
   font-size: 1rem !important;
   width: 70%;
@@ -44,6 +85,13 @@
   border-radius: 10px;
 }
 
+@media screen and (min-width: 767px) {
+  .btn_submit {
+    width: 70%;
+  }
+}
+
 .box_btn {
   text-align: center;
+  padding: 0px 40px;
 }

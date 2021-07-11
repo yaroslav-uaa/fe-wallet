@@ -10,8 +10,9 @@ const getFilter = state => state.transactions.filter;
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
   (transactions, filter) => {
-    return transactions.filter(({ date }) =>
-      date.toLowerCase().includes(filter.toLowerCase()),
+    console.log(transactions);
+    return transactions.filter(({ category }) =>
+      category.toLowerCase().includes(filter.toLowerCase()),
     );
   },
 );
