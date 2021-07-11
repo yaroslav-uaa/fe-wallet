@@ -70,13 +70,15 @@ export default function FormAddTransaction() {
       category: category,
       income: chooseSelect,
       comment: '',
-      sum: '',
+      sum: null,
     },
     validationSchema: SchemaYup,
     onSubmit: (values, { resetForm }) => {
+      console.log(chooseSelect);
       const correctValue = {
         ...values,
-        date: moment(values.date).format(),
+        date: moment(selectedDate).format(),
+        income: chooseSelect,
         category: category,
       };
       console.log(correctValue);
@@ -124,7 +126,7 @@ export default function FormAddTransaction() {
               id="sum"
               name="sum"
               label="Sum"
-              type="text"
+              type="number"
               className={classes.input}
               value={formik.values.sum}
               onChange={formik.handleChange}
