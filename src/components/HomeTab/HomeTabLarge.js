@@ -74,7 +74,6 @@ export default function HomeTabLarge() {
   useEffect(() => {
     setItemSort(transactionList);
   }, [transactionList]);
-  console.log('________', transactionList);
 
   const sortByUp = value => {
     const lodash = sortBy(transactionList, [

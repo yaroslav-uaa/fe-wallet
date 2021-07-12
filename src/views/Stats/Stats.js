@@ -1,24 +1,67 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { transactionsSelectors } from '../../redux/transaction';
+import { useSelector } from 'react-redux';
 import Chart from '../../components/Chart/Chart';
-import transactions from '../../transaction.json';
 import DiagramTab from '../../components/DiagramTab/DiagramTab';
-import styles from './Stats.module.css';
 import SideBar from '../../components/SideBar';
-import Header from '../../components/Header';
+import SelectForStats from '../../components/SelectForStats/SelectForStats';
+
+import styles from './Stats.module.css';
+import operationsTransactions from '../../redux/transaction/operations-transactions';
+
+// import transactions from '../../transaction.json';
+import { useDispatch } from 'react-redux';
+
+// const getTransactionsByDate = (mounth, age) => async dispatch => {
+//   try {
+//     const { data } = await axios.get(
+//       `/api/categories?month=${mounth}&year=${age}`,
+//     ); //дописать правельный путь для fetch по дате
+//   } catch (error) {}
+// };
+
+const arrColors = [
+  'rgba(255, 99, 132, 1)',
+  'rgba(54, 162, 235, 1)',
+  'rgba(255, 206, 86, 1)',
+  'rgba(75, 192, 192, 1)',
+  'rgba(153, 102, 255, 1)',
+  'rgba(255, 159, 64, 1)',
+  'rgba(200, 159, 64, 1)',
+  'rgba(200, 159, 64, 1)',
+  'rgba(200, 159, 64, 1)',
+];
 
 const Stats = () => {
-  // console.log(transactions);
+  const dispatch = useDispatch();
+
+  const monthNow = new Date().getMonth();
+  const ageNow = new Date().getFullYear();
+
+  useEffect(
+    () =>
+      dispatch(operationsTransactions.getTransactionsByDate(monthNow, ageNow)),
+    [dispatch],
+  );
+
+  const { getAllCategoriesFromTransactions } = transactionsSelectors;
+  const categoriesFromState = useSelector(getAllCategoriesFromTransactions);
+  const categories = categoriesFromState.categories;
+  const balance = categoriesFromState.balance;
+
+  const arrMoney = categories ? categories.map(trans => trans.sum) : null;
+
   return (
-    <>
-      <Header />
-      <div className="page">
-        <SideBar />
-        <div className={styles.statisticsPage}>
-          <Chart transactions={transactions} />
-          <DiagramTab transactions={transactions} />
+    <div className="page">
+      <SideBar />
+      <div className={styles.statisticsPage}>
+        <Chart arrColors={arrColors} arrMoney={arrMoney} balance={balance} />
+        <div>
+          <SelectForStats />
+          <DiagramTab arrColors={arrColors} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
