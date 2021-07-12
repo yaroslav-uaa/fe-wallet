@@ -74,7 +74,6 @@ export default function HomeTabLarge() {
   useEffect(() => {
     setItemSort(transactionList);
   }, [transactionList]);
-  console.log('________', transactionList);
 
   const sortByUp = value => {
     const lodash = sortBy(transactionList, [
@@ -117,6 +116,9 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
+  console.log(rowsPerPage.length)
+  console.log(itemSort.length)
+  console.log(transactionList.length)
   return (
     <>
       <TableContainer className={s.container} component={Paper}>
@@ -183,10 +185,8 @@ export default function HomeTabLarge() {
               </TableCell>
             </TableRow>
           </TableHead>
-          {transactionList === null ? (
-            <TableRow className={s.row} align="center">
-              No transactions yet
-            </TableRow>
+          {transactionList.length === 0 ? (
+            <caption className={s.row} style={{height: '150px', margin: '100px auto', fontSize: '20px', width: '350px',  color: 'black', textAlign: 'center'}} align="center">No transactions yet</caption>
           ) : (
             <>
               <TableBody>
