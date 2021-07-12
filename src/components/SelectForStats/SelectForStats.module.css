@@ -5,20 +5,23 @@
   margin-right: auto;
 }
 
-.selectMounth {
+.selectMonth {
   background-color: #fff;
   min-width: 280px !important;
   min-height: 58px;
   border-radius: 29px;
   margin-bottom: 20px !important;
+  padding-top: 15px !important;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
 }
 
 @media screen and (min-width: 768px) {
-  .selectMounth {
+  .selectMonth {
     min-width: 166px !important;
   }
 
-  .selectMounth:not(:last-child) {
+  .selectMonth:not(:last-child) {
     margin-right: 20px !important;
   }
 }

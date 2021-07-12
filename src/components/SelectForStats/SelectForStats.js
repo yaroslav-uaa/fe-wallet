@@ -1,89 +1,161 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { deepPurple } from '@material-ui/core/colors';
 import styles from './SelectForStats.module.css';
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    marginTop: theme.spacing(2),
-    margin: theme.spacing(0),
-    minWidth: 280,
-    minHeight: 58,
+import operationsTransactions from '../../redux/transaction/operations-transactions';
+import { useDispatch } from 'react-redux';
+
+const useMinimalSelectStyles = {
+  select: {
+    // minWidth: 200,
+    // background: 'white',
+    // color: deepPurple[500],
+    // fontWeight: 200,
+    // borderStyle: 'none',
+    // borderWidth: 2,
+    // borderRadius: 12,
+    // paddingLeft: 24,
+    // paddingTop: 14,
+    // paddingBottom: 15,
+    boxShadow: '0px 5px 8px -3px rgba(0,0,0,0.14)',
+    '&:focus': {
+      borderRadius: 12,
+      background: 'green',
+      borderColor: deepPurple[100],
+    },
+  },
+  icon: {
+    color: deepPurple[300],
+    right: 12,
+    position: 'absolute',
+    userSelect: 'none',
+    pointerEvents: 'none',
+  },
+  paper: {
+    borderRadius: 12,
+    marginTop: 8,
+  },
+  list: {
+    paddingTop: 0,
+    paddingBottom: 0,
     background: 'white',
-    borderRadius: 29,
+    '& li': {
+      fontWeight: 200,
+      paddingTop: 12,
+      paddingBottom: 12,
+    },
+    '& li:hover': {
+      background: deepPurple[100],
+    },
+    '& li.Mui-selected': {
+      color: 'white',
+      background: deepPurple[400],
+    },
+    '& li.Mui-selected:hover': {
+      background: deepPurple[500],
+    },
   },
-  select: {},
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    borderBottom: 'none',
-  },
-}));
+};
 
-export default function SimpleSelect() {
-  const classes = useStyles();
-  const [mounts, setMounth] = React.useState('');
-  const [age, setAge] = React.useState('');
+const MinimalSelect = () => {
+  const [month, setMonth] = useState(new Date().getMonth());
+  const [year, setYear] = useState(new Date().getFullYear());
 
-  React.useEffect(() => {
-    // делает запрос на сервер с данными mounts и age если такие выбраны
-    console.log(mounts);
-    console.log(age);
-  }, [mounts, age]);
-
-  const handleChangeMounth = event => {
-    setMounth(event.target.value);
+  const handleChangeMonth = event => {
+    setMonth(event.target.value);
   };
 
-  const handleChangeAge = event => {
-    setAge(event.target.value);
+  const handleChangeYear = event => {
+    setYear(event.target.value);
+  };
+
+  useEffect(() => {
+    // делает запрос на сервер с данными mounts и age если такие выбраны
+    // console.log(month);
+    // console.log(age);
+  }, [month, year]);
+
+  // ---------------------------------------------
+  // const dispatch = useDispatch();
+  // // const monthNow = new Date().getMonth();
+  // // const ageNow = new Date().getFullYear();
+
+  // useEffect(
+  //   () => dispatch(operationsTransactions.getTransactionsByDate(month, year)),
+  //   [month, year],
+  // );
+  // ---------------------------------------------
+
+  const minimalSelectClasses = useMinimalSelectStyles;
+
+  const iconComponent = props => {
+    return (
+      <ExpandMoreIcon
+        className={props.className + ' ' + minimalSelectClasses.icon}
+      />
+    );
+  };
+
+  const menuProps = {
+    classes: {
+      paper: minimalSelectClasses.paper,
+      list: minimalSelectClasses.list,
+    },
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: 'left',
+    },
+    transformOrigin: {
+      vertical: 'top',
+      horizontal: 'left',
+    },
+    getContentAnchorEl: null,
   };
 
   return (
     <div>
-      <FormControl className={styles.selectMounth}>
+      <FormControl className={styles.selectMonth}>
         <Select
-          value={mounts}
-          onChange={handleChangeMounth}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
+          disableUnderline
+          MenuProps={menuProps}
+          IconComponent={iconComponent}
+          value={month}
+          onChange={handleChangeMonth}
         >
-          <MenuItem value="">
-            <em>Mounth</em>
-          </MenuItem>
-          <MenuItem value={'January'}>January</MenuItem>
-          <MenuItem value={'February'}>February</MenuItem>
-          <MenuItem value={'March'}>March</MenuItem>
-          <MenuItem value={'April'}>April</MenuItem>
-          <MenuItem value={'May'}>May</MenuItem>
-          <MenuItem value={'June'}>June</MenuItem>
-          <MenuItem value={'July'}>July</MenuItem>
-          <MenuItem value={'August'}>August</MenuItem>
-          <MenuItem value={'September'}>September</MenuItem>
-          <MenuItem value={'October'}>October</MenuItem>
-          <MenuItem value={'November'}>November</MenuItem>
-          <MenuItem value={'December'}>December</MenuItem>
+          <MenuItem value={'Month'}>Month</MenuItem>
+          <MenuItem value={0}>January</MenuItem>
+          <MenuItem value={1}>February</MenuItem>
+          <MenuItem value={2}>March</MenuItem>
+          <MenuItem value={3}>April</MenuItem>
+          <MenuItem value={4}>May</MenuItem>
+          <MenuItem value={5}>June</MenuItem>
+          <MenuItem value={6}>July</MenuItem>
+          <MenuItem value={7}>August</MenuItem>
+          <MenuItem value={8}>September</MenuItem>
+          <MenuItem value={9}>October</MenuItem>
+          <MenuItem value={10}>November</MenuItem>
+          <MenuItem value={11}>December</MenuItem>
         </Select>
       </FormControl>
 
-      <FormControl className={styles.selectMounth}>
+      <FormControl className={styles.selectMonth}>
         <Select
-          value={age}
-          onChange={handleChangeAge}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
+          disableUnderline
+          MenuProps={menuProps}
+          IconComponent={iconComponent}
+          value={year}
+          onChange={handleChangeYear}
         >
-          <MenuItem value="">
-            <em>Age</em>
-          </MenuItem>
+          <MenuItem value={'Year'}>Year</MenuItem>
           <MenuItem value={2021}>2021</MenuItem>
         </Select>
       </FormControl>
     </div>
   );
-}
+};
+
+export default MinimalSelect;

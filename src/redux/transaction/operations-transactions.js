@@ -4,6 +4,9 @@ import {
   getTransactionsRequest,
   getTransactionsSuccess,
   getTransactionsError,
+  getTransactionsByDateRequest,
+  getTransactionsByDateSuccess,
+  getTransactionsByDateError,
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
@@ -22,6 +25,17 @@ const fetchTransactions = () => async dispatch => {
     dispatch(getTransactionsSuccess(data));
   } catch (error) {
     dispatch(getTransactionsError(Notify.Error(error.message)));
+  }
+};
+
+const getTransactionsByDate = (month, age) => async dispatch => {
+  dispatch(getTransactionsByDateRequest());
+
+  try {
+    const { data } = await axios.get(`/categories?month=${month}&year=${age}`);
+    dispatch(getTransactionsByDateSuccess(data));
+  } catch (error) {
+    dispatch(getTransactionsByDateError(Notify.Error(error.message)));
   }
 };
 
@@ -48,4 +62,11 @@ const deleteTransaction = transactionId => async dispatch => {
 };
 
 // eslint-disable-next-line
-export default { fetchTransactions, addTransaction, deleteTransaction };
+
+export default {
+  fetchTransactions,
+  addTransaction,
+  deleteTransaction,
+  getTransactionsByDate,
+};
+
