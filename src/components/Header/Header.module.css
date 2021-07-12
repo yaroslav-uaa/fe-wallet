@@ -9,6 +9,16 @@
 .logo {
   display: flex;
   align-items: center;
+  margin-top: 20px;
+}
+
+.logo p {
+  margin: 0;
+  margin-left: 10px;
+  font-family: Gugi, sans-serif;
+  color: beige;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
 .user {
@@ -20,7 +30,7 @@
   display: flex;
   align-items: center;
   margin-right: 10px;
-  color: black;
+  color: #278b6f;
   text-transform: capitalize;
   text-decoration: none;
 }

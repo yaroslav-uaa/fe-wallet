@@ -19,7 +19,7 @@ import {
 const result = createReducer([], {
   [getTransactionsSuccess]: (_, { payload }) => payload.transactions,
   [addTransactionSuccess]: (state, { payload }) => [
-    payload.transactions,
+    payload.transaction,
     ...state,
   ],
   [deleteTransactionSuccess]: (state, { payload }) =>

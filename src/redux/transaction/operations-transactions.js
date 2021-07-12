@@ -62,9 +62,11 @@ const deleteTransaction = transactionId => async dispatch => {
 };
 
 // eslint-disable-next-line
+
 export default {
   fetchTransactions,
   addTransaction,
   deleteTransaction,
   getTransactionsByDate,
 };
+

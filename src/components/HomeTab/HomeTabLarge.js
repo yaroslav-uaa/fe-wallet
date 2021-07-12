@@ -18,6 +18,7 @@ import {
   transactionsSelectors,
 } from '../../redux/transaction';
 import sortBy from 'lodash.sortby';
+import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -116,6 +117,9 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
+  console.log(rowsPerPage.length)
+  console.log(itemSort.length)
+  console.log(transactionList.length)
   return (
     <>
       <TableContainer className={s.container} component={Paper}>
@@ -137,7 +141,7 @@ export default function HomeTabLarge() {
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
-                  className={!isOn ? 'btn' : 'hidden'}
+                  className={isOn ? 'btn' : 'hidden'}
                   onClick={() => {
                     sortByUp('date');
                     toggleIsOn();
@@ -155,7 +159,7 @@ export default function HomeTabLarge() {
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
-                  className={isOn ? 'btn' : 'hidden'}
+                  className={!isOn ? 'btn' : 'hidden'}
                   onClick={() => {
                     sortByDown('date');
                     toggleIsOn();
@@ -182,10 +186,8 @@ export default function HomeTabLarge() {
               </TableCell>
             </TableRow>
           </TableHead>
-          {transactionList === null ? (
-            <TableRow className={s.row} align="center">
-              No transactions yet
-            </TableRow>
+          {transactionList.length === 0 ? (
+            <caption className={s.row} style={{height: '150px', margin: '100px auto', fontSize: '20px', width: '350px',  color: 'black', textAlign: 'center'}} align="center">No transactions yet</caption>
           ) : (
             <>
               <TableBody>
@@ -195,17 +197,17 @@ export default function HomeTabLarge() {
                       page * rowsPerPage + rowsPerPage,
                     )
                   : itemSort
-                ).map(({ id, date, type, category, comment, sum, balance }) => (
+                ).map(({ id, date, income, category, comment, sum, balance }) => (
                   <TableRow className={s.row} key={id}>
                     <TableCell
                       className={s.text}
-                      style={{ fontSize: 14 }}
+                      style={{ fontSize: 16 }}
                       align="center"
                     >
-                      {date}
+                      {moment(date).format('DD.MM.YYYY')}
                     </TableCell>
                     <TableCell className={s.text} align="center">
-                      {type}
+                     {income ? 'income' : 'expenses'}
                     </TableCell>
                     <TableCell className={s.text} align="center">
                       {category}
@@ -214,7 +216,8 @@ export default function HomeTabLarge() {
                       {comment}
                     </TableCell>
                     <TableCell className={s.text} align="center">
-                      {sum}
+                      {income ? `+${sum}` : `-${sum}`}
+                      
                     </TableCell>
                     <TableCell className={s.text} align="center">
                       {balance}
@@ -238,7 +241,7 @@ export default function HomeTabLarge() {
                       inputProps: { 'aria-label': 'rows per page' },
                       native: true,
                     }}
-                    onChangePage={handleChangePage}
+                    onPageChange={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                     ActionsComponent={TablePaginationActions}
                   />

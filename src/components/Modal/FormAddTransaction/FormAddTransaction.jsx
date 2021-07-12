@@ -1,257 +1,189 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import {
-  Button,
-  LinearProgress,
-  MenuItem,
-  FormControlLabel,
-} from '@material-ui/core';
-import MuiTextField from '@material-ui/core/TextField';
-import {
-  fieldToTextField,
-  TextField,
-  TextFieldProps,
-  Switch,
-} from 'formik-material-ui';
-import { DatePicker } from 'formik-material-ui-pickers';
+import { Button, LinearProgress } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
+import TextField from '@material-ui/core/TextField';
+import SimpleSelect from '../Select/Select';
 import Box from '@material-ui/core/Box';
 import operationsTransactions from '../../../redux/transaction/operations-transactions';
 import s from './Form.module.css';
 import { makeStyles } from '@material-ui/core/styles';
-import Notify from '../../Notify';
 import SwitchMy from '../Switch';
-
-// const operationSchema = values => {
-//   return Yup.object({
-//     category: Yup.string('Choise your category outlay').required(
-//       'Category is required',
-//     ),
-//     sum: Yup.number('Enter your amount').required('Amount is required'),
-//     date: Yup.number('Enter your date operation').required('Date is required'),
-//     comment: Yup.string('Enter your comments for operation')
-//       .min(5, 'Your comments to short')
-//       .max(30, 'Your comments to long'),
-//   });
-// };
-
-interface Values {
-  email: string;
-}
-
-const rangesExpense = [
-  {
-    value: 'Basic',
-    label: 'Basic',
-  },
-  {
-    value: 'Food',
-    label: 'Food',
-  },
-  {
-    value: 'Auto',
-    label: 'Auto',
-  },
-  {
-    value: 'Development',
-    label: 'Development',
-  },
-  {
-    value: 'Children',
-    label: 'Children',
-  },
-  {
-    value: 'House',
-    label: 'House',
-  },
-  {
-    value: 'Education',
-    label: 'Education',
-  },
-  {
-    value: 'The rest',
-    label: 'The rest',
-  },
-];
-
-const rangesIncome = [
-  {
-    value: 'Regular income',
-    label: 'Regular income',
-  },
-  {
-    value: 'Non-regular income',
-    label: 'Non-regular income',
-  },
-];
+import moment from 'moment';
+import 'date-fns';
+import Grid from '@material-ui/core/Grid';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'block',
-    width: '100%',
+    color: 'white',
   },
   uderline: {
-    '&&&:before': {
-      borderBottom: '2px solid rgb(82, 10, 124)',
+    '&&:before': {
+      borderBottom: 'none',
     },
     '&&:after': {
-      borderBottom: '2px solid rgb(82, 10, 124)',
+      borderBottom: 'none',
     },
   },
   input: {
-    width: '100%',
     textAlign: 'center',
-    border: 'none',
-    borderBottom: '2px solid rgb(82, 10, 124)',
-    color: ' rgb(49, 12, 109)',
+    color: 'white',
   },
 }));
 
-function UpperCasingTextField(props: TextFieldProps) {
-  const {
-    form: { setFieldValue },
-    field: { name },
-  } = props;
-  const onChange = React.useCallback(
-    event => {
-      const { value } = event.target;
-      setFieldValue(name, value ? value.toUpperCase() : '');
-    },
-    [setFieldValue, name],
-  );
-  return <MuiTextField {...fieldToTextField(props)} onChange={onChange} />;
-}
+const SchemaYup = Yup.object({
+  //   category: Yup.string('Choose your category').required('Category is required'),
+  sum: Yup.number('Enter your sum').required('Sum is required'),
+  //   date: Yup.string('Choose your date operation').required('Date is required'),
+  comment: Yup.string('Enter your comment')
+    .min(3, 'Your comment to short')
+    .required('Comment is required'),
+});
 
-const FormAddTransaction = () => {
+export default function FormAddTransaction() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [chooseSelect, setSelect] = useState(true);
+  const [chooseSelect, setSelect] = useState(false);
+  const [category, setCategory] = useState();
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleChangeCategory = event => {
+    console.log(event.target.value);
+    setCategory(event.target.value);
+  };
   const onSwitchChecked = evt => {
     console.log(evt.target.checked);
     setSelect(evt.target.checked);
+    setCategory(null);
+  };
+  const handleDateChange = date => {
+    setSelectedDate(date);
   };
 
-  console.log(chooseSelect);
-
-  return (
-    <Formik
-      initialValues={{
-        date: new Date(),
-        category: '',
+  const formik = useFormik({
+    initialValues: {
+      date: selectedDate,
+      category: category,
+      income: chooseSelect,
+      comment: '',
+      sum: null,
+    },
+    validationSchema: SchemaYup,
+    onSubmit: (values, { resetForm }) => {
+      console.log(chooseSelect);
+      const correctValue = {
+        ...values,
+        date: moment(selectedDate).format(),
         income: chooseSelect,
-        comment: '',
-        sum: '',
-      }}
-      // validate={values => operationSchema(values)}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        setSubmitting(true);
-        console.log({ ...values, іncome: chooseSelect });
-        console.log(chooseSelect);
-        dispatch(
-          operationsTransactions.addTransaction({
-            ...values,
-            income: chooseSelect,
-          }),
-        );
-
-        resetForm();
-        setSubmitting(false);
-      }}
-    >
-      {({ submitForm, isSubmitting, touched, errors }) => (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Form className={s.form}>
-            <h2 className={s.title}>Add transaction</h2>
-            <Box margin={1}>
-              <SwitchMy
-                // name="Income"
-                onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
-                isChecked={chooseSelect}
-                onClick={chooseSelect => onSwitchChecked(chooseSelect)}
-              />
-            </Box>
-            <Box margin={1} className={s.box_select}>
-              <Field
-                component={TextField}
-                type="text"
-                name="category"
-                label="Category"
-                select
-                variant="standard"
-                helperText="Please select Category"
-                margin="normal"
-                className={s.select}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              >
-                {!chooseSelect
-                  ? createSelect(rangesIncome)
-                  : createSelect(rangesExpense)}
-              </Field>
-            </Box>
-            <Box margin={1} className={s.box_input}>
-              <div className={s.box_time}>
-                <Field
-                  component={UpperCasingTextField}
-                  name="sum"
-                  type="text"
-                  label="Sum"
-                  width="100%"
-                  className={s.sum}
-                />
-
-                <Field
-                  component={DatePicker}
-                  name="date"
-                  label="Date"
-                  className={s.date}
-                />
-              </div>
-            </Box>
-            <Box margin={1} className={s.box_input}>
-              <Field
-                component={TextField}
-                type="text"
-                label="Comment"
-                name="comment"
-                className={classes.input}
-              />
-            </Box>
-
-            <Box margin={1}></Box>
-            {isSubmitting && <LinearProgress />}
-
-            <Box margin={1} className={s.box_btn}>
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                onClick={submitForm}
-                className={s.btn_submit}
-              >
-                Submit
-              </Button>
-            </Box>
-          </Form>
-        </MuiPickersUtilsProvider>
-      )}
-    </Formik>
-  );
-};
-
-function createSelect(array) {
-  return array.map(option => {
-    return (
-      <MenuItem key={option.value} value={option.value} width="100%">
-        {option.label}
-      </MenuItem>
-    );
+        category: category,
+      }; 
+      onFormSubmit(correctValue, resetForm);
+    },
   });
-}
 
-export default FormAddTransaction;
+  function onFormSubmit(data, resetForm) {
+    dispatch(operationsTransactions.addTransaction(data));
+    resetForm();
+  }
+  return (
+    <form onSubmit={formik.handleSubmit} className={s.form}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <h2 className={s.title}>Add transaction</h2>
+        <Box margin={1} className={s.box_switch}>
+          <p className={s.text}>Income</p>
+          <div>
+            <SwitchMy
+              onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
+              isChecked={chooseSelect}
+              onClick={chooseSelect => onSwitchChecked(chooseSelect)}
+            />
+          </div>
+          <p className={s.text}>Expense</p>
+        </Box>
+
+        <Box>
+          <SimpleSelect
+            name="category"
+            isIncome={!chooseSelect}
+            category={category}
+            value={formik.values.category}
+            onBlur={formik.handleChange}
+            handleChange={handleChangeCategory}
+            error={formik.touched.category && Boolean(formik.errors.category)}
+            helperText={formik.touched.category && formik.errors.category}
+          />
+        </Box>
+
+        <div className={s.box_time}>
+          <Box>
+            <TextField
+              fullWidth
+              id="sum"
+              name="sum"
+              label="Sum"
+              type="number"
+              className={classes.input}
+              value={formik.values.sum}
+              onChange={formik.handleChange}
+              error={formik.touched.sum && Boolean(formik.errors.sum)}
+              helperText={formik.touched.sum && formik.errors.sum}
+            />
+          </Box>
+          <Box>
+            <Grid container justifyContent="space-around" className={s.toolbar}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Date picker dialog"
+                format="MM/dd/yyyy"
+                value={selectedDate}
+                classes={{
+                  root: classes.root,
+                  toolbar: s.toolbar,
+                }}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                error={formik.touched.date && Boolean(formik.errors.date)}
+                helperText={formik.touched.date && formik.errors.date}
+              />
+            </Grid>
+          </Box>
+        </div>
+        <Box margin={1} className={s.box_select}>
+          <TextField
+            fullWidth
+            id="comment"
+            name="comment"
+            label="Comment"
+            type="text"
+            className={classes.input}
+            value={formik.values.comment}
+            onChange={formik.handleChange}
+            error={formik.touched.comment && Boolean(formik.errors.comment)}
+            helperText={formik.touched.comment && formik.errors.comment}
+          />
+        </Box>
+
+        <Box margin={1}></Box>
+        {formik.isSubmitting && <LinearProgress />}
+        <Box margin={1} className={s.box_btn}>
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={formik.isSubmitting}
+            onClick={formik.handleSubmit}
+            className={s.btn_submit}
+          >
+            Submit
+          </Button>
+        </Box>
+      </MuiPickersUtilsProvider>
+    </form>
+  );
+}

@@ -12,6 +12,7 @@ const getFilter = state => state.transactions.filter;
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
   (transactions, filter) => {
+    console.log(transactions);
     return transactions.filter(({ date }) =>
       date.toLowerCase().includes(filter.toLowerCase()),
     );

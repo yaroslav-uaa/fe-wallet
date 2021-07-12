@@ -5,9 +5,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (max-width: 767px) {
-}
-
 @media screen and (min-width: 1280px) {
   .page {
     display: flex;
@@ -20,20 +17,17 @@ body {
   padding-top: 4vh;
 }
 
-/* .MuiFormControl-root {
-  min-width: 280px;
-} */
 .hidden {
- position: absolute;
+  position: absolute;
   width: 1px;
   height: 1px;
   margin: -1px;
   padding: 0;
   overflow: hidden;
   border: 0;
-  clip: rect(0 0 0 0)
-};
+  clip: rect(0 0 0 0);
+}
 
 .btn {
   position: absolute;
-};
+}

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Chart from '../../components/Chart/Chart';
 import DiagramTab from '../../components/DiagramTab/DiagramTab';
 import SideBar from '../../components/SideBar';
+
 import SelectForStats from '../../components/SelectForStats/SelectForStats';
 
 import styles from './Stats.module.css';
@@ -31,6 +32,7 @@ const arrColors = [
   'rgba(200, 159, 64, 1)',
   'rgba(200, 159, 64, 1)',
 ];
+
 
 const Stats = () => {
   const dispatch = useDispatch();
