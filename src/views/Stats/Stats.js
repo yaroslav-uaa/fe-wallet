@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 import Chart from '../../components/Chart/Chart';
@@ -33,18 +33,22 @@ const arrColors = [
   'rgba(200, 159, 64, 1)',
 ];
 
-
 const Stats = () => {
   const dispatch = useDispatch();
 
   const monthNow = new Date().getMonth();
-  const ageNow = new Date().getFullYear();
+  const yearNow = new Date().getFullYear();
 
-  useEffect(
-    () =>
-      dispatch(operationsTransactions.getTransactionsByDate(monthNow, ageNow)),
-    [dispatch],
-  );
+  // const [month, setMonth] = useState(monthNow);
+
+  // const changeMonth = value => {
+  //   setMonth(value);
+  // };
+
+  useEffect(() => {
+    dispatch(operationsTransactions.getTransactionsByDate(monthNow, yearNow));
+    // console.log('---------------', month);
+  }, [dispatch]);
 
   const { getAllCategoriesFromTransactions } = transactionsSelectors;
   const categoriesFromState = useSelector(getAllCategoriesFromTransactions);

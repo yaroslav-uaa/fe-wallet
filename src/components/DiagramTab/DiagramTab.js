@@ -2,6 +2,7 @@ import React from 'react';
 import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 import styles from './DiagramTab.module.css';
+import { red } from '@material-ui/core/colors';
 
 // const arr = [
 //   'Basic expenses',
@@ -29,11 +30,19 @@ export default function DiagramTab({ arrColors }) {
       </ul>
 
       <ul className={styles.listTransaction}>
-        <h1>Hello, world</h1>
         {categories
-          ? categories.map(({ category, sum }) => {
+          ? categories.map(({ category, sum }, index) => {
               return (
                 <li className={styles.elementTransaction}>
+                  <div
+                    style={{
+                      backgroundColor: `${arrColors[index]}`,
+                      width: '24px',
+                      minHeight: '24px',
+                      borderRadius: '12px',
+                      marginRight: '15px',
+                    }}
+                  ></div>
                   <div className={styles.category}>{category}</div>
                   <div className={styles.sum}>{sum}</div>
                 </li>
