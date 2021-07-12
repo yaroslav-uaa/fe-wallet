@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { fetchInfo } from '../../services/currencyExchange';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Table,
@@ -73,16 +72,14 @@ function Currency() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetchInfo();
-        setCurrency(data.slice(0, -1));
+        const data = JSON.parse(sessionStorage.getItem('currency'));
+        setCurrency(data);
       } catch (error) {
         console.log(error.message);
       }
     };
     getData();
   }, []);
-
-  console.log(currency);
 
   return (
     <>

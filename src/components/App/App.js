@@ -18,6 +18,7 @@ import authSelectors from '../../redux/auth/auth-selectors';
 import SignUpPage from '../../views/SignUpPage/SignUpPage';
 import { useMediaQuery } from 'react-responsive';
 import CurrencyPage from '../../views/CurrencyPage/CurrencyPage';
+import GetCurrency from '../GetCurrency/GetCurrency';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 
@@ -41,48 +42,51 @@ function App() {
       {isAuth && <Header />}
 
       <Suspense fallback={<p>"wait..."</p>}>
-        <Switch>
-          <PublicRoute
-            path="/signin"
-            exact
-            component={SignIn}
-            redirectTo="/"
-            restricted
-          />
-
-          <PublicRoute
-            path="/signup"
-            exact
-            component={SignUpPage}
-            redirectTo="/"
-            restricted
-          />
-
-          <PrivateRoute
-            path="/"
-            exact
-            component={DashboardPage}
-            redirectTo="/signin"
-          />
-
-          <PrivateRoute
-            path="/stats"
-            exact
-            component={Stats}
-            redirectTo="/signin"
-          />
-
-          {isTabletOrMobile ? (
-            <PrivateRoute
-              path="/currency"
+        <GetCurrency />
+        <Suspense fallback={<p>'Loading...'</p>}>
+          <Switch>
+            <PublicRoute
+              path="/signin"
               exact
-              component={CurrencyPage}
+              component={SignIn}
+              redirectTo="/"
+              restricted
+            />
+
+            <PublicRoute
+              path="/signup"
+              exact
+              component={SignUpPage}
+              redirectTo="/"
+              restricted
+            />
+
+            <PrivateRoute
+              path="/"
+              exact
+              component={DashboardPage}
               redirectTo="/signin"
             />
-          ) : (
-            <Redirect from="/currency" to="/" />
-          )}
-        </Switch>
+
+            <PrivateRoute
+              path="/stats"
+              exact
+              component={Stats}
+              redirectTo="/signin"
+            />
+
+            {isTabletOrMobile ? (
+              <PrivateRoute
+                path="/currency"
+                exact
+                component={CurrencyPage}
+                redirectTo="/signin"
+              />
+            ) : (
+              <Redirect from="/currency" to="/" />
+            )}
+          </Switch>
+        </Suspense>
       </Suspense>
       {isAuth && <Modal />}
     </Container>
