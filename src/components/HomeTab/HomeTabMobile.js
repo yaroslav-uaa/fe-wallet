@@ -10,7 +10,10 @@ import React, { useEffect } from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 
 import { transactionsOperations, transactionsSelectors } from '../../redux/transaction';
-import { useSelector, useDispatch } from 'react-redux'; 
+import { useSelector, useDispatch } from 'react-redux';
+
+import moment from 'moment'
+
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -61,8 +64,8 @@ export default function HomeTabMobile() {
 };
   return (
     <div>     
-          {transactionList === null ? (
-            <TableRow className={s.row} >No transactions yet</TableRow> 
+          {transactionList.length === 0 ? (
+            <p className={s.row} style={{height: '150px', margin: '50px auto', fontSize: '20px', width: '90vw', textAlign: 'center'}} align="center" >No transactions yet</p> 
           ) : (
             <div>
               {transactionList.map(({id, date, income, category, comment, sum, balance} ) => (
@@ -78,7 +81,7 @@ export default function HomeTabMobile() {
                                                   Date
                                               </TableCell>
                                               <TableCell className={s.text} align="right">
-                                                  {date}
+                                                    {moment(date).format('DD.MM.YYYY')}
                                               </TableCell>
                                     </TableRow>
                                     <TableRow className={s.row}>
