@@ -18,6 +18,7 @@ import {
   transactionsSelectors,
 } from '../../redux/transaction';
 import sortBy from 'lodash.sortby';
+import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -138,7 +139,7 @@ export default function HomeTabLarge() {
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
-                  className={!isOn ? 'btn' : 'hidden'}
+                  className={isOn ? 'btn' : 'hidden'}
                   onClick={() => {
                     sortByUp('date');
                     toggleIsOn();
@@ -156,7 +157,7 @@ export default function HomeTabLarge() {
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
-                  className={isOn ? 'btn' : 'hidden'}
+                  className={!isOn ? 'btn' : 'hidden'}
                   onClick={() => {
                     sortByDown('date');
                     toggleIsOn();
@@ -200,10 +201,10 @@ export default function HomeTabLarge() {
                   <TableRow className={s.row} key={id}>
                     <TableCell
                       className={s.text}
-                      style={{ fontSize: 14 }}
+                      style={{ fontSize: 16 }}
                       align="center"
                     >
-                      {date}
+                      {moment(date).format('DD.MM.YYYY')}
                     </TableCell>
                     <TableCell className={s.text} align="center">
                      {income ? 'income' : 'expenses'}
