@@ -10,6 +10,9 @@ import {
   deleteTransactionRequest,
   deleteTransactionSuccess,
   deleteTransactionError,
+  updateTransactionSuccess,
+  updateTransactionRequest,
+  updateTransactionError,
 } from './actions-transactions';
 
 axios.defaults.baseURL = 'http://localhost:4040/api';
@@ -47,5 +50,21 @@ const deleteTransaction = transactionId => async dispatch => {
   }
 };
 
+
+const updateTransaction = ({ date, income, category, comment, sum, transactionId }) => async dispatch => {
+  dispatch(updateTransactionRequest());
+  const update = { date, income, category, comment, sum};
+  try {
+    const { data } = await axios.patch(`/transactions/${transactionId}`, update);
+    Notify.Success('Transaction Edited');
+    dispatch(updateTransactionSuccess(data));
+  } catch (error) {
+    dispatch(updateTransactionError(error.message));
+  }
+};
+
+
+
+
 // eslint-disable-next-line
-export default { fetchTransactions, addTransaction, deleteTransaction };
+export default { fetchTransactions, addTransaction, deleteTransaction, updateTransaction, };

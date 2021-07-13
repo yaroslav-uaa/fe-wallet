@@ -17,8 +17,17 @@ import {
   transactionsOperations,
   transactionsSelectors,
 } from '../../redux/transaction';
+
+import TransitionsModal from './EditTransaction/ModalTransaction';
+import EditTransaction from './EditTransaction';
+import EditIcon from '@material-ui/icons/Edit';
+
 import sortBy from 'lodash.sortby';
 import moment from 'moment'
+ 
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -58,7 +67,7 @@ const useStyles = makeStyles(theme => ({
 export default function HomeTabLarge() {
   const s = useStyles();
   const dispatch = useDispatch();
-
+  const deleteTransaction = useCallback((id) => dispatch(transactionsOperations.deleteTransaction(id)), [dispatch]);
   const fetchTransactions = useCallback(() => {
     dispatch(transactionsOperations.fetchTransactions());
   }, [dispatch]);
@@ -101,7 +110,10 @@ export default function HomeTabLarge() {
     }, []);
     return [value, toggle];
   }
-
+  function deleteT(id) {
+    deleteTransaction(id)
+    return handleChangePage
+  }
   const [isOn, toggleIsOn] = useToggle();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -117,9 +129,28 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
-  console.log(rowsPerPage.length)
-  console.log(itemSort.length)
-  console.log(transactionList.length)
+
+    const [transactionForEdit, setTransactionForEdit] = useState(null);
+    
+    const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
+      setTransactionForEdit({ id, date, income, category, comment, sum,  });
+      console.log({ id, date, income, category, comment, sum,  })
+
+      handleClickOpen();
+  };
+   const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
+  const handleClose = () => {
+    setOpen(!open);
+  };
+
+
+
+
   return (
     <>
       <TableContainer className={s.container} component={Paper}>
@@ -184,6 +215,9 @@ export default function HomeTabLarge() {
               <TableCell className={s.head} align="center">
                 Balance
               </TableCell>
+               <TableCell className={s.head} align="center">
+                Edit
+              </TableCell>
             </TableRow>
           </TableHead>
           {transactionList.length === 0 ? (
@@ -222,6 +256,24 @@ export default function HomeTabLarge() {
                     <TableCell className={s.text} align="center">
                       {balance}
                     </TableCell>
+                    <TableCell className={s.text} align="center">
+                      <div style={{ display: 'flex', height: 'inherit' }}>
+                        <IconButton
+                          onClick={() =>
+                            OnEditTransaction({
+                              id, date, income, category, comment, sum, 
+                            })
+                          }
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      <IconButton aria-label="delete">
+                          <DeleteIcon
+                            onClick={() => deleteT(id) }
+                          />
+                      </IconButton>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
                 {emptyRows > 0 && (
@@ -249,8 +301,11 @@ export default function HomeTabLarge() {
               </TableFooter>
             </>
           )}
-        </Table>
+        </Table>      
       </TableContainer>
+      <TransitionsModal open={open}  handleClose={handleClose} handleClickOpen={handleClickOpen} >
+        <EditTransaction  handleClickOpen={handleClickOpen} transactionForEdit={transactionForEdit}  />
+      </TransitionsModal>
     </>
   );
 }
