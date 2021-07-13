@@ -1,6 +1,6 @@
 import React from 'react';
-import { transactionsSelectors } from '../../redux/transaction';
-import { useSelector } from 'react-redux';
+// import { transactionsSelectors } from '../../redux/transaction';
+// import { useSelector } from 'react-redux';
 import { Doughnut } from 'react-chartjs-2';
 import Balance from './Balance/Balance';
 import styles from './Chart.module.css';
@@ -23,7 +23,7 @@ export default function Chart({ arrColors, arrMoney, balance }) {
 
   return (
     <div className={styles.chart}>
-      <div className={styles.title}>Statistics</div>
+      <p className={styles.title}>Statistics</p>
       <Balance balance={balance} />
       <div>
         <Doughnut
