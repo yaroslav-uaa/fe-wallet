@@ -69,7 +69,7 @@ const updateTransaction = ({ date, category, income, comment, sum, transactionId
   dispatch(updateTransactionRequest());
   const update = { date, income, category, comment, sum};
   try {
-    const { data } = await axios.patch(`/transactions/${transactionId}`, update);
+    const { data } = await axios.put(`/transactions/${transactionId}`, update);
     Notify.Success('Transaction Edited');
     dispatch(updateTransactionSuccess(data));
   } catch (error) {

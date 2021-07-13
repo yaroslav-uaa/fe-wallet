@@ -114,6 +114,7 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
     };
     updateTransactions(correctValue);
     handleClickOpen()
+    window.location.reload()
   }
 
   return (

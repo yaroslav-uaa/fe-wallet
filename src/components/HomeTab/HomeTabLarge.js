@@ -71,15 +71,19 @@ export default function HomeTabLarge() {
     dispatch(transactionsOperations.fetchTransactions());
   }, [dispatch]);
 
-  useEffect(() => fetchTransactions(), [fetchTransactions]);
-
   const transactionList = useSelector(transactionsSelectors.filterTransactions);
   const totalTransactions = useSelector(
     transactionsSelectors.totalTransactions,
   );
 
   const [itemSort, setItemSort] = useState([]);
+  const [isOn, toggleIsOn] = useToggle();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [open, setOpen] = useState(false);
+  const [transactionForEdit, setTransactionForEdit] = useState(null);
 
+  useEffect(() => fetchTransactions(), [fetchTransactions]);
   useEffect(() => {
     setItemSort(transactionList);
   }, [transactionList]);
@@ -92,7 +96,6 @@ export default function HomeTabLarge() {
     ]);
     setItemSort(lodash);
   };
-
   const sortByDown = value => {
     const lodash = sortBy(transactionList, [
       function (o) {
@@ -101,21 +104,6 @@ export default function HomeTabLarge() {
     ]);
     setItemSort(lodash.reverse());
   };
-
-  function useToggle(initialValue = false) {
-    const [value, setValue] = useState(initialValue);
-    const toggle = useCallback(() => {
-      setValue(v => !v);
-    }, []);
-    return [value, toggle];
-  }
-  function deleteT(id) {
-    deleteTransaction(id)
-    return handleChangePage
-  }
-  const [isOn, toggleIsOn] = useToggle();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
@@ -128,23 +116,28 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
-
-    const [transactionForEdit, setTransactionForEdit] = useState(null);
-    
-    const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
-      setTransactionForEdit({ id, date, income, category, comment, sum,  });
-      console.log({ id, date, income, category, comment, sum,  })
-
-      handleClickOpen();
-      
-  };
-   const [open, setOpen] = useState(false);
-
+  
   const handleClickOpen = () => {
     setOpen(!open);
     return handleChangePage
   };
 
+  const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
+    setTransactionForEdit({ id, date, income, category, comment, sum,  });
+    handleClickOpen();
+  };
+  
+  function useToggle(initialValue = false) {
+    const [value, setValue] = useState(initialValue);
+    const toggle = useCallback(() => {
+      setValue(v => !v);
+    }, []);
+    return [value, toggle];
+  }
+  function deleteT(id) {
+    deleteTransaction(id)
+    return handleChangePage
+  }
   return (
     <>
       <TableContainer className={s.container} component={Paper}>
