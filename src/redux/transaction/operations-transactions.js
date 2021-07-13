@@ -65,7 +65,7 @@ const deleteTransaction = transactionId => async dispatch => {
 };
 
 
-const updateTransaction = ({ date, income, category, comment, sum, transactionId }) => async dispatch => {
+const updateTransaction = ({ date, category, income, comment, sum, transactionId}) => async dispatch => {
   dispatch(updateTransactionRequest());
   const update = { date, income, category, comment, sum};
   try {

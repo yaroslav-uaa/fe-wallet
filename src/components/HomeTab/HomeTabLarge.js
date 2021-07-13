@@ -27,7 +27,6 @@ import moment from 'moment'
  
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -137,19 +136,14 @@ export default function HomeTabLarge() {
       console.log({ id, date, income, category, comment, sum,  })
 
       handleClickOpen();
+      
   };
    const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(!open);
+    return handleChangePage
   };
-
-  const handleClose = () => {
-    setOpen(!open);
-  };
-
-
-
 
   return (
     <>
@@ -303,7 +297,7 @@ export default function HomeTabLarge() {
           )}
         </Table>      
       </TableContainer>
-      <TransitionsModal open={open}  handleClose={handleClose} handleClickOpen={handleClickOpen} >
+      <TransitionsModal open={open}  handleClickOpen={handleClickOpen} >
         <EditTransaction  handleClickOpen={handleClickOpen} transactionForEdit={transactionForEdit}  />
       </TransitionsModal>
     </>
