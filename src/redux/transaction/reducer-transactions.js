@@ -4,6 +4,9 @@ import {
   getTransactionsRequest,
   getTransactionsSuccess,
   getTransactionsError,
+  getTransactionsByDateRequest,
+  getTransactionsByDateSuccess,
+  getTransactionsByDateError,
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
@@ -28,6 +31,10 @@ const result = createReducer([], {
     state.filter(({ id }) => id !== payload),
 });
 
+const categories = createReducer('', {
+  [getTransactionsByDateSuccess]: (_, { payload }) => payload.data,
+});
+
 const filter = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
 });
@@ -45,10 +52,14 @@ const loading = createReducer(false, {
   [updateTransactionRequest]: () => true,
   [updateTransactionSuccess]: () => false,
   [updateTransactionError]: () => false,
+  [getTransactionsByDateRequest]: () => true,
+  [getTransactionsByDateSuccess]: () => false,
+  [getTransactionsByDateError]: () => false,
 });
 
 export default combineReducers({
   result,
   filter,
   loading,
+  categories,
 });

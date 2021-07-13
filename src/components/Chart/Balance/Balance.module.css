@@ -1,8 +1,20 @@
-.balance {
+.balancePositive {
   font-family: Circe;
   font-style: normal;
   font-weight: bold;
-  color: #c2c2c2;
+  color: #24cca7;
+  font-size: 24px;
+  line-height: 27px;
+  position: absolute;
+  top: 55%;
+  left: 35%;
+}
+
+.balanceNegative {
+  font-family: Circe;
+  font-style: normal;
+  font-weight: bold;
+  color: #ff6596;
   font-size: 24px;
   line-height: 27px;
   position: absolute;

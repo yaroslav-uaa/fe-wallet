@@ -5,6 +5,8 @@ const getIsLoading = state => state.transactions.loading;
 const getAllTransactions = state => state.transactions.result;
 const totalTransactions = state => getAllTransactions(state).length;
 
+const getAllCategoriesFromTransactions = state => state.transactions.categories;
+
 const getFilter = state => state.transactions.filter;
 
 const filterTransactions = createSelector(
@@ -21,6 +23,7 @@ const filterTransactions = createSelector(
 export default {
   getIsLoading,
   getAllTransactions,
+  getAllCategoriesFromTransactions,
   getFilter,
   filterTransactions,
   totalTransactions,

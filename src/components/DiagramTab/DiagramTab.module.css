@@ -51,14 +51,14 @@ ul {
   border-bottom: 1px solid #2121fd;
 }
 
-.elementTransaction::before {
+/* .elementTransaction::before {
   content: '';
   display: block;
   width: 24px;
   height: 24px;
   background-color: rgb(117, 181, 255);
   margin-right: 16px;
-}
+} */
 
 .sum {
   margin-left: auto;
