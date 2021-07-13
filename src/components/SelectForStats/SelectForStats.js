@@ -61,7 +61,9 @@ const useMinimalSelectStyles = {
   },
 };
 
-const MinimalSelect = () => {
+const SelectForStats = () => {
+  const dispatch = useDispatch();
+
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -74,9 +76,9 @@ const MinimalSelect = () => {
   };
 
   useEffect(() => {
-    // делает запрос на сервер с данными mounts и age если такие выбраны
+    dispatch(operationsTransactions.getTransactionsByDate(month, year));
+
     // console.log(month);
-    // console.log(age);
   }, [month, year]);
 
   // ---------------------------------------------
@@ -151,6 +153,8 @@ const MinimalSelect = () => {
           onChange={handleChangeYear}
         >
           <MenuItem value={'Year'}>Year</MenuItem>
+          <MenuItem value={2019}>2019</MenuItem>
+          <MenuItem value={2020}>2020</MenuItem>
           <MenuItem value={2021}>2021</MenuItem>
         </Select>
       </FormControl>
@@ -158,4 +162,4 @@ const MinimalSelect = () => {
   );
 };
 
-export default MinimalSelect;
+export default SelectForStats;
