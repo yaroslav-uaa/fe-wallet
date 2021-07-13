@@ -43,4 +43,8 @@ export const deleteTransactionError = createAction(
   'transactions/deleteTransactionError',
 );
 
+export const updateTransactionRequest = createAction('transactions/updateTransactionRequest');
+export const updateTransactionSuccess = createAction('transactions/updateTransactionSuccess');
+export const updateTransactionError = createAction('transactions/updateTransactionError');
+
 export const changeFilter = createAction('transactions/changeFilter');
