@@ -14,6 +14,11 @@ function GetCurrency() {
     };
     getData();
   }, []);
+  // useEffect(() => {
+  //   fetchInfo()
+  //     .then(data => data.slice(0, -1))
+  //     .then(r => sessionStorage.setItem('currency', JSON.stringify(r)));
+  // }, []);
   return <div></div>;
 }
 
