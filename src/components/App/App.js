@@ -5,90 +5,72 @@ import authOperations from '../../redux/auth/auth-operations';
 import { Container } from '@material-ui/core';
 import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
-// import LoadinfForm from '../LoginForm/SignInSide';
 import Header from '../Header';
-import DashboardPage from '../../views/DashboardPage/DashboardPage';
-import Stats from '../../views/Stats/Stats';
 // import Loader from '../Loader/Loader';
-// import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
-import Modal from '../Modal';
-// import SignInSide from '../LoginForm/SignInSide';
 import SignIn from '../SignInForm';
 import authSelectors from '../../redux/auth/auth-selectors';
 import SignUpPage from '../../views/SignUpPage/SignUpPage';
-import { useMediaQuery } from 'react-responsive';
 import CurrencyPage from '../../views/CurrencyPage/CurrencyPage';
 import GetCurrency from '../GetCurrency/GetCurrency';
+// import UserPage from '../../views/UserPage/UserPage';
+import MainPage from '../../views/MainPage/MainPage';
+import { useMediaQuery } from 'react-responsive';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 
 function App() {
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
+
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
   const isAuth = useSelector(authSelectors.getIsAuthenticated);
 
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
-
+  if (!localStorage.color) localStorage.setItem('color', '#212121');
+  document.body.style.backgroundColor = localStorage.color;
   return (
     <Container
       maxWidth="xl"
-      disableGutters={false}
+      disableGutters={true}
       style={{
-        background: 'linear-gradient(90deg, #8609F9 0%, #311FA0 45%)',
         minHeight: '100vh',
       }}
     >
+      <GetCurrency />
       {isAuth && <Header />}
 
       <Suspense fallback={<p>"wait..."</p>}>
-        <GetCurrency />
-        <Suspense fallback={<p>'Loading...'</p>}>
-          <Switch>
-            <PublicRoute
-              path="/signin"
-              exact
-              component={SignIn}
-              redirectTo="/"
-              restricted
-            />
+        <Switch>
+          <PublicRoute
+            path="/signin"
+            exact
+            component={SignIn}
+            redirectTo="/main"
+            restricted
+          />
 
-            <PublicRoute
-              path="/signup"
-              exact
-              component={SignUpPage}
-              redirectTo="/"
-              restricted
-            />
+          <PublicRoute
+            path="/signup"
+            exact
+            component={SignUpPage}
+            redirectTo="/main"
+            restricted
+          />
 
+          <PrivateRoute path="/" component={MainPage} redirectTo="/signin" />
+          {/* <PrivateRoute path="/user" component={UserPage} /> */}
+          {isTabletOrMobile ? (
             <PrivateRoute
-              path="/"
+              path="/currency"
               exact
-              component={DashboardPage}
+              component={CurrencyPage}
               redirectTo="/signin"
             />
-
-            <PrivateRoute
-              path="/stats"
-              exact
-              component={Stats}
-              redirectTo="/signin"
-            />
-
-            {isTabletOrMobile ? (
-              <PrivateRoute
-                path="/currency"
-                exact
-                component={CurrencyPage}
-                redirectTo="/signin"
-              />
-            ) : (
-              <Redirect from="/currency" to="/" />
-            )}
-          </Switch>
-        </Suspense>
+          ) : (
+            <Redirect from="/currency" to="/main" />
+          )}
+        </Switch>
       </Suspense>
-      {isAuth && <Modal />}
     </Container>
   );
 }

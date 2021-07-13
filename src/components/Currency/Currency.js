@@ -10,15 +10,17 @@ import {
 } from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
 import Navigation from '../Navigation';
-import f from '../SideBar/SideBar.module.css';
+import f from './Currency.module.css';
 import Skeleton from 'react-loading-skeleton';
+// import { fetchInfo } from '../../services/currencyExchange';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 280,
-    maxWidth: 340,
+    maxWidth: 357,
     maxHeight: 180,
     borderRadius: 6,
+    boxShadow: ' 0 3px 10px -2px #212121',
   },
 
   head: {
@@ -32,11 +34,11 @@ const useStyles = makeStyles({
     fontSize: 16,
     paddingTop: 12,
     paddingBottom: 10,
-    color: '#d2dbe8',
+    color: '#fffefe',
   },
 
   body: {
-    background: 'rgba(255, 255, 255, 0.7)',
+    background: 'rgba(255, 254, 254, 0.8)',
   },
 
   currency: {
@@ -63,77 +65,99 @@ const useStyles = makeStyles({
   },
 });
 
+// const data = JSON.parse(localStorage.getItem('currency'));
+// console.log(data);
+
 function Currency() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const isDesktopOrTablet = useMediaQuery({ minWidth: 1280 });
   const s = useStyles();
   const [currency, setCurrency] = useState('');
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const data = JSON.parse(sessionStorage.getItem('currency'));
         setCurrency(data);
+        setisLoading(true);
       } catch (error) {
         console.log(error.message);
       }
     };
     getData();
   }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const data = await fetchInfo();
+  //       const slicedData = data.slice(0, -1);
+  //       setCurrency(slicedData);
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
+  //   getData();
+  // }, []);
+  console.log(currency);
 
   return (
     <>
-      <div className={f.sidebar}>
-        {isTabletOrMobile && <Navigation />}
-        <TableContainer className={s.table}>
-          {currency.length > 0 ? (
-            <Table size="small" aria-label="a dense table">
-              <TableHead className={s.head}>
-                <TableRow>
-                  <TableCell className={s.headers}>Currency</TableCell>
-                  <TableCell align="center" className={s.headers}>
-                    Buy
-                  </TableCell>
-                  <TableCell align="center" className={s.headers}>
-                    Sale
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-
-              <TableBody className={s.body}>
-                {currency.map(el => (
-                  <TableRow key={el.ccy}>
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      align="left"
-                      className={s.currency}
-                    >
-                      {el.ccy}
+      {isLoading && (
+        <div className={f.sidebar}>
+          {/* {isTabletOrMobile && <Navigation />} */}
+          <TableContainer className={s.table}>
+            {!currency ? (
+              <Skeleton
+                style={{
+                  background:
+                    'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
+                }}
+                duration={3}
+                width={isDesktopOrTablet ? 340 : 280}
+                height={174}
+              />
+            ) : (
+              <Table size="small" aria-label="a dense table">
+                <TableHead className={s.head}>
+                  <TableRow>
+                    <TableCell color="secondary" className={s.headers}>
+                      Currency
                     </TableCell>
-                    <TableCell align="center" className={s.buy}>
-                      {Math.floor(el.buy * 100) / 100}
+                    <TableCell align="center" className={s.headers}>
+                      Buy
                     </TableCell>
-                    <TableCell align="center" className={s.sale}>
-                      {Math.floor(el.sale * 100) / 100}
+                    <TableCell align="center" className={s.headers}>
+                      Sale
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          ) : (
-            <Skeleton
-              style={{
-                background:
-                  'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
-              }}
-              duration={2.4}
-              width={isDesktopOrTablet ? 340 : 280}
-              height={174}
-            />
-          )}
-        </TableContainer>
-      </div>
+                </TableHead>
+
+                <TableBody className={s.body}>
+                  {currency.map(el => (
+                    <TableRow key={el.ccy}>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        align="left"
+                        className={s.currency}
+                      >
+                        {el.ccy}
+                      </TableCell>
+                      <TableCell align="center" className={s.buy}>
+                        {Math.floor(el.buy * 100) / 100}
+                      </TableCell>
+                      <TableCell align="center" className={s.sale}>
+                        {Math.floor(el.sale * 100) / 100}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+          </TableContainer>
+        </div>
+      )}
     </>
   );
 }

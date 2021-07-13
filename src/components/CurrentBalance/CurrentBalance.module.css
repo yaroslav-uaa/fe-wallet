@@ -1,27 +1,23 @@
 .container {
   min-width: 280px;
-  max-width: 340px;
-  height: 80px;
+  max-width: 357px;
   padding: 8px 40px;
   margin-bottom: 30px;
-  background: linear-gradient(
-    140deg,
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.01)
-  );
+  background-color: #fffefe;
   border-radius: 25px;
 }
 
-@media screen and (max-width: 1279px) and (min-width: 768px) {
+@media screen and (max-width: 1279px) {
   .container {
     margin-bottom: 0;
+    padding: 8px 30px;
   }
 }
 
 .title {
   font-family: Poppins, sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 18px;
   text-transform: uppercase;
   margin: 0;
@@ -30,7 +26,17 @@
 .balance {
   font-family: Poppins, sans-serif;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 45px;
   margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 6px 20px;
+  }
+
+  .balance {
+    font-size: 24px;
+  }
 }
