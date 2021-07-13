@@ -1,21 +1,20 @@
 .balancePositive {
-  font-family: Circe;
-  font-style: normal;
-  font-weight: bold;
-  color: #24cca7;
-  font-size: 24px;
+  font-family: Prompt;
+  font-weight: 700;
+  color: #1c473e;
+  font-size: 18px;
   line-height: 27px;
   position: absolute;
-  top: 55%;
-  left: 35%;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .balanceNegative {
-  font-family: Circe;
-  font-style: normal;
-  font-weight: bold;
-  color: #ff6596;
-  font-size: 24px;
+  font-family: Prompt;
+  font-weight: 700;
+  color: #461e2b;
+  font-size: 18px;
   line-height: 27px;
   position: absolute;
   top: 55%;

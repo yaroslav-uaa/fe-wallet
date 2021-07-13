@@ -21,24 +21,27 @@ import {
 import TransitionsModal from './EditTransaction/ModalTransaction';
 import EditTransaction from './EditTransaction';
 import EditIcon from '@material-ui/icons/Edit';
-
 import sortBy from 'lodash.sortby';
 import moment from 'moment'
- 
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
+
 const useStyles = makeStyles(theme => ({
+  tablehead: {
+    backgroundImage:
+      'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
+  },
+
   head: {
     width: '16%',
     fontFamily: 'Prompt, sans-serif',
-    fontWeight: 500,
-    color: theme.palette.primary.dark,
-    backgroundColor: 'rgba(53%, 4%, 98%, 0.6);',
+    fontWeight: 400,
+    color: theme.palette.secondary.main,
     fontSize: 17,
     textAlign: 'center',
-    textShadow: '2px 2px 3px grey',
+    // textShadow: '2px 2px 3px grey',
     borderCollapse: 'collapse',
   },
   row: {
@@ -51,16 +54,33 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     fontSize: 15,
   },
+
+  greentext: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 15,
+    color: 'rgb(0, 150, 32)',
+  },
+
+  redtext: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 15,
+    color: 'rgb(230, 47, 69)',
+  },
+
   container: {
-    background: theme.palette.background.gradient,
     width: 'fit-content',
     margin: 'auto',
-    boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',
   },
   table: {
     color: theme.palette.primary.light,
     borderCollapse: 'collapse',
-    maxWidth: '790px',
+    maxWidth: '100%',
+  },
+
+  tablebody: {
+    backgroundColor: '#fffefed1',
   },
 }));
 
@@ -129,7 +149,7 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
-
+  
     const [transactionForEdit, setTransactionForEdit] = useState(null);
     
     const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
@@ -148,14 +168,11 @@ export default function HomeTabLarge() {
     setOpen(!open);
   };
 
-
-
-
   return (
     <>
-      <TableContainer className={s.container} component={Paper}>
+      <TableContainer className={s.container}>
         <Table className={s.table} aria-label="a dense table">
-          <TableHead>
+          <TableHead className={s.tablehead}>
             <TableRow className={s.row}>
               <TableCell
                 className={s.head}
@@ -221,41 +238,60 @@ export default function HomeTabLarge() {
             </TableRow>
           </TableHead>
           {transactionList.length === 0 ? (
-            <caption className={s.row} style={{height: '150px', margin: '100px auto', fontSize: '20px', width: '350px',  color: 'black', textAlign: 'center'}} align="center">No transactions yet</caption>
+            <caption
+              className={s.row}
+              style={{
+                height: '150px',
+                margin: '100px auto',
+                fontSize: '20px',
+                width: '350px',
+                color: 'black',
+                textAlign: 'center',
+              }}
+              align="center"
+            >
+              No transactions yet
+            </caption>
           ) : (
             <>
-              <TableBody>
+              <TableBody className={s.tablebody}>
                 {(rowsPerPage > 0
                   ? itemSort.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
                   : itemSort
-                ).map(({ id, date, income, category, comment, sum, balance }) => (
-                  <TableRow className={s.row} key={id}>
-                    <TableCell
-                      className={s.text}
-                      style={{ fontSize: 16 }}
-                      align="center"
-                    >
-                      {moment(date).format('DD.MM.YYYY')}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                     {income ? 'income' : 'expenses'}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {category}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {comment}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {income ? `+${sum}` : `-${sum}`}
-                      
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {balance}
-                    </TableCell>
+                ).map(
+                  ({ id, date, income, category, comment, sum, balance }) => (
+                    <TableRow className={s.row} key={id}>
+                      <TableCell
+                        className={s.text}
+                        style={{ fontSize: 16 }}
+                        align="center"
+                      >
+                        {moment(date).format('DD.MM.YYYY')}
+                      </TableCell>
+                      <TableCell
+                        className={income ? s.greentext : s.redtext}
+                        align="center"
+                      >
+                        {income ? 'income' : 'expenses'}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {category}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {comment}
+                      </TableCell>
+                      <TableCell
+                        className={income ? s.greentext : s.redtext}
+                        align="center"
+                      >
+                        {income ? `+${sum}` : `-${sum}`}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {balance}
+                      </TableCell>
                     <TableCell className={s.text} align="center">
                       <div style={{ display: 'flex', height: 'inherit' }}>
                         <IconButton
@@ -276,13 +312,14 @@ export default function HomeTabLarge() {
                     </TableCell>
                   </TableRow>
                 ))}
+
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 30 * emptyRows }}>
                     <TableCell colSpan={6} />
                   </TableRow>
                 )}
               </TableBody>
-              <TableFooter>
+              <TableFooter className={s.tablehead}>
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[10, 15, 20]}
@@ -294,7 +331,7 @@ export default function HomeTabLarge() {
                       native: true,
                     }}
                     onPageChange={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
                     ActionsComponent={TablePaginationActions}
                   />
                 </TableRow>
