@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 import Chart from '../../components/Chart/Chart';
@@ -9,16 +9,7 @@ import SelectForStats from '../../components/SelectForStats/SelectForStats';
 import styles from './Stats.module.css';
 import operationsTransactions from '../../redux/transaction/operations-transactions';
 
-// import transactions from '../../transaction.json';
 import { useDispatch } from 'react-redux';
-
-// const getTransactionsByDate = (mounth, age) => async dispatch => {
-//   try {
-//     const { data } = await axios.get(
-//       `/api/categories?month=${mounth}&year=${age}`,
-//     ); //дописать правельный путь для fetch по дате
-//   } catch (error) {}
-// };
 
 const arrColors = [
   'rgba(255, 99, 132, 1)',
@@ -27,9 +18,14 @@ const arrColors = [
   'rgba(75, 192, 192, 1)',
   'rgba(153, 102, 255, 1)',
   'rgba(255, 159, 64, 1)',
-  'rgba(200, 159, 64, 1)',
-  'rgba(200, 159, 64, 1)',
-  'rgba(200, 159, 64, 1)',
+  'rgba(252, 110, 206, 1)',
+  'rgba(116, 175, 195, 1)',
+  'rgba(252, 239, 36, 1)',
+  'rgba(199, 74, 180, 1)',
+  'rgba(210, 224, 67, 1)',
+  'rgba(109, 36, 40, 1)',
+  'rgba(144, 182, 231, 1)',
+  'rgba(182, 140, 136, 1)',
 ];
 
 const Stats = () => {
@@ -38,15 +34,10 @@ const Stats = () => {
   const monthNow = new Date().getMonth();
   const yearNow = new Date().getFullYear();
 
-  // const [month, setMonth] = useState(monthNow);
-
-  // const changeMonth = value => {
-  //   setMonth(value);
-  // };
-
   useEffect(() => {
-    dispatch(operationsTransactions.getTransactionsByDate(monthNow, yearNow));
-    // console.log('---------------', month);
+    dispatch(
+      operationsTransactions.getTransactionsByDate(monthNow + 1, yearNow),
+    );
   }, [dispatch]);
 
   const { getAllCategoriesFromTransactions } = transactionsSelectors;
