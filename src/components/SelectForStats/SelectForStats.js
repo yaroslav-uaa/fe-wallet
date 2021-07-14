@@ -11,16 +11,16 @@ import { useDispatch } from 'react-redux';
 
 const useMinimalSelectStyles = {
   select: {
-    // minWidth: 200,
-    // background: 'white',
-    // color: deepPurple[500],
-    // fontWeight: 200,
-    // borderStyle: 'none',
-    // borderWidth: 2,
-    // borderRadius: 12,
-    // paddingLeft: 24,
-    // paddingTop: 14,
-    // paddingBottom: 15,
+    minWidth: 200,
+    background: 'white',
+    color: deepPurple[500],
+    fontWeight: 200,
+    borderStyle: 'none',
+    borderWidth: 2,
+    borderRadius: 12,
+    paddingLeft: 24,
+    paddingTop: 14,
+    paddingBottom: 15,
     boxShadow: '0px 5px 8px -3px rgba(0,0,0,0.14)',
     '&:focus': {
       borderRadius: 12,
@@ -76,21 +76,8 @@ const SelectForStats = () => {
   };
 
   useEffect(() => {
-    dispatch(operationsTransactions.getTransactionsByDate(month, year));
-
-    // console.log(month);
+    dispatch(operationsTransactions.getTransactionsByDate(month + 1, year));
   }, [month, year]);
-
-  // ---------------------------------------------
-  // const dispatch = useDispatch();
-  // // const monthNow = new Date().getMonth();
-  // // const ageNow = new Date().getFullYear();
-
-  // useEffect(
-  //   () => dispatch(operationsTransactions.getTransactionsByDate(month, year)),
-  //   [month, year],
-  // );
-  // ---------------------------------------------
 
   const minimalSelectClasses = useMinimalSelectStyles;
 

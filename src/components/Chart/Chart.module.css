@@ -4,12 +4,11 @@
   font-weight: normal;
   font-size: 30px;
   line-height: 45px;
-  color: #000000;
+  color: #f3f3f3;
 }
 
 .chart {
   position: relative;
-  /* outline: 1px solid green; */
   max-width: 400px;
   margin-bottom: 30px;
 }
