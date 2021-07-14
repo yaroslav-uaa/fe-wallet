@@ -26,7 +26,7 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-function FullScreenDialog ({open, handleClickOpen, handleClose, children}) {
+function FullScreenDialog ({open, handleClickOpen, children}) {
     return (
       <>
         <div>
@@ -34,15 +34,16 @@ function FullScreenDialog ({open, handleClickOpen, handleClose, children}) {
             <Dialog
               fullScreen
               open={open}
-              onClose={handleClose}
+              onClose={handleClickOpen}
               TransitionComponent={Transition}
               className={st.container}
+              onPageChange={handleClickOpen}
             >
               <List className={st.list_modal}>
                 <div className={st.box_close_btn}>
                   <IconButton
                     color="inherit"
-                    onClick={handleClose}
+                    onClick={handleClickOpen}
                     aria-label="Close"
                   >
                     <CloseIcon />
@@ -51,7 +52,7 @@ function FullScreenDialog ({open, handleClickOpen, handleClose, children}) {
 
             {children}
                 <div className={st.box_btn_rejected}>
-                  <Button onClick={handleClose} className={st.rejected}>
+                  <Button onClick={handleClickOpen} className={st.rejected}>
                     rejected
                   </Button>
                 </div>

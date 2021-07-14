@@ -5,25 +5,26 @@ import s from './Navigation.module.css';
 import HomeIcon from '@material-ui/icons/Home';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import PersonIcon from '@material-ui/icons/Person';
 
 function Navigation() {
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 768 });
   return (
     <>
       <div>
         <ul className={s.list}>
           <li>
             <NavLink
-              to="/"
+              to="/main"
               exact
               className={s.link}
               activeClassName={s.link__active}
             >
               <HomeIcon
-                color={isTabletOrMobile ? 'inherit' : 'primary'}
-                fontSize="small"
+                color="secondary"
+                fontSize={isTabletOrMobile ? 'medium' : 'large'}
               />
-              {!isTabletOrMobile && <span className={s.text}>Main</span>}
+              {/* {!isTabletOrMobile && <span className={s.text}>Main</span>} */}
             </NavLink>
           </li>
           <li>
@@ -33,8 +34,11 @@ function Navigation() {
               className={s.link}
               activeClassName={s.link__active}
             >
-              <EqualizerIcon color="primary" fontSize="small" />
-              {!isTabletOrMobile && <span className={s.text}>Statistics</span>}
+              <EqualizerIcon
+                color="secondary"
+                fontSize={isTabletOrMobile ? 'medium' : 'large'}
+              />
+              {/* {!isTabletOrMobile && <span className={s.text}>Statistics</span>} */}
             </NavLink>
           </li>
           {isTabletOrMobile && (
@@ -44,10 +48,27 @@ function Navigation() {
                 className={s.link}
                 activeClassName={s.link__active}
               >
-                <MonetizationOnIcon color="primary" fontSize="small" />
+                <MonetizationOnIcon
+                  color="secondary"
+                  fontSize={isTabletOrMobile ? 'medium' : 'large'}
+                />
               </NavLink>
             </li>
           )}
+          <li>
+            <NavLink
+              to="/user"
+              exact
+              className={s.link}
+              activeClassName={s.link__active}
+            >
+              <PersonIcon
+                color="secondary"
+                fontSize={isTabletOrMobile ? 'medium' : 'large'}
+              />
+              {/* {!isTabletOrMobile && <span className={s.text}>User</span>} */}
+            </NavLink>
+          </li>
         </ul>
       </div>
     </>

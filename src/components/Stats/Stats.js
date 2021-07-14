@@ -3,7 +3,6 @@ import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 import Chart from '../../components/Chart/Chart';
 import DiagramTab from '../../components/DiagramTab/DiagramTab';
-import SideBar from '../../components/SideBar';
 
 import SelectForStats from '../../components/SelectForStats/SelectForStats';
 
@@ -49,8 +48,7 @@ const Stats = () => {
   const arrMoney = categories ? categories.map(trans => trans.sum) : null;
 
   return (
-    <div className="page">
-      <SideBar />
+    <div>
       <div className={styles.statisticsPage}>
         <Chart arrColors={arrColors} arrMoney={arrMoney} balance={balance} />
         <div>

@@ -6,7 +6,7 @@ import styles from './Chart.module.css';
 export default function Chart({ arrColors, arrMoney, balance }) {
   return (
     <div className={styles.chart}>
-      <div className={styles.title}>Statistics</div>
+      <p className={styles.title}>Statistics</p>
       <Balance balance={balance} />
       <div>
         <Doughnut
