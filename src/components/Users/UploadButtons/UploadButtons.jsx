@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
       marginLeft: 0,
     },
   },
+
+  form: {
+display: 'flex'
+  },
   input: {
     display: 'none',
   },
@@ -35,7 +39,7 @@ export default function UploadButtons() {
 
   return (
     <div className={classes.root}>
-      <form>
+      <form className={classes.form}>
         <input
           accept="image/*"
           className={classes.input}
@@ -57,7 +61,7 @@ export default function UploadButtons() {
         {/* <button type="button" onClick={() => SubmitAvatar(file)}>
           Send
         </button> */}
-        <Button variant="outlined" color="primary" onClick={() => SubmitAvatar(file)}>Send</Button>
+        <Button size="small" variant="outlined" color="primary" onClick={() => SubmitAvatar(file)}>Send</Button>
       </form>
     </div>
   );
