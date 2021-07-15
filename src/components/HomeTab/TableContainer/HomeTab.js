@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
+
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import HomeTabMobile from './HomeTabMobile';
-import HomeTabLarge from './HomeTabLarge';
+
+import HomeTabMobile from '../TableComponents/HomeTabMobile';
+import HomeTabLarge from '../TableComponents/HomeTabLarge';
 
 function HomeTab() {
   const theme = useTheme();

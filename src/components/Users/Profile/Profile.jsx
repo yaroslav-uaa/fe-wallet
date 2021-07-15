@@ -1,21 +1,23 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+import selectors from '../../../redux/auth/auth-selectors';
+
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button';
+import { IconButton } from '@material-ui/core';
+
 import s from './Profile.module.css';
 import UploadButtons from '../UploadButtons';
-import { useMediaQuery } from 'react-responsive';
-import Button from '@material-ui/core/Button';
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import selectors from '../../../redux/auth/auth-selectors';
-import { IconButton } from '@material-ui/core';
+
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const avatar = useSelector(selectors.getAvatar);
-  console.log(avatar);
 
   return (
     <div className={s.user_menu}>

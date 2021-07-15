@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import operations from '../../../redux/auth/auth-operations';
+
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import operations from '../../../redux/auth/auth-operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({

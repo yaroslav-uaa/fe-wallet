@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeTab from '../../components/HomeTab/HomeTab';
+import HomeTab from '../../components/HomeTab';
 import Modal from '../../components/Modal';
 function DashboardPage() {
   return (

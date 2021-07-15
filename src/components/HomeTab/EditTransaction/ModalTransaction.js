@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import st from '../../Modal/Modal.module.css';
 
-const styles = {
+import s from '../../Modal/Modal.module.css';
+
+const useStyles = makeStyles(() => ({
   flex: {
     flex: 1,
     color: 'white',
@@ -20,13 +22,15 @@ const styles = {
   paper: {
     color: 'white',
   },
-};
+} ))
+
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-function FullScreenDialog ({open, handleClickOpen, children}) {
+export default function FullScreenDialog({ open, handleClickOpen, children }) {
+  const styles = useStyles();
     return (
       <>
         <div>
@@ -36,11 +40,11 @@ function FullScreenDialog ({open, handleClickOpen, children}) {
               open={open}
               onClose={handleClickOpen}
               TransitionComponent={Transition}
-              className={st.container}
+              className={s.container}
               onPageChange={handleClickOpen}
             >
-              <List className={st.list_modal}>
-                <div className={st.box_close_btn}>
+              <List className={s.list_modal}>
+                <div className={s.box_close_btn}>
                   <IconButton
                     color="inherit"
                     onClick={handleClickOpen}
@@ -51,8 +55,8 @@ function FullScreenDialog ({open, handleClickOpen, children}) {
                 </div>
 
             {children}
-                <div className={st.box_btn_rejected}>
-                  <Button onClick={handleClickOpen} className={st.rejected}>
+                <div className={s.box_btn_rejected}>
+                  <Button onClick={handleClickOpen} className={s.rejected}>
                     rejected
                   </Button>
                 </div>
@@ -69,4 +73,3 @@ FullScreenDialog.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FullScreenDialog);

@@ -1,24 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import * as Yup from 'yup';
-import { Button } from '@material-ui/core';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import TextField from '@material-ui/core/TextField';
-import SimpleSelect from '../../Modal/Select/Select';
-import Box from '@material-ui/core/Box';
-import { transactionsOperations } from '../../../redux/transaction';
-import s from '../../Modal/FormAddTransaction/Form.module.css';
 import { makeStyles } from '@material-ui/core/styles';
-import SwitchMy from '../../Modal/Switch';
+import { transactionsOperations } from '../../../redux/transaction';
+
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+
+import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 import { boolean } from 'yup/lib/locale';
 
-const useStyles = makeStyles(theme => ({
+import SimpleSelect from '../../Modal/Select/Select';
+import SwitchMy from '../../Modal/Switch';
+import s from '../../Modal/FormAddTransaction/Form.module.css';
+
+const useStyles = makeStyles(() => ({
   root: {
     color: 'white',
   },
@@ -61,6 +64,22 @@ export default function EditTransaction({
     dispatch(transactionsOperations.fetchTransactions());
   }, [dispatch]);
 
+    const updateTransactions = useCallback(
+    ({ date, category, income, comment, sum, transactionId }) => {
+      dispatch(
+        transactionsOperations.updateTransaction({
+          date,
+          category,
+          income,
+          comment,
+          sum,
+          transactionId,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
     if (transactionForEdit) {
       const { id, date, category, income, sum, comment } = transactionForEdit;
@@ -82,22 +101,6 @@ export default function EditTransaction({
     };
   }, [transactionForEdit]);
 
-  const updateTransactions = useCallback(
-    ({ date, category, income, comment, sum, transactionId }) => {
-      dispatch(
-        transactionsOperations.updateTransaction({
-          date,
-          category,
-          income,
-          comment,
-          sum,
-          transactionId,
-        }),
-      );
-      console.log({ date, category, income, comment, sum, transactionId });
-    },
-    [dispatch],
-  );
 
   const handleChangeCategory = event => {
     setCategory(event.target.value);
