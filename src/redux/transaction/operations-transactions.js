@@ -4,12 +4,18 @@ import {
   getTransactionsRequest,
   getTransactionsSuccess,
   getTransactionsError,
+  getTransactionsByDateRequest,
+  getTransactionsByDateSuccess,
+  getTransactionsByDateError,
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
   deleteTransactionRequest,
   deleteTransactionSuccess,
   deleteTransactionError,
+  updateTransactionSuccess,
+  updateTransactionRequest,
+  updateTransactionError,
 } from './actions-transactions';
 
 axios.defaults.baseURL = 'http://localhost:4040/api';
@@ -22,6 +28,17 @@ const fetchTransactions = () => async dispatch => {
     dispatch(getTransactionsSuccess(data));
   } catch (error) {
     dispatch(getTransactionsError(Notify.Error(error.message)));
+  }
+};
+
+const getTransactionsByDate = (month, age) => async dispatch => {
+  dispatch(getTransactionsByDateRequest());
+
+  try {
+    const { data } = await axios.get(`/categories?month=${month}&year=${age}`);
+    dispatch(getTransactionsByDateSuccess(data));
+  } catch (error) {
+    dispatch(getTransactionsByDateError(Notify.Error(error.message)));
   }
 };
 
@@ -47,5 +64,27 @@ const deleteTransaction = transactionId => async dispatch => {
   }
 };
 
-// eslint-disable-next-line
-export default { fetchTransactions, addTransaction, deleteTransaction };
+const updateTransaction =
+  ({ date, category, income, comment, sum, transactionId }) =>
+  async dispatch => {
+    dispatch(updateTransactionRequest());
+    const update = { date, income, category, comment, sum };
+    try {
+      const { data } = await axios.patch(
+        `/transactions/${transactionId}`,
+        update,
+      );
+      Notify.Success('Transaction Edited');
+      dispatch(updateTransactionSuccess(data));
+    } catch (error) {
+      dispatch(updateTransactionError(error.message));
+    }
+  };
+
+export default {
+  fetchTransactions,
+  addTransaction,
+  deleteTransaction,
+  updateTransaction,
+  getTransactionsByDate,
+};

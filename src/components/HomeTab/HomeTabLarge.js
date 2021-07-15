@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -17,18 +16,30 @@ import {
   transactionsOperations,
   transactionsSelectors,
 } from '../../redux/transaction';
+
+import TransitionsModal from './EditTransaction/ModalTransaction';
+import EditTransaction from './EditTransaction';
+import EditIcon from '@material-ui/icons/Edit';
 import sortBy from 'lodash.sortby';
+import moment from 'moment';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
+  tablehead: {
+    backgroundImage:
+      'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
+  },
+
   head: {
     width: '16%',
     fontFamily: 'Prompt, sans-serif',
-    fontWeight: 500,
-    color: theme.palette.primary.dark,
-    backgroundColor: 'rgba(53%, 4%, 98%, 0.6);',
+    fontWeight: 400,
+    color: theme.palette.secondary.main,
     fontSize: 17,
     textAlign: 'center',
-    textShadow: '2px 2px 3px grey',
+    borderBottom: '2px solid rgba(224, 224, 224, 1)',
+    // textShadow: '2px 2px 3px grey',
     borderCollapse: 'collapse',
   },
   row: {
@@ -41,16 +52,33 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     fontSize: 15,
   },
+
+  greentext: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 15,
+    color: 'rgb(0, 150, 32)',
+  },
+
+  redtext: {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 15,
+    color: 'rgb(230, 47, 69)',
+  },
+
   container: {
-    background: theme.palette.background.gradient,
     width: 'fit-content',
     margin: 'auto',
-    boxShadow: ' 0px 0px 50px 19px rgba(134, 9, 249, 0.47)',
   },
   table: {
     color: theme.palette.primary.light,
     borderCollapse: 'collapse',
-    maxWidth: '790px',
+    maxWidth: '100%',
+  },
+
+  tablebody: {
+    backgroundColor: '#fffefed1',
   },
 }));
 
@@ -58,23 +86,30 @@ export default function HomeTabLarge() {
   const s = useStyles();
   const dispatch = useDispatch();
 
-  const fetchTransactions = useCallback(() => {
-    dispatch(transactionsOperations.fetchTransactions());
-  }, [dispatch]);
-
-  useEffect(() => fetchTransactions(), [fetchTransactions]);
-
   const transactionList = useSelector(transactionsSelectors.filterTransactions);
   const totalTransactions = useSelector(
     transactionsSelectors.totalTransactions,
   );
 
   const [itemSort, setItemSort] = useState([]);
+  const [isOn, toggleIsOn] = useToggle();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [open, setOpen] = useState(false);
+  const [transactionForEdit, setTransactionForEdit] = useState(null);
 
+  const deleteTransaction = useCallback(
+    id => dispatch(transactionsOperations.deleteTransaction(id)),
+    [dispatch],
+  );
+  const fetchTransactions = useCallback(() => {
+    dispatch(transactionsOperations.fetchTransactions());
+  }, [dispatch]);
+
+  useEffect(() => fetchTransactions(), [fetchTransactions]);
   useEffect(() => {
     setItemSort(transactionList);
   }, [transactionList]);
-  console.log('________', transactionList);
 
   const sortByUp = value => {
     const lodash = sortBy(transactionList, [
@@ -84,7 +119,6 @@ export default function HomeTabLarge() {
     ]);
     setItemSort(lodash);
   };
-
   const sortByDown = value => {
     const lodash = sortBy(transactionList, [
       function (o) {
@@ -93,18 +127,6 @@ export default function HomeTabLarge() {
     ]);
     setItemSort(lodash.reverse());
   };
-
-  function useToggle(initialValue = false) {
-    const [value, setValue] = useState(initialValue);
-    const toggle = useCallback(() => {
-      setValue(v => !v);
-    }, []);
-    return [value, toggle];
-  }
-
-  const [isOn, toggleIsOn] = useToggle();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
@@ -117,11 +139,35 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
+
+  const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
+    setTransactionForEdit({ id, date, income, category, comment, sum });
+    console.log({ id, date, income, category, comment, sum });
+
+    handleClickOpen();
+  };
+  const handleClickOpen = () => {
+    setOpen(!open);
+    return handleChangePage;
+  };
+
+  function useToggle(initialValue = false) {
+    const [value, setValue] = useState(initialValue);
+    const toggle = useCallback(() => {
+      setValue(v => !v);
+    }, []);
+    return [value, toggle];
+  }
+  function deleteT(id) {
+    deleteTransaction(id);
+    return handleChangePage;
+  }
+
   return (
     <>
-      <TableContainer className={s.container} component={Paper}>
+      <TableContainer className={s.container}>
         <Table className={s.table} aria-label="a dense table">
-          <TableHead>
+          <TableHead className={s.tablehead}>
             <TableRow className={s.row}>
               <TableCell
                 className={s.head}
@@ -134,11 +180,12 @@ export default function HomeTabLarge() {
                   style={{
                     border: 'none',
                     width: '10px',
-                    padding: '0 8px',
+                    padding: '4px 8px 0 8px',
+                    color: 'white',
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
-                  className={!isOn ? 'btn' : 'hidden'}
+                  className={isOn ? 'btn' : 'hidden'}
                   onClick={() => {
                     sortByUp('date');
                     toggleIsOn();
@@ -152,11 +199,12 @@ export default function HomeTabLarge() {
                   style={{
                     border: 'none',
                     width: '10px',
-                    padding: '0 8px',
+                    padding: '4px 8px 0 8px',
                     cursor: 'pointer',
+                    color: 'white',
                     backgroundColor: 'transparent',
                   }}
-                  className={isOn ? 'btn' : 'hidden'}
+                  className={!isOn ? 'btn' : 'hidden'}
                   onClick={() => {
                     sortByDown('date');
                     toggleIsOn();
@@ -181,54 +229,98 @@ export default function HomeTabLarge() {
               <TableCell className={s.head} align="center">
                 Balance
               </TableCell>
+              <TableCell className={s.head} align="center">
+                Edit
+              </TableCell>
             </TableRow>
           </TableHead>
-          {transactionList === null ? (
-            <TableRow className={s.row} align="center">
+          {transactionList.length === 0 ? (
+            <caption
+              className={s.row}
+              style={{
+                height: '150px',
+                margin: '100px auto',
+                fontSize: '20px',
+                width: '350px',
+                color: 'black',
+                textAlign: 'center',
+              }}
+              align="center"
+            >
               No transactions yet
-            </TableRow>
+            </caption>
           ) : (
             <>
-              <TableBody>
+              <TableBody className={s.tablebody}>
                 {(rowsPerPage > 0
                   ? itemSort.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
                   : itemSort
-                ).map(({ id, date, type, category, comment, sum, balance }) => (
-                  <TableRow className={s.row} key={id}>
-                    <TableCell
-                      className={s.text}
-                      style={{ fontSize: 14 }}
-                      align="center"
-                    >
-                      {date}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {type}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {category}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {comment}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {sum}
-                    </TableCell>
-                    <TableCell className={s.text} align="center">
-                      {balance}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                ).map(
+                  ({ id, date, income, category, comment, sum, balance }) => (
+                    <TableRow className={s.row} key={id}>
+                      <TableCell
+                        className={s.text}
+                        style={{ fontSize: 16 }}
+                        align="center"
+                      >
+                        {moment(date).format('DD.MM.YYYY')}
+                      </TableCell>
+                      <TableCell
+                        className={income ? s.greentext : s.redtext}
+                        align="center"
+                      >
+                        {income ? 'income' : 'expenses'}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {category}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {comment}
+                      </TableCell>
+                      <TableCell
+                        className={income ? s.greentext : s.redtext}
+                        align="center"
+                      >
+                        {income ? `+${sum}` : `-${sum}`}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        {balance}
+                      </TableCell>
+                      <TableCell className={s.text} align="center">
+                        <div style={{ display: 'flex', height: 'inherit' }}>
+                          <IconButton
+                            onClick={() =>
+                              OnEditTransaction({
+                                id,
+                                date,
+                                income,
+                                category,
+                                comment,
+                                sum,
+                              })
+                            }
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton aria-label="delete">
+                            <DeleteIcon onClick={() => deleteT(id)} />
+                          </IconButton>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ),
+                )}
+
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: 30 * emptyRows }}>
-                    <TableCell colSpan={6} />
+                  <TableRow className={s.row} style={{ height: 30 * emptyRows }}>
+                    <TableCell colSpan={10} />
                   </TableRow>
                 )}
               </TableBody>
-              <TableFooter>
+              <TableFooter className={s.tablehead}>
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[10, 15, 20]}
@@ -239,8 +331,8 @@ export default function HomeTabLarge() {
                       inputProps: { 'aria-label': 'rows per page' },
                       native: true,
                     }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
                     ActionsComponent={TablePaginationActions}
                   />
                 </TableRow>
@@ -249,6 +341,12 @@ export default function HomeTabLarge() {
           )}
         </Table>
       </TableContainer>
+      <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
+        <EditTransaction
+          handleClickOpen={handleClickOpen}
+          transactionForEdit={transactionForEdit}
+        />
+      </TransitionsModal>
     </>
   );
 }

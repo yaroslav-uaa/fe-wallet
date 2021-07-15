@@ -71,16 +71,17 @@ export default function FormAddTransaction() {
       category: category,
       income: chooseSelect,
       comment: '',
-      sum: '',
+      sum: null,
     },
     validationSchema: SchemaYup,
     onSubmit: (values, { resetForm }) => {
+      console.log(chooseSelect);
       const correctValue = {
         ...values,
         date: moment(selectedDate).format(),
+        income: chooseSelect,
         category: category,
       };
-      console.log(correctValue);
       onFormSubmit(correctValue, resetForm);
     },
   });

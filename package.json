@@ -30,6 +30,7 @@
     "react": "^17.0.2",
     "react-avatar-uploader": "^1.0.3",
     "react-chartjs-2": "^3.0.3",
+    "react-color": "^2.19.3",
     "react-date-picker": "^8.2.0",
     "react-datepicker": "^4.1.1",
     "react-day-picker": "^7.4.10",
