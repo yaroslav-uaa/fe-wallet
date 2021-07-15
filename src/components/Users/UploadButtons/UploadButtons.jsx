@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import operations from '../../../redux/auth/auth-operations';
+import { useMediaQuery } from 'react-responsive';
 
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,7 +10,6 @@ import { Button } from '@material-ui/core';
 import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 
 import s from './UploadButton.module.css';
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   form: {
-display: 'flex'
+    display: 'flex',
   },
   input: {
     display: 'none',

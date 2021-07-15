@@ -1,14 +1,21 @@
-import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import { Button } from '@material-ui/core';
 import { SwatchesPicker } from 'react-color';
 import Profile from '../../components/Users/Profile/Profile';
 import s from './UserPage.module.css';
-
-const defaultColor = localStorage.getItem('color') || '#212121';
 import Picker from '../../components/Picker/Picker';
 
+const defaultColor = localStorage.getItem('color') || '#212121';
 
 function UserPage() {
+  const [color, setcolor] = useState('');
+  useEffect(() => {
+    setcolor(defaultColor);
+  }, []);
+  const handleChangeComplete = color => {
+    setcolor(color.hex);
+    localStorage.setItem('color', color.hex);
+  };
   return (
     <div
       className="page"
