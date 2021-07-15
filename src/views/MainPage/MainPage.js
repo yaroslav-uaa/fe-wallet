@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Suspense } from 'react';
 import { Route } from 'react-router';
 import Header from '../../components/Header';
-import HomeTab from '../../components/HomeTab/HomeTab';
 import SideBar from '../../components/SideBar';
-import Stats from '../../components/Stats/Stats';
-import UserPage from '../UserPage/UserPage';
+
+// views
+const DashboardPage = lazy(() => import('../DashboardPage/DashboardPage'));
+const StatsPage = lazy(() => import('../StatsPage/StatsPage'));
+const UserPage = lazy(() => import('../UserPage/UserPage'));
 
 function MainPage() {
   return (
@@ -15,8 +17,8 @@ function MainPage() {
         <SideBar />
         <div className="content">
           <Suspense>
-            <Route path="/" exact component={HomeTab} />
-            <Route path="/stats" exact component={Stats} />
+            <Route path="/" exact component={DashboardPage} />
+            <Route path="/stats" exact component={StatsPage} />
             <Route path="/user" exact component={UserPage} />
           </Suspense>
         </div>

@@ -18,27 +18,12 @@
   margin: 0 auto;
 }
 
-/* @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .header {
-    padding: 0 24px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .header {
-    padding: 0 20px;
-  }
-} */
-
 .logo {
-  /* display: flex; */
   text-decoration: none;
-  /* align-items: center; */
 }
 
 .logo p {
   margin: 0;
-  /* margin-left: 10px; */
   font-family: Gugi, sans-serif;
   font-size: 20px;
   text-transform: uppercase;
@@ -64,6 +49,5 @@
 }
 
 .user__info p {
-  margin: 0;
-  padding-right: 10px;
+  margin: 0 10px;
 }

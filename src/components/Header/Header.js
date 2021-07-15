@@ -5,7 +5,6 @@ import s from './Header.module.css';
 import authSelectors from '../../redux/auth/auth-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operations';
-import { NavLink } from 'react-router-dom';
 import GetCurrency from '../GetCurrency/GetCurrency';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
@@ -21,7 +20,7 @@ function Header() {
       <GetCurrency />
       <header className={s.header}>
         <div className={s.header__box}>
-          <a href="/main" className={s.logo}>
+          <a href="/" className={s.logo}>
             <p
               style={{
                 backgroundImage: `linear-gradient(to right, ${localStorage.color}, #fffefe)`,
@@ -32,17 +31,7 @@ function Header() {
           </a>
           <div className={s.user}>
             <a href="/user" className={s.user__info}>
-              <NavLink to="/users" exact>
-                <AccountCircleIcon color="primary" />
-              </NavLink>
-              <div
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: `${localStorage.color}`,
-                  marginRight: '10px',
-                }}
-              ></div>
+              <AccountCircleIcon color="secondary" />
               <p>{name}</p>
             </a>
             <IconButton

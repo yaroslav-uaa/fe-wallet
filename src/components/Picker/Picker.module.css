@@ -1,0 +1,39 @@
+.wrap {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.wrap p {
+  margin-top: 0;
+  font-family: Prompt;
+  font-size: 18px;
+  color: #212121;
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: 0.06em;
+}
+
+.testColor {
+  width: 150px;
+  height: 75px;
+  color: #fffefe;
+  font-family: Gugi, sans-serif;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  border: 3px solid #fffefe;
+  box-shadow: 0 0 0 2px #21212190;
+}
+
+@media screen and (max-width: 1279px) {
+  .testColor {
+    width: 120px;
+    height: 58px;
+    font-size: 16px;
+  }
+}
