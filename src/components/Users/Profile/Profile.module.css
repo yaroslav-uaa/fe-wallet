@@ -1,13 +1,3 @@
-.edit {
-  margin-left: auto;
-  padding-right: 15px;
-}
-.btn_edit {
-  background: inherit;
-  border: none;
-  outline: none;
-}
-
 .user_menu {
   width: 100%;
   height: 100%;
@@ -18,10 +8,30 @@
   box-shadow: 0 3px 10px -2px #212121;
 }
 
-.profile_user {
-  padding: 10px;
+.user_avatar {
+  margin-right: 40px;
 }
+
+.avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
 .upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_user {
+  padding: 0;
+  width: 100%;
+  margin: -10px 0;
+}
+
+.user_item {
   display: flex;
   align-items: center;
   margin-right: 20px;
@@ -51,9 +61,68 @@
   text-transform: uppercase;
 }
 
+.edit {
+  margin-left: auto;
+  padding-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .user_menu {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .user_menu {
+    border-bottom: 1px solid #fffefe;
+    margin: 0 auto;
+  }
+
+  .user_avatar,
+  .profile_list {
+    width: 280px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .user_avatar,
+  .profile_list {
+    margin: 0 auto;
+  }
+
+  .user_menu {
+    padding: 0 0 20px;
+  }
+
+  .user_avatar,
+  .profile_list {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .user_item {
+    width: inherit;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .user_menu {
+    border-right: 1px solid #fffefe;
+  }
+
+  .user_avatar,
+  .profile_list {
+    max-width: 300px;
+  }
+}
+
+/* для чого ці стилі? */
 .upload_avatar {
   background: inherit;
 }
+
 
 .user_item {
   display: flex;
@@ -64,4 +133,10 @@
   padding: 3px;
   width: 100%;
   margin-bottom: 10px;
+}
+
+.btn_edit {
+  background: inherit;
+  border: none;
+  outline: none;
 }

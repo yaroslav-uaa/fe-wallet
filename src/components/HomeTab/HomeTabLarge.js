@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
   table: {
     color: theme.palette.primary.light,
     borderCollapse: 'collapse',
-    maxWidth: '100%',
+    maxWidth: '728px',
   },
 
   tablebody: {
@@ -315,7 +315,10 @@ export default function HomeTabLarge() {
                 )}
 
                 {emptyRows > 0 && (
-                  <TableRow className={s.row} style={{ height: 30 * emptyRows }}>
+                  <TableRow
+                    className={s.row}
+                    style={{ height: 30 * emptyRows }}
+                  >
                     <TableCell colSpan={10} />
                   </TableRow>
                 )}

@@ -6,16 +6,23 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import { useMediaQuery } from 'react-responsive';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect, useCallback } from 'react';
 import operations from '../../../redux/auth/auth-operations';
 // styles
 import s from './UploadButton.module.css';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
+      marginLeft: 0,
     },
+  },
+
+  form: {
+display: 'flex'
   },
   input: {
     display: 'none',
@@ -60,7 +67,6 @@ export default function UploadButtons() {
             />
           </IconButton>
         </label>
-
         <button
           type="button"
           onClick={() => SubmitAvatar(file)}

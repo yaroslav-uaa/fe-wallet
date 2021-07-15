@@ -9,11 +9,12 @@ import Button from '@material-ui/core/Button';
 // react redux
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import selectors from '../../../redux/auth/auth-selectors';
 import authOperations from '../../../redux/auth/auth-operations';
 // styles
 import s from './Profile.module.css';
+import { IconButton } from '@material-ui/core';
+
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
@@ -43,13 +44,14 @@ export default function Profile() {
           <UploadButtons />
         </div>
       </div>
-      <div>
+      <div className={s.profile_list}>
         <ul className={s.profile_user}>
           <li className={s.user_item}>
             <PersonIcon
               color="secondary"
               fontSize={isTabletOrMobile ? 'small' : 'large'}
               style={{ marginLeft: '10px' }}
+
             />
             <p className={s.profile_name}>{user.name}</p>
           </li>
@@ -69,6 +71,7 @@ export default function Profile() {
               color="secondary"
               fontSize={isTabletOrMobile ? 'small' : 'large'}
               style={{ marginLeft: '10px' }}
+
             />
             <p className={s.profile_name}>{user.email}</p>
           </li>
