@@ -5,7 +5,6 @@ import authOperations from '../../redux/auth/auth-operations';
 import { Container } from '@material-ui/core';
 import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
-import Header from '../Header';
 // import authSelectors from '../../redux/auth/auth-selectors';
 import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
@@ -28,6 +27,7 @@ function App() {
 
   if (!localStorage.color) localStorage.setItem('color', '#0097a7');
   document.body.style.backgroundColor = localStorage.color;
+
   return (
     <Container
       maxWidth="1440px"
