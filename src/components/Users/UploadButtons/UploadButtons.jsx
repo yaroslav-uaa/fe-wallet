@@ -1,10 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
+// materia
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
+import { useMediaQuery } from 'react-responsive';
+// redux
+import { useDispatch } from 'react-redux';
 import operations from '../../../redux/auth/auth-operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect, useCallback } from 'react';
+// styles
+import s from './UploadButton.module.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,12 +23,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function UploadButtons() {
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const classes = useStyles();
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
 
   const handlerChange = e => {
-    console.dir(e.target.files[0]);
     setFile(e.target.files[0]);
   };
 
@@ -33,7 +38,7 @@ export default function UploadButtons() {
 
   return (
     <div className={classes.root}>
-      <form>
+      <div className={s.avatar_upload}>
         <input
           accept="image/*"
           className={classes.input}
@@ -47,15 +52,26 @@ export default function UploadButtons() {
             color="primary"
             aria-label="upload picture"
             component="span"
+            style={{ margin: ' 0px 10px ' }}
           >
-            <PhotoCamera fontSize="large" />
+            <PhotoCamera
+              color="secondary"
+              fontSize={isTabletOrMobile ? 'small' : 'large'}
+            />
           </IconButton>
         </label>
 
-        <button type="button" onClick={() => SubmitAvatar(file)}>
-          Отправить
+        <button
+          type="button"
+          onClick={() => SubmitAvatar(file)}
+          className={s.btn_save}
+        >
+          <UpdateOutlinedIcon
+            color="secondary"
+            fontSize={isTabletOrMobile ? 'small' : 'large'}
+          />
         </button>
-      </form>
+      </div>
     </div>
   );
 }

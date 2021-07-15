@@ -1,7 +1,25 @@
-.box_user {
-  display: flex;
+.page_profile {
+  background-color: #21212130;
+  border-radius: 10px;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.user_dreams {
-  padding: 10px;
+@media screen and (min-width: 768px) {
+  .user_profile {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box_page {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .page_profile {
+    margin-right: 80px;
+  }
 }
