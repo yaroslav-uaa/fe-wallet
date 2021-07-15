@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { SketchPicker } from 'react-color';
+import { SwatchesPicker } from 'react-color';
 
 const defaultColor = localStorage.getItem('color') || '#212121';
 
@@ -31,7 +31,7 @@ function UserPage() {
         }}
       >
         <p>Choose Your Theme: </p>
-        <SketchPicker
+        <SwatchesPicker
           color={color}
           onChangeComplete={handleChangeComplete}
           style={{ marginBottom: '49px' }}

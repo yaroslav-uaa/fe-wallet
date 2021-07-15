@@ -8,21 +8,21 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import PersonIcon from '@material-ui/icons/Person';
 
 function Navigation() {
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 768 });
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <>
       <div>
         <ul className={s.list}>
           <li>
             <NavLink
-              to="/main"
+              to="/"
               exact
               className={s.link}
               activeClassName={s.link__active}
             >
               <HomeIcon
                 color="secondary"
-                fontSize={isTabletOrMobile ? 'medium' : 'large'}
+                fontSize={isTabletOrMobile ? 'small' : 'large'}
               />
               {/* {!isTabletOrMobile && <span className={s.text}>Main</span>} */}
             </NavLink>
@@ -36,7 +36,7 @@ function Navigation() {
             >
               <EqualizerIcon
                 color="secondary"
-                fontSize={isTabletOrMobile ? 'medium' : 'large'}
+                fontSize={isTabletOrMobile ? 'small' : 'large'}
               />
               {/* {!isTabletOrMobile && <span className={s.text}>Statistics</span>} */}
             </NavLink>
@@ -50,7 +50,7 @@ function Navigation() {
               >
                 <MonetizationOnIcon
                   color="secondary"
-                  fontSize={isTabletOrMobile ? 'medium' : 'large'}
+                  fontSize={isTabletOrMobile ? 'small' : 'large'}
                 />
               </NavLink>
             </li>
@@ -64,7 +64,7 @@ function Navigation() {
             >
               <PersonIcon
                 color="secondary"
-                fontSize={isTabletOrMobile ? 'medium' : 'large'}
+                fontSize={isTabletOrMobile ? 'small' : 'large'}
               />
               {/* {!isTabletOrMobile && <span className={s.text}>User</span>} */}
             </NavLink>

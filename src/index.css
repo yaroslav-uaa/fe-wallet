@@ -15,15 +15,10 @@ body {
 }
 
 .page {
-  padding: 0 20px;
+  width: 100%;
+  max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1279px) {
-  .page {
-    padding: 0 40px;
-  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -31,7 +26,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 0 60px;
+    width: 100%;
     max-width: 1440px;
     margin: 0 auto;
   }
@@ -59,15 +54,7 @@ body {
 }
 
 @media screen and (min-width: 1280px) {
-  .sidebar__gl {
-    position: relative;
-    width: 378px;
-    height: 100vh;
-    background-attachment: fixed;
-  }
-
   .content {
-    width: calc(100%-200px);
     padding: 100px 0 4vh;
     height: 100%;
   }
