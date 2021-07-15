@@ -5,7 +5,9 @@ import s from './Header.module.css';
 import authSelectors from '../../redux/auth/auth-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operations';
+import { NavLink } from 'react-router-dom';
 import GetCurrency from '../GetCurrency/GetCurrency';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 function Header() {
   const name = useSelector(authSelectors.getUserName);
@@ -30,7 +32,9 @@ function Header() {
           </a>
           <div className={s.user}>
             <a href="/user" className={s.user__info}>
-              {/* тут буде аватарка */}
+              <NavLink to="/users" exact>
+                <AccountCircleIcon color="primary" />
+              </NavLink>
               <div
                 style={{
                   width: '20px',

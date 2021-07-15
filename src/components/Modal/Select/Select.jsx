@@ -3,11 +3,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    width: '95%',
+    width: '90%',
     color: 'white',
   },
   selectEmpty: {
@@ -15,14 +16,35 @@ const useStyles = makeStyles(theme => ({
   },
   select: {
     color: 'white',
+    background: 'inherit',
   },
+
   padding: {
     padding: '0px',
+  },
+
+  button: {
+    background: 'red',
   },
 }));
 
 export default function SimpleSelect({ isIncome, category, handleChange }) {
   const classes = useStyles();
+  function createSelect(array) {
+    return array.map(option => {
+      return (
+        <MenuItem
+          key={option.value}
+          value={option.value}
+          width="100%"
+          color="red"
+          className={styles.select}
+        >
+          {option.label}
+        </MenuItem>
+      );
+    });
+  }
   return (
     <div>
       <FormControl className={classes.formControl}>
@@ -39,21 +61,6 @@ export default function SimpleSelect({ isIncome, category, handleChange }) {
       </FormControl>
     </div>
   );
-}
-
-function createSelect(array) {
-  return array.map(option => {
-    return (
-      <MenuItem
-        key={option.value}
-        value={option.value}
-        width="100%"
-        color="red"
-      >
-        {option.label}
-      </MenuItem>
-    );
-  });
 }
 
 const rangesExpense = [

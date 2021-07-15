@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
   input: {
     textAlign: 'center',
     color: 'white',
+    background: 'inherit',
   },
 }));
 
@@ -80,7 +81,7 @@ export default function FormAddTransaction() {
         date: moment(selectedDate).format(),
         income: chooseSelect,
         category: category,
-      }; 
+      };
       onFormSubmit(correctValue, resetForm);
     },
   });
@@ -121,11 +122,13 @@ export default function FormAddTransaction() {
         <div className={s.box_time}>
           <Box>
             <TextField
+              required
               fullWidth
               id="sum"
               name="sum"
               label="Sum"
-              type="number"
+              type="text"
+              color="primary"
               className={classes.input}
               value={formik.values.sum}
               onChange={formik.handleChange}
@@ -162,6 +165,8 @@ export default function FormAddTransaction() {
             name="comment"
             label="Comment"
             type="text"
+            color="primary"
+            required
             className={classes.input}
             value={formik.values.comment}
             onChange={formik.handleChange}

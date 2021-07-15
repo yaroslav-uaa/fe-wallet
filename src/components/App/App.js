@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
 import { Container } from '@material-ui/core';
@@ -36,6 +36,7 @@ function App() {
         minHeight: '100vh',
       }}
     >
+      {/* <UserPage /> */}
       <GetCurrency />
 
       <Suspense fallback={<p>"wait..."</p>}>
