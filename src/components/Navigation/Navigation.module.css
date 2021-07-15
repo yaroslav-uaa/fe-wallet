@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0 0 40px;
-  padding: 10px 0;
+  padding: 0;
   width: 100%;
   background-color: #21212130;
   border-radius: 4px;
@@ -16,6 +16,15 @@
   align-items: center;
 }
 
+.link {
+  padding: 14px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
 .link__active {
   background: linear-gradient(to top, #21212190, transparent);
 }
@@ -23,7 +32,6 @@
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .list {
     margin: 0 0 20px;
-    padding: 5px;
   }
 
   .link {
@@ -38,10 +46,5 @@
   }
   .link {
     padding: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
   }
 }
