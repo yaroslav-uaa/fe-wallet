@@ -1,14 +1,25 @@
-.box_user {
-  background-color: #fffefe60;
-  padding: 15px;
-  max-width: 768px;
-  margin: 0 auto;
+.page_profile {
+  background-color: #21212130;
+  border-radius: 10px;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-@media screen and (min-width: 1280px) {
-  .box_user {
+@media screen and (min-width: 768px) {
+  .user_profile {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box_page {
     display: flex;
-    padding: 25px;
-    max-width: fit-content;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .page_profile {
+    margin-right: 80px;
   }
 }

@@ -10,9 +10,6 @@ const user = createReducer(initUserState, {
   [authActions.signOutSuccess]: () => initUserState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload.user,
 });
-const newAvatar = createReducer(null, {
-  [authActions.uploadAvatarSuccess]: (_, { payload }) => payload.data.avatarURL,
-});
 
 const token = createReducer(null, {
   [authActions.regSuccess]: (_, { payload }) => payload.token,
@@ -44,5 +41,4 @@ export default combineReducers({
   token,
   isLoggedIn,
   error,
-  newAvatar,
 });

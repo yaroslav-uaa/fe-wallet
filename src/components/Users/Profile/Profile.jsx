@@ -14,28 +14,27 @@ import { IconButton } from '@material-ui/core';
 import s from './Profile.module.css';
 import UploadButtons from '../UploadButtons';
 
-
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const avatar = useSelector(selectors.getAvatar);
-
+  
   return (
     <div className={s.user_menu}>
       <div className={s.user_avatar}>
         <img
           src={
-            avatar
-              ? avatar
+            user.avatar
+              ? user.avatar
               : 'https://ik.imagekit.io/s2fpg15d4rx/default-avatar_8DzX4xISu.png'
           }
           alt="avatar"
           className={s.avatar}
         ></img>
         <div className={s.upload}>
-          <IconButton variant="outlined"><EditIcon
-            fontSize="medium"
-            color={isTabletOrMobile ? 'inherit' : 'primary'}
-          /></IconButton >
+          <EditIcon
+            color="secondary"
+            fontSize={isTabletOrMobile ? 'small' : 'large'}
+          />
           <UploadButtons />
         </div>
       </div>
@@ -43,15 +42,18 @@ export default function Profile() {
         <ul className={s.profile_user}>
           <li className={s.user_item}>
             <PersonIcon
-              fontSize="medium"
-              color={isTabletOrMobile ? 'inherit' : 'primary'}
+              color="secondary"
+              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              style={{ marginLeft: '10px' }}
+
             />
-            <p className={s.profile_name}>Name</p>
+            <p className={s.profile_name}>{user.name}</p>
           </li>
           <li className={s.user_item}>
             <VpnKeyIcon
-              fontSize="medium"
-              color={isTabletOrMobile ? 'inherit' : 'primary'}
+              color="secondary"
+              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              style={{ marginLeft: '10px' }}
             />
             <p className={s.profile_name}>*********</p>
             <div className={s.edit}>
@@ -60,17 +62,20 @@ export default function Profile() {
           </li>
           <li className={s.user_item}>
             <DraftsIcon
-              fontSize="medium"
-              color={isTabletOrMobile ? 'inherit' : 'primary'}
+              color="secondary"
+              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              style={{ marginLeft: '10px' }}
+
             />
-            <p className={s.profile_name}>testUser@gmail.com</p>
+            <p className={s.profile_name}>{user.email}</p>
           </li>
           <li className={s.user_item}>
             <MonetizationOnIcon
-              fontSize="medium"
-              color={isTabletOrMobile ? 'inherit' : 'primary'}
+              color="secondary"
+              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              style={{ marginLeft: '10px' }}
             />
-            <p className={s.profile_name}>5000</p>
+            <p className={s.profile_name}>ТУт должен быть баланс 5000</p>
           </li>
         </ul>
       </div>

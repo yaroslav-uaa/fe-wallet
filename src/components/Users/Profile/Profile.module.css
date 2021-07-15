@@ -1,7 +1,11 @@
 .user_menu {
+  width: 100%;
   height: 100%;
-  padding: 20px;
-  margin: 0 auto;
+  padding: 20px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px -2px #212121;
 }
 
 .user_avatar {
@@ -30,18 +34,31 @@
 .user_item {
   display: flex;
   align-items: center;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.24);
-  border-radius: 10px;
-  padding: 3px;
-  margin: 10px 0;
-  padding-left: 10px;
+  margin-right: 20px;
+  justify-content: center;
+}
+
+.avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  width: 100%;
+  max-width: 250px;
+  padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .avatar {
+    max-width: 350px;
+  }
 }
 
 .profile_name {
   display: flex;
   color: white;
   padding-left: 20px;
+  text-transform: uppercase;
 }
 
 .edit {
@@ -104,6 +121,18 @@
 /* для чого ці стилі? */
 .upload_avatar {
   background: inherit;
+}
+
+
+.user_item {
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  padding: 3px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .btn_edit {
