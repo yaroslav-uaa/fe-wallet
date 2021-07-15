@@ -22,10 +22,9 @@ import TransitionsModal from './EditTransaction/ModalTransaction';
 import EditTransaction from './EditTransaction';
 import EditIcon from '@material-ui/icons/Edit';
 import sortBy from 'lodash.sortby';
-import moment from 'moment'
+import moment from 'moment';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-
 
 const useStyles = makeStyles(theme => ({
   tablehead: {
@@ -86,10 +85,6 @@ const useStyles = makeStyles(theme => ({
 export default function HomeTabLarge() {
   const s = useStyles();
   const dispatch = useDispatch();
-  const deleteTransaction = useCallback((id) => dispatch(transactionsOperations.deleteTransaction(id)), [dispatch]);
-  const fetchTransactions = useCallback(() => {
-    dispatch(transactionsOperations.fetchTransactions());
-  }, [dispatch]);
 
   const transactionList = useSelector(transactionsSelectors.filterTransactions);
   const totalTransactions = useSelector(
@@ -102,6 +97,14 @@ export default function HomeTabLarge() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
+
+  const deleteTransaction = useCallback(
+    id => dispatch(transactionsOperations.deleteTransaction(id)),
+    [dispatch],
+  );
+  const fetchTransactions = useCallback(() => {
+    dispatch(transactionsOperations.fetchTransactions());
+  }, [dispatch]);
 
   useEffect(() => fetchTransactions(), [fetchTransactions]);
   useEffect(() => {
@@ -136,29 +139,19 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
-  
 
-    const [transactionForEdit, setTransactionForEdit] = useState(null);
-    
-    const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
-      setTransactionForEdit({ id, date, income, category, comment, sum,  });
-      console.log({ id, date, income, category, comment, sum,  })
+  const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
+    setTransactionForEdit({ id, date, income, category, comment, sum });
+    console.log({ id, date, income, category, comment, sum });
 
-      handleClickOpen();
-  };
-   const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(!open);
-    return handleChangePage
-  };
-
-  const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
-    setTransactionForEdit({ id, date, income, category, comment, sum,  });
     handleClickOpen();
   };
 
-  
+  const handleClickOpen = () => {
+    setOpen(!open);
+    return handleChangePage;
+  };
+
   function useToggle(initialValue = false) {
     const [value, setValue] = useState(initialValue);
     const toggle = useCallback(() => {
@@ -167,8 +160,8 @@ export default function HomeTabLarge() {
     return [value, toggle];
   }
   function deleteT(id) {
-    deleteTransaction(id)
-    return handleChangePage
+    deleteTransaction(id);
+    return handleChangePage;
   }
 
   return (
@@ -235,7 +228,7 @@ export default function HomeTabLarge() {
               <TableCell className={s.head} align="center">
                 Balance
               </TableCell>
-               <TableCell className={s.head} align="center">
+              <TableCell className={s.head} align="center">
                 Edit
               </TableCell>
             </TableRow>
@@ -295,26 +288,30 @@ export default function HomeTabLarge() {
                       <TableCell className={s.text} align="center">
                         {balance}
                       </TableCell>
-                    <TableCell className={s.text} align="center">
-                      <div style={{ display: 'flex', height: 'inherit' }}>
-                        <IconButton
-                          onClick={() =>
-                            OnEditTransaction({
-                              id, date, income, category, comment, sum, 
-                            })
-                          }
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      <IconButton aria-label="delete">
-                          <DeleteIcon
-                            onClick={() => deleteT(id) }
-                          />
-                      </IconButton>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      <TableCell className={s.text} align="center">
+                        <div style={{ display: 'flex', height: 'inherit' }}>
+                          <IconButton
+                            onClick={() =>
+                              OnEditTransaction({
+                                id,
+                                date,
+                                income,
+                                category,
+                                comment,
+                                sum,
+                              })
+                            }
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton aria-label="delete">
+                            <DeleteIcon onClick={() => deleteT(id)} />
+                          </IconButton>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ),
+                )}
 
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 30 * emptyRows }}>
@@ -341,10 +338,13 @@ export default function HomeTabLarge() {
               </TableFooter>
             </>
           )}
-        </Table>      
+        </Table>
       </TableContainer>
-      <TransitionsModal open={open}  handleClickOpen={handleClickOpen} >
-        <EditTransaction  handleClickOpen={handleClickOpen} transactionForEdit={transactionForEdit}  />
+      <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
+        <EditTransaction
+          handleClickOpen={handleClickOpen}
+          transactionForEdit={transactionForEdit}
+        />
       </TransitionsModal>
     </>
   );
