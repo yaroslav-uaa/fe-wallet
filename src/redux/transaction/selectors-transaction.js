@@ -18,12 +18,12 @@ const filterTransactions = createSelector(
   },
 );
 
-// eslint-disable-next-line
-export default {
+const selectors = {
   getIsLoading,
   getAllTransactions,
   getAllCategoriesFromTransactions,
   getFilter,
   filterTransactions,
   totalTransactions,
-};
+}; 
+export default selectors;

@@ -81,10 +81,12 @@ const updateTransaction =
     }
   };
 
-export default {
+const operations = {
   fetchTransactions,
   addTransaction,
   deleteTransaction,
   updateTransaction,
   getTransactionsByDate,
 };
+
+export default operations;

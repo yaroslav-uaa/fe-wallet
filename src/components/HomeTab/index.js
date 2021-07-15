@@ -1,1 +1,1 @@
-export { default } from './HomeTab';
+export { default } from './TableContainer/HomeTab';

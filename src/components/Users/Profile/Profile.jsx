@@ -1,29 +1,23 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+import selectors from '../../../redux/auth/auth-selectors';
+
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import EditIcon from '@material-ui/icons/Edit';
-import { useMediaQuery } from 'react-responsive';
-import UploadButtons from '../UploadButtons';
 import Button from '@material-ui/core/Button';
-// react redux
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import selectors from '../../../redux/auth/auth-selectors';
-import authOperations from '../../../redux/auth/auth-operations';
-// styles
-import s from './Profile.module.css';
 import { IconButton } from '@material-ui/core';
 
+import s from './Profile.module.css';
+import UploadButtons from '../UploadButtons';
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
-  const dispatch = useDispatch();
-
-  const user = useSelector(selectors.getUser);
-
-  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch, user]);
-
+  const avatar = useSelector(selectors.getAvatar);
+  
   return (
     <div className={s.user_menu}>
       <div className={s.user_avatar}>

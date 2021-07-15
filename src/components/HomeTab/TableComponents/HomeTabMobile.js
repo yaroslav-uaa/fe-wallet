@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   transactionsOperations,
   transactionsSelectors,
-} from '../../redux/transaction';
+} from '../../../redux/transaction';
 import { useSelector, useDispatch } from 'react-redux';
 
 import moment from 'moment';

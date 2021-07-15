@@ -59,7 +59,6 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
   try {
     const r = await axios.get('/users/current');
-    console.log(r.data);
     dispatch(authActions.getCurrentUserSuccess(r.data));
   } catch (err) {
     dispatch(authActions.getCurrentUserError(err.message));
@@ -73,7 +72,6 @@ const uploadAvatar = file => async dispatch => {
     fd.append('name', file.name);
     fd.append('avatar', file);
     const res = await axios.patch('/users/avatars', fd);
-    console.log(res.data);
     dispatch(authActions.uploadAvatarSuccess(res.data));
   } catch (err) {
     dispatch(authActions.uploadAvatarError(err.message));
