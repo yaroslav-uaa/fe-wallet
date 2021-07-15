@@ -5,11 +5,13 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import operations from '../../../redux/auth/auth-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
+      marginLeft: 0,
     },
   },
   input: {
@@ -52,9 +54,10 @@ export default function UploadButtons() {
           </IconButton>
         </label>
 
-        <button type="button" onClick={() => SubmitAvatar(file)}>
-          Отправить
-        </button>
+        {/* <button type="button" onClick={() => SubmitAvatar(file)}>
+          Send
+        </button> */}
+        <Button variant="outlined" color="primary" onClick={() => SubmitAvatar(file)}>Send</Button>
       </form>
     </div>
   );
