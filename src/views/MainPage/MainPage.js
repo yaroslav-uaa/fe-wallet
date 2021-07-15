@@ -17,7 +17,7 @@ function MainPage() {
           <Suspense>
             <Route path="/" exact component={HomeTab} />
             <Route path="/stats" exact component={Stats} />
-            <Route path="/user" component={UserPage} />
+            <Route path="/user" exact component={UserPage} />
           </Suspense>
         </div>
       </div>

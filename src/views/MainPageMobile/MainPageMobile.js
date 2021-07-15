@@ -16,9 +16,9 @@ function MainPageMobile() {
         <SideBar />
         <div className="content">
           <Suspense>
-            <Route path="/main" exact component={HomeTab} />
+            <Route path="/" exact component={HomeTab} />
             <Route path="/stats" exact component={Stats} />
-            <Route path="/user" component={UserPage} />
+            <Route path="/user" exact component={UserPage} />
             <Route path="/currency" exact component={CurrencyPage} />
           </Suspense>
         </div>
