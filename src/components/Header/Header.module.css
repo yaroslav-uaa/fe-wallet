@@ -7,7 +7,7 @@
   left: 0;
   right: 0;
   z-index: 999;
-  padding: 0 60px;
+  padding: 0 24px;
 }
 
 .header__box {
@@ -18,9 +18,9 @@
   margin: 0 auto;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+/* @media screen and (min-width: 768px) and (max-width: 1279px) {
   .header {
-    padding: 0 40px;
+    padding: 0 24px;
   }
 }
 
@@ -28,7 +28,7 @@
   .header {
     padding: 0 20px;
   }
-}
+} */
 
 .logo {
   /* display: flex; */

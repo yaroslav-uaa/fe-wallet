@@ -43,7 +43,10 @@ const SchemaYup = Yup.object({
     .required('Comment is required'),
 });
 
-export default function EditTransaction({ transactionForEdit, handleClickOpen }) {
+export default function EditTransaction({
+  transactionForEdit,
+  handleClickOpen,
+}) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -53,10 +56,14 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
   const [date, setSelectedDate] = useState(new Date());
   const [sum, setSum] = useState(null)
   const [comment, setComment] = useState('')
-    
-   useEffect(() => {
+
+  const fetchTransactions = useCallback(() => {
+    dispatch(transactionsOperations.fetchTransactions());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (transactionForEdit) {
-      const { id, date, category, income, sum, comment, } = transactionForEdit;
+      const { id, date, category, income, sum, comment } = transactionForEdit;
       setId(id);
       setSelectedDate(date);
       setCategory(category);
@@ -69,16 +76,25 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
       setId('');
       setCategory('');
       setCategory('');
-      setSelect(boolean)
-      setSum(null)
-      setComment('')
+      setSelect(boolean);
+      setSum(null);
+      setComment('');
     };
   }, [transactionForEdit]);
 
   const updateTransactions = useCallback(
     ({ date, category, income, comment, sum, transactionId }) => {
-      dispatch(transactionsOperations.updateTransaction({ date, category, income, comment, sum, transactionId }));
-      console.log({ date, category, income, comment, sum, transactionId })
+      dispatch(
+        transactionsOperations.updateTransaction({
+          date,
+          category,
+          income,
+          comment,
+          sum,
+          transactionId,
+        }),
+      );
+      console.log({ date, category, income, comment, sum, transactionId });
     },
     [dispatch],
   );
@@ -100,7 +116,7 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
     setComment(event.target.value);
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     const correctValue = {
       ...values,
       date: moment(date).format(),
@@ -111,102 +127,100 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
       transactionId: id,
     };
     updateTransactions(correctValue);
-    handleClickOpen()
-    console.log(correctValue)
-    // window.location.reload()
-  }
+    fetchTransactions();
+    handleClickOpen();
+  };
+
   return (
-      <Formik 
-       onSubmit={onSubmit}
-       validationSchema={SchemaYup}
-     >
-    <form onSubmit={onSubmit} className={s.form}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <h2 className={s.title}>Edit transaction</h2>
-        <Box margin={1} className={s.box_switch}>
-          <p className={s.text}>Income</p>
-          <div>
-            <SwitchMy
-              onSwitch={income => onSwitchChecked(income)}
-              isChecked={income}
-              onClick={income => onSwitchChecked(income)}
-            />
-          </div>
-          <p className={s.text}>Expense</p>
-        </Box>
+    <Formik onSubmit={onSubmit} validationSchema={SchemaYup}>
+      <form onSubmit={onSubmit} className={s.form}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <h2 className={s.title}>Edit transaction</h2>
+          <Box margin={1} className={s.box_switch}>
+            <p className={s.text}>Income</p>
+            <div>
+              <SwitchMy
+                onSwitch={income => onSwitchChecked(income)}
+                isChecked={income}
+                onClick={income => onSwitchChecked(income)}
+              />
+            </div>
+            <p className={s.text}>Expense</p>
+          </Box>
 
-        <Box>
-          <SimpleSelect
-            name="category"
-            isIncome={!income}
-            category={initCategory}
-            value={initCategory}
-            handleChange={handleChangeCategory}
-
-          />
-        </Box>
-
-        <div className={s.box_time}>
           <Box>
+            <SimpleSelect
+              name="category"
+              isIncome={!income}
+              category={initCategory}
+              value={initCategory}
+              handleChange={handleChangeCategory}
+            />
+          </Box>
+
+          <div className={s.box_time}>
+            <Box>
+              <TextField
+                fullWidth
+                id="sum"
+                name="sum"
+                label="Sum"
+                type="number"
+                className={classes.input}
+                value={sum}
+                onChange={handleSumChange}
+              />
+            </Box>
+            <Box>
+              <Grid
+                container
+                justifyContent="space-around"
+                className={s.toolbar}
+              >
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="Date picker dialog"
+                  format="MM/dd/yyyy"
+                  value={date}
+                  classes={{
+                    root: classes.root,
+                    toolbar: s.toolbar,
+                  }}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </Grid>
+            </Box>
+          </div>
+          <Box margin={1} className={s.box_select}>
             <TextField
               fullWidth
-              id="sum"
-              name="sum"
-              label="Sum"
-              type="number"
+              id="comment"
+              name="comment"
+              label="Comment"
+              type="text"
               className={classes.input}
-              value={sum}
-              onChange={handleSumChange}
-
+              value={comment}
+              onChange={handleCommentChange}
             />
           </Box>
-          <Box>
-            <Grid container justifyContent="space-around" className={s.toolbar}>
-              <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                label="Date picker dialog"
-                format="MM/dd/yyyy"
-                value={date}
-                classes={{
-                  root: classes.root,
-                  toolbar: s.toolbar,
-                }}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-               
-              />
-            </Grid>
-          </Box>
-        </div>
-        <Box margin={1} className={s.box_select}>
-          <TextField
-            fullWidth
-            id="comment"
-            name="comment"
-            label="Comment"
-            type="text"
-            className={classes.input}
-            value={comment}
-            onChange={handleCommentChange}
-          />
-        </Box>
 
-        <Box margin={1}></Box> 
-        <Box margin={1} className={s.box_btn}>
-          <Button
-            variant="contained"
-            color="primary"
-          
-            onClick={onSubmit}
-            className={s.btn_submit}
-          >
-            Submit
-          </Button>
-        </Box>
-      </MuiPickersUtilsProvider>
-    </form></Formik>
+          <Box margin={1}></Box>
+          <Box margin={1} className={s.box_btn}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onSubmit}
+              className={s.btn_submit}
+            >
+              Submit
+            </Button>
+          </Box>
+        </MuiPickersUtilsProvider>
+      </form>
+    </Formik>
   );
 }

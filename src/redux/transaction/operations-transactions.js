@@ -64,18 +64,22 @@ const deleteTransaction = transactionId => async dispatch => {
   }
 };
 
-
-const updateTransaction = ({ date, category, income, comment, sum, transactionId}) => async dispatch => {
-  dispatch(updateTransactionRequest());
-  const update = { date, income, category, comment, sum};
-  try {
-    const { data } = await axios.put(`/transactions/${transactionId}`, update);
-    Notify.Success('Transaction Edited');
-    dispatch(updateTransactionSuccess(data));
-  } catch (error) {
-    dispatch(updateTransactionError(error.message));
-  }
-};
+const updateTransaction =
+  ({ date, category, income, comment, sum, transactionId }) =>
+  async dispatch => {
+    dispatch(updateTransactionRequest());
+    const update = { date, income, category, comment, sum };
+    try {
+      const { data } = await axios.patch(
+        `/transactions/${transactionId}`,
+        update,
+      );
+      Notify.Success('Transaction Edited');
+      dispatch(updateTransactionSuccess(data));
+    } catch (error) {
+      dispatch(updateTransactionError(error.message));
+    }
+  };
 
 export default {
   fetchTransactions,
@@ -84,4 +88,3 @@ export default {
   updateTransaction,
   getTransactionsByDate,
 };
-

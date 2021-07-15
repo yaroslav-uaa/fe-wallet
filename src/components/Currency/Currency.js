@@ -9,10 +9,8 @@ import {
   TableRow,
 } from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
-import Navigation from '../Navigation';
 import f from './Currency.module.css';
 import Skeleton from 'react-loading-skeleton';
-// import { fetchInfo } from '../../services/currencyExchange';
 
 const useStyles = makeStyles({
   table: {
@@ -65,11 +63,7 @@ const useStyles = makeStyles({
   },
 });
 
-// const data = JSON.parse(localStorage.getItem('currency'));
-// console.log(data);
-
 function Currency() {
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const isDesktopOrTablet = useMediaQuery({ minWidth: 1280 });
   const s = useStyles();
   const [currency, setCurrency] = useState('');
@@ -87,25 +81,11 @@ function Currency() {
     };
     getData();
   }, []);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const data = await fetchInfo();
-  //       const slicedData = data.slice(0, -1);
-  //       setCurrency(slicedData);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
-  console.log(currency);
 
   return (
     <>
-      {isLoading && (
+      {isLoading === true && (
         <div className={f.sidebar}>
-          {/* {isTabletOrMobile && <Navigation />} */}
           <TableContainer className={s.table}>
             {!currency ? (
               <Skeleton
