@@ -5,6 +5,7 @@ import s from './Header.module.css';
 import authSelectors from '../../redux/auth/auth-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operations';
+import GetCurrency from '../GetCurrency/GetCurrency';
 
 function Header() {
   const name = useSelector(authSelectors.getUserName);
@@ -15,6 +16,7 @@ function Header() {
   }, [dispatch]);
   return (
     <>
+      <GetCurrency />
       <header className={s.header}>
         <div className={s.header__box}>
           <a href="/main" className={s.logo}>
