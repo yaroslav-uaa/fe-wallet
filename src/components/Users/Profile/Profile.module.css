@@ -110,6 +110,7 @@
 @media screen and (min-width: 1280px) {
   .user_menu {
     border-right: 1px solid #fffefe;
+    padding-left: 0;
   }
 
   .user_avatar,

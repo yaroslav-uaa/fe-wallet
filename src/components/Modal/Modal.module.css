@@ -3,19 +3,19 @@
   height: 100%;
   padding: 0px;
   margin: 0px;
-  border-radius: 20px !important;
+  /* border-radius: 20px !important; */
   color: inherit;
 }
 
 .fullScreen {
   background: linear-gradient(90deg, #a05ce0 20%, #6c5eca 50%);
   height: 100%;
-  border-radius: 30px;
+  /* border-radius: 30px; */
   overflow: hidden;
 }
 @media screen and(min-width:767px) {
   .fullScreen {
-    border-radius: 30px;
+    /* border-radius: 30px; */
     height: 60%;
     background: linear-gradient(90deg, #a05ce0 20%, #6c5eca 50%);
   }
@@ -32,7 +32,7 @@
 }
 
 .box {
-  border-radius: 20px;
+  /* border-radius: 20px; */
   padding: 10px;
 }
 .box_btn_rejected {
