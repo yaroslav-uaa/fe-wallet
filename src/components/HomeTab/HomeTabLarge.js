@@ -136,15 +136,14 @@ export default function HomeTabLarge() {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
-    
-    const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
-      setTransactionForEdit({ id, date, income, category, comment, sum,  });
-      handleClickOpen();
-  };
-
   const handleClickOpen = () => {
     setOpen(!open);
     return handleChangePage
+  };
+
+const OnEditTransaction = ({ id, date, income, category, comment, sum,  }) => {
+    setTransactionForEdit({ id, date, income, category, comment, sum,  });
+    handleClickOpen();
   };
   
   function useToggle(initialValue = false) {

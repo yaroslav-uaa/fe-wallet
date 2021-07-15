@@ -77,11 +77,6 @@ const updateTransaction = ({ date, category, income, comment, sum, transactionId
   }
 };
 
-
-
-
-// eslint-disable-next-line
-
 export default {
   fetchTransactions,
   addTransaction,

@@ -37,9 +37,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SchemaYup = Yup.object({
-  //   category: Yup.string('Choose your category').required('Category is required'),
   sum: Yup.number('Enter your sum').required('Sum is required'),
-  //   date: Yup.string('Choose your date operation').required('Date is required'),
   comment: Yup.string('Enter your comment')
     .min(3, 'Your comment to short')
     .required('Comment is required'),
@@ -56,7 +54,7 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
   const [sum, setSum] = useState(null)
   const [comment, setComment] = useState('')
     
-  useEffect(() => {
+   useEffect(() => {
     if (transactionForEdit) {
       const { id, date, category, income, sum, comment, } = transactionForEdit;
       setId(id);
@@ -84,7 +82,7 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
     },
     [dispatch],
   );
-  
+
   const handleChangeCategory = event => {
     setCategory(event.target.value);
   };
@@ -114,9 +112,9 @@ export default function EditTransaction({ transactionForEdit, handleClickOpen })
     };
     updateTransactions(correctValue);
     handleClickOpen()
-    window.location.reload()
+    console.log(correctValue)
+    // window.location.reload()
   }
-
   return (
       <Formik 
        onSubmit={onSubmit}
