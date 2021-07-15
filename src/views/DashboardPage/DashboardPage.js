@@ -1,10 +1,12 @@
 import React from 'react';
 import HomeTab from '../../components/HomeTab/HomeTab';
-
+import Modal from '../../components/Modal';
 function DashboardPage() {
   return (
     <div>
       <HomeTab />
+
+      <Modal />
     </div>
   );
 }

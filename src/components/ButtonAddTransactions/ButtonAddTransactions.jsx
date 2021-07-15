@@ -7,7 +7,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     color: '#212121',
     background: 'radial-gradient( transparent, rgba(255, 254, 254, 0.8))',
-    border: '2px solid #212121'
+    border: '2px solid #212121',
+    position: 'fixed',
+    bottom: "7vh",
+    right: '2vw'
   },
 }));
 

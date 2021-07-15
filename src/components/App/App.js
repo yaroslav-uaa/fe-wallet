@@ -23,7 +23,7 @@ function App() {
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
 
   // add background
-  if (!localStorage.color) localStorage.setItem('color', '#0097a7');
+  if (!localStorage.color) localStorage.setItem('color', '	#0162b1');
   document.body.style.backgroundColor = localStorage.color;
 
   return (

@@ -17,23 +17,15 @@
 }
 
 .testColor {
-  width: 150px;
-  height: 75px;
+  width: 120px;
+  height: 58px;
+  font-size: 16px;
   color: #fffefe;
   font-family: Gugi, sans-serif;
-  font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
   border: 3px solid #fffefe;
   box-shadow: 0 0 0 2px #21212190;
-}
-
-@media screen and (max-width: 1279px) {
-  .testColor {
-    width: 120px;
-    height: 58px;
-    font-size: 16px;
-  }
 }

@@ -127,7 +127,7 @@ export default function FormAddTransaction() {
               id="sum"
               name="sum"
               label="Sum"
-              type="text"
+              type="number"
               color="primary"
               className={classes.input}
               value={formik.values.sum}
