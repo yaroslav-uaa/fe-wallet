@@ -30,6 +30,7 @@ const signIn = user => async dispatch => {
   try {
     const r = await axios.post('/users/signin', user);
     token.set(r.data.token);
+
     dispatch(authActions.signInSuccess(r.data));
   } catch (err) {
     dispatch(authActions.signInError(err.message));
@@ -58,11 +59,33 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
   try {
     const r = await axios.get('/users/current');
+    console.log(r.data);
     dispatch(authActions.getCurrentUserSuccess(r.data));
   } catch (err) {
     dispatch(authActions.getCurrentUserError(err.message));
   }
 };
 
-const authOperations = { token, signUp, signIn, signOut, getCurrentUser };
+const uploadAvatar = file => async dispatch => {
+  dispatch(authActions.uploadAvatarRequest());
+  try {
+    const fd = new FormData();
+    fd.append('name', file.name);
+    fd.append('avatar', file);
+    const res = await axios.patch('/users/avatars', fd);
+    console.log(res.data);
+    dispatch(authActions.uploadAvatarSuccess(res.data));
+  } catch (err) {
+    dispatch(authActions.uploadAvatarError(err.message));
+  }
+};
+
+const authOperations = {
+  token,
+  signUp,
+  signIn,
+  signOut,
+  getCurrentUser,
+  uploadAvatar,
+};
 export default authOperations;

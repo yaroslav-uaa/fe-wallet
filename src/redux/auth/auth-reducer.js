@@ -2,13 +2,16 @@ import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import authActions from './auth-actions';
 
-const initUserState = { name: null, email: null };
+const initUserState = { name: null, email: null, avatar: null };
 
 const user = createReducer(initUserState, {
   [authActions.regSuccess]: (_, { payload }) => payload,
   [authActions.signInSuccess]: (_, { payload }) => payload.user,
   [authActions.signOutSuccess]: () => initUserState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload.user,
+});
+const newAvatar = createReducer(null, {
+  [authActions.uploadAvatarSuccess]: (_, { payload }) => payload.data.avatarURL,
 });
 
 const token = createReducer(null, {
@@ -41,4 +44,5 @@ export default combineReducers({
   token,
   isLoggedIn,
   error,
+  newAvatar,
 });

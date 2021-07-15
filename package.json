@@ -16,6 +16,7 @@
     "chart.js": "^3.4.0",
     "chroma-js": "^2.1.2",
     "date-fns": "^2.22.1",
+    "form-data": "^4.0.0",
     "formik": "^2.2.9",
     "formik-material-ui": "^3.0.1",
     "formik-material-ui-lab": "0.0.8",
@@ -27,6 +28,7 @@
     "prop-types": "^15.7.2",
     "rc-datepicker": "^5.0.16",
     "react": "^17.0.2",
+    "react-avatar-uploader": "^1.0.3",
     "react-chartjs-2": "^3.0.3",
     "react-date-picker": "^8.2.0",
     "react-datepicker": "^4.1.1",
@@ -48,6 +50,7 @@
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "use-file-upload": "^1.0.9",
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
   },

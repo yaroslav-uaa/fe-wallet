@@ -3,7 +3,22 @@
   height: 100%;
   padding: 0px;
   margin: 0px;
-  border-radius: 20px;
+  border-radius: 20px !important;
+  color: inherit;
+}
+
+.fullScreen {
+  background: linear-gradient(90deg, #a05ce0 20%, #6c5eca 50%);
+  height: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+}
+@media screen and(min-width:767px) {
+  .fullScreen {
+    border-radius: 30px;
+    height: 60%;
+    background: linear-gradient(90deg, #a05ce0 20%, #6c5eca 50%);
+  }
 }
 
 @media screen and (min-width: 767px) {
@@ -11,8 +26,8 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    height: 80%;
     margin-top: 50px;
+    height: 50%;
   }
 }
 
@@ -52,5 +67,4 @@
 .list_modal {
   height: 100%;
   padding: 10px;
-  background: linear-gradient(90deg, #8609f9 20%, #3e2ac0 50%);
 }

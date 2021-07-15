@@ -7,6 +7,7 @@ import s from './Header.module.css';
 import authSelectors from '../../redux/auth/auth-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operations';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   const name = useSelector(authSelectors.getUserName);
@@ -25,8 +26,9 @@ function Header() {
         </div>
         <div className={s.user}>
           <a href="/user" className={s.user__info}>
-            <AccountCircleIcon color="primary" />
-            {'   '}
+            <NavLink to="/users" exact>
+              <AccountCircleIcon color="primary" />
+            </NavLink>
             <p>Welcome, {name}</p>
           </a>
           <IconButton

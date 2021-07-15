@@ -1,0 +1,54 @@
+.edit {
+  margin-left: auto;
+  padding-right: 15px;
+}
+.btn_edit {
+  background: inherit;
+  border: none;
+  outline: none;
+}
+
+.user_menu {
+  width: 350px;
+  height: 100%;
+  padding: 20px 10px;
+  border-right: 1px solid white;
+  justify-content: center;
+  align-items: center;
+}
+.avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+.profile_user {
+  padding: 10px;
+}
+.upload {
+  display: flex;
+  margin-right: 20px;
+  justify-content: flex-end;
+}
+
+.profile_name {
+  display: flex;
+  color: white;
+  padding-left: 20px;
+}
+
+.upload_avatar {
+  background: inherit;
+}
+
+.user_item {
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  padding: 3px;
+  margin: 10px;
+  padding-left: 10px;
+}

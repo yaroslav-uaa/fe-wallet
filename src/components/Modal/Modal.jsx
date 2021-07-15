@@ -12,6 +12,10 @@ import s from './Modal.module.css';
 import FormAddTransaction from './FormAddTransaction';
 
 const styles = {
+  root: {
+    background: 'red',
+  },
+
   flex: {
     flex: 1,
     color: 'white',
@@ -20,7 +24,14 @@ const styles = {
     color: 'white',
   },
   paper: {
-    color: 'white',
+    color: 'red',
+    background: 'inherit',
+  },
+  slide: {
+    color: 'red',
+  },
+  paperFullScreen: {
+    borderRadius: '20px',
   },
 };
 
@@ -42,36 +53,42 @@ class FullScreenDialog extends React.Component {
   };
 
   render() {
+    const classes = this.props;
     return (
       <>
         <ButtonAddTransactions openModal={this.handleClickOpen} />
         <div>
-          <div className={styles.box}>
+          <div className={s.box}>
             <Dialog
               fullScreen
               open={this.state.open}
               onClose={this.handleClose}
               TransitionComponent={Transition}
-              className={s.container}
+              // className={s.container}
+              className={classes.root}
+              maxWidth="false"
+              PaperProps
             >
-              <List className={s.list_modal}>
-                <div className={s.box_close_btn}>
-                  <IconButton
-                    color="inherit"
-                    onClick={this.handleClose}
-                    aria-label="Close"
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </div>
+              <div className={s.fullScreen}>
+                <List className={s.list_modal}>
+                  <div className={s.box_close_btn}>
+                    <IconButton
+                      color="inherit"
+                      onClick={this.handleClose}
+                      aria-label="Close"
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </div>
 
-                <FormAddTransaction />
-                <div className={s.box_btn_rejected}>
-                  <Button onClick={this.handleClose} className={s.rejected}>
-                    rejected
-                  </Button>
-                </div>
-              </List>
+                  <FormAddTransaction />
+                  <div className={s.box_btn_rejected}>
+                    <Button onClick={this.handleClose} className={s.rejected}>
+                      rejected
+                    </Button>
+                  </div>
+                </List>
+              </div>
             </Dialog>
           </div>
         </div>

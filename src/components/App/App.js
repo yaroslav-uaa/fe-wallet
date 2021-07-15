@@ -18,6 +18,7 @@ import authSelectors from '../../redux/auth/auth-selectors';
 import SignUpPage from '../../views/SignUpPage/SignUpPage';
 import { useMediaQuery } from 'react-responsive';
 import CurrencyPage from '../../views/CurrencyPage/CurrencyPage';
+import UserPage from '../../views/UserPage/UserPage';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 
@@ -39,6 +40,7 @@ function App() {
       }}
     >
       {isAuth && <Header />}
+      {/* <UserPage /> */}
 
       <Suspense fallback={<p>"wait..."</p>}>
         <Switch>
@@ -82,6 +84,13 @@ function App() {
           ) : (
             <Redirect from="/currency" to="/" />
           )}
+
+          <PrivateRoute
+            path="/users"
+            exact
+            component={UserPage}
+            redirectTo="/signin"
+          />
         </Switch>
       </Suspense>
       {isAuth && <Modal />}
