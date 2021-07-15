@@ -5,9 +5,10 @@ import Header from '../../components/Header';
 import HomeTab from '../../components/HomeTab/HomeTab';
 import SideBar from '../../components/SideBar';
 import Stats from '../../components/Stats/Stats';
+import CurrencyPage from '../CurrencyPage/CurrencyPage';
 import UserPage from '../UserPage/UserPage';
 
-function MainPage() {
+function MainPageMobile() {
   return (
     <>
       <Header />
@@ -15,9 +16,10 @@ function MainPage() {
         <SideBar />
         <div className="content">
           <Suspense>
-            <Route path="/" exact component={HomeTab} />
+            <Route path="/main" exact component={HomeTab} />
             <Route path="/stats" exact component={Stats} />
             <Route path="/user" component={UserPage} />
+            <Route path="/currency" exact component={CurrencyPage} />
           </Suspense>
         </div>
       </div>
@@ -25,4 +27,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default MainPageMobile;
