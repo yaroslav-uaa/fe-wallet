@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import selectors from '../../../redux/auth/auth-selectors';
 
@@ -11,13 +11,20 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
 
+import authOperations from '../../../redux/auth/auth-operations';
+// styles
 import s from './Profile.module.css';
 import UploadButtons from '../UploadButtons';
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
-  const avatar = useSelector(selectors.getAvatar);
-  
+
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectors.getUser);
+
+  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch, user]);
+
   return (
     <div className={s.user_menu}>
       <div className={s.user_avatar}>
@@ -45,7 +52,6 @@ export default function Profile() {
               color="secondary"
               fontSize={isTabletOrMobile ? 'small' : 'large'}
               style={{ marginLeft: '10px' }}
-
             />
             <p className={s.profile_name}>{user.name}</p>
           </li>
@@ -65,7 +71,6 @@ export default function Profile() {
               color="secondary"
               fontSize={isTabletOrMobile ? 'small' : 'large'}
               style={{ marginLeft: '10px' }}
-
             />
             <p className={s.profile_name}>{user.email}</p>
           </li>
