@@ -1,21 +1,13 @@
-.edit {
-  margin-left: auto;
-  padding-right: 15px;
-}
-.btn_edit {
-  background: inherit;
-  border: none;
-  outline: none;
+.user_menu {
+  height: 100%;
+  padding: 20px;
+  margin: 0 auto;
 }
 
-.user_menu {
-  width: 350px;
-  height: 100%;
-  padding: 20px 10px;
-  border-right: 1px solid white;
-  justify-content: center;
-  align-items: center;
+.user_avatar {
+  margin-right: 40px;
 }
+
 .avatar {
   display: block;
   margin-left: auto;
@@ -23,23 +15,16 @@
   border-radius: 50%;
 }
 
-.profile_user {
-  padding: 10px;
-}
 .upload {
   display: flex;
-  margin-right: 20px;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
 }
 
-.profile_name {
-  display: flex;
-  color: white;
-  padding-left: 20px;
-}
-
-.upload_avatar {
-  background: inherit;
+.profile_user {
+  padding: 0;
+  width: 100%;
+  margin: -10px 0;
 }
 
 .user_item {
@@ -49,6 +34,80 @@
   background-color: rgba(255, 255, 255, 0.24);
   border-radius: 10px;
   padding: 3px;
-  margin: 10px;
+  margin: 10px 0;
   padding-left: 10px;
+}
+
+.profile_name {
+  display: flex;
+  color: white;
+  padding-left: 20px;
+}
+
+.edit {
+  margin-left: auto;
+  padding-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .user_menu {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .user_menu {
+    border-bottom: 1px solid #fffefe;
+    margin: 0 auto;
+  }
+
+  .user_avatar,
+  .profile_list {
+    width: 280px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .user_avatar,
+  .profile_list {
+    margin: 0 auto;
+  }
+
+  .user_menu {
+    padding: 0 0 20px;
+  }
+
+  .user_avatar,
+  .profile_list {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .user_item {
+    width: inherit;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .user_menu {
+    border-right: 1px solid #fffefe;
+  }
+
+  .user_avatar,
+  .profile_list {
+    max-width: 300px;
+  }
+}
+
+/* для чого ці стилі? */
+.upload_avatar {
+  background: inherit;
+}
+
+.btn_edit {
+  background: inherit;
+  border: none;
+  outline: none;
 }

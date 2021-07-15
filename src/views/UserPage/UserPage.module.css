@@ -1,7 +1,14 @@
 .box_user {
-  display: flex;
+  background-color: #fffefe60;
+  padding: 15px;
+  max-width: 768px;
+  margin: 0 auto;
 }
 
-.user_dreams {
-  padding: 10px;
+@media screen and (min-width: 1280px) {
+  .box_user {
+    display: flex;
+    padding: 25px;
+    max-width: fit-content;
+  }
 }
