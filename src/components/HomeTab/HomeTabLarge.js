@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -39,6 +38,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.main,
     fontSize: 17,
     textAlign: 'center',
+    borderBottom: '2px solid rgba(224, 224, 224, 1)',
     // textShadow: '2px 2px 3px grey',
     borderCollapse: 'collapse',
   },
@@ -146,7 +146,6 @@ export default function HomeTabLarge() {
 
     handleClickOpen();
   };
-
   const handleClickOpen = () => {
     setOpen(!open);
     return handleChangePage;
@@ -181,7 +180,8 @@ export default function HomeTabLarge() {
                   style={{
                     border: 'none',
                     width: '10px',
-                    padding: '0 8px',
+                    padding: '4px 8px 0 8px',
+                    color: 'white',
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
@@ -199,8 +199,9 @@ export default function HomeTabLarge() {
                   style={{
                     border: 'none',
                     width: '10px',
-                    padding: '0 8px',
+                    padding: '4px 8px 0 8px',
                     cursor: 'pointer',
+                    color: 'white',
                     backgroundColor: 'transparent',
                   }}
                   className={!isOn ? 'btn' : 'hidden'}
@@ -314,8 +315,8 @@ export default function HomeTabLarge() {
                 )}
 
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: 30 * emptyRows }}>
-                    <TableCell colSpan={6} />
+                  <TableRow className={s.row} style={{ height: 30 * emptyRows }}>
+                    <TableCell colSpan={10} />
                   </TableRow>
                 )}
               </TableBody>

@@ -81,8 +81,6 @@ const updateTransaction =
     }
   };
 
-// eslint-disable-next-line
-
 export default {
   fetchTransactions,
   addTransaction,
