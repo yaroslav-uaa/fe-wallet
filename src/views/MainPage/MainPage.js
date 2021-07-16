@@ -19,7 +19,7 @@ function MainPage() {
       <div className="page">
         <SideBar />
         <div className="content">
-          <Suspense>
+          <Suspense fallback={<p>wait...</p>}>
             <TransitionGroup>
               <CSSTransition
                 timeout={200}

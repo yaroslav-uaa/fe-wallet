@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  transactionsOperations,
-  transactionsSelectors,
-} from '../../redux/transaction';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { transactionsSelectors } from '../../redux/transaction';
 import s from './CurrentBalance.module.css';
 
 function CurrentBalance() {
@@ -24,7 +21,7 @@ function CurrentBalance() {
       }
     };
     getbalance();
-  }, [getAllTransactions]);
+  }, [getAllTransactions, balance]);
 
   console.log(balance);
 
