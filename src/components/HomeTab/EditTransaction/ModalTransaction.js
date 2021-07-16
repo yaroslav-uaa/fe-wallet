@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
@@ -11,39 +10,26 @@ import Slide from '@material-ui/core/Slide';
 
 import s from '../../Modal/Modal.module.css';
 
-const useStyles = makeStyles(() => ({
-  flex: {
-    flex: 1,
-    color: 'white',
-  },
-  label: {
-    color: 'white',
-  },
-  paper: {
-    color: 'white',
-  },
-} ))
-
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
 export default function FullScreenDialog({ open, handleClickOpen, children }) {
-  const styles = useStyles();
     return (
       <>
         <div>
-          <div className={styles.box}>
+          <div className={s.box}>
             <Dialog
               fullScreen
               open={open}
               onClose={handleClickOpen}
               TransitionComponent={Transition}
-              className={s.container}
               onPageChange={handleClickOpen}
+              maxWidth="false"
             >
-              <List className={s.list_modal}>
+              <div className={s.fullScreen}>
+                <List className={s.list_modal}>
                 <div className={s.box_close_btn}>
                   <IconButton
                     color="inherit"
@@ -61,6 +47,7 @@ export default function FullScreenDialog({ open, handleClickOpen, children }) {
                   </Button>
                 </div>
               </List>
+              </div>
             </Dialog>
           </div>
         </div>

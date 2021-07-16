@@ -11,7 +11,8 @@ import operationsTransactions from '../../redux/transaction/operations-transacti
 
 import { useDispatch } from 'react-redux';
 
-const arrColors = [
+export const colors = () => {
+  const arrColors = [
   'rgba(255, 99, 132, 1)',
   'rgba(54, 162, 235, 1)',
   'rgba(255, 206, 86, 1)',
@@ -26,7 +27,9 @@ const arrColors = [
   'rgba(109, 36, 40, 1)',
   'rgba(144, 182, 231, 1)',
   'rgba(182, 140, 136, 1)',
-];
+  ];
+  return arrColors;
+}
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -50,14 +53,13 @@ const Stats = () => {
   return (
     <div>
       <div className={styles.statisticsPage}>
-        <Chart arrColors={arrColors} arrMoney={arrMoney} balance={balance} />
+        <Chart arrColors={colors} arrMoney={arrMoney} balance={balance} />
         <div>
           <SelectForStats />
-          <DiagramTab arrColors={arrColors} />
+          <DiagramTab arrColors={colors} />
         </div>
       </div>
     </div>
   );
 };
-
-export default Stats;
+export default Stats

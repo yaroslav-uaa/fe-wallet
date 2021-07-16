@@ -142,7 +142,6 @@ export default function HomeTabLarge() {
   
   function deleteT(id) {
     deleteTransaction(id);
-    return handleChangePage;
   }
 
   const emptyRows =
@@ -151,8 +150,6 @@ export default function HomeTabLarge() {
 
   const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
     setTransactionForEdit({ id, date, income, category, comment, sum });
-    console.log({ id, date, income, category, comment, sum });
-
     handleClickOpen();
   };
 
@@ -167,6 +164,7 @@ export default function HomeTabLarge() {
 
   const handleClickOpen = () => {
     setOpen(!open);
+    fetchTransactions()
     return handleChangePage;
   };
 
