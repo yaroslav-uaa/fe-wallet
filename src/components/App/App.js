@@ -7,6 +7,7 @@ import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
 import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
+import Loader from '../Loader/Loader';
 
 // views
 const SignInPage = lazy(() => import('../../views/SignInPage/SignInPage'));
@@ -36,7 +37,7 @@ function App() {
     >
       <GetCurrency />
 
-      <Suspense fallback={<p>"wait..."</p>}>
+      <Suspense fallback={<Loader />}>
         <Switch>
           <PublicRoute path="/signin" exact component={SignInPage} restricted />
 
