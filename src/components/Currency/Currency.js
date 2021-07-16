@@ -94,7 +94,7 @@ function Currency() {
                     'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
                 }}
                 duration={3}
-                width={isDesktopOrTablet ? 340 : 280}
+                width={isDesktopOrTablet ? 357 : 280}
                 height={174}
               />
             ) : (
