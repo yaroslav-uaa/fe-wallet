@@ -1,6 +1,6 @@
 .bg {
   background: url(../../images/back.png),
-    radial-gradient(rgb(255, 255, 255, 0.8), rgba(39, 39, 39, 0.788));
+    radial-gradient(rgb(255, 255, 255, 0.5), rgba(39, 39, 39, 0.5));
   max-width: 600px;
   margin: 0 auto;
   padding: 6vh 30px 3vh;

@@ -22,7 +22,7 @@ function Navigation() {
             >
               <HomeIcon
                 color="secondary"
-                fontSize={isTabletOrMobile ? 'small' : 'large'}
+                fontSize={isTabletOrMobile ? 'small' : 'medium'}
               />
               {/* {!isTabletOrMobile && <span className={s.text}>Main</span>} */}
             </NavLink>
@@ -36,7 +36,7 @@ function Navigation() {
             >
               <EqualizerIcon
                 color="secondary"
-                fontSize={isTabletOrMobile ? 'small' : 'large'}
+                fontSize={isTabletOrMobile ? 'small' : 'medium'}
               />
               {/* {!isTabletOrMobile && <span className={s.text}>Statistics</span>} */}
             </NavLink>
@@ -50,7 +50,7 @@ function Navigation() {
               >
                 <MonetizationOnIcon
                   color="secondary"
-                  fontSize={isTabletOrMobile ? 'small' : 'large'}
+                  fontSize={isTabletOrMobile ? 'small' : 'medium'}
                 />
               </NavLink>
             </li>
@@ -64,7 +64,7 @@ function Navigation() {
             >
               <PersonIcon
                 color="secondary"
-                fontSize={isTabletOrMobile ? 'small' : 'large'}
+                fontSize={isTabletOrMobile ? 'small' : 'medium'}
               />
               {/* {!isTabletOrMobile && <span className={s.text}>User</span>} */}
             </NavLink>
