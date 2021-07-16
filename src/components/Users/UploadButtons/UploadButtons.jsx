@@ -6,10 +6,8 @@ import { useMediaQuery } from 'react-responsive';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import { Button } from '@material-ui/core';
-import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
-
 import s from './UploadButton.module.css';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -60,21 +58,16 @@ export default function UploadButtons() {
             style={{ margin: ' 0px 10px ' }}
           >
             <PhotoCamera
-              color="secondary"
-              fontSize={isTabletOrMobile ? 'small' : 'large'}
             />
           </IconButton>
         </label>
-        <button
-          type="button"
-          onClick={() => SubmitAvatar(file)}
-          className={s.btn_save}
-        >
-          <UpdateOutlinedIcon
-            color="secondary"
-            fontSize={isTabletOrMobile ? 'small' : 'large'}
-          />
-        </button>
+        <IconButton
+        variant="contained"
+          color="primary"
+           onClick={() => SubmitAvatar(file)}
+      >
+        <CloudUploadIcon />
+      </IconButton>
       </div>
     </div>
   );

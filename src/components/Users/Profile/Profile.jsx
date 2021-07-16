@@ -38,10 +38,12 @@ export default function Profile() {
           className={s.avatar}
         ></img>
         <div className={s.upload}>
-          <EditIcon
-            color="secondary"
-            fontSize={isTabletOrMobile ? 'small' : 'large'}
-          />
+          <IconButton variant="outlined">
+            <EditIcon
+              fontSize="medium"
+              color= "primary"
+            />
+          </IconButton>
           <UploadButtons />
         </div>
       </div>
@@ -49,16 +51,16 @@ export default function Profile() {
         <ul className={s.profile_user}>
           <li className={s.user_item}>
             <PersonIcon
-              color="secondary"
-              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              color="primary"
+              fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
             <p className={s.profile_name}>{user.name}</p>
           </li>
           <li className={s.user_item}>
             <VpnKeyIcon
-              color="secondary"
-              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              color="primary"
+              fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
             <p className={s.profile_name}>*********</p>
@@ -68,16 +70,16 @@ export default function Profile() {
           </li>
           <li className={s.user_item}>
             <DraftsIcon
-              color="secondary"
-              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              color="primary"
+              fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
             <p className={s.profile_name}>{user.email}</p>
           </li>
           <li className={s.user_item}>
             <MonetizationOnIcon
-              color="secondary"
-              fontSize={isTabletOrMobile ? 'small' : 'large'}
+              color="primary"
+              fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
             <p className={s.profile_name}>ТУт должен быть баланс 5000</p>

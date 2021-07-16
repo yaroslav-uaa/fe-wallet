@@ -1,22 +1,11 @@
 .user_menu {
-  width: 100%;
   height: 100%;
-  padding: 20px 10px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px -2px #212121;
+  padding: 20px;
+  margin: 0 auto;
 }
 
 .user_avatar {
   margin-right: 40px;
-}
-
-.avatar {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 50%;
 }
 
 .upload {
@@ -34,8 +23,12 @@
 .user_item {
   display: flex;
   align-items: center;
-  margin-right: 20px;
-  justify-content: center;
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 6px;
+  padding: 3px;
+  width: 100%;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 10px -2px #212121e0;
 }
 
 .avatar {
@@ -43,20 +36,27 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 50%;
-  width: 100%;
-  max-width: 250px;
-  padding: 20px;
+  max-width: 200px;
+  padding: 0;
+}
+
+.profile_name {
+  color: #212121aa;
+  font-family: Prompt, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.17;
 }
 
 @media screen and (min-width: 768px) {
   .avatar {
-    max-width: 350px;
+    max-width: 180px;
   }
 }
 
 .profile_name {
   display: flex;
-  color: white;
   padding-left: 20px;
   text-transform: uppercase;
 }
@@ -110,30 +110,22 @@
 @media screen and (min-width: 1280px) {
   .user_menu {
     border-right: 1px solid #fffefe;
-    padding-left: 0;
+    padding: 20px 20px 20px 0;
   }
 
   .user_avatar,
   .profile_list {
     max-width: 300px;
   }
+
+  .user_avatar {
+    margin-right: 30px;
+  }
 }
 
 /* для чого ці стилі? */
 .upload_avatar {
   background: inherit;
-}
-
-
-.user_item {
-  display: flex;
-  align-items: center;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.24);
-  border-radius: 10px;
-  padding: 3px;
-  width: 100%;
-  margin-bottom: 10px;
 }
 
 .btn_edit {
