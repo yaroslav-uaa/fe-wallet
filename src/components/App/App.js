@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
@@ -8,6 +8,7 @@ import PublicRoute from '../../routes/PublicRoute';
 import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
 import Loader from '../Loader/Loader';
+import { Default } from 'react-spinners-css';
 
 // views
 const SignInPage = lazy(() => import('../../views/SignInPage/SignInPage'));
@@ -20,9 +21,10 @@ const MainPageMobile = lazy(() =>
 function App() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
-
+  const [loaderOff, setLoaderOff] = useState(false);
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
 
+  setTimeout(() => setLoaderOff(true), 3000);
   // add background
   if (!localStorage.color) localStorage.setItem('color', '	#0162b1');
   document.body.style.backgroundColor = localStorage.color;
@@ -36,19 +38,44 @@ function App() {
       }}
     >
       <GetCurrency />
+      {!loaderOff && <Loader />}
 
-      <Suspense fallback={<Loader />}>
-        <Switch>
-          <PublicRoute path="/signin" exact component={SignInPage} restricted />
+      {loaderOff && (
+        <Suspense
+          fallback={
+            <Default
+              color="#fffefe"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            />
+          }
+        >
+          <Switch>
+            <PublicRoute
+              path="/signin"
+              exact
+              component={SignInPage}
+              restricted
+            />
 
-          <PublicRoute path="/signup" exact component={SignUpPage} restricted />
+            <PublicRoute
+              path="/signup"
+              exact
+              component={SignUpPage}
+              restricted
+            />
 
-          <PrivateRoute
-            path="/"
-            component={isTabletOrMobile ? MainPageMobile : MainPage}
-          />
-        </Switch>
-      </Suspense>
+            <PrivateRoute
+              path="/"
+              component={isTabletOrMobile ? MainPageMobile : MainPage}
+            />
+          </Switch>
+        </Suspense>
+      )}
     </Container>
   );
 }
