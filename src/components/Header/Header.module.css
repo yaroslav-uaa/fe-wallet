@@ -16,6 +16,7 @@
   align-items: center;
   max-width: 1440px;
   margin: 0 auto;
+  height: 100%;
 }
 
 .logo {
@@ -50,4 +51,11 @@
 
 .user__info p {
   margin: 0 10px;
+}
+
+.avatar {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }

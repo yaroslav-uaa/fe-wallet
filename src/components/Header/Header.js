@@ -9,8 +9,8 @@ import GetCurrency from '../GetCurrency/GetCurrency';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 function Header() {
-  const name = useSelector(authSelectors.getUserName);
-
+  // const name = useSelector(authSelectors.getUserName);
+  const user = useSelector(authSelectors.getUser);
   const dispatch = useDispatch();
   const onLogout = useCallback(() => {
     dispatch(authOperations.signOut());
@@ -31,8 +31,10 @@ function Header() {
           </a>
           <div className={s.user}>
             <a href="/user" className={s.user__info}>
-              <AccountCircleIcon color="secondary" />
-              <p>{name}</p>
+              {<img src={user.avatar} alt="avatar" className={s.avatar} /> || (
+                <AccountCircleIcon color="secondary" />
+              )}
+              <p>{user.name}</p>
             </a>
             <IconButton
               type="button"
