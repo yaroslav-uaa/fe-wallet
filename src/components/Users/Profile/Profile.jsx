@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import selectors from '../../../redux/auth/auth-selectors';
+import authSelectors from '../../../redux/auth/auth-selectors';
 
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -21,9 +21,10 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
-  const user = useSelector(selectors.getUser);
+  const user = useSelector(authSelectors.getUser);
+  console.log(user)
 
-  // useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch, user]);
+  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
 
   return (
     <div className={s.user_menu}>

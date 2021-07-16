@@ -9,13 +9,21 @@
 }
 
 /* █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ */
-body {
+.s {
   background-color: #110021;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .Loader {
-  position: relative;
-  width: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 150px; */
   width: var(--loader-size, 150px);
   min-width: 110px;
   overflow: visible;
@@ -27,16 +35,16 @@ body {
 
 .Loader::after {
   content: attr(data-text);
-  color: #cecece;
-  color: var(--text-color, #110021);
+  color: var(--text-color, #cecece);
+  font-family: Gugi, sans-serif;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: calc(70% + 0.1vw);
+  font-size: 22px;
   text-transform: uppercase;
   letter-spacing: 5px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .Loader::before {
