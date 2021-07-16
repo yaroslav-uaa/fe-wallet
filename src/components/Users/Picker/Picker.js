@@ -1,11 +1,22 @@
-import { Button } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { CompactPicker } from 'react-color';
 import s from './Picker.module.css';
 const defaultColor = localStorage.getItem('color') || '#212121';
 
+const useStyles = makeStyles(theme => ({
+  button: {
+    color: theme.palette.primary.dark,
+    background: 'linear-gradient(60deg, #212121d0, #fffefe90, #212121d0)',
+    marginTop: '35px',
+    fontFamily: 'Poppins',
+    fontWeight: 500,
+  },
+}));
+
 function Picker() {
   const [color, setcolor] = useState('');
+  const stlz = useStyles();
 
   useEffect(() => {
     setcolor(defaultColor);
@@ -24,16 +35,9 @@ function Picker() {
         style={{ marginBottom: '49px' }}
       />
 
-      <div
-        style={{
-          backgroundColor: `${color}`,
-        }}
-        className={s.testColor}
-      >
-        WALLET
-      </div>
-
       <Button
+        size="medium"
+        className={stlz.button}
         variant="contained"
         color="secondary"
         onClick={() => {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   transactionsOperations,
   transactionsSelectors,
-} from '../../../redux/transaction'
+} from '../../../redux/transaction';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
   table: {
     color: theme.palette.primary.light,
     borderCollapse: 'collapse',
-    maxWidth: '728px',
+    maxWidth: '780px',
   },
 
   tablebody: {
@@ -132,14 +132,14 @@ export default function HomeTabLarge() {
     setItemSort(lodash.reverse());
   };
 
-    function useToggle(initialValue = false) {
+  function useToggle(initialValue = false) {
     const [value, setValue] = useState(initialValue);
     const toggle = useCallback(() => {
       setValue(v => !v);
     }, []);
     return [value, toggle];
   }
-  
+
   function deleteT(id) {
     deleteTransaction(id);
   }
@@ -147,13 +147,12 @@ export default function HomeTabLarge() {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
 
-
   const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
     setTransactionForEdit({ id, date, income, category, comment, sum });
     handleClickOpen();
   };
 
-   const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 

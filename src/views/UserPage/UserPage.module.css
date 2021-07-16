@@ -1,25 +1,23 @@
-.page_profile {
-  background-color: #21212130;
-  border-radius: 10px;
-  width: 100%;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.box_user {
+  background-color: #fffefe60;
+  padding: 15px;
+  max-width: 780px;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px -2px #212121;
 }
 
-@media screen and (min-width: 768px) {
-  .user_profile {
-    width: 50%;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .box_page {
+@media screen and (min-width: 1280px) {
+  .box_user {
     display: flex;
+    padding: 20px;
+    width: 780px;
+    min-height: 375px;
   }
 }
 
-@media screen and (min-width: 768px) {
-  .page_profile {
-    margin-right: 80px;
+@media screen and (max-width: 767px) {
+  .box_user {
+    max-width: 400px;
   }
 }

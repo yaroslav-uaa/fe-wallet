@@ -8,7 +8,7 @@
 
 @media screen and (min-width: 1280px) {
   .wrap {
-    padding-right: 0;
+    padding: 20px 0 20px 20px;
   }
 }
 .wrap p {
@@ -19,18 +19,4 @@
   font-weight: 500;
   line-height: 1.22;
   letter-spacing: 0.06em;
-}
-
-.testColor {
-  width: 120px;
-  height: 58px;
-  font-size: 16px;
-  color: #fffefe;
-  font-family: Gugi, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-  border: 3px solid #fffefe;
-  box-shadow: 0 0 0 2px #21212190;
 }
