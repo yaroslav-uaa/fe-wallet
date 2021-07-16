@@ -23,7 +23,7 @@ export default function Profile() {
 
   const user = useSelector(selectors.getUser);
 
-  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch, user]);
+  // useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch, user]);
 
   return (
     <div className={s.user_menu}>
