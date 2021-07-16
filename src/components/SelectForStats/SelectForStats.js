@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 const useMinimalSelectStyles = {
   select: {
-    minWidth: 200,
+    minWidth: 180,
     background: 'white',
     color: deepPurple[500],
     fontWeight: 200,
@@ -35,10 +35,6 @@ const useMinimalSelectStyles = {
     userSelect: 'none',
     pointerEvents: 'none',
   },
-  // paper: {
-  //   borderRadius: 12,
-  //   marginTop: 8,
-  // },
   list: {
     paddingTop: 0,
     paddingBottom: 0,
@@ -90,10 +86,6 @@ const SelectForStats = () => {
   };
 
   const menuProps = {
-    // classes: {
-    //   paper: minimalSelectClasses.paper,
-    //   list: minimalSelectClasses.list,
-    // },
     anchorOrigin: {
       vertical: 'bottom',
       horizontal: 'left',

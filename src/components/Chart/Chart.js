@@ -8,7 +8,7 @@ export default function Chart({ arrColors, arrMoney, balance }) {
     <div className={styles.chart}>
       <p className={styles.title}>Statistics</p>
       <Balance balance={balance} />
-      <div>
+      <div className={styles.doughnut}>
         <Doughnut
           data={{
             datasets: [
@@ -23,8 +23,8 @@ export default function Chart({ arrColors, arrMoney, balance }) {
             ],
           }}
           options={{ maintainAspectRatio: false }}
-          height={280}
-          width={280}
+          height={270}
+          width={270}
         />
       </div>
     </div>
