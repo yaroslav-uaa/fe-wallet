@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authActions from './auth-actions';
 
-axios.defaults.baseURL = 'http://localhost:4040/api';
+axios.defaults.baseURL = 'https://be-wallet.herokuapp.com/api';
 
 const token = {
   set(token) {
