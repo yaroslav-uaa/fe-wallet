@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, withRouter } from 'react-router-dom';
 import s from './Navigation.module.css';
 import HomeIcon from '@material-ui/icons/Home';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
@@ -8,6 +8,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import PersonIcon from '@material-ui/icons/Person';
 
 function Navigation() {
+  const location = useLocation();
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <>
@@ -15,7 +16,10 @@ function Navigation() {
         <ul className={s.list}>
           <li>
             <NavLink
-              to="/"
+              to={{
+                pathname: '/',
+                state: { from: location },
+              }}
               exact
               className={s.link}
               activeClassName={s.link__active}
@@ -29,7 +33,7 @@ function Navigation() {
           </li>
           <li>
             <NavLink
-              to="/stats"
+              to={{ pathname: '/stats', state: { from: location } }}
               exact
               className={s.link}
               activeClassName={s.link__active}
@@ -44,7 +48,7 @@ function Navigation() {
           {isTabletOrMobile && (
             <li>
               <NavLink
-                to="/currency"
+                to={{ pathname: '/currency', state: { from: location } }}
                 className={s.link}
                 activeClassName={s.link__active}
               >
@@ -57,7 +61,7 @@ function Navigation() {
           )}
           <li>
             <NavLink
-              to="/user"
+              to={{ pathname: '/user', state: { from: location } }}
               exact
               className={s.link}
               activeClassName={s.link__active}
@@ -75,4 +79,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default withRouter(Navigation);
