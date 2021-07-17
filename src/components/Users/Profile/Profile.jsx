@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
+// redux
 import authSelectors from '../../../redux/auth/auth-selectors';
-
+import authOperations from '../../../redux/auth/auth-operations';
+import transactionSelectors from '../../../redux/transaction/selectors-transaction';
+// materia
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import DraftsIcon from '@material-ui/icons/Drafts';
@@ -11,21 +14,17 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
 
-import authOperations from '../../../redux/auth/auth-operations';
+import UploadButtons from '../UploadButtons';
 // styles
 import s from './Profile.module.css';
-import UploadButtons from '../UploadButtons';
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
-
   const dispatch = useDispatch();
 
   const user = useSelector(authSelectors.getUser);
-  console.log(user)
-
+  const transactions = useSelector(transactionSelectors.getLastTransaction);
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
-
   return (
     <div className={s.user_menu}>
       <div className={s.user_avatar}>
@@ -38,12 +37,10 @@ export default function Profile() {
           alt="avatar"
           className={s.avatar}
         ></img>
+        {/* <Crop /> */}
         <div className={s.upload}>
           <IconButton variant="outlined">
-            <EditIcon
-              fontSize="medium"
-              color= "primary"
-            />
+            <EditIcon fontSize="medium" color="primary" />
           </IconButton>
           <UploadButtons />
         </div>
@@ -83,7 +80,7 @@ export default function Profile() {
               fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
-            <p className={s.profile_name}>ТУт должен быть баланс 5000</p>
+            <p className={s.profile_name}>{transactions['balance']}</p>
           </li>
         </ul>
       </div>
