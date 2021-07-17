@@ -18,7 +18,7 @@ import {
   updateTransactionError,
 } from './actions-transactions';
 
-axios.defaults.baseURL = 'http://localhost:4040/api';
+axios.defaults.baseURL = 'https://be-wallet.herokuapp.com/api';
 
 const fetchTransactions = () => async dispatch => {
   dispatch(getTransactionsRequest());

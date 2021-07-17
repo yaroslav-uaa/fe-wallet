@@ -21,7 +21,7 @@ const filterTransactions = createSelector(
   },
 );
 
-const selectors = {
+const transactionSelectors = {
   getIsLoading,
   getAllTransactions,
   getAllCategoriesFromTransactions,
@@ -30,4 +30,4 @@ const selectors = {
   totalTransactions,
   getLastTransaction,
 };
-export default selectors;
+export default transactionSelectors;
