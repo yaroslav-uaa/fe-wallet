@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import operations from '../../../redux/auth/auth-operations';
-import { useMediaQuery } from 'react-responsive';
 
+// materia
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import s from './UploadButton.module.css';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+// styles
+import s from './UploadButton.module.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,17 +27,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function UploadButtons() {
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [file, setFile] = useState(null);
-
   const handlerChange = e => {
-    setFile(e.target.files[0]);
+    const file = e.target.files[0];
+    dispatch(operations.uploadAvatar(file));
   };
 
-  const SubmitAvatar = file => {
-    dispatch(operations.uploadAvatar(file));
+  const SubmitAvatar = () => {
+    dispatch(operations.getCurrentUser());
   };
 
   return (
@@ -57,17 +56,16 @@ export default function UploadButtons() {
             component="span"
             style={{ margin: ' 0px 10px ' }}
           >
-            <PhotoCamera
-            />
+            <PhotoCamera />
           </IconButton>
         </label>
         <IconButton
-        variant="contained"
+          variant="contained"
           color="primary"
-           onClick={() => SubmitAvatar(file)}
-      >
-        <CloudUploadIcon />
-      </IconButton>
+          onClick={() => SubmitAvatar()}
+        >
+          <CloudUploadIcon />
+        </IconButton>
       </div>
     </div>
   );
