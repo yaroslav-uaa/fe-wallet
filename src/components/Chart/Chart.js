@@ -7,25 +7,27 @@ export default function Chart({ arrColors, arrMoney, balance }) {
   return (
     <div className={styles.chart}>
       <p className={styles.title}>Statistics</p>
-      <Balance balance={balance} />
-      <div>
-        <Doughnut
-          data={{
-            datasets: [
-              {
-                label: '# of Votes',
-                data: arrMoney,
-                backgroundColor: arrColors,
-                borderColor: arrColors,
-                borderWidth: 1,
-                cutout: 90,
-              },
-            ],
-          }}
-          options={{ maintainAspectRatio: false }}
-          height={280}
-          width={280}
-        />
+      <div style={{ position: 'relative' }}>
+        <Balance balance={balance} />
+        <div>
+          <Doughnut
+            data={{
+              datasets: [
+                {
+                  label: '# of Votes',
+                  data: arrMoney,
+                  backgroundColor: arrColors,
+                  borderColor: arrColors,
+                  borderWidth: 1,
+                  cutout: 90,
+                },
+              ],
+            }}
+            options={{ maintainAspectRatio: false }}
+            height={280}
+            width={280}
+          />
+        </div>
       </div>
     </div>
   );

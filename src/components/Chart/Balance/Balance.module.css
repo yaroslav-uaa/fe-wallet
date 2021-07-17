@@ -1,22 +1,31 @@
 .balancePositive {
   font-family: Prompt;
   font-weight: 700;
-  color: #1c473e;
   font-size: 18px;
-  line-height: 27px;
+  z-index: 999;
   position: absolute;
-  top: 52%;
+  width: 150px;
+  height: 20px;
+  margin: 0;
+  text-align: center;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -30%);
+  color: #24cca7;
 }
 
 .balanceNegative {
   font-family: Prompt;
   font-weight: 700;
-  color: #461e2b;
   font-size: 18px;
-  line-height: 27px;
+  z-index: 999;
   position: absolute;
-  top: 55%;
-  left: 35%;
+  width: 150px;
+  height: 20px;
+  margin: 0;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  color: #ff6596;
 }

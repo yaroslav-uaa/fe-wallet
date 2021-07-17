@@ -5,13 +5,13 @@ import { SketchPicker } from 'react-color';
 const defaultColor = localStorage.getItem('color') || '#212121';
 
 function UserPage() {
-  const [color, setcolor] = useState('');
+  const [color, setСolor] = useState('');
 
   useEffect(() => {
-    setcolor(defaultColor);
+    setСolor(defaultColor);
   }, []);
   const handleChangeComplete = color => {
-    setcolor(color.hex);
+    setСolor(color.hex);
     localStorage.setItem('color', color.hex);
   };
 

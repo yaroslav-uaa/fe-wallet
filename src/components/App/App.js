@@ -15,6 +15,7 @@ import GetCurrency from '../GetCurrency/GetCurrency';
 // import UserPage from '../../views/UserPage/UserPage';
 import MainPage from '../../views/MainPage/MainPage';
 import { useMediaQuery } from 'react-responsive';
+import '@pnotify/core/dist/PNotify.css';
 
 //TODO: подключить routes, private, public, добавить компоненты lazy load
 

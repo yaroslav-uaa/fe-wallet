@@ -106,7 +106,7 @@ const SelectForStats = () => {
   };
 
   return (
-    <div>
+    <div className={styles.containerSelects}>
       <FormControl className={styles.selectMonth}>
         <Select
           disableUnderline

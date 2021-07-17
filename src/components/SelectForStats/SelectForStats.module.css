@@ -6,6 +6,7 @@
 }
 
 .selectMonth {
+  display: flex;
   background-color: #fff;
   min-width: 280px !important;
   min-height: 58px;
@@ -18,10 +19,22 @@
 
 @media screen and (min-width: 768px) {
   .selectMonth {
-    min-width: 166px !important;
+    min-width: 150px !important;
   }
 
   .selectMonth:not(:last-child) {
     margin-right: 20px !important;
+  }
+}
+
+.containerSelects {
+  display: block;
+  max-width: 280px;
+}
+
+@media screen and (min-width: 768px) {
+  .containerSelects {
+    display: block;
+    min-width: 322px;
   }
 }
