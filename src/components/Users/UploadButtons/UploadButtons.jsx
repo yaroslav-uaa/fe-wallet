@@ -33,7 +33,6 @@ export default function UploadButtons() {
     const file = e.target.files[0];
     dispatch(operations.uploadAvatar(file));
   };
-
   const SubmitAvatar = () => {
     dispatch(operations.getCurrentUser());
   };

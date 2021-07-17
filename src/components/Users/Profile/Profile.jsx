@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 // redux
 import authSelectors from '../../../redux/auth/auth-selectors';
 import authOperations from '../../../redux/auth/auth-operations';
+import transactionSelectors from '../../../redux/transaction/selectors-transaction';
 // materia
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -20,7 +21,9 @@ import s from './Profile.module.css';
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
+
   const user = useSelector(authSelectors.getUser);
+  const transactions = useSelector(transactionSelectors.getLastTransaction);
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
   return (
     <div className={s.user_menu}>
@@ -34,6 +37,7 @@ export default function Profile() {
           alt="avatar"
           className={s.avatar}
         ></img>
+        {/* <Crop /> */}
         <div className={s.upload}>
           <IconButton variant="outlined">
             <EditIcon fontSize="medium" color="primary" />
@@ -76,7 +80,7 @@ export default function Profile() {
               fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
-            <p className={s.profile_name}>ТУт должен быть баланс 5000</p>
+            <p className={s.profile_name}>{transactions['balance']}</p>
           </li>
         </ul>
       </div>
