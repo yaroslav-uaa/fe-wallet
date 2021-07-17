@@ -4,7 +4,9 @@ import {
   transactionsOperations,
   transactionsSelectors,
 } from '../../../redux/transaction';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 
 import {
   Table,
@@ -20,7 +22,6 @@ import moment from 'moment';
 
 import EditTransaction from '../EditTransaction';
 import TransitionsModal from '../EditTransaction/ModalTransaction';
-import {colors} from '../../Stats/Stats'
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -68,13 +69,14 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.graidiertTwo,
     margin: '20px auto',
     maxWidth: '400px',
-  },
+  }
 }));
 
 export default function HomeTabMobile() {
   const dispatch = useDispatch();
   const s = useStyles();
-
+  const theme = useTheme();
+  
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
 
@@ -106,7 +108,7 @@ export default function HomeTabMobile() {
   };
 
   function getRandomColor() {
-    const color = colors()
+    const color = theme.palette.arrColors
     const index = Math.floor(Math.random() * color.length);
     return color[index];
   }
