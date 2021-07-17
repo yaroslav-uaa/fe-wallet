@@ -16,28 +16,24 @@
   position: absolute;
   top: 0;
   left: 0;
-  animation: zast 3s linear;
+  animation: zast 2s linear;
 }
 
 @keyframes zast {
   0% {
     opacity: 0;
-    transform: scale(0.7);
   }
 
   15% {
     opacity: 1;
-    transform: scale(1);
   }
 
   85% {
     opacity: 1;
-    transform: translate(0, 0);
   }
 
   100% {
     opacity: 0;
-    transform: translate(0, -100%);
   }
 }
 
