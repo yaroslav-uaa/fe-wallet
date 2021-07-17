@@ -27,6 +27,7 @@
 }
 
 .link__active {
+  pointer-events: none;
   border-bottom: 1px solid #fffefe80;
   background: linear-gradient(to top, #21212190, transparent);
 }

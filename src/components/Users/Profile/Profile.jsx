@@ -25,6 +25,8 @@ export default function Profile() {
   const user = useSelector(authSelectors.getUser);
   const transactions = useSelector(transactionSelectors.getLastTransaction);
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
+ 
+ console.log(transactions)
   return (
     <div className={s.user_menu}>
       <div className={s.user_avatar}>
@@ -80,7 +82,7 @@ export default function Profile() {
               fontSize={isTabletOrMobile ? 'small' : 'medium'}
               style={{ marginLeft: '10px' }}
             />
-            <p className={s.profile_name}>{transactions['balance']}</p>
+            <p className={s.profile_name}>here will be start balance</p>
           </li>
         </ul>
       </div>

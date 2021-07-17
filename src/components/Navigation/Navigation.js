@@ -28,7 +28,6 @@ function Navigation() {
                 color="secondary"
                 fontSize={isTabletOrMobile ? 'small' : 'medium'}
               />
-              {/* {!isTabletOrMobile && <span className={s.text}>Main</span>} */}
             </NavLink>
           </li>
           <li>
@@ -42,7 +41,6 @@ function Navigation() {
                 color="secondary"
                 fontSize={isTabletOrMobile ? 'small' : 'medium'}
               />
-              {/* {!isTabletOrMobile && <span className={s.text}>Statistics</span>} */}
             </NavLink>
           </li>
           {isTabletOrMobile && (
@@ -70,7 +68,6 @@ function Navigation() {
                 color="secondary"
                 fontSize={isTabletOrMobile ? 'small' : 'medium'}
               />
-              {/* {!isTabletOrMobile && <span className={s.text}>User</span>} */}
             </NavLink>
           </li>
         </ul>
