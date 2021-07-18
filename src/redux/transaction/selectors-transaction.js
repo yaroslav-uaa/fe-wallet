@@ -9,6 +9,9 @@ const getAllCategoriesFromTransactions = state => state.transactions.categories;
 
 const getFilter = state => state.transactions.filter;
 
+const getLastTransaction = state =>
+  getAllTransactions(state)[totalTransactions(state) - 1];
+
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
   (transactions, filter) => {
@@ -18,12 +21,13 @@ const filterTransactions = createSelector(
   },
 );
 
-// eslint-disable-next-line
-export default {
+const transactionSelectors = {
   getIsLoading,
   getAllTransactions,
   getAllCategoriesFromTransactions,
   getFilter,
   filterTransactions,
   totalTransactions,
+  getLastTransaction,
 };
+export default transactionSelectors;

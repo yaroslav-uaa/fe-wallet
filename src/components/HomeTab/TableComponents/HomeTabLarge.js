@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
-  Paper,
+  transactionsOperations,
+  transactionsSelectors,
+} from '../../../redux/transaction';
+import { makeStyles } from '@material-ui/core/styles';
+
+import {
   Table,
   TableBody,
   TableCell,
@@ -11,20 +17,16 @@ import {
   TablePagination,
   TableRow,
 } from '@material-ui/core';
-import TablePaginationActions from './HomeTabPagination';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  transactionsOperations,
-  transactionsSelectors,
-} from '../../redux/transaction';
-
-import TransitionsModal from './EditTransaction/ModalTransaction';
-import EditTransaction from './EditTransaction';
 import EditIcon from '@material-ui/icons/Edit';
-import sortBy from 'lodash.sortby';
-import moment from 'moment';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+
+import sortBy from 'lodash.sortby';
+import moment from 'moment';
+
+import TablePaginationActions from './HomeTabPagination';
+import EditTransaction from '../EditTransaction';
+import TransitionsModal from '../EditTransaction/ModalTransaction';
 
 const useStyles = makeStyles(theme => ({
   tablehead: {
@@ -37,33 +39,33 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'Prompt, sans-serif',
     fontWeight: 400,
     color: theme.palette.secondary.main,
-    fontSize: 17,
+    fontSize: 14,
     textAlign: 'center',
-    // textShadow: '2px 2px 3px grey',
+    borderBottom: '2px solid rgba(224, 224, 224, 1)',
     borderCollapse: 'collapse',
   },
   row: {
     width: '65%',
-    padding: '0.5em',
+    padding: '0.3em',
     color: theme.palette.primary.light,
   },
   text: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 15,
+    fontSize: 14,
   },
 
   greentext: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 15,
+    fontSize: 14,
     color: 'rgb(0, 150, 32)',
   },
 
   redtext: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 15,
+    fontSize: 14,
     color: 'rgb(230, 47, 69)',
   },
 
@@ -74,7 +76,7 @@ const useStyles = makeStyles(theme => ({
   table: {
     color: theme.palette.primary.light,
     borderCollapse: 'collapse',
-    maxWidth: '100%',
+    maxWidth: '780px',
   },
 
   tablebody: {
@@ -85,18 +87,6 @@ const useStyles = makeStyles(theme => ({
 export default function HomeTabLarge() {
   const s = useStyles();
   const dispatch = useDispatch();
-  const deleteTransaction = useCallback(
-    id => dispatch(transactionsOperations.deleteTransaction(id)),
-    [dispatch],
-  );
-  const fetchTransactions = useCallback(() => {
-    dispatch(transactionsOperations.fetchTransactions());
-  }, [dispatch]);
-
-  const transactionList = useSelector(transactionsSelectors.filterTransactions);
-  const totalTransactions = useSelector(
-    transactionsSelectors.totalTransactions,
-  );
 
   const [itemSort, setItemSort] = useState([]);
   const [isOn, toggleIsOn] = useToggle();
@@ -104,6 +94,20 @@ export default function HomeTabLarge() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
+
+  const transactionList = useSelector(transactionsSelectors.filterTransactions);
+  const totalTransactions = useSelector(
+    transactionsSelectors.totalTransactions,
+  );
+
+  const deleteTransaction = useCallback(
+    id => dispatch(transactionsOperations.deleteTransaction(id)),
+    [dispatch],
+  );
+
+  const fetchTransactions = useCallback(() => {
+    dispatch(transactionsOperations.fetchTransactions());
+  }, [dispatch]);
 
   useEffect(() => fetchTransactions(), [fetchTransactions]);
   useEffect(() => {
@@ -118,6 +122,7 @@ export default function HomeTabLarge() {
     ]);
     setItemSort(lodash);
   };
+
   const sortByDown = value => {
     const lodash = sortBy(transactionList, [
       function (o) {
@@ -127,8 +132,25 @@ export default function HomeTabLarge() {
     setItemSort(lodash.reverse());
   };
 
+  function useToggle(initialValue = false) {
+    const [value, setValue] = useState(initialValue);
+    const toggle = useCallback(() => {
+      setValue(v => !v);
+    }, []);
+    return [value, toggle];
+  }
+
+  function deleteT(id) {
+    deleteTransaction(id);
+  }
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
+
+  const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
+    setTransactionForEdit({ id, date, income, category, comment, sum });
+    handleClickOpen();
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -139,29 +161,11 @@ export default function HomeTabLarge() {
     setPage(0);
   };
 
-  const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
-    setTransactionForEdit({ id, date, income, category, comment, sum });
-    console.log({ id, date, income, category, comment, sum });
-
-    handleClickOpen();
-  };
-
   const handleClickOpen = () => {
     setOpen(!open);
+    fetchTransactions();
     return handleChangePage;
   };
-
-  function useToggle(initialValue = false) {
-    const [value, setValue] = useState(initialValue);
-    const toggle = useCallback(() => {
-      setValue(v => !v);
-    }, []);
-    return [value, toggle];
-  }
-  function deleteT(id) {
-    deleteTransaction(id);
-    return handleChangePage;
-  }
 
   return (
     <>
@@ -180,7 +184,8 @@ export default function HomeTabLarge() {
                   style={{
                     border: 'none',
                     width: '10px',
-                    padding: '0 8px',
+                    padding: '4px 8px 0 8px',
+                    color: 'white',
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
@@ -198,8 +203,9 @@ export default function HomeTabLarge() {
                   style={{
                     border: 'none',
                     width: '10px',
-                    padding: '0 8px',
+                    padding: '4px 8px 0 8px',
                     cursor: 'pointer',
+                    color: 'white',
                     backgroundColor: 'transparent',
                   }}
                   className={!isOn ? 'btn' : 'hidden'}
@@ -261,7 +267,7 @@ export default function HomeTabLarge() {
                     <TableRow className={s.row} key={id}>
                       <TableCell
                         className={s.text}
-                        style={{ fontSize: 16 }}
+                        style={{ fontSize: 14 }}
                         align="center"
                       >
                         {moment(date).format('DD.MM.YYYY')}
@@ -313,8 +319,11 @@ export default function HomeTabLarge() {
                 )}
 
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: 30 * emptyRows }}>
-                    <TableCell colSpan={6} />
+                  <TableRow
+                    className={s.row}
+                    style={{ height: 30 * emptyRows }}
+                  >
+                    <TableCell colSpan={10} />
                   </TableRow>
                 )}
               </TableBody>

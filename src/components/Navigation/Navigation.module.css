@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   margin: 0 0 40px;
-  padding: 10px 0;
+  padding: 0;
   width: 100%;
   background-color: #21212130;
-  border-radius: 8px;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px 0 #212121a0;
 }
 
 .list li {
@@ -17,19 +18,23 @@
 }
 
 .link {
-  padding: 15px;
-  border-radius: 50%;
+  padding: 14px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
 }
 
 .link__active {
-  box-shadow: 0 0 4px 0 inset #fffefec9;
-  background-color: #212121aa;
+  pointer-events: none;
+  border-bottom: 1px solid #fffefe80;
+  background: linear-gradient(to top, #21212190, transparent);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .list {
-    margin: 0 0 20px;
-    padding: 5px;
+    margin: 0 0 50px;
   }
 
   .link {
@@ -39,13 +44,10 @@
 
 @media screen and (max-width: 767px) {
   .list {
-    padding: 5px 0;
+    padding: 0;
     margin-bottom: 20px;
   }
-  .list li {
-    width: 20%;
-  }
   .link {
-    padding: 6px;
+    padding: 10px;
   }
 }

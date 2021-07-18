@@ -3,7 +3,7 @@ import authActions from './auth-actions';
 import { alert } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 
-axios.defaults.baseURL = 'http://localhost:4040/api';
+axios.defaults.baseURL = 'https://be-wallet.herokuapp.com/api';
 
 const token = {
   set(token) {
@@ -36,6 +36,7 @@ const signIn = user => async dispatch => {
   try {
     const r = await axios.post('/users/signin', user);
     token.set(r.data.token);
+
     dispatch(authActions.signInSuccess(r.data));
   } catch (err) {
     dispatch(authActions.signInError(err.message));
@@ -74,5 +75,25 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-const authOperations = { token, signUp, signIn, signOut, getCurrentUser };
+const uploadAvatar = file => async dispatch => {
+  dispatch(authActions.uploadAvatarRequest());
+  try {
+    const fd = new FormData();
+    fd.append('name', file.name);
+    fd.append('avatar', file);
+    const res = await axios.patch('/users/avatars', fd);
+    dispatch(authActions.uploadAvatarSuccess(res.data));
+  } catch (err) {
+    dispatch(authActions.uploadAvatarError(err.message));
+  }
+};
+
+const authOperations = {
+  token,
+  signUp,
+  signIn,
+  signOut,
+  getCurrentUser,
+  uploadAvatar,
+};
 export default authOperations;

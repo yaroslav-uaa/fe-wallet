@@ -21,8 +21,8 @@ import {
 import { alert } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 
-axios.defaults.baseURL = 'http://localhost:4040/api';
-// axios.defaults.baseURL = 'http://be-wallet.herokuapp/api';
+// axios.defaults.baseURL = 'http://localhost:4040/api';
+axios.defaults.baseURL = 'http://be-wallet.herokuapp/api';
 
 const fetchTransactions = () => async dispatch => {
   dispatch(getTransactionsRequest());
@@ -84,7 +84,7 @@ const deleteTransaction = transactionId => async dispatch => {
       type: 'success',
     });
   } catch (error) {
-    dispatch(deleteTransactionError());
+    dispatch(deleteTransactionError(Notify.Error(error.message)));
   }
 };
 
@@ -94,26 +94,23 @@ const updateTransaction =
     dispatch(updateTransactionRequest());
     const update = { date, income, category, comment, sum };
     try {
-      const { data } = await axios.put(
+      const { data } = await axios.patch(
         `/transactions/${transactionId}`,
         update,
       );
+      Notify.Success('Transaction Edited');
       dispatch(updateTransactionSuccess(data));
-      alert({
-        text: 'Transaction edited',
-        type: 'success',
-      });
     } catch (error) {
       dispatch(updateTransactionError(error.message));
     }
   };
 
-// eslint-disable-next-line
-
-export default {
+const operations = {
   fetchTransactions,
   addTransaction,
   deleteTransaction,
   updateTransaction,
   getTransactionsByDate,
 };
+
+export default operations;

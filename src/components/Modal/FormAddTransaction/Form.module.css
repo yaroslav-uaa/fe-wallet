@@ -1,63 +1,56 @@
 .title {
-  color: white;
+  color: #fffefe;
   text-transform: uppercase;
   text-align: center;
-  font-size: 25px;
+  font-size: 24px;
   margin: 0px;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
 }
 .form {
-  padding: 10px;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .text {
-  color: white;
-  font-size: 15px;
+  font-family: Prompt, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px #fffefe;
+  line-height: 1.17;
   padding: 0px;
   margin: 0px;
 }
 
 .box_switch {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 5px;
+}
+
+@media screen and (max-width: 420px) {
+  .box_switch {
+    justify-content: space-between;
+  }
 }
 .select {
   width: 100%;
   display: flex;
-  color: white !important;
+  color: #fffefe !important;
 }
 .select:active .select:hover {
-  color: white;
+  color: #fffefe;
 }
 
-.date {
-  width: 100%;
-  color: white !important;
-}
-
-.sum {
-  width: 100%;
-}
-
-@media screen and (min-width: 767px) {
-  .date {
-    width: 45%;
-  }
-  .sum {
-    width: 45%;
-  }
-}
-
-.toolbar {
-  color: white !important;
-}
-.option {
+/* .option {
   color: rgb(26, 8, 70);
   width: 100%;
-}
+} */
 .option:focus,
 .option:active,
 option:checked,
@@ -68,28 +61,30 @@ option:checked,
 .box_time {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  margin: 8px;
 }
 
 .btn_submit {
   background: linear-gradient(
     45deg,
-    rgb(110, 25, 154) 10%,
-    rgb(76, 21, 201) 43%,
-    rgb(102, 50, 158)
+    rgb(4, 156, 30) 10%,
+    rgb(69, 226, 55) 43%,
+    rgb(4, 156, 30)
   );
 
   text-transform: uppercase;
-  color: white !important;
+  color: #fffefe !important;
   margin-top: 20px !important;
   font-size: 1rem !important;
   width: 70%;
-  max-width: 300px;
+  max-width: 250px;
   border-radius: 10px;
+  margin-bottom: 10px !important;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 768px) {
   .btn_submit {
     width: 70%;
   }

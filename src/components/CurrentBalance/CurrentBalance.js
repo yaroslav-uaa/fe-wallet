@@ -1,35 +1,32 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { transactionsSelectors } from '../../redux/transaction';
-import operationsTransactions from '../../redux/transaction/operations-transactions';
 import s from './CurrentBalance.module.css';
 
 function CurrentBalance() {
-  const dispatch = useDispatch();
-  const monthNow = new Date().getMonth();
-  const ageNow = new Date().getFullYear();
-
-  useEffect(
-    () =>
-      dispatch(operationsTransactions.getTransactionsByDate(monthNow, ageNow)),
-    [dispatch],
+  const [balance, setbalance] = useState(0);
+  const getAllTransactions = useSelector(
+    transactionsSelectors.getAllTransactions,
   );
 
-  const { getAllCategoriesFromTransactions } = transactionsSelectors;
-  const categoriesFromState = useSelector(getAllCategoriesFromTransactions);
-  const balance = categoriesFromState.balance;
+  useEffect(() => {
+    const getbalance = async () => {
+      try {
+        const all = await getAllTransactions;
+        const last = all.slice(all.length - 1);
+        setbalance(last[0].balance);
+        console.log(balance);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getbalance();
+  }, [getAllTransactions, balance]);
+
+  console.log(balance);
 
   return (
-    <div
-      className={s.container}
-      //     style={{
-      //       background: `linear-gradient(
-      //   140deg,
-      //   ${localStorage.color},
-      //   rgba(255, 255, 255, 0.1)
-      // )`,
-      //     }}
-    >
+    <div className={s.container}>
       <p className={s.title}>balance:</p>
       <p className={s.balance}>&#8372; {balance}</p>
     </div>

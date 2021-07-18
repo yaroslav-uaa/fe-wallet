@@ -19,6 +19,10 @@ const signOutError = createAction('auth/signOutError');
 const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
 const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
 const getCurrentUserError = createAction('auth/getCurrentUserError');
+//upload avatar
+const uploadAvatarRequest = createAction('auth/uploadAvatarRequest');
+const uploadAvatarSuccess = createAction('auth/uploadAvatarSuccess');
+const uploadAvatarError = createAction('auth/uploadAvatarError');
 
 const authActions = {
   regRequest,
@@ -33,6 +37,9 @@ const authActions = {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
+  uploadAvatarRequest,
+  uploadAvatarSuccess,
+  uploadAvatarError,
 };
 
 export default authActions;

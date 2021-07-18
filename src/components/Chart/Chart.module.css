@@ -2,8 +2,16 @@
   font-family: 'Prompt', sans-serif;
   font-weight: 500;
   font-size: 30px;
-  line-height: 45px;
-  color: #f3f3f3;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: #212121e0;
+  margin: 0 auto 20px;
+  width: fit-content;
+}
+
+.doughnut {
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .chart {
@@ -13,6 +21,13 @@
 
 @media screen and (min-width: 768px) {
   .chart {
-    margin-right: 35px;
+    margin-right: 25px;
+    margin-left: 25px;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .title {
+    font-size: 24px;
   }
 }
