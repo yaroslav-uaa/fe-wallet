@@ -9,8 +9,9 @@
   width: fit-content;
 }
 
-.doughnut {
+.doughnut canvas {
   min-width: 270px;
+  min-height: 270px;
 }
 
 .chart {
