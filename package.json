@@ -21,7 +21,6 @@
     "formik-material-ui": "^3.0.1",
     "formik-material-ui-lab": "0.0.8",
     "formik-material-ui-pickers": "0.0.12",
-    "json-server": "^0.16.3",
     "lodash": "^4.17.21",
     "lodash.sortby": "^4.7.0",
     "moment": "^2.29.1",
@@ -40,6 +39,7 @@
     "react-lodash": "^0.1.2",
     "react-media": "^1.10.0",
     "react-multi-date-picker": "^2.10.0",
+    "react-pnotify": "0.0.6",
     "react-redux": "^7.2.4",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
@@ -48,7 +48,6 @@
     "react-spinners": "^0.11.0",
     "react-spinners-css": "^2.0.1",
     "react-text-mask": "^5.4.3",
-    "react-toastify": "^7.0.4",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
@@ -83,9 +82,12 @@
     ]
   },
   "devDependencies": {
+    "@pnotify/core": "^5.2.0",
+    "@pnotify/mobile": "^5.2.0",
     "@welldone-software/why-did-you-render": "^6.2.0",
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
+    "pnotify": "^5.2.0",
     "prettier": "^2.3.2"
   }
 }

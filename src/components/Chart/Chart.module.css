@@ -10,8 +10,7 @@
 }
 
 .doughnut {
-  margin: 0 auto;
-  width: fit-content;
+  min-width: 270px;
 }
 
 .chart {

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import authActions from './auth-actions';
+import { alert } from '@pnotify/core';
+import '@pnotify/core/dist/BrightTheme.css';
 
 axios.defaults.baseURL = 'https://be-wallet.herokuapp.com/api';
 
@@ -21,6 +23,10 @@ const signUp = user => async dispatch => {
     dispatch(authActions.regSuccess(r.data));
   } catch (err) {
     dispatch(authActions.regError(err.message));
+    alert({
+      text: 'Invalid data',
+      type: 'error',
+    });
   }
 };
 
@@ -34,6 +40,10 @@ const signIn = user => async dispatch => {
     dispatch(authActions.signInSuccess(r.data));
   } catch (err) {
     dispatch(authActions.signInError(err.message));
+    alert({
+      text: 'Invalid credentials',
+      type: 'error',
+    });
   }
 };
 

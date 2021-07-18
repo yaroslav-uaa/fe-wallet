@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
@@ -7,6 +7,7 @@ import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
 import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
+import '@pnotify/core/dist/PNotify.css';
 // import Loader from '../Loader/Loader';
 import { Default } from 'react-spinners-css';
 

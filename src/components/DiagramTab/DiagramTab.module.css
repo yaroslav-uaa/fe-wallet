@@ -13,7 +13,6 @@ ul {
 }
 
 .listNames {
-  /* outline: 1px solid red; */
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: space-between;
@@ -40,25 +39,14 @@ ul {
 }
 
 .elementTransaction {
-  /* outline: 1px solid red; */
   color: #000;
   display: flex;
-  /* justify-content: space-between; */
   height: 54px;
   padding-left: 16px;
   padding-right: 16px;
   align-items: center;
   border-bottom: 1px solid #2121fd;
 }
-
-/* .elementTransaction::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 24px;
-  background-color: rgb(117, 181, 255);
-  margin-right: 16px;
-} */
 
 .sum {
   margin-left: auto;

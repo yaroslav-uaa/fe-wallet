@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 
@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/core/styles';
 
 import Chart from '../../components/Chart/Chart';
 import DiagramTab from '../../components/DiagramTab/DiagramTab';
-
+import colors from '../../helpers/helpers';
 import SelectForStats from '../../components/SelectForStats/SelectForStats';
 
 import styles from './Stats.module.css';
@@ -33,7 +33,7 @@ const Stats = () => {
   const balance = categoriesFromState.balance;
 
   const arrMoney = categories ? categories.map(trans => trans.sum) : null;
-  const color = theme.palette.arrColors
+  const color = theme.palette.arrColors;
   return (
     <div>
       <div className={styles.statisticsPage}>
@@ -46,4 +46,4 @@ const Stats = () => {
     </div>
   );
 };
-export default Stats
+export default Stats;

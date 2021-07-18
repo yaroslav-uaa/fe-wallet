@@ -9,6 +9,7 @@
 }
 
 .selectMonth {
+  display: flex;
   background-color: #fff;
   min-width: 116px !important;
   min-height: 58px;
@@ -26,5 +27,17 @@
 
   .selectMonth:not(:last-child) {
     margin-right: 20px !important;
+  }
+}
+
+.containerSelects {
+  display: block;
+  max-width: 280px;
+}
+
+@media screen and (min-width: 768px) {
+  .containerSelects {
+    display: block;
+    min-width: 322px;
   }
 }
