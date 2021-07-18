@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
@@ -77,10 +76,6 @@ function FullScreenDialog() {
       </>
     );
   }
-
-FullScreenDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default FullScreenDialog;
 

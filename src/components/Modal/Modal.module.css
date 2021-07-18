@@ -8,6 +8,10 @@
   border-radius: 6px;
   padding: 25px 0;
 }
+
+.fullScreen::-webkit-scrollbar {
+  width: 0;
+}
 @media screen and (min-width: 768px) {
   .fullScreen {
     width: 600px;
