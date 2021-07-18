@@ -27,15 +27,14 @@ const useStyles = makeStyles(theme => ({
   head: {
     fontFamily: 'Prompt, sans-serif',
     fontWeight: 500,
-    color: 'white',
-    fontSize: 17,
-    textShadow: '2px 2px 3px grey',
+    color: '#fffefe',
+    fontSize: 14,
     borderCollapse: 'collapse',
   },
   text: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 700,
-    fontSize: 16,
+    fontSize: 14,
     width: '100%',
     color: theme.palette.primary.dark,
     backgroundColor: 'transparent',
@@ -44,21 +43,21 @@ const useStyles = makeStyles(theme => ({
   greentext: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 16,
+    fontSize: 14,
     color: 'rgb(0, 150, 32)',
   },
 
   redtext: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 16,
+    fontSize: 14,
     color: 'rgb(230, 47, 69)',
   },
 
   row: {
     width: '100%',
     margin: '0 auto',
-    padding: '0.5em',
+    padding: '0.3em',
     color: theme.palette.primary.light,
     backgroundColor: 'transparent',
   },
@@ -67,16 +66,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     background: theme.palette.background.graidiertTwo,
-    margin: '20px auto',
+    margin: '14px auto',
     maxWidth: '400px',
-  }
+  },
 }));
 
 export default function HomeTabMobile() {
   const dispatch = useDispatch();
   const s = useStyles();
   const theme = useTheme();
-  
+
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
 
@@ -96,7 +95,7 @@ export default function HomeTabMobile() {
     () => dispatch(transactionsOperations.fetchTransactions()),
     [dispatch],
   );
-  
+
   function deleteT(id) {
     deleteTransaction(id);
   }
@@ -104,11 +103,11 @@ export default function HomeTabMobile() {
   const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
     setTransactionForEdit({ id, date, income, category, comment, sum });
     handleClickOpen();
-    fetchTransactions()
+    fetchTransactions();
   };
 
   function getRandomColor() {
-    const color = theme.palette.arrColors
+    const color = theme.palette.arrColors;
     const index = Math.floor(Math.random() * color.length);
     return color[index];
   }
@@ -143,10 +142,18 @@ export default function HomeTabMobile() {
                     <TableCell
                       style={{
                         width: '7px',
-                        backgroundColor: getRandomColor()
+                        backgroundColor: getRandomColor(),
+                        padding: '10px',
+                        borderBottom: 0,
                       }}
                     ></TableCell>
-                    <TableCell>
+                    <TableCell
+                      style={{
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                        borderBottom: 0,
+                      }}
+                    >
                       <TableRow className={s.row}>
                         <TableCell className={s.head} align="left">
                           Date
@@ -201,8 +208,15 @@ export default function HomeTabMobile() {
                           {balance}
                         </TableCell>
                       </TableRow>
-                      <TableRow className={s.row}>
-                        <TableCell className={s.head} align="left">
+                      <TableRow style={{ padding: '5px', borderBottom: 0 }}>
+                        <TableCell
+                          align="left"
+                          style={{
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                            borderBottom: 0,
+                          }}
+                        >
                           <IconButton
                             onClick={() =>
                               OnEditTransaction({
@@ -218,7 +232,14 @@ export default function HomeTabMobile() {
                             <EditIcon />
                           </IconButton>
                         </TableCell>
-                        <TableCell className={s.text} align="right">
+                        <TableCell
+                          align="right"
+                          style={{
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                            borderBottom: 0,
+                          }}
+                        >
                           <IconButton aria-label="delete">
                             <DeleteIcon onClick={() => deleteT(id)} />
                           </IconButton>
@@ -232,7 +253,7 @@ export default function HomeTabMobile() {
           )}
         </div>
       )}
-        <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
+      <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
         <EditTransaction
           handleClickOpen={handleClickOpen}
           transactionForEdit={transactionForEdit}

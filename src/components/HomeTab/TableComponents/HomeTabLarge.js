@@ -39,33 +39,33 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'Prompt, sans-serif',
     fontWeight: 400,
     color: theme.palette.secondary.main,
-    fontSize: 17,
+    fontSize: 14,
     textAlign: 'center',
     borderBottom: '2px solid rgba(224, 224, 224, 1)',
     borderCollapse: 'collapse',
   },
   row: {
     width: '65%',
-    padding: '0.5em',
+    padding: '0.3em',
     color: theme.palette.primary.light,
   },
   text: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 15,
+    fontSize: 14,
   },
 
   greentext: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 15,
+    fontSize: 14,
     color: 'rgb(0, 150, 32)',
   },
 
   redtext: {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 500,
-    fontSize: 15,
+    fontSize: 14,
     color: 'rgb(230, 47, 69)',
   },
 
@@ -163,7 +163,7 @@ export default function HomeTabLarge() {
 
   const handleClickOpen = () => {
     setOpen(!open);
-    fetchTransactions()
+    fetchTransactions();
     return handleChangePage;
   };
 
@@ -267,7 +267,7 @@ export default function HomeTabLarge() {
                     <TableRow className={s.row} key={id}>
                       <TableCell
                         className={s.text}
-                        style={{ fontSize: 16 }}
+                        style={{ fontSize: 14 }}
                         align="center"
                       >
                         {moment(date).format('DD.MM.YYYY')}
