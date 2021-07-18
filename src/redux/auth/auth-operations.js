@@ -75,6 +75,16 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
+const updateUser = data => async dispatch => {
+  dispatch(authActions.updateUserRequest());
+  try {
+    const res = await axios.put('/users/update', data);
+    dispatch(authActions.updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(authActions.updateUserError(err.message));
+  }
+};
+
 const uploadAvatar = file => async dispatch => {
   dispatch(authActions.uploadAvatarRequest());
   try {
@@ -94,6 +104,8 @@ const authOperations = {
   signIn,
   signOut,
   getCurrentUser,
+  updateUser,
   uploadAvatar,
 };
+
 export default authOperations;
