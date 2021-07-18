@@ -7,7 +7,7 @@ export default function Balance({ balance }) {
       {balance > 0 ? (
         <p className={s.balancePositive}>{balance}</p>
       ) : (
-        <p className={s.balanceNegative}>-{balance}</p>
+        <p className={s.balanceNegative}>{balance}</p>
       )}
     </div>
   );

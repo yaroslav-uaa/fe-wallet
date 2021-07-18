@@ -309,8 +309,11 @@ export default function HomeTabLarge() {
                           >
                             <EditIcon />
                           </IconButton>
-                          <IconButton aria-label="delete">
-                            <DeleteIcon onClick={() => deleteT(id)} />
+                          <IconButton
+                            aria-label="delete"
+                            onClick={() => deleteT(id)}
+                          >
+                            <DeleteIcon />
                           </IconButton>
                         </div>
                       </TableCell>
