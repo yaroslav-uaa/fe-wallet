@@ -9,7 +9,7 @@ export default function Chart({ arrColors, arrMoney, balance }) {
       <p className={styles.title}>Statistics</p>
       <div style={{ position: 'relative' }}>
         <Balance balance={balance} />
-        <div>
+        <div className={styles.doughnut}>
           <Doughnut
             data={{
               datasets: [
