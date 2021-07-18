@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
@@ -10,81 +9,64 @@ import Slide from '@material-ui/core/Slide';
 import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
 import s from './Modal.module.css';
 import FormAddTransaction from './FormAddTransaction';
+import { makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 
-const styles = {
-  root: {
-    background: 'red',
-  },
-
-  flex: {
-    flex: 1,
-    color: 'white',
-  },
-  label: {
-    color: 'white',
-  },
-  paper: {
-    color: 'red',
-    background: 'inherit',
-  },
-  slide: {
-    color: 'red',
-  },
-  paperFullScreen: {
-    borderRadius: '20px',
-  },
-};
+const useStyles = makeStyles(()=>({
+  dialog: {
+    margin: '0 auto',
+    maxWidth: '600px',
+}
+})
+)
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class FullScreenDialog extends React.Component {
-  state = {
-    open: false,
+function FullScreenDialog() {
+  const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClickOpen = () => {
+    setOpen(true)
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  const handleClose = () => {
+    setOpen(false)
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const classes = this.props;
     return (
       <>
-        <ButtonAddTransactions openModal={this.handleClickOpen} />
+        <ButtonAddTransactions openModal={handleClickOpen} />
         <div>
-          <div className={s.box}>
+          <div className={s.container}>
             <Dialog
-              fullScreen
-              open={this.state.open}
-              onClose={this.handleClose}
+              PaperComponent='div'
+              maxWidth='md'
+              fullScreen={fullScreen}
+              open={open}
+              onClose={handleClose}
               TransitionComponent={Transition}
-              // className={s.container}
-              className={classes.root}
-              maxWidth="false"
-              PaperProps
+              className={classes.dialog}
             >
               <div className={s.fullScreen}>
                 <List className={s.list_modal}>
                   <div className={s.box_close_btn}>
                     <IconButton
                       color="inherit"
-                      onClick={this.handleClose}
+                      onClick={handleClose}
                       aria-label="Close"
                     >
                       <CloseIcon />
                     </IconButton>
                   </div>
 
-                  <FormAddTransaction />
+                  <FormAddTransaction handleClose={handleClose}/>
                   <div className={s.box_btn_rejected}>
-                    <Button onClick={this.handleClose} className={s.rejected}>
-                      rejected
+                    <Button variant="contained" onClick={handleClose} className={s.rejected} size='small'>
+                      cancel
                     </Button>
                   </div>
                 </List>
@@ -95,10 +77,11 @@ class FullScreenDialog extends React.Component {
       </>
     );
   }
-}
 
 FullScreenDialog.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FullScreenDialog);
+export default FullScreenDialog;
+
+
