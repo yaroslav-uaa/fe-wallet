@@ -10,11 +10,11 @@
 }
 
 .doughnut {
-  margin: 0 auto;
-  width: fit-content;
+  min-width: 270px;
 }
 
 .chart {
+  position: relative;
   max-width: 400px;
   margin-bottom: 30px;
 }
