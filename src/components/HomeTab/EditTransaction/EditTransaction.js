@@ -2,13 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { transactionsOperations } from '../../../redux/transaction';
-
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
@@ -23,7 +21,7 @@ import s from '../../Modal/FormAddTransaction/Form.module.css';
 
 const useStyles = makeStyles(() => ({
   root: {
-    color: 'white',
+    color: '#fffefe',
   },
   uderline: {
     '&&:before': {
@@ -35,7 +33,7 @@ const useStyles = makeStyles(() => ({
   },
   input: {
     textAlign: 'center',
-    color: 'white',
+    color: '#fffefe',
   },
 }));
 
@@ -57,14 +55,14 @@ export default function EditTransaction({
   const [income, setSelect] = useState(false);
   const [initCategory, setCategory] = useState();
   const [date, setSelectedDate] = useState(new Date());
-  const [sum, setSum] = useState(null)
-  const [comment, setComment] = useState('')
+  const [sum, setSum] = useState(null);
+  const [comment, setComment] = useState('');
 
   const fetchTransactions = useCallback(() => {
     dispatch(transactionsOperations.fetchTransactions());
   }, [dispatch]);
 
-    const updateTransactions = useCallback(
+  const updateTransactions = useCallback(
     ({ date, category, income, comment, sum, transactionId }) => {
       dispatch(
         transactionsOperations.updateTransaction({
@@ -100,7 +98,6 @@ export default function EditTransaction({
       setComment('');
     };
   }, [transactionForEdit]);
-
 
   const handleChangeCategory = event => {
     setCategory(event.target.value);
@@ -140,15 +137,17 @@ export default function EditTransaction({
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <h2 className={s.title}>Edit transaction</h2>
           <Box margin={1} className={s.box_switch}>
-            <p className={s.text}>Income</p>
-            <div>
-              <SwitchMy
-                onSwitch={income => onSwitchChecked(income)}
-                isChecked={income}
-                onClick={income => onSwitchChecked(income)}
-              />
-            </div>
-            <p className={s.text}>Expense</p>
+            <p className={s.text} style={{ color: 'rgb(4, 106, 30)' }}>
+              Income
+            </p>
+            <SwitchMy
+              onSwitch={income => onSwitchChecked(income)}
+              isChecked={income}
+              onClick={income => onSwitchChecked(income)}
+            />
+            <p className={s.text} style={{ color: 'rgb(180, 41, 41)' }}>
+              Expense
+            </p>
           </Box>
 
           <Box>
@@ -164,7 +163,6 @@ export default function EditTransaction({
           <div className={s.box_time}>
             <Box>
               <TextField
-                fullWidth
                 id="sum"
                 name="sum"
                 label="Sum"
@@ -175,27 +173,20 @@ export default function EditTransaction({
               />
             </Box>
             <Box>
-              <Grid
-                container
-                justifyContent="space-around"
-                className={s.toolbar}
-              >
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
-                  label="Date picker dialog"
-                  format="MM/dd/yyyy"
-                  value={date}
-                  classes={{
-                    root: classes.root,
-                    toolbar: s.toolbar,
-                  }}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </Grid>
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                format="MM/dd/yyyy"
+                value={date}
+                classes={{
+                  root: classes.root,
+                  toolbar: s.toolbar,
+                }}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
             </Box>
           </div>
           <Box margin={1} className={s.box_select}>
@@ -218,6 +209,7 @@ export default function EditTransaction({
               color="primary"
               onClick={onSubmit}
               className={s.btn_submit}
+              size="small"
             >
               Submit
             </Button>

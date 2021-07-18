@@ -14,12 +14,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import SwitchMy from '../Switch';
 import moment from 'moment';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    color: 'white',
+    color: '#fffefe',
   },
   uderline: {
     '&&:before': {
@@ -30,9 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   input: {
-    textAlign: 'center',
-    color: 'white',
-    background: 'inherit',
+    color: '#fffefe',
   },
 }));
 
@@ -45,7 +42,7 @@ const SchemaYup = Yup.object({
     .required('Comment is required'),
 });
 
-export default function FormAddTransaction() {
+export default function FormAddTransaction({handleClose}) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [chooseSelect, setSelect] = useState(false);
@@ -83,6 +80,7 @@ export default function FormAddTransaction() {
         category: category,
       };
       onFormSubmit(correctValue, resetForm);
+      handleClose()
     },
   });
 
@@ -95,18 +93,16 @@ export default function FormAddTransaction() {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <h2 className={s.title}>Add transaction</h2>
         <Box margin={1} className={s.box_switch}>
-          <p className={s.text}>Income</p>
-          <div>
+          <p className={s.text} style={{color: 'rgb(4, 106, 30)'}}>Income</p>
             <SwitchMy
               onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
               isChecked={chooseSelect}
               onClick={chooseSelect => onSwitchChecked(chooseSelect)}
             />
-          </div>
-          <p className={s.text}>Expense</p>
+          <p className={s.text} style={{color: 'rgb(180, 41, 41)'}}>Expense</p>
         </Box>
 
-        <Box>
+        <Box >
           <SimpleSelect
             name="category"
             isIncome={!chooseSelect}
@@ -123,7 +119,6 @@ export default function FormAddTransaction() {
           <Box>
             <TextField
               required
-              fullWidth
               id="sum"
               name="sum"
               label="Sum"
@@ -137,11 +132,9 @@ export default function FormAddTransaction() {
             />
           </Box>
           <Box>
-            <Grid container justifyContent="space-around" className={s.toolbar}>
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
-                label="Date picker dialog"
                 format="MM/dd/yyyy"
                 value={selectedDate}
                 classes={{
@@ -155,7 +148,6 @@ export default function FormAddTransaction() {
                 error={formik.touched.date && Boolean(formik.errors.date)}
                 helperText={formik.touched.date && formik.errors.date}
               />
-            </Grid>
           </Box>
         </div>
         <Box margin={1} className={s.box_select}>
@@ -184,6 +176,7 @@ export default function FormAddTransaction() {
             disabled={formik.isSubmitting}
             onClick={formik.handleSubmit}
             className={s.btn_submit}
+            size="small"
           >
             Submit
           </Button>
