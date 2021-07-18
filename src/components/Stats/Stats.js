@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 
@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/core/styles';
 
 import Chart from '../../components/Chart/Chart';
 import DiagramTab from '../../components/DiagramTab/DiagramTab';
-import colors from '../../helpers/helpers';
+// import colors from '../../helpers/helpers';
 import SelectForStats from '../../components/SelectForStats/SelectForStats';
 
 import styles from './Stats.module.css';

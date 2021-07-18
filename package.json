@@ -48,6 +48,7 @@
     "react-spinners": "^0.11.0",
     "react-spinners-css": "^2.0.1",
     "react-text-mask": "^5.4.3",
+    "react-toastify": "^7.0.4",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
