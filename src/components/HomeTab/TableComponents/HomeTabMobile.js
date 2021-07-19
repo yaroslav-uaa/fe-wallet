@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
     borderCollapse: 'collapse',
   },
   cont: {
-    width: '90%',
     margin: '0',
     backgroundColor: 'transparent',
     border: 'none'
@@ -86,6 +85,11 @@ const useStyles = makeStyles(theme => ({
     margin: '14px auto',
     maxWidth: '400px',
   },
+  sort: {
+    width: '200px',
+    height: '30px',
+    margin: '0 auto'
+  }
 }));
 
 export default function HomeTabMobile() {
@@ -182,6 +186,40 @@ export default function HomeTabMobile() {
 
   return (
     <>
+      <div className={s.sort}>      <button
+        type="button"
+        style={{
+          border: 'none',
+          width: '200px',
+          padding: '4px 8px 0 8px',
+          color: 'white',
+          cursor: 'pointer',
+          backgroundColor: 'transparent',
+        }}
+        className={isOn ? 'btn' : 'hidden'}
+        onClick={() => {
+          sortByUp('date');
+          toggleIsOn();
+        }}>
+        <span> Sort by date 🠕</span>
+      </button>
+      <button
+        type="button"
+        style={{
+          border: 'none',
+          width: '200px',
+          padding: '4px 8px 0 8px',
+          cursor: 'pointer',
+          color: 'white',
+          backgroundColor: 'transparent',
+        }}
+        className={!isOn ? 'btn' : 'hidden'}
+        onClick={() => {
+          sortByDown('date');
+          toggleIsOn();
+        }}>
+        <span>Sort by date 🠗</span>
+        </button></div>
       <TableContainer className={s.cont}>
         <Table className={s.table}>
       {transactionList.length === 0 ? (
@@ -230,44 +268,6 @@ export default function HomeTabMobile() {
                       <TableRow className={s.row}>
                         <TableCell className={s.head} align="left">
                                   Date
-                                   <button
-                  type="button"
-                  style={{
-                    border: 'none',
-                    width: '10px',
-                    padding: '4px 8px 0 8px',
-                    color: 'white',
-                    cursor: 'pointer',
-                    backgroundColor: 'transparent',
-                  }}
-                  className={isOn ? 'btn' : 'hidden'}
-                  onClick={() => {
-                    sortByUp('date');
-                    toggleIsOn();
-                  }}
-                >
-                  {' '}
-                  🠕
-                </button>
-                <button
-                  type="button"
-                  style={{
-                    border: 'none',
-                    width: '10px',
-                    padding: '4px 8px 0 8px',
-                    cursor: 'pointer',
-                    color: 'white',
-                    backgroundColor: 'transparent',
-                  }}
-                  className={!isOn ? 'btn' : 'hidden'}
-                  onClick={() => {
-                    sortByDown('date');
-                    toggleIsOn();
-                  }}
-                >
-                  {' '}
-                  🠗
-                </button>
                         </TableCell>
                         <TableCell className={s.text} align="right">
                           {moment(date).format('DD.MM.YYYY')}
