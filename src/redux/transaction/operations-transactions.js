@@ -101,7 +101,7 @@ const updateTransaction =
       Notify.Success('Transaction Edited');
       dispatch(updateTransactionSuccess(data));
     } catch (error) {
-      dispatch(updateTransactionError(error.message));
+      dispatch(updateTransactionError(Notify.Error(error.message)));
     }
   };
 

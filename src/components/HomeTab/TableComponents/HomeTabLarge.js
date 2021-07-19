@@ -140,8 +140,11 @@ export default function HomeTabLarge() {
     return [value, toggle];
   }
 
-  function deleteT(id) {
+  const deleteT = (id) => {
+    fetchTransactions();
     deleteTransaction(id);
+    fetchTransactions();
+    return handleChangePage;
   }
 
   const emptyRows =
