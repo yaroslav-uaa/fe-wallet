@@ -13,6 +13,8 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
+  TablePagination,
   TableRow,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
@@ -22,6 +24,7 @@ import moment from 'moment';
 
 import EditTransaction from '../EditTransaction';
 import TransitionsModal from '../EditTransaction/ModalTransaction';
+import TablePaginationActions from './HomeTabPagination';
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -30,6 +33,18 @@ const useStyles = makeStyles(theme => ({
     color: '#fffefe',
     fontSize: 14,
     borderCollapse: 'collapse',
+  },
+  cont: {
+    width: '100vw',
+    margin: 'auto',
+    backgroundColor: 'transparent',
+    border: 'none'
+  },
+  table: {
+    width: '100vw',
+    margin: 'auto',
+    backgroundColor: 'transparent',
+    border: 'none'
   },
   text: {
     fontFamily: 'Poppins, sans-serif',
@@ -78,8 +93,14 @@ export default function HomeTabMobile() {
 
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const transactionList = useSelector(transactionsSelectors.filterTransactions);
+  
+  const totalTransactions = useSelector(
+    transactionsSelectors.totalTransactions,
+  );
 
   const deleteTransaction = useCallback(
     id => dispatch(transactionsOperations.deleteTransaction(id)),
@@ -116,8 +137,19 @@ export default function HomeTabMobile() {
     setOpen(!open);
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = e => {
+    setRowsPerPage(parseInt(e.target.value, 5));
+    setPage(0);
+  };
+
   return (
-    <div>
+    <>
+      <TableContainer className={s.cont}>
+        <Table className={s.table}>
       {transactionList.length === 0 ? (
         <p
           className={s.row}
@@ -133,10 +165,17 @@ export default function HomeTabMobile() {
           No transactions yet
         </p>
       ) : (
-        <div>
-          {transactionList.map(
+        <>
+          {(rowsPerPage > 0
+                  ? transactionList.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage,
+                    )
+                  : transactionList
+                ).map(
             ({ id, date, income, category, comment, sum, balance }) => (
-              <TableContainer key={id} className={s.container}>
+              <TableRow>
+                <TableContainer key={id} className={s.container}>
                 <Table>
                   <TableBody>
                     <TableCell
@@ -249,16 +288,37 @@ export default function HomeTabMobile() {
                   </TableBody>
                 </Table>
               </TableContainer>
+              </TableRow>
             ),
           )}
-        </div>
-      )}
+        </>
+          )}
+          <TableFooter className={s.tablehead}>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[5]}
+                    count={transactionList !== [] && totalTransactions}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: { 'aria-label': 'rows per page' },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+        </Table>
+      </TableContainer>
       <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
         <EditTransaction
           handleClickOpen={handleClickOpen}
           transactionForEdit={transactionForEdit}
         />
-      </TransitionsModal>
-    </div>
+        </TransitionsModal>
+        
+    </>
   );
 }
