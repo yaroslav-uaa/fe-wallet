@@ -65,3 +65,18 @@ body {
   margin: 0 !important;
   border-radius: 6px;
 }
+
+.brighttheme-text {
+  line-height: 1.5rem !important;
+}
+.brighttheme-icon, .brighttheme-icon>span {
+  line-height: 1.7rem !important;
+  height: 1rem !important;
+  vertical-align: middle !important;
+}
+
+.brighttheme-icon, .brighttheme-icon>span::after {
+  line-height: 1.7rem !important;
+  height: 1rem !important;
+  vertical-align: middle !important;
+}
