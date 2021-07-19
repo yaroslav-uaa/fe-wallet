@@ -5,7 +5,7 @@
   margin-right: auto;
 }
 .selectMonth:not(:last-child) {
-  margin-right: 10px !important;
+  /* margin-right: 10px !important; */
 }
 
 .selectMonth {
@@ -28,16 +28,8 @@
   .selectMonth:not(:last-child) {
     margin-right: 20px !important;
   }
-}
 
-.containerSelects {
-  display: block;
-  max-width: 280px;
-}
-
-@media screen and (min-width: 768px) {
   .containerSelects {
-    display: block;
-    min-width: 322px;
+    display: flex;
   }
 }
