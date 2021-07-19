@@ -13,15 +13,20 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
+  TablePagination,
   TableRow,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+
+import sortBy from 'lodash.sortby';
 import moment from 'moment';
 
 import EditTransaction from '../EditTransaction';
 import TransitionsModal from '../EditTransaction/ModalTransaction';
+import TablePaginationActions from './HomeTabPagination';
 
 const useStyles = makeStyles(theme => ({
   head: {
@@ -30,6 +35,17 @@ const useStyles = makeStyles(theme => ({
     color: '#fffefe',
     fontSize: 14,
     borderCollapse: 'collapse',
+  },
+  cont: {
+    margin: '0',
+    backgroundColor: 'transparent',
+    border: 'none'
+  },
+  table: {
+    width: '100%',
+    margin: 'auto',
+    backgroundColor: 'transparent',
+    border: 'none'
   },
   text: {
     fontFamily: 'Poppins, sans-serif',
@@ -69,6 +85,11 @@ const useStyles = makeStyles(theme => ({
     margin: '14px auto',
     maxWidth: '400px',
   },
+  sort: {
+    width: '200px',
+    height: '30px',
+    margin: '0 auto'
+  }
 }));
 
 export default function HomeTabMobile() {
@@ -76,10 +97,18 @@ export default function HomeTabMobile() {
   const s = useStyles();
   const theme = useTheme();
 
+  const [itemSort, setItemSort] = useState([]);
+  const [isOn, toggleIsOn] = useToggle();
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const transactionList = useSelector(transactionsSelectors.filterTransactions);
+  
+  const totalTransactions = useSelector(
+    transactionsSelectors.totalTransactions,
+  );
 
   const deleteTransaction = useCallback(
     id => dispatch(transactionsOperations.deleteTransaction(id)),
@@ -95,6 +124,9 @@ export default function HomeTabMobile() {
     () => dispatch(transactionsOperations.fetchTransactions()),
     [dispatch],
   );
+    useEffect(() => {
+    setItemSort(transactionList);
+  }, [transactionList]);
 
   function deleteT(id) {
     deleteTransaction(id);
@@ -106,6 +138,33 @@ export default function HomeTabMobile() {
     fetchTransactions();
   };
 
+  const sortByUp = value => {
+    const lodash = sortBy(transactionList, [
+      function (o) {
+        return o[value];
+      },
+    ]);
+    setItemSort(lodash);
+  };
+
+  const sortByDown = value => {
+    const lodash = sortBy(transactionList, [
+      function (o) {
+        return o[value];
+      },
+    ]);
+    setItemSort(lodash.reverse());
+  };
+
+  function useToggle(initialValue = false) {
+    const [value, setValue] = useState(initialValue);
+    const toggle = useCallback(() => {
+      setValue(v => !v);
+    }, []);
+    return [value, toggle];
+  }
+
+
   function getRandomColor() {
     const color = theme.palette.arrColors;
     const index = Math.floor(Math.random() * color.length);
@@ -116,8 +175,53 @@ export default function HomeTabMobile() {
     setOpen(!open);
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = e => {
+    setRowsPerPage(parseInt(e.target.value, 5));
+    setPage(0);
+  };
+
   return (
-    <div>
+    <>
+      <div className={s.sort}>      <button
+        type="button"
+        style={{
+          border: 'none',
+          width: '200px',
+          padding: '4px 8px 0 8px',
+          color: 'white',
+          cursor: 'pointer',
+          backgroundColor: 'transparent',
+        }}
+        className={isOn ? 'btn' : 'hidden'}
+        onClick={() => {
+          sortByUp('date');
+          toggleIsOn();
+        }}>
+        <span> Sort by date 🠕</span>
+      </button>
+      <button
+        type="button"
+        style={{
+          border: 'none',
+          width: '200px',
+          padding: '4px 8px 0 8px',
+          cursor: 'pointer',
+          color: 'white',
+          backgroundColor: 'transparent',
+        }}
+        className={!isOn ? 'btn' : 'hidden'}
+        onClick={() => {
+          sortByDown('date');
+          toggleIsOn();
+        }}>
+        <span>Sort by date 🠗</span>
+        </button></div>
+      <TableContainer className={s.cont}>
+        <Table className={s.table}>
       {transactionList.length === 0 ? (
         <p
           className={s.row}
@@ -133,10 +237,17 @@ export default function HomeTabMobile() {
           No transactions yet
         </p>
       ) : (
-        <div>
-          {transactionList.map(
+        <>
+          {(rowsPerPage > 0
+                  ? itemSort.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage,
+                    )
+                  : itemSort
+                ).map(
             ({ id, date, income, category, comment, sum, balance }) => (
-              <TableContainer key={id} className={s.container}>
+              <TableRow>
+                <TableContainer key={id} className={s.container}>
                 <Table>
                   <TableBody>
                     <TableCell
@@ -156,7 +267,7 @@ export default function HomeTabMobile() {
                     >
                       <TableRow className={s.row}>
                         <TableCell className={s.head} align="left">
-                          Date
+                                  Date
                         </TableCell>
                         <TableCell className={s.text} align="right">
                           {moment(date).format('DD.MM.YYYY')}
@@ -249,16 +360,37 @@ export default function HomeTabMobile() {
                   </TableBody>
                 </Table>
               </TableContainer>
+              </TableRow>
             ),
           )}
-        </div>
-      )}
+        </>
+          )}
+          <TableFooter className={s.tablehead}>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[5]}
+                    count={transactionList !== [] && totalTransactions}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: { 'aria-label': 'rows per page' },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+        </Table>
+      </TableContainer>
       <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
         <EditTransaction
           handleClickOpen={handleClickOpen}
           transactionForEdit={transactionForEdit}
         />
-      </TransitionsModal>
-    </div>
+        </TransitionsModal>
+        
+    </>
   );
 }
