@@ -20,6 +20,8 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+
+import sortBy from 'lodash.sortby';
 import moment from 'moment';
 
 import EditTransaction from '../EditTransaction';
@@ -35,13 +37,13 @@ const useStyles = makeStyles(theme => ({
     borderCollapse: 'collapse',
   },
   cont: {
-    width: '100vw',
-    margin: 'auto',
+    width: '90%',
+    margin: '0',
     backgroundColor: 'transparent',
     border: 'none'
   },
   table: {
-    width: '100vw',
+    width: '100%',
     margin: 'auto',
     backgroundColor: 'transparent',
     border: 'none'
@@ -91,6 +93,8 @@ export default function HomeTabMobile() {
   const s = useStyles();
   const theme = useTheme();
 
+  const [itemSort, setItemSort] = useState([]);
+  const [isOn, toggleIsOn] = useToggle();
   const [open, setOpen] = useState(false);
   const [transactionForEdit, setTransactionForEdit] = useState(null);
   const [page, setPage] = useState(0);
@@ -116,6 +120,9 @@ export default function HomeTabMobile() {
     () => dispatch(transactionsOperations.fetchTransactions()),
     [dispatch],
   );
+    useEffect(() => {
+    setItemSort(transactionList);
+  }, [transactionList]);
 
   function deleteT(id) {
     deleteTransaction(id);
@@ -126,6 +133,33 @@ export default function HomeTabMobile() {
     handleClickOpen();
     fetchTransactions();
   };
+
+  const sortByUp = value => {
+    const lodash = sortBy(transactionList, [
+      function (o) {
+        return o[value];
+      },
+    ]);
+    setItemSort(lodash);
+  };
+
+  const sortByDown = value => {
+    const lodash = sortBy(transactionList, [
+      function (o) {
+        return o[value];
+      },
+    ]);
+    setItemSort(lodash.reverse());
+  };
+
+  function useToggle(initialValue = false) {
+    const [value, setValue] = useState(initialValue);
+    const toggle = useCallback(() => {
+      setValue(v => !v);
+    }, []);
+    return [value, toggle];
+  }
+
 
   function getRandomColor() {
     const color = theme.palette.arrColors;
@@ -167,11 +201,11 @@ export default function HomeTabMobile() {
       ) : (
         <>
           {(rowsPerPage > 0
-                  ? transactionList.slice(
+                  ? itemSort.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage,
                     )
-                  : transactionList
+                  : itemSort
                 ).map(
             ({ id, date, income, category, comment, sum, balance }) => (
               <TableRow>
@@ -195,7 +229,45 @@ export default function HomeTabMobile() {
                     >
                       <TableRow className={s.row}>
                         <TableCell className={s.head} align="left">
-                          Date
+                                  Date
+                                   <button
+                  type="button"
+                  style={{
+                    border: 'none',
+                    width: '10px',
+                    padding: '4px 8px 0 8px',
+                    color: 'white',
+                    cursor: 'pointer',
+                    backgroundColor: 'transparent',
+                  }}
+                  className={isOn ? 'btn' : 'hidden'}
+                  onClick={() => {
+                    sortByUp('date');
+                    toggleIsOn();
+                  }}
+                >
+                  {' '}
+                  🠕
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    border: 'none',
+                    width: '10px',
+                    padding: '4px 8px 0 8px',
+                    cursor: 'pointer',
+                    color: 'white',
+                    backgroundColor: 'transparent',
+                  }}
+                  className={!isOn ? 'btn' : 'hidden'}
+                  onClick={() => {
+                    sortByDown('date');
+                    toggleIsOn();
+                  }}
+                >
+                  {' '}
+                  🠗
+                </button>
                         </TableCell>
                         <TableCell className={s.text} align="right">
                           {moment(date).format('DD.MM.YYYY')}
