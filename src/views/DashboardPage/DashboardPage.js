@@ -3,11 +3,10 @@ import HomeTab from '../../components/HomeTab';
 import Modal from '../../components/Modal';
 function DashboardPage() {
   return (
-    <div>
+    <>
       <HomeTab />
-
       <Modal />
-    </div>
+    </>
   );
 }
 

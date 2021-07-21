@@ -3,9 +3,9 @@ import SignIn from '../../components/SignInForm';
 
 function SignInPage() {
   return (
-    <div>
+    <>
       <SignIn />
-    </div>
+    </>
   );
 }
 
