@@ -22,19 +22,10 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-function FullScreenDialog() {
+function FullScreenDialog({children, handleClickOpen, open}) {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  };
-
-  const handleClose = () => {
-    setOpen(false)
-  };
 
     return (
       <>
@@ -46,7 +37,7 @@ function FullScreenDialog() {
               maxWidth='md'
               fullScreen={fullScreen}
               open={open}
-              onClose={handleClose}
+              onClose={handleClickOpen}
               TransitionComponent={Transition}
               className={classes.dialog}
             >
@@ -55,16 +46,16 @@ function FullScreenDialog() {
                   <div className={s.box_close_btn}>
                     <IconButton
                       color="inherit"
-                      onClick={handleClose}
+                      onClick={handleClickOpen}
                       aria-label="Close"
                     >
                       <CloseIcon />
                     </IconButton>
                   </div>
-
-                  <FormAddTransaction handleClose={handleClose}/>
+                  {children}
+                  {/* <FormAddTransaction handleClickOpen={handleClickOpen}/> */}
                   <div className={s.box_btn_rejected}>
-                    <Button variant="contained" onClick={handleClose} className={s.rejected} size='small'>
+                    <Button variant="contained" onClick={handleClickOpen} className={s.rejected} size='small'>
                       cancel
                     </Button>
                   </div>

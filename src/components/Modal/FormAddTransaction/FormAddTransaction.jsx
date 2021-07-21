@@ -42,7 +42,7 @@ const SchemaYup = Yup.object({
     .required('Comment is required'),
 });
 
-export default function FormAddTransaction({handleClose}) {
+export default function FormAddTransaction({handleClickOpen}) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [chooseSelect, setSelect] = useState(false);
@@ -80,7 +80,7 @@ export default function FormAddTransaction({handleClose}) {
         category: category,
       };
       onFormSubmit(correctValue, resetForm);
-      handleClose()
+      handleClickOpen()
     },
   });
 
