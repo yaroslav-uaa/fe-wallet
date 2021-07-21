@@ -1,9 +1,8 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
 import { Container } from '@material-ui/core';
-import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
 // import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
@@ -57,7 +56,7 @@ function App() {
 
           <PublicRoute path="/signup" exact component={SignUpPage} restricted />
 
-          <PrivateRoute
+          <Route
             path="/"
             component={isTabletOrMobile ? MainPageMobile : MainPage}
           />
