@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import SideBar from '../../components/SideBar';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import '../ViewsAnimate.css';
+import { Ripple } from 'react-spinners-css';
 // views
 const DashboardPage = lazy(() => import('../DashboardPage/DashboardPage'));
 const StatsPage = lazy(() => import('../StatsPage/StatsPage'));
@@ -19,7 +20,20 @@ function MainPage() {
       <div className="page">
         <SideBar />
         <div className="content">
-          <Suspense fallback={<p>wait...</p>}>
+          <Suspense
+            fallback={
+              <Ripple
+                color="#fffefe"
+                size="100"
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              />
+            }
+          >
             <TransitionGroup>
               <CSSTransition
                 timeout={200}
