@@ -1,11 +1,11 @@
 .header {
   height: 60px;
+  width: 100vw;
   border-bottom: 1px solid #fffefe;
   background-color: #212121;
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   z-index: 999;
   padding: 0 24px;
 }
