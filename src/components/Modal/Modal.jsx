@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
@@ -7,7 +7,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
 import s from './Modal.module.css';
-import FormAddTransaction from './FormAddTransaction';
 import { makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 
 const useStyles = makeStyles(()=>({
@@ -53,7 +52,6 @@ function FullScreenDialog({children, handleClickOpen, open}) {
                     </IconButton>
                   </div>
                   {children}
-                  {/* <FormAddTransaction handleClickOpen={handleClickOpen}/> */}
                   <div className={s.box_btn_rejected}>
                     <Button variant="contained" onClick={handleClickOpen} className={s.rejected} size='small'>
                       cancel

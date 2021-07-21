@@ -1,9 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  transactionsOperations,
-  transactionsSelectors,
-} from '../../../redux/transaction';
+import React, { useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -21,11 +16,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
-import sortBy from 'lodash.sortby';
 import moment from 'moment';
 
 import EditTransaction from '../EditTransaction';
-import TransitionsModal from '../EditTransaction/ModalTransaction';
+import TransitionsModal from '../../Modal';
 import TablePaginationActions from './HomeTabPagination';
 
 const useStyles = makeStyles(theme => ({
@@ -94,96 +88,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function HomeTabMobile() {
-  const dispatch = useDispatch();
+export default function HomeTabMobile({
+  setPage,
+  page,
+  open,
+  OnEditTransaction,
+  deleteT,
+  itemSort,
+  totalTransactions,
+  transactionList,
+  transactionForEdit,
+  fetchTransactions,
+  sortByUp,
+  sortByDown,
+  isOn,
+  toggleIsOn,
+  useToggle,
+  handleClickOpen,
+  handleChangePage, }) {
+  
   const s = useStyles();
   const theme = useTheme();
-
-  const [itemSort, setItemSort] = useState([]);
-  const [isOn, toggleIsOn] = useToggle();
-  const [open, setOpen] = useState(false);
-  const [transactionForEdit, setTransactionForEdit] = useState(null);
-  const [page, setPage] = useState(0);
+  
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const transactionList = useSelector(transactionsSelectors.filterTransactions);
-
-  const totalTransactions = useSelector(
-    transactionsSelectors.totalTransactions,
-  );
-
-  const deleteTransaction = useCallback(
-    id => dispatch(transactionsOperations.deleteTransaction(id)),
-    [dispatch],
-  );
-
-  const fetchTransactions = useCallback(() => {
-    dispatch(transactionsOperations.fetchTransactions());
-  }, [dispatch]);
-
-  useEffect(() => fetchTransactions(), [fetchTransactions]);
-  useEffect(
-    () => dispatch(transactionsOperations.fetchTransactions()),
-    [dispatch],
-  );
-  useEffect(() => {
-    setItemSort(transactionList);
-  }, [transactionList]);
-
-  function deleteT(id) {
-    deleteTransaction(id);
-  }
-
-  const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
-    setTransactionForEdit({ id, date, income, category, comment, sum });
-    handleClickOpen();
-    fetchTransactions();
+  const handleChangeRowsPerPage = e => {
+    setRowsPerPage(parseInt(e.target.value, 5));
+    setPage(0);
   };
-
-  const sortByUp = value => {
-    const lodash = sortBy(transactionList, [
-      function (o) {
-        return o[value];
-      },
-    ]);
-    setItemSort(lodash);
-  };
-
-  const sortByDown = value => {
-    const lodash = sortBy(transactionList, [
-      function (o) {
-        return o[value];
-      },
-    ]);
-    setItemSort(lodash.reverse());
-  };
-
-  function useToggle(initialValue = false) {
-    const [value, setValue] = useState(initialValue);
-    const toggle = useCallback(() => {
-      setValue(v => !v);
-    }, []);
-    return [value, toggle];
-  }
 
   function getRandomColor() {
     const color = theme.palette.arrColors;
     const index = Math.floor(Math.random() * color.length);
     return color[index];
   }
-
-  const handleClickOpen = () => {
-    setOpen(!open);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = e => {
-    setRowsPerPage(parseInt(e.target.value, 5));
-    setPage(0);
-  };
 
   return (
     <>
