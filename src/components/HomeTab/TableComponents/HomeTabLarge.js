@@ -6,7 +6,6 @@ import {
   transactionsSelectors,
 } from '../../../redux/transaction';
 import { makeStyles } from '@material-ui/core/styles';
-
 import {
   Table,
   TableBody,
@@ -76,7 +75,8 @@ const useStyles = makeStyles(theme => ({
   table: {
     color: theme.palette.primary.light,
     borderCollapse: 'collapse',
-    maxWidth: '780px',
+    width: '100%',
+    // maxWidth: '780px',
   },
 
   tablebody: {
@@ -140,12 +140,12 @@ export default function HomeTabLarge() {
     return [value, toggle];
   }
 
-  const deleteT = (id) => {
+  const deleteT = id => {
     fetchTransactions();
     deleteTransaction(id);
     fetchTransactions();
     return handleChangePage;
-  }
+  };
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
