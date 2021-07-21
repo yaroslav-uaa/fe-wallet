@@ -98,12 +98,10 @@ export default function HomeTabMobile({
   totalTransactions,
   transactionList,
   transactionForEdit,
-  fetchTransactions,
   sortByUp,
   sortByDown,
   isOn,
   toggleIsOn,
-  useToggle,
   handleClickOpen,
   handleChangePage, }) {
   

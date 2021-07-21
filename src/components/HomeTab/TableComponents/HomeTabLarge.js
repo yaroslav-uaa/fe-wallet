@@ -88,12 +88,10 @@ export default function HomeTabLarge({
   totalTransactions,
   transactionList,
   transactionForEdit,
-  fetchTransactions,
   sortByUp,
   sortByDown,
   isOn,
   toggleIsOn,
-  useToggle,
   handleClickOpen,
   handleChangePage, }) {
   const s = useStyles();

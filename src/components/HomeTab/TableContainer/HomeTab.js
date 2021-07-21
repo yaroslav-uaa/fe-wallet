@@ -47,26 +47,39 @@ function HomeTab() {
   useEffect(() => {
     setItemSort(transactionList);
   }, [transactionList]);
+  // const sortByDown = value => {
+  //   const lodash = sortBy(transactionList, [
+  //     function (o) {
+  //       return o[value];
+  //     },
+  //   ]);
+  //   setItemSort(lodash.reverse());
+  // };
 
-
-  const sortByUp = value => {
-    const lodash = sortBy(transactionList, [
+  // const sortByUp = value => {
+  //   const lodash = sortBy(transactionList, [
+  //     function (o) {
+  //       return o[value];
+  //     },
+  //   ]);
+  //   setItemSort(lodash);
+  // };
+  const sorting = (value) => {
+     const lodash = sortBy(transactionList, [
       function (o) {
         return o[value];
       },
-    ]);
-    setItemSort(lodash);
+     ]);
+    setItemSort(lodash)
+  }
+  
+  const sortByUp = (value) => {
+    sorting(value.reverse)
   };
-
-  const sortByDown = value => {
-    const lodash = sortBy(transactionList, [
-      function (o) {
-        return o[value];
-      },
-    ]);
-    setItemSort(lodash.reverse());
+    const sortByDown = (value) => {
+    sorting(value)
   };
-
+  
   function useToggle(initialValue = false) {
     const [value, setValue] = useState(initialValue);
     const toggle = useCallback(() => {
