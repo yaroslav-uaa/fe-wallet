@@ -11,6 +11,7 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import f from './Currency.module.css';
 import Skeleton from 'react-loading-skeleton';
+import { fetchInfo } from '../../services/currencyExchange';
 
 const useStyles = makeStyles({
   table: {
@@ -67,77 +68,76 @@ function Currency() {
   const isDesktopOrTablet = useMediaQuery({ minWidth: 1280 });
   const s = useStyles();
   const [currency, setCurrency] = useState('');
-  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = JSON.parse(sessionStorage.getItem('currency'));
-        setCurrency(data);
-        setisLoading(true);
+        const data = await fetchInfo();
+        const sliced = data.slice(0, -1);
+        setCurrency(sliced);
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     };
     getData();
   }, []);
 
+  console.log(currency);
+
   return (
     <>
-      {isLoading === true && (
-        <div className={f.sidebar}>
-          <TableContainer className={s.table}>
-            {!currency ? (
-              <Skeleton
-                style={{
-                  background:
-                    'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
-                }}
-                duration={3}
-                width={isDesktopOrTablet ? 357 : 280}
-                height={174}
-              />
-            ) : (
-              <Table size="small" aria-label="a dense table">
-                <TableHead className={s.head}>
-                  <TableRow>
-                    <TableCell color="secondary" className={s.headers}>
-                      Currency
+      <div className={f.sidebar}>
+        <TableContainer className={s.table}>
+          {!currency ? (
+            <Skeleton
+              style={{
+                background:
+                  'linear-gradient(to right,  rgba(49, 45, 45, 0.8), rgba(49, 45, 45, 0.2), rgba(49, 45, 45, 0.8))',
+              }}
+              duration={3}
+              width={isDesktopOrTablet ? 357 : 280}
+              height={174}
+            />
+          ) : (
+            <Table size="small" aria-label="a dense table">
+              <TableHead className={s.head}>
+                <TableRow>
+                  <TableCell color="secondary" className={s.headers}>
+                    Currency
+                  </TableCell>
+                  <TableCell align="center" className={s.headers}>
+                    Buy
+                  </TableCell>
+                  <TableCell align="center" className={s.headers}>
+                    Sale
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody className={s.body}>
+                {currency?.map(el => (
+                  <TableRow key={el.ccy}>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      align="left"
+                      className={s.currency}
+                    >
+                      {el.ccy}
                     </TableCell>
-                    <TableCell align="center" className={s.headers}>
-                      Buy
+                    <TableCell align="center" className={s.buy}>
+                      {Math.floor(el.buy * 100) / 100}
                     </TableCell>
-                    <TableCell align="center" className={s.headers}>
-                      Sale
+                    <TableCell align="center" className={s.sale}>
+                      {Math.floor(el.sale * 100) / 100}
                     </TableCell>
                   </TableRow>
-                </TableHead>
-
-                <TableBody className={s.body}>
-                  {currency.map(el => (
-                    <TableRow key={el.ccy}>
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        align="left"
-                        className={s.currency}
-                      >
-                        {el.ccy}
-                      </TableCell>
-                      <TableCell align="center" className={s.buy}>
-                        {Math.floor(el.buy * 100) / 100}
-                      </TableCell>
-                      <TableCell align="center" className={s.sale}>
-                        {Math.floor(el.sale * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            )}
-          </TableContainer>
-        </div>
-      )}
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </TableContainer>
+      </div>
     </>
   );
 }
