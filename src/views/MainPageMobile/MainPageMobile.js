@@ -6,6 +6,7 @@ import SideBar from '../../components/SideBar';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import '../ViewsAnimate.css';
 import PrivateRoute from '../../routes/PrivateRoute';
+import { Ripple } from 'react-spinners-css';
 
 // views
 const DashboardPage = lazy(() => import('../DashboardPage/DashboardPage'));
@@ -21,7 +22,20 @@ function MainPageMobile() {
       <div className="page">
         <SideBar />
         <div className="content">
-          <Suspense>
+          <Suspense
+            fallback={
+              <Ripple
+                color="#fffefe"
+                size="60"
+                style={{
+                  position: 'absolute',
+                  top: '70%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              />
+            }
+          >
             <TransitionGroup>
               <CSSTransition
                 timeout={500}

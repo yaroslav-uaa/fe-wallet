@@ -29,7 +29,7 @@ function MainPage() {
                 size="100"
                 style={{
                   position: 'absolute',
-                  top: '50%',
+                  top: '70%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                 }}
