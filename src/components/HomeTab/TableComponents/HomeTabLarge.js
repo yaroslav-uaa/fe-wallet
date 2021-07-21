@@ -1,10 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 
-import {
-  transactionsOperations,
-  transactionsSelectors,
-} from '../../../redux/transaction';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Table,
@@ -20,12 +15,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
-import sortBy from 'lodash.sortby';
 import moment from 'moment';
 
 import TablePaginationActions from './HomeTabPagination';
 import EditTransaction from '../EditTransaction';
-import TransitionsModal from '../EditTransaction/ModalTransaction';
+import TransitionsModal from '../../Modal';
 
 const useStyles = makeStyles(theme => ({
   tablehead: {
@@ -84,90 +78,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function HomeTabLarge() {
+export default function HomeTabLarge({
+  setPage,
+  page,
+  open,
+  OnEditTransaction,
+  deleteT,
+  itemSort,
+  totalTransactions,
+  transactionList,
+  transactionForEdit,
+  sortByUp,
+  sortByDown,
+  isOn,
+  toggleIsOn,
+  handleClickOpen,
+  handleChangePage, }) {
   const s = useStyles();
-  const dispatch = useDispatch();
-
-  const [itemSort, setItemSort] = useState([]);
-  const [isOn, toggleIsOn] = useToggle();
-  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = useState(false);
-  const [transactionForEdit, setTransactionForEdit] = useState(null);
-
-  const transactionList = useSelector(transactionsSelectors.filterTransactions);
-  const totalTransactions = useSelector(
-    transactionsSelectors.totalTransactions,
-  );
-
-  const deleteTransaction = useCallback(
-    id => dispatch(transactionsOperations.deleteTransaction(id)),
-    [dispatch],
-  );
-
-  const fetchTransactions = useCallback(() => {
-    dispatch(transactionsOperations.fetchTransactions());
-  }, [dispatch]);
-
-  useEffect(() => fetchTransactions(), [fetchTransactions]);
-  useEffect(() => {
-    setItemSort(transactionList);
-  }, [transactionList]);
-
-  const sortByUp = value => {
-    const lodash = sortBy(transactionList, [
-      function (o) {
-        return o[value];
-      },
-    ]);
-    setItemSort(lodash);
-  };
-
-  const sortByDown = value => {
-    const lodash = sortBy(transactionList, [
-      function (o) {
-        return o[value];
-      },
-    ]);
-    setItemSort(lodash.reverse());
-  };
-
-  function useToggle(initialValue = false) {
-    const [value, setValue] = useState(initialValue);
-    const toggle = useCallback(() => {
-      setValue(v => !v);
-    }, []);
-    return [value, toggle];
-  }
-
-  const deleteT = id => {
-    fetchTransactions();
-    deleteTransaction(id);
-    fetchTransactions();
-    return handleChangePage;
-  };
-
+  
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, itemSort.length - page * rowsPerPage);
-
-  const OnEditTransaction = ({ id, date, income, category, comment, sum }) => {
-    setTransactionForEdit({ id, date, income, category, comment, sum });
-    handleClickOpen();
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
   const handleChangeRowsPerPage = e => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
-  };
-
-  const handleClickOpen = () => {
-    setOpen(!open);
-    fetchTransactions();
-    return handleChangePage;
   };
 
   return (

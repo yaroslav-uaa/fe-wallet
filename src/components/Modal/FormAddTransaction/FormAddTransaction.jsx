@@ -34,15 +34,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SchemaYup = Yup.object({
-  //   category: Yup.string('Choose your category').required('Category is required'),
   sum: Yup.number('Enter your sum').required('Sum is required'),
-  //   date: Yup.string('Choose your date operation').required('Date is required'),
   comment: Yup.string('Enter your comment')
     .min(3, 'Your comment to short')
     .required('Comment is required'),
 });
 
-export default function FormAddTransaction({handleClose}) {
+export default function FormAddTransaction({handleClickOpen}) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [chooseSelect, setSelect] = useState(false);
@@ -50,11 +48,9 @@ export default function FormAddTransaction({handleClose}) {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleChangeCategory = event => {
-    console.log(event.target.value);
     setCategory(event.target.value);
   };
   const onSwitchChecked = evt => {
-    console.log(evt.target.checked);
     setSelect(evt.target.checked);
     setCategory(null);
   };
@@ -72,7 +68,6 @@ export default function FormAddTransaction({handleClose}) {
     },
     validationSchema: SchemaYup,
     onSubmit: (values, { resetForm }) => {
-      console.log(chooseSelect);
       const correctValue = {
         ...values,
         date: moment(selectedDate).format(),
@@ -80,7 +75,7 @@ export default function FormAddTransaction({handleClose}) {
         category: category,
       };
       onFormSubmit(correctValue, resetForm);
-      handleClose()
+      handleClickOpen()
     },
   });
 
