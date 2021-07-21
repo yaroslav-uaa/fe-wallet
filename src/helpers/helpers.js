@@ -1,20 +1,18 @@
-const arrColors = [
-  'rgba(255, 99, 132, 1)',
-  'rgba(54, 162, 235, 1)',
-  'rgba(255, 206, 86, 1)',
-  'rgba(75, 192, 192, 1)',
-  'rgba(153, 102, 255, 1)',
-  'rgba(255, 159, 64, 1)',
-  'rgba(252, 110, 206, 1)',
-  'rgba(116, 175, 195, 1)',
-  'rgba(252, 239, 36, 1)',
-  'rgba(199, 74, 180, 1)',
-  'rgba(210, 224, 67, 1)',
-  'rgba(109, 36, 40, 1)',
-  'rgba(144, 182, 231, 1)',
-  'rgba(182, 140, 136, 1)',
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 export default {
-  arrColors,
+  months,
 };
