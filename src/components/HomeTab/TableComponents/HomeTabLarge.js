@@ -114,6 +114,7 @@ export default function HomeTabLarge() {
     setItemSort(transactionList);
   }, [transactionList]);
 
+
   const sortByUp = value => {
     const lodash = sortBy(transactionList, [
       function (o) {
