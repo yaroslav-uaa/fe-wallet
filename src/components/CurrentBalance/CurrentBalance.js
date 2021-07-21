@@ -9,7 +9,7 @@ function CurrentBalance() {
   return (
     <div className={s.container}>
       <p className={s.title}>balance:</p>
-      <p className={s.balance}>&#8372; {getlast?.balance}</p>
+      <p className={s.balance}>&#8372; {getlast?.balance || 0}</p>
     </div>
   );
 }
