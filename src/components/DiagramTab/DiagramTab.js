@@ -30,38 +30,42 @@ export default function DiagramTab({ arrColors }) {
       </ul>
 
       <ul className={styles.listTransaction}>
-        {categories
-          ? categories.map(({ category, sum }, index) => {
-              return (
-                <li className={styles.elementTransaction} key={index}>
-                  <div
-                    style={{
-                      backgroundColor: `${arrColors[index]}`,
-                      width: '24px',
-                      minHeight: '24px',
-                      borderRadius: '12px',
-                      marginRight: '15px',
-                    }}
-                  ></div>
-                  <div className={styles.category}>{category}</div>
-                  <div className={styles.sum}>{sum}</div>
-                </li>
-              );
-            })
-          : null}
+        {categories ? (
+          categories.map(({ category, sum }, index) => {
+            return (
+              <li className={styles.elementTransaction} key={index}>
+                <div
+                  style={{
+                    backgroundColor: `${arrColors[index]}`,
+                    width: '24px',
+                    minHeight: '24px',
+                    borderRadius: '12px',
+                    marginRight: '15px',
+                  }}
+                ></div>
+                <div className={styles.category}>{category}</div>
+                <div className={styles.sum}>{sum}</div>
+              </li>
+            );
+          })
+        ) : (
+          <li className={styles.elementTransaction}>
+            <div className={styles.category}>Here is nothing :(</div>
+          </li>
+        )}
       </ul>
 
       <ul className={styles.listAll}>
         <li className={styles.elementListAll}>
           <div className={styles.elementAllText}>Costs:</div>
           <div className={styles.elementAllCosts}>
-            {categoriesFromState.consumption}
+            {categoriesFromState.consumption || 0}
           </div>
         </li>
         <li className={styles.elementListAll}>
           <div className={styles.elementAllText}>Income:</div>
           <div className={styles.elementAllIncome}>
-            {categoriesFromState.income}
+            {categoriesFromState.income || 0}
           </div>
         </li>
       </ul>
