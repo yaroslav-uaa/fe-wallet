@@ -13,17 +13,13 @@ function CurrentBalance() {
     const getbalance = async () => {
       try {
         const all = await getAllTransactions;
-        const last = all.slice(all.length - 1);
-        setbalance(last[0].balance);
-        console.log(balance);
+        setbalance(all[0].balance);
       } catch (error) {
         console.log(error.message);
       }
     };
     getbalance();
-  }, [getAllTransactions, balance]);
-
-  console.log(balance);
+  }, [getAllTransactions]);
 
   return (
     <div className={s.container}>

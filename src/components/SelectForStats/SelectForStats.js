@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import arrMonth from '../../helpers/helpers';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { deepPurple } from '@material-ui/core/colors';
 import styles from './SelectForStats.module.css';
@@ -107,19 +108,9 @@ const SelectForStats = () => {
           value={month}
           onChange={handleChangeMonth}
         >
-          <MenuItem value={'Month'}>Month</MenuItem>
-          <MenuItem value={0}>January</MenuItem>
-          <MenuItem value={1}>February</MenuItem>
-          <MenuItem value={2}>March</MenuItem>
-          <MenuItem value={3}>April</MenuItem>
-          <MenuItem value={4}>May</MenuItem>
-          <MenuItem value={5}>June</MenuItem>
-          <MenuItem value={6}>July</MenuItem>
-          <MenuItem value={7}>August</MenuItem>
-          <MenuItem value={8}>September</MenuItem>
-          <MenuItem value={9}>October</MenuItem>
-          <MenuItem value={10}>November</MenuItem>
-          <MenuItem value={11}>December</MenuItem>
+          {arrMonth.months.map((month, index) => {
+            return <MenuItem value={index}>{month}</MenuItem>;
+          })}
         </Select>
       </FormControl>
 
@@ -131,7 +122,6 @@ const SelectForStats = () => {
           value={year}
           onChange={handleChangeYear}
         >
-          <MenuItem value={'Year'}>Year</MenuItem>
           <MenuItem value={2019}>2019</MenuItem>
           <MenuItem value={2020}>2020</MenuItem>
           <MenuItem value={2021}>2021</MenuItem>
