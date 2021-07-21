@@ -5,7 +5,7 @@ import authOperations from '../../redux/auth/auth-operations';
 import { Container } from '@material-ui/core';
 import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
-import GetCurrency from '../GetCurrency/GetCurrency';
+// import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
 import '@pnotify/core/dist/PNotify.css';
 // import Loader from '../Loader/Loader';
@@ -37,7 +37,7 @@ function App() {
         minHeight: '100vh',
       }}
     >
-      <GetCurrency />
+      {/* <GetCurrency /> */}
 
       <Suspense
         fallback={
