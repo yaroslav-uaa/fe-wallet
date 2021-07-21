@@ -9,8 +9,7 @@ const getAllCategoriesFromTransactions = state => state.transactions.categories;
 
 const getFilter = state => state.transactions.filter;
 
-const getLastTransaction = state =>
-  getAllTransactions(state)[totalTransactions(state) - 1];
+const getLastTransaction = state => getAllTransactions(state)[0];
 
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
