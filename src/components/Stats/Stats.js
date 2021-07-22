@@ -15,21 +15,39 @@ const Stats = () => {
 
   const { getAllCategoriesFromTransactions } = transactionsSelectors;
   const categoriesFromState = useSelector(getAllCategoriesFromTransactions);
-  const categories = categoriesFromState.categories;
   const balance = categoriesFromState.balance;
+  const categoriesWithBD = categoriesFromState.categories;
+  const months = theme.months;
+  const allCategoriesWithColors = theme.categories;
 
-  const arrMoney = categories ? categories.map(trans => trans.sum) : null;
-  const color = theme.palette.arrColors;
+  const visibleCategories = allCategoriesWithColors.map(el => {
+    const arrCategoriesWithDB = categoriesWithBD
+      ? categoriesWithBD.map(trans => trans.category)
+      : [];
+    if (arrCategoriesWithDB.includes(el.value)) {
+      return el;
+    }
+  });
+
+  const filteredVisibleCategories = visibleCategories.filter(
+    e => e !== undefined,
+  );
+
+  const color = filteredVisibleCategories.map(el => el.color);
+
+  const arrMoney = categoriesWithBD
+    ? categoriesWithBD.map(trans => trans.sum)
+    : null;
   return (
-    <div>
+    <>
       <div className={styles.statisticsPage}>
         <Chart arrColors={color} arrMoney={arrMoney} balance={balance} />
         <div>
-          <SelectForStats />
+          <SelectForStats months={months} />
           <DiagramTab arrColors={color} />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Stats;

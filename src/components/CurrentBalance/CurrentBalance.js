@@ -5,11 +5,18 @@ import s from './CurrentBalance.module.css';
 
 function CurrentBalance() {
   const getlast = useSelector(transactionsSelectors.getLastTransaction);
+  const getBalanceWithCategories = useSelector(
+    transactionsSelectors.getAllCategoriesFromTransactions,
+  );
+  // const balance = categoriesFromState.balance;
+  // const balanceCategories = getlast || getBalanceWithCategories;
 
   return (
     <div className={s.container}>
       <p className={s.title}>balance:</p>
-      <p className={s.balance}>&#8372; {getlast?.balance || 0}</p>
+      <p className={s.balance}>
+        &#8372; {getlast?.balance || getBalanceWithCategories.balance}
+      </p>
     </div>
   );
 }
