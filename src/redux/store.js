@@ -15,7 +15,7 @@ import authReducer from './auth/auth-reducer';
 import isLoading from './isLoading/load-reducer';
 import { transactionsReducer } from './transaction';
 import capitalReducer from './capital/reducer-capital';
-
+import resetTokenReducer from './ResetPass/reset-reducer.js';
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -36,6 +36,7 @@ const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     transactions: transactionsReducer,
     capital: capitalReducer,
+    resetToken: resetTokenReducer,
     isLoading,
   },
   middleware,
