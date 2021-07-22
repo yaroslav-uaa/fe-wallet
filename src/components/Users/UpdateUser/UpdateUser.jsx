@@ -1,12 +1,8 @@
 import { useCallback, useState } from 'react';
 // materia
 import PersonIcon from '@material-ui/icons/Person';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import Button from '@material-ui/core/Button';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { useMediaQuery } from 'react-responsive';
-
 // redux
 import authSelectors from '../../../redux/auth/auth-selectors';
 import authOperations from '../../../redux/auth/auth-operations';
@@ -14,13 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 // styles
 import s from '../Profile/Profile.module.css';
 
-export default function UpdateUser() {
+export default function UpdateUser({ closeFormUpdate }) {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
 
   const user = useSelector(authSelectors.getUser);
-  const initialState = { ...user, newPassword: '' };
-  const [updateUser, setUpdateUser] = useState(initialState);
+  const initialState = { name: user.name, email: user.email };
+  const [updateUser, setUpdateUser] = useState({ ...initialState });
 
   const handleInput = useCallback(evt => {
     const value = evt.target.value;
@@ -38,10 +34,11 @@ export default function UpdateUser() {
   const handleSubmit = useCallback(
     evt => {
       evt.preventDefault();
-      console.log(updateUser);
-      updateUserSubmit({ updateUser });
+      updateUserSubmit(updateUser);
+      closeFormUpdate();
+      setTimeout(() => dispatch(authOperations.getCurrentUser()), 1000);
     },
-    [updateUserSubmit, updateUser],
+    [updateUserSubmit, updateUser, closeFormUpdate, dispatch],
   );
 
   return (
@@ -59,42 +56,10 @@ export default function UpdateUser() {
               value={updateUser.name}
               type="text"
               onChange={handleInput}
+              className={s.input_update}
             />
           </li>
-          <li className={s.user_item}>
-            <VpnKeyIcon
-              color="primary"
-              fontSize={isTabletOrMobile ? 'small' : 'medium'}
-              style={{ marginLeft: '10px' }}
-            />
-            <input
-              name="password"
-              value={updateUser.password}
-              type="password"
-              onChange={handleInput}
-              placeholder="old password"
-            />
-            <div className={s.edit}>
-              <Button disableElevation></Button>
-            </div>
-          </li>
-          <li className={s.user_item}>
-            <VpnKeyIcon
-              color="primary"
-              fontSize={isTabletOrMobile ? 'small' : 'medium'}
-              style={{ marginLeft: '10px' }}
-            />
-            <input
-              name="newPassword"
-              value={updateUser.newPassword}
-              type="password"
-              onChange={handleInput}
-              placeholder="new password"
-            />
-            <div className={s.edit}>
-              <Button disableElevation></Button>
-            </div>
-          </li>
+
           <li className={s.user_item}>
             <DraftsIcon
               color="primary"
@@ -106,23 +71,15 @@ export default function UpdateUser() {
               value={updateUser.email}
               type="email"
               onChange={handleInput}
-            />
-          </li>
-          <li className={s.user_item}>
-            <MonetizationOnIcon
-              color="primary"
-              fontSize={isTabletOrMobile ? 'small' : 'medium'}
-              style={{ marginLeft: '10px' }}
-            />
-            <input
-              name="balance"
-              value={updateUser.balance}
-              type="text"
-              onChange={handleInput}
+              className={s.input_update}
             />
           </li>
         </ul>
-        <button type="submit">Save</button>
+        <div className={s.box_btn}>
+          <button type="submit" className={s.user_update_btn}>
+            Save
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -25,7 +25,7 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.24);
   border-radius: 6px;
-  padding: 3px;
+  padding: 3px 8px;
   width: 100%;
   margin-bottom: 14px;
   box-shadow: 0 3px 10px -2px #212121e0;
@@ -124,13 +124,38 @@
   }
 }
 
-/* для чого ці стилі? */
-.upload_avatar {
+.input_update {
   background: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  margin: 5px 10px;
 }
 
-.btn_edit {
-  background: inherit;
+.box_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_update_btn {
+  background: rgba(255, 255, 255, 0.534);
   border: none;
-  outline: none;
+  padding: 8px;
+  color: black;
+  border-radius: 5px;
+  text-transform: uppercase;
+  box-shadow: 0 3px 10px -2px #212121e0;
+  /* margin-top: 10px; */
+}
+.user_update_btn:active,
+.user_update_btn:focus,
+.user_update_btn:hover {
+  background: rgba(255, 255, 255, 0.671);
+  box-shadow: 0 3px 10px -2px #ece0e0e0;
+}
+
+.box_update_capital_btn {
+  margin-left: auto;
 }
