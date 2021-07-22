@@ -21,12 +21,14 @@ import {
 
 const result = createReducer([], {
   [getTransactionsSuccess]: (_, { payload }) => payload.transactions,
-  [addTransactionSuccess]: (state, { payload }) => [
-    payload.transaction,
-    ...state,
+  [addTransactionSuccess]: (_, { payload }) => [
+    ...payload.transaction,
+    // ...state,
   ],
   [updateTransactionSuccess]: (state, { payload }) =>
-    state.map(transaction => (transaction.id === payload.transactionId ? payload : transaction)),
+    state.map(transaction =>
+      transaction.id === payload.transactionId ? payload : transaction,
+    ),
   [deleteTransactionSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });

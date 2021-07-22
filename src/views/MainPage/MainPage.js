@@ -15,7 +15,6 @@ const UserPage = lazy(() => import('../UserPage/UserPage'));
 
 function MainPage() {
   const location = useLocation();
-
   return (
     <>
       <Header />
