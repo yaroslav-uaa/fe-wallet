@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from './auth/auth-reducer';
 import isLoading from './isLoading/load-reducer';
 import { transactionsReducer } from './transaction';
+import capitalReducer from './capital/reducer-capital';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -34,6 +35,7 @@ const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     transactions: transactionsReducer,
+    capital: capitalReducer,
     isLoading,
   },
   middleware,

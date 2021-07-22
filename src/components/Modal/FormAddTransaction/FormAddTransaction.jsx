@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { Button, LinearProgress } from '@material-ui/core';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import TextField from '@material-ui/core/TextField';
-import SimpleSelect from '../Select/Select';
-import Box from '@material-ui/core/Box';
-import operationsTransactions from '../../../redux/transaction/operations-transactions';
-import s from './Form.module.css';
-import { makeStyles } from '@material-ui/core/styles';
-import SwitchMy from '../Switch';
 import moment from 'moment';
 import 'date-fns';
+// redux
+import { useDispatch } from 'react-redux';
+import operationsTransactions from '../../../redux/transaction/operations-transactions';
+// materia
+import { Button, LinearProgress } from '@material-ui/core';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import Box from '@material-ui/core/Box';
+import DateFnsUtils from '@date-io/date-fns';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 import { KeyboardDatePicker } from '@material-ui/pickers';
+//component
+import SwitchMy from '../Switch';
+import SimpleSelect from '../Select/Select';
+// styles
+import s from './Form.module.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,6 +43,7 @@ const SchemaYup = Yup.object({
     .min(3, 'Your comment to short')
     .required('Comment is required'),
 });
+
 
 export default function FormAddTransaction({handleClickOpen}) {
   const classes = useStyles();
@@ -88,16 +93,20 @@ export default function FormAddTransaction({handleClickOpen}) {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <h2 className={s.title}>Add transaction</h2>
         <Box margin={1} className={s.box_switch}>
-          <p className={s.text} style={{color: 'rgb(4, 106, 30)'}}>Income</p>
-            <SwitchMy
-              onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
-              isChecked={chooseSelect}
-              onClick={chooseSelect => onSwitchChecked(chooseSelect)}
-            />
-          <p className={s.text} style={{color: 'rgb(180, 41, 41)'}}>Expense</p>
+          <p className={s.text} style={{ color: 'rgb(4, 106, 30)' }}>
+            Income
+          </p>
+          <SwitchMy
+            onSwitch={chooseSelect => onSwitchChecked(chooseSelect)}
+            isChecked={chooseSelect}
+            onClick={chooseSelect => onSwitchChecked(chooseSelect)}
+          />
+          <p className={s.text} style={{ color: 'rgb(180, 41, 41)' }}>
+            Expense
+          </p>
         </Box>
 
-        <Box >
+        <Box>
           <SimpleSelect
             name="category"
             isIncome={!chooseSelect}
@@ -127,22 +136,22 @@ export default function FormAddTransaction({handleClickOpen}) {
             />
           </Box>
           <Box>
-              <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                classes={{
-                  root: classes.root,
-                  toolbar: s.toolbar,
-                }}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-                error={formik.touched.date && Boolean(formik.errors.date)}
-                helperText={formik.touched.date && formik.errors.date}
-              />
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              format="MM/dd/yyyy"
+              value={selectedDate}
+              classes={{
+                root: classes.root,
+                toolbar: s.toolbar,
+              }}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+              error={formik.touched.date && Boolean(formik.errors.date)}
+              helperText={formik.touched.date && formik.errors.date}
+            />
           </Box>
         </div>
         <Box margin={1} className={s.box_select}>
@@ -172,6 +181,7 @@ export default function FormAddTransaction({handleClickOpen}) {
             onClick={formik.handleSubmit}
             className={s.btn_submit}
             size="small"
+            type="submit"
           >
             Submit
           </Button>

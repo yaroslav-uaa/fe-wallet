@@ -24,6 +24,11 @@ const uploadAvatarRequest = createAction('auth/uploadAvatarRequest');
 const uploadAvatarSuccess = createAction('auth/uploadAvatarSuccess');
 const uploadAvatarError = createAction('auth/uploadAvatarError');
 
+// update user
+const updateUserRequest = createAction('auth/updateUserRequest');
+const updateUserSuccess = createAction('auth/updateUserSuccess');
+const updateUserError = createAction('auth/updateUserError');
+
 const authActions = {
   regRequest,
   regSuccess,
@@ -40,6 +45,10 @@ const authActions = {
   uploadAvatarRequest,
   uploadAvatarSuccess,
   uploadAvatarError,
+
+  updateUserRequest,
+  updateUserSuccess,
+  updateUserError,
 };
 
 export default authActions;

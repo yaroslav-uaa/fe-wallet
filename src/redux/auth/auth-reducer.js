@@ -9,6 +9,7 @@ const user = createReducer(initUserState, {
   [authActions.signInSuccess]: (_, { payload }) => payload.user,
   [authActions.signOutSuccess]: () => initUserState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload.user,
+  [authActions.updateUserSuccess]: (_, { payload }) => payload,
 });
 
 const token = createReducer(null, {
@@ -35,6 +36,7 @@ const error = createReducer(null, {
   [authActions.signInError]: setError,
   [authActions.signOutError]: setError,
   [authActions.getCurrentUserError]: setError,
+  [authActions.uploadAvatarError]: setError,
 });
 
 export default combineReducers({
