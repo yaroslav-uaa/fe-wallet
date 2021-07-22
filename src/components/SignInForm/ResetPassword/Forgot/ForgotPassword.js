@@ -1,4 +1,3 @@
-import React, { useCallback, useState } from 'react';
 import s from './Forgot.module.css';
 import { Button, TextField, LinearProgress } from '@material-ui/core';
 import { useDispatch } from 'react-redux';

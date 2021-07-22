@@ -39,6 +39,7 @@ export default function SimpleSelect({ isIncome, category, handleChange }) {
           value={category}
           onChange={handleChange}
           className={classes.select}
+          defaultValue=''
         >
           {isIncome ? SelectItem(rangesExpense) : SelectItem(rangesIncome)}
         </Select>
