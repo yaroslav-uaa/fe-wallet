@@ -14,7 +14,8 @@ import Copyright from '../FormCopyright/Copyright';
 import { useDispatch } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operations';
 import f from './SignInForm.module.css';
-
+import { ForgotPassword } from './ResetPassword/Forgot/ForgotPassword';
+import TransitionsModal from './ResetPassword/Forgot/Modal';
 const useStyles = makeStyles(theme => ({
   paper: {
     paddingTop: theme.spacing(8),
@@ -49,6 +50,7 @@ function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
 
   // Dispatch
   const dispatch = useDispatch();
@@ -70,6 +72,10 @@ function SignIn() {
 
   const handleMouseDownPassword = e => {
     e.preventDefault();
+  };
+
+  const handleClickOpen = () => {
+    setOpen(!open);
   };
 
   return (
@@ -141,12 +147,22 @@ function SignIn() {
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
+            <Button
+              onClick={handleClickOpen}
+              size="small"
+              style={{ marginTop: '10px' }}
+            >
+              Forgot password?
+            </Button>
           </form>
           <Box mt={8}>
             <Copyright />
           </Box>
         </div>
       </div>
+      <TransitionsModal open={open} handleClickOpen={handleClickOpen}>
+        <ForgotPassword handleClickOpen={handleClickOpen} />
+      </TransitionsModal>
     </>
   );
 }
