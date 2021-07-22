@@ -12,6 +12,7 @@ export default function SwitchMy({ isChecked, onSwitch }) {
               className={styles.switch}
               checked={isChecked}
               onClick={onSwitch}
+              readOnly
             />
             <label htmlFor="income" className={styles.switch_for}></label>
           </div>

@@ -11,7 +11,6 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import f from './Currency.module.css';
 import Skeleton from 'react-loading-skeleton';
-import { fetchInfo } from '../../services/currencyExchange';
 
 const useStyles = makeStyles({
   table: {
@@ -72,11 +71,10 @@ function Currency() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetchInfo();
-        const sliced = data.slice(0, -1);
-        setCurrency(sliced);
+        const data = JSON.parse(sessionStorage.getItem('currency'));
+        setCurrency(data);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
     getData();

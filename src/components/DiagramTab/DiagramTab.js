@@ -30,7 +30,7 @@ export default function DiagramTab({ arrColors }) {
       </ul>
 
       <ul className={styles.listTransaction}>
-        {categories ? (
+        {categories?.length > 0 ? (
           categories.map(({ category, sum }, index) => {
             return (
               <li className={styles.elementTransaction} key={index}>

@@ -15,7 +15,8 @@ function CurrentBalance() {
     <div className={s.container}>
       <p className={s.title}>balance:</p>
       <p className={s.balance}>
-        &#8372; {getlast?.balance || getBalanceWithCategories.balance}
+        &#8372;{' '}
+        {getlast?.balance.toFixed(2) || getBalanceWithCategories.balance}
       </p>
     </div>
   );

@@ -73,7 +73,7 @@ const SelectForStats = ({ months }) => {
 
   useEffect(() => {
     dispatch(operationsTransactions.getTransactionsByDate(month + 1, year));
-  }, [month, year]);
+  }, [dispatch, month, year]);
 
   const minimalSelectClasses = useMinimalSelectStyles;
 

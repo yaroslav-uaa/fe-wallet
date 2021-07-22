@@ -1,17 +1,17 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from '@reduxjs/toolkit';
 import {
   regError,
-  signInError, 
+  signInError,
   signOutError,
   getCurrentUserError,
-  uploadAvatarError
+  uploadAvatarError,
 } from './auth/auth-actions';
-
+import { verifyResetTokenError } from './ResetPass/reset-actions';
 import {
   getTransactionsError,
   addTransactionError,
   deleteTransactionSuccess,
-  updateTransactionError
+  updateTransactionError,
 } from './transaction/actions-transactions';
 
 const setError = (_, { payload }) => payload;
@@ -26,6 +26,7 @@ const error = createReducer(null, {
   [addTransactionError]: setError,
   [deleteTransactionSuccess]: setError,
   [updateTransactionError]: setError,
+  [verifyResetTokenError]: setError,
 });
 
 export default error;
