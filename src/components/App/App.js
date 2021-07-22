@@ -11,6 +11,7 @@ import PublicRoute from '../../routes/PublicRoute';
 // import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
 import '@pnotify/core/dist/PNotify.css';
+import { defaults } from '@pnotify/core';
 // import Loader from '../Loader/Loader';
 import { Default } from 'react-spinners-css';
 
@@ -33,6 +34,7 @@ function App() {
 
   // setTimeout(() => sessionStorage.setItem('loaderOff', true), 2000);
   // add background
+  isTabletOrMobile ? defaults.width = '270px' : defaults.width = '340px';
   if (!localStorage.color) localStorage.setItem('color', '	#0162b1');
   document.body.style.backgroundColor = localStorage.color;
 

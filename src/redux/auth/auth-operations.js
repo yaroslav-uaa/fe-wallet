@@ -26,6 +26,7 @@ const signUp = user => async dispatch => {
     alert({
       text: 'Invalid data',
       type: 'error',
+      delay: 2000,
     });
   }
 };
@@ -43,6 +44,7 @@ const signIn = user => async dispatch => {
     alert({
       text: 'Invalid credentials',
       type: 'error',
+      delay: 2000,
     });
   }
 };

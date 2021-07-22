@@ -18,8 +18,8 @@ import sortBy from 'lodash.sortby';
 
 function HomeTab() {
     const dispatch = useDispatch();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(
+    const theme = useTheme();
+    const isMobile = useMediaQuery(
     theme.breakpoints.down(theme.breakpoints.values.md),
   );
 
@@ -47,23 +47,7 @@ function HomeTab() {
   useEffect(() => {
     setItemSort(transactionList);
   }, [transactionList]);
-  // const sortByDown = value => {
-  //   const lodash = sortBy(transactionList, [
-  //     function (o) {
-  //       return o[value];
-  //     },
-  //   ]);
-  //   setItemSort(lodash.reverse());
-  // };
 
-  // const sortByUp = value => {
-  //   const lodash = sortBy(transactionList, [
-  //     function (o) {
-  //       return o[value];
-  //     },
-  //   ]);
-  //   setItemSort(lodash);
-  // };
   const sorting = (value) => {
      const lodash = sortBy(transactionList, [
       function (o) {
@@ -89,7 +73,6 @@ function HomeTab() {
   }
 
   const deleteT = id => {
-    fetchTransactions();
     deleteTransaction(id);
     fetchTransactions();
     return handleChangePage;
