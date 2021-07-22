@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 // materia
 import PersonIcon from '@material-ui/icons/Person';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import { useMediaQuery } from 'react-responsive';
 // redux
 import authSelectors from '../../../redux/auth/auth-selectors';
@@ -15,13 +14,13 @@ export default function UpdateUser({ closeFormUpdate }) {
   const dispatch = useDispatch();
 
   const user = useSelector(authSelectors.getUser);
-  const initialState = { name: user.name, email: user.email };
+  const initialState = { name: user.name };
   const [updateUser, setUpdateUser] = useState({ ...initialState });
 
   const handleInput = useCallback(evt => {
     const value = evt.target.value;
     const name = evt.target.name;
-    setUpdateUser(prev => ({ ...prev, [name]: value }));
+    setUpdateUser({ [name]: value });
   }, []);
 
   const updateUserSubmit = useCallback(
@@ -55,21 +54,6 @@ export default function UpdateUser({ closeFormUpdate }) {
               name="name"
               value={updateUser.name}
               type="text"
-              onChange={handleInput}
-              className={s.input_update}
-            />
-          </li>
-
-          <li className={s.user_item}>
-            <DraftsIcon
-              color="primary"
-              fontSize={isTabletOrMobile ? 'small' : 'medium'}
-              style={{ marginLeft: '10px' }}
-            />
-            <input
-              name="email"
-              value={updateUser.email}
-              type="email"
               onChange={handleInput}
               className={s.input_update}
             />

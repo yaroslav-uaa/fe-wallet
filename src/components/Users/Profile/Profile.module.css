@@ -173,6 +173,10 @@
   margin-left: auto;
 }
 
+.box_update_name_btn {
+  margin-left: auto;
+}
+
 .user_cancel_btn {
   background: linear-gradient(
     45deg,
