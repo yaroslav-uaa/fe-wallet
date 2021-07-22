@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import arrMonth from '../../helpers/helpers';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { deepPurple } from '@material-ui/core/colors';
 import styles from './SelectForStats.module.css';
@@ -58,7 +57,7 @@ const useMinimalSelectStyles = {
   },
 };
 
-const SelectForStats = () => {
+const SelectForStats = ({ months }) => {
   const dispatch = useDispatch();
 
   const [month, setMonth] = useState(new Date().getMonth());
@@ -108,7 +107,7 @@ const SelectForStats = () => {
           value={month}
           onChange={handleChangeMonth}
         >
-          {arrMonth.months.map((month, index) => {
+          {months.map((month, index) => {
             return <MenuItem value={index}>{month}</MenuItem>;
           })}
         </Select>

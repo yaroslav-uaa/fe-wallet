@@ -1,7 +1,7 @@
 .balancePositive {
   font-family: Prompt;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 24px;
   z-index: 999;
   position: absolute;
   width: 150px;
@@ -17,7 +17,7 @@
 .balanceNegative {
   font-family: Prompt;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 24px;
   z-index: 999;
   position: absolute;
   width: 150px;
