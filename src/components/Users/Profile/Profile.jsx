@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 // redux
 import authSelectors from '../../../redux/auth/auth-selectors';
-import authOperations from '../../../redux/auth/auth-operations';
+
 // materia
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -22,12 +22,9 @@ import { useState } from 'react';
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
-  const dispatch = useDispatch();
+
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const user = useSelector(authSelectors.getUser);
-  useEffect(() => {
-    dispatch(authOperations.getCurrentUser());
-  }, [dispatch]);
 
   const openFormUpdate = () => {
     setShowUpdateForm(true);

@@ -79,6 +79,13 @@ export default function UpdateUser({ closeFormUpdate }) {
           <button type="submit" className={s.user_update_btn}>
             Save
           </button>
+          <button
+            type="button"
+            className={s.user_cancel_btn}
+            onClick={closeFormUpdate}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>

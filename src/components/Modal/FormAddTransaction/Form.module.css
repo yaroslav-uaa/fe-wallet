@@ -47,10 +47,6 @@
   color: #fffefe;
 }
 
-/* .option {
-  color: rgb(26, 8, 70);
-  width: 100%;
-} */
 .option:focus,
 .option:active,
 option:checked,

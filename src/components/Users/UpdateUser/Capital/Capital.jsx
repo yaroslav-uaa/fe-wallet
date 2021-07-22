@@ -1,21 +1,19 @@
+import { useCallback, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import operations from '../../../../redux/capital/operations-capital';
+import getCapital from '../../../../redux/capital/selectors-capital';
+
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { useMediaQuery } from 'react-responsive';
-import { useCallback, useState } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import { IconButton } from '@material-ui/core';
 import s from '../../Profile/Profile.module.css';
-
-import operations from '../../../../redux/capital/operations-capital';
-// import operationsCapital from '../../../../redux/capital/operations-capital';
-import getCapital from '../../../../redux/capital/selectors-capital';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function Capital() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
   const initialCapital = useSelector(getCapital);
-
-  console.log(initialCapital);
   const [showInput, setShowInput] = useState(false);
   const [capital, setCapital] = useState(initialCapital);
 
@@ -26,6 +24,10 @@ export default function Capital() {
   const closeCapitalUpdate = () => {
     setShowInput(false);
   };
+
+  useEffect(() => {
+    setCapital(initialCapital);
+  }, [initialCapital]);
 
   const handleInput = useCallback(evt => {
     const value = evt.target.value;
@@ -53,7 +55,7 @@ export default function Capital() {
         style={{ marginLeft: '10px' }}
       />
       {!showInput ? (
-        <p className={s.profile_name}>{capital && capital.sum}</p>
+        <p className={s.profile_name}>{capital.sum && capital.sum}</p>
       ) : (
         <input
           className={s.input_update}
@@ -74,7 +76,7 @@ export default function Capital() {
           </IconButton>
         ) : (
           <button
-            type="submit"
+            type="button"
             className={s.user_update_btn}
             onClick={onSubmitCapital}
           >
