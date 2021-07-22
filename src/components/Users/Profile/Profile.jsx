@@ -47,9 +47,6 @@ export default function Profile() {
           className={s.avatar}
         ></img>
         <div className={s.upload}>
-          <IconButton variant="outlined" type="button" onClick={openFormUpdate}>
-            <EditIcon fontSize="medium" color="primary" />
-          </IconButton>
           <UploadButtons />
         </div>
       </div>
@@ -65,6 +62,15 @@ export default function Profile() {
                 style={{ marginLeft: '10px' }}
               />
               <p className={s.profile_name}>{user.name}</p>
+              <div className={s.box_update_name_btn}>
+                <IconButton
+                  variant="outlined"
+                  type="button"
+                  onClick={openFormUpdate}
+                >
+                  <EditIcon fontSize="medium" color="primary" />
+                </IconButton>
+              </div>
             </li>
             <li className={s.user_item}>
               <VpnKeyIcon

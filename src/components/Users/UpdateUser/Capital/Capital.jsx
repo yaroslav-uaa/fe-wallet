@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import operations from '../../../../redux/capital/operations-capital';
 import getCapital from '../../../../redux/capital/selectors-capital';
+import operationTransactions from '../../../../redux/transaction/operations-transactions';
 
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { useMediaQuery } from 'react-responsive';
@@ -45,6 +46,7 @@ export default function Capital() {
   const onSubmitCapital = () => {
     updateCapital(capital);
     closeCapitalUpdate();
+    setTimeout(() => dispatch(operationTransactions.fetchTransactions()), 1000);
   };
 
   return (
