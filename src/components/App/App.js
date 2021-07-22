@@ -2,8 +2,10 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
+
 import capitalOperations from '../../redux/capital/operations-capital';
 import transactionsOperations from '../../redux/transaction/operations-transactions';
+
 import { Container } from '@material-ui/core';
 import PublicRoute from '../../routes/PublicRoute';
 // import GetCurrency from '../GetCurrency/GetCurrency';

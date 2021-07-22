@@ -14,9 +14,7 @@ const getLastTransaction = state => getAllTransactions(state)[0];
 const filterTransactions = createSelector(
   [getAllTransactions, getFilter],
   (transactions, filter) => {
-    return transactions.filter(({ date }) =>
-      date.toLowerCase().includes(filter.toLowerCase()),
-    );
+    return transactions.filter(({ date }) => date.includes(filter));
   },
 );
 

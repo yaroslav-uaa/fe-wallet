@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 // redux
@@ -18,7 +18,6 @@ import UploadButtons from '../UploadButtons';
 import Capital from '../UpdateUser/Capital';
 // styles
 import s from './Profile.module.css';
-import { useState } from 'react';
 
 export default function Profile() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
