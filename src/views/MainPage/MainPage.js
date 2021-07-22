@@ -1,12 +1,17 @@
-import React, { lazy } from 'react';
-import { Suspense } from 'react';
+import React, { lazy, useEffect, Suspense } from 'react';
 import { Switch, useLocation } from 'react-router';
+import PrivateRoute from '../../routes/PrivateRoute';
+import { useDispatch } from 'react-redux';
+
+import capitalOperations from '../../redux/capital/operations-capital';
+import transactionsOperations from '../../redux/transaction/operations-transactions';
+
 import Header from '../../components/Header';
 import SideBar from '../../components/SideBar';
+
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import '../ViewsAnimate.css';
 import { Ripple } from 'react-spinners-css';
-import PrivateRoute from '../../routes/PrivateRoute';
 
 // views
 const DashboardPage = lazy(() => import('../DashboardPage/DashboardPage'));
@@ -15,6 +20,12 @@ const UserPage = lazy(() => import('../UserPage/UserPage'));
 
 function MainPage() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(capitalOperations.getCapital());
+    dispatch(transactionsOperations.fetchTransactions());
+  }, [dispatch]);
   return (
     <>
       <Header />

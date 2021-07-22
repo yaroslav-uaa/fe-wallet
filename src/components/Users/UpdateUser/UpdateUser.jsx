@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // materia
 import PersonIcon from '@material-ui/icons/Person';
 import { useMediaQuery } from 'react-responsive';
 // redux
 import authSelectors from '../../../redux/auth/auth-selectors';
 import authOperations from '../../../redux/auth/auth-operations';
-import { useDispatch, useSelector } from 'react-redux';
 // styles
 import s from '../Profile/Profile.module.css';
 
