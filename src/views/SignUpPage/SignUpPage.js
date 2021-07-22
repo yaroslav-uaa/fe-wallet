@@ -3,9 +3,9 @@ import SignUp from '../../components/SignUpForm/SignUp';
 
 function SignUpPage() {
   return (
-    <div>
+    <>
       <SignUp />
-    </div>
+    </>
   );
 }
 

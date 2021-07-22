@@ -21,7 +21,6 @@ import {
 import { alert } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 
-// axios.defaults.baseURL = 'http://localhost:4040/api';
 axios.defaults.baseURL = 'https://be-wallet.herokuapp.com/api';
 
 const fetchTransactions = () => async dispatch => {
@@ -50,6 +49,7 @@ const getTransactionsByDate = (month, age) => async dispatch => {
     alert({
       text: "You don't have transactions on this date",
       type: 'error',
+      delay: 1000,
     });
   }
 };
@@ -101,7 +101,7 @@ const updateTransaction =
       Notify.Success('Transaction Edited');
       dispatch(updateTransactionSuccess(data));
     } catch (error) {
-      dispatch(updateTransactionError(error.message));
+      dispatch(updateTransactionError(Notify.Error(error.message)));
     }
   };
 

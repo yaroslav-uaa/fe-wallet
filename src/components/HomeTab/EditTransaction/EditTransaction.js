@@ -13,7 +13,6 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
 import 'date-fns';
-import { boolean } from 'yup/lib/locale';
 
 import SimpleSelect from '../../Modal/Select/Select';
 import SwitchMy from '../../Modal/Switch';
@@ -88,15 +87,6 @@ export default function EditTransaction({
       setSum(sum);
       setComment(comment);
     }
-
-    return () => {
-      setId('');
-      setCategory('');
-      setCategory('');
-      setSelect(boolean);
-      setSum(null);
-      setComment('');
-    };
   }, [transactionForEdit]);
 
   const handleChangeCategory = event => {

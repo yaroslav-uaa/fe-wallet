@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
@@ -7,7 +7,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
 import s from './Modal.module.css';
-import FormAddTransaction from './FormAddTransaction';
 import { makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 
 const useStyles = makeStyles(()=>({
@@ -22,19 +21,10 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-function FullScreenDialog() {
+function FullScreenDialog({children, handleClickOpen, open}) {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  };
-
-  const handleClose = () => {
-    setOpen(false)
-  };
 
     return (
       <>
@@ -46,7 +36,7 @@ function FullScreenDialog() {
               maxWidth='md'
               fullScreen={fullScreen}
               open={open}
-              onClose={handleClose}
+              onClose={handleClickOpen}
               TransitionComponent={Transition}
               className={classes.dialog}
             >
@@ -55,16 +45,15 @@ function FullScreenDialog() {
                   <div className={s.box_close_btn}>
                     <IconButton
                       color="inherit"
-                      onClick={handleClose}
+                      onClick={handleClickOpen}
                       aria-label="Close"
                     >
                       <CloseIcon />
                     </IconButton>
                   </div>
-
-                  <FormAddTransaction handleClose={handleClose}/>
+                  {children}
                   <div className={s.box_btn_rejected}>
-                    <Button variant="contained" onClick={handleClose} className={s.rejected} size='small'>
+                    <Button variant="contained" onClick={handleClickOpen} className={s.rejected} size='small'>
                       cancel
                     </Button>
                   </div>

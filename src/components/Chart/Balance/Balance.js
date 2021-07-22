@@ -4,10 +4,10 @@ import s from './Balance.module.css';
 export default function Balance({ balance }) {
   return (
     <div>
-      {balance > 0 ? (
-        <p className={s.balancePositive}>{balance}</p>
+      {balance ? (
+        <p className={s.balancePositive}>&#8372; {balance}</p>
       ) : (
-        <p className={s.balanceNegative}>{balance}</p>
+        <p className={s.balanceNegative}>&#8372; 0</p>
       )}
     </div>
   );
