@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Notify from '../../components/Notify/Notify';
+
 import {
   getTransactionsRequest,
   getTransactionsSuccess,
@@ -58,7 +58,6 @@ const addTransaction = transaction => async dispatch => {
   dispatch(addTransactionRequest());
   try {
     const { data } = await axios.post('/transactions', transaction);
-    Notify.Success('Transaction Add');
     dispatch(addTransactionSuccess(data));
     alert({
       text: 'Transaction added',
@@ -84,7 +83,7 @@ const deleteTransaction = transactionId => async dispatch => {
       type: 'success',
     });
   } catch (error) {
-    dispatch(deleteTransactionError(Notify.Error(error.message)));
+    dispatch(deleteTransactionError(error.message));
   }
 };
 
@@ -98,10 +97,9 @@ const updateTransaction =
         `/transactions/${transactionId}`,
         update,
       );
-      Notify.Success('Transaction Edited');
       dispatch(updateTransactionSuccess(data));
     } catch (error) {
-      dispatch(updateTransactionError(Notify.Error(error.message)));
+      dispatch(updateTransactionError(error.message));
     }
   };
 

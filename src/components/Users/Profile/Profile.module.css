@@ -127,35 +127,70 @@
 .input_update {
   background: inherit;
   width: 100%;
-  border: none;
+  border: 1px solid transparent;
   border-bottom: 1px solid black;
   padding: 10px;
   margin: 5px 10px;
+  border-radius: 3px;
+}
+
+.input_update:active,
+.input_update:focus,
+.input_update:hover {
+  border: 1px solid white;
+  outline: none;
 }
 
 .box_btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .user_update_btn {
-  background: rgba(255, 255, 255, 0.534);
+  background: linear-gradient(
+    45deg,
+    rgb(4, 156, 30) 10%,
+    rgb(69, 226, 55) 43%,
+    rgb(4, 156, 30)
+  );
   border: none;
   padding: 8px;
-  color: black;
   border-radius: 5px;
   text-transform: uppercase;
   box-shadow: 0 3px 10px -2px #212121e0;
+  color: white;
   /* margin-top: 10px; */
 }
 .user_update_btn:active,
 .user_update_btn:focus,
 .user_update_btn:hover {
-  background: rgba(255, 255, 255, 0.671);
-  box-shadow: 0 3px 10px -2px #ece0e0e0;
+  box-shadow: 0 3px 10px -2px #ece0e0ec;
 }
 
 .box_update_capital_btn {
   margin-left: auto;
+}
+
+.user_cancel_btn {
+  background: linear-gradient(
+    45deg,
+    rgba(197, 21, 21, 0.849) 10%,
+    rgb(255, 56, 106) 43%,
+    rgba(223, 25, 25, 0.795)
+  );
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  box-shadow: 0 3px 10px -2px #212121e0;
+  color: white;
+  margin-left: 20px;
+}
+
+.user_cancel_btn:active,
+.user_cancel_btn:focus,
+.user_cancel_btn:hover {
+  box-shadow: 0 3px 10px -2px #ece0e0ec;
 }
