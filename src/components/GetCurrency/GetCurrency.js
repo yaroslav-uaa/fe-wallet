@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { fetchInfo } from '../../services/currencyExchange';
+import React, { useEffect } from 'react';
+import fetchInfo from '../../services/currencyExchange';
 
 function GetCurrency() {
-  const [currency, setCurrency] = useState();
   useEffect(() => {
     const getData = async () => {
       try {
         const data = await fetchInfo();
-        const sliced = data.slice(0, -1);
-        setCurrency(sliced);
+        const slicedData = data.slice(0, -1);
+        sessionStorage.setItem('currency', JSON.stringify(slicedData));
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
     getData();
   }, []);
-
-  console.log(currency);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const data = await fetchInfo();
-  //       const slicedData = data.slice(0, -1);
-  //       sessionStorage.setItem('currency', JSON.stringify(slicedData));
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
 
   return <div></div>;
 }
