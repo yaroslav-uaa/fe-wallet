@@ -1,8 +1,12 @@
 body {
   background-image: linear-gradient(
-    to bottom,
-    rgba(33, 33, 33, 0.25),
-    rgba(255, 254, 254, 0.6)
+    130deg,
+    transparent,
+    rgba(33, 33, 33, 0.35),
+    #51649a96,
+    #529b7785,
+    #8f9a51b6,
+    rgba(255, 254, 254, 0.7)
   );
   background-attachment: fixed;
   background-repeat: no-repeat;
