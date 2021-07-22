@@ -79,8 +79,6 @@ const updateUser = user => async dispatch => {
   dispatch(authActions.updateUserRequest());
   try {
     const res = await axios.put('/users/update', user);
-    console.log(user);
-    console.log(res.data);
     dispatch(authActions.updateUserSuccess(res.data.result));
   } catch (err) {
     dispatch(authActions.updateUserError(err.message));

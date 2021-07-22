@@ -12,7 +12,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
 // component
-
 import UpdateUser from '../UpdateUser/UpdateUser';
 import UploadButtons from '../UploadButtons';
 import Capital from '../UpdateUser/Capital';
