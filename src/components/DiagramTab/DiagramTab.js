@@ -2,23 +2,10 @@ import React from 'react';
 import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 import styles from './DiagramTab.module.css';
-// import { red } from '@material-ui/core/colors';
-
-// const arr = [
-//   'Basic expenses',
-//   'Products',
-//   'Car',
-//   'Taking care of yourself',
-//   'Taking care of children',
-//   'Household products',
-//   'Education',
-//   'Leisure',
-//   'Other expenses',
-// ];
 
 export default function DiagramTab({ arrColors }) {
-  const { getAllCategoriesFromTransactions } = transactionsSelectors;
-  const categoriesFromState = useSelector(getAllCategoriesFromTransactions);
+  
+  const categoriesFromState = useSelector(transactionsSelectors.getAllCategoriesFromTransactions);
 
   const categories = categoriesFromState.categories;
 

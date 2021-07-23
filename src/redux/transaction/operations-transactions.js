@@ -34,6 +34,7 @@ const fetchTransactions = () => async dispatch => {
     alert({
       text: "You don't have transactions",
       type: 'error',
+      delay: 1000
     });
   }
 };
@@ -62,11 +63,13 @@ const addTransaction = transaction => async dispatch => {
     alert({
       text: 'Transaction added',
       type: 'success',
+      delay: 1000
     });
   } catch (error) {
     alert({
       text: 'Invalid data',
       type: 'error',
+      delay: 1000
     });
     dispatch(addTransactionError());
   }
@@ -81,6 +84,7 @@ const deleteTransaction = transactionId => async dispatch => {
     alert({
       text: 'Transaction deleted',
       type: 'success',
+      delay: 1000
     });
   } catch (error) {
     dispatch(deleteTransactionError(error.message));

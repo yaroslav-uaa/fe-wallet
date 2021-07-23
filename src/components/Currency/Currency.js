@@ -80,8 +80,6 @@ function Currency() {
     getData();
   }, []);
 
-  console.log(currency);
-
   return (
     <>
       <div className={f.sidebar}>

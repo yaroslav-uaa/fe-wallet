@@ -30,20 +30,6 @@ export default createTheme({
       graidiertTwo:
         'linear-gradient(90deg, rgb(39, 39, 39, 0.5), rgba(255, 254, 254, 0.5))',
     },
-    arrColors: [
-      'rgba(252, 239, 36, 1)',
-      'rgba(252, 239, 36, 1)',
-      'rgba(252, 239, 36, 1)',
-      'rgba(252, 239, 36, 1)',
-      'rgba(252, 239, 36, 1)',
-      'rgba(252, 239, 36, 1)',
-      'rgba(252, 239, 36, 1)',
-      'rgba(199, 74, 180, 1)',
-      'rgba(210, 224, 67, 1)',
-      'rgba(109, 36, 40, 1)',
-      'rgba(144, 182, 231, 1)',
-      'rgba(182, 140, 136, 1)',
-    ],
   },
   months: [
     'January',
@@ -62,35 +48,43 @@ export default createTheme({
   categories: [
     {
       value: 'Basic',
-      color: 'rgba(255, 99, 132, 1)',
+      color: 'rgb(153, 0, 33)',
     },
     {
       value: 'Food',
-      color: 'rgba(54, 162, 235, 1)',
+      color: 'rgb(255, 255, 0)',
     },
     {
       value: 'Auto',
-      color: 'rgba(255, 206, 86, 1)',
+      color: 'rgb(204, 255, 51)',
     },
     {
       value: 'Development',
-      color: 'rgba(75, 192, 192, 1)',
+      color: 'rgb(26, 26, 255)',
     },
     {
       value: 'Children',
-      color: 'rgba(153, 102, 255, 1)', //
+      color: 'rgb(140, 26, 255)', //
     },
     {
       value: 'House',
-      color: 'rgba(255, 159, 64, 1)',
+      color: 'rgb(77, 46, 0)',
     },
     {
       value: 'Education',
-      color: 'rgba(252, 110, 206, 1)',
+      color: 'rgb(255, 0, 0)',
     },
     {
       value: 'The other',
-      color: 'rgba(116, 175, 195, 1)',
+      color: 'rgb(116, 175, 195)',
+    },
+     {
+      value: 'Regular income',
+      color: 'rgb(0, 204, 68)',
+    },
+      {
+      value: 'Non-regular income',
+      color: 'rgb(0, 204, 68)',
     },
   ],
 });
