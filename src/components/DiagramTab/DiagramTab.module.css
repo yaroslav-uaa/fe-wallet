@@ -1,0 +1,95 @@
+li {
+  list-style-type: none;
+}
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.listNames {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  height: 58px;
+  margin-top: 0;
+  margin-bottom: 9px;
+  border-radius: 29px;
+  align-items: center;
+  background-color: #fff;
+}
+
+.nameElement {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.listTransaction {
+  margin: 0 0 15px 0;
+}
+
+.elementTransaction {
+  color: #000;
+  display: flex;
+  height: 54px;
+  padding-left: 16px;
+  padding-right: 16px;
+  align-items: center;
+  border-bottom: 1px solid #2121fd;
+}
+
+.sum {
+  margin-left: auto;
+}
+
+.category {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.listAll {
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 40px;
+}
+
+.elementListAll {
+  display: flex;
+  justify-content: space-between;
+}
+
+.elementAllText {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.elementAllCosts {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  color: #e02b3a;
+}
+
+.elementAllIncome {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0c942a;
+}

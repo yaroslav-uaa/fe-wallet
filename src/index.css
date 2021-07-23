@@ -1,13 +1,130 @@
 body {
+  background-image: linear-gradient(
+    130deg,
+    transparent,
+    rgba(33, 33, 33, 0.35),
+    #51649a96,
+    #529b7785,
+    #8f9a51b6,
+    rgba(255, 254, 254, 0.7)
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.page {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 5vh;
 }
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.btn {
+  position: absolute;
+}
+
+.content {
+  width: 100%;
+  max-width: 780px;
+  padding-bottom: 4vh;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    margin-top: 20px;
+    max-width: 400px;
+  }
+  .brighttheme-text {
+    line-height: 1rem !important;
+    font-size: 0.9rem !important;
+  }
+  .brighttheme-icon,
+  .brighttheme-icon > span {
+  line-height: 1.1rem !important;
+  height: 0.8rem !important;
+  vertical-align: middle !important;
+}
+
+.brighttheme-icon,
+.brighttheme-icon > span::after {
+  line-height: 1.1rem !important;
+  height: 0.8rem !important;
+  vertical-align: middle !important;
+}
+}
+
+@media screen and (min-width: 1280px) {
+  body {
+    width: 100vw;
+  }
+
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .content {
+    padding: 100px 0 4vh;
+    height: 100%;
+    width: 780px;
+    margin: 0;
+  }
+  body {
+    width: 100vw;
+  }
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .brighttheme-text {
+  line-height: 1.5rem !important;
+}
+.brighttheme-icon,
+.brighttheme-icon > span {
+  line-height: 1.7rem !important;
+  height: 1rem !important;
+  vertical-align: middle !important;
+}
+
+.brighttheme-icon,
+.brighttheme-icon > span::after {
+  line-height: 1.7rem !important;
+  height: 1rem !important;
+  vertical-align: middle !important;
+}
+}
+
+.MuiDialog-paper {
+  margin: 0 !important;
+  border-radius: 6px;
+}
+
+

@@ -1,0 +1,21 @@
+.box_user {
+  background-color: #fffefe60;
+  padding: 15px;
+  max-width: 780px;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px -2px #212121;
+}
+
+@media screen and (min-width: 1280px) {
+  .box_user {
+    padding: 20px;
+    width: 780px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .box_user {
+    max-width: 400px;
+  }
+}

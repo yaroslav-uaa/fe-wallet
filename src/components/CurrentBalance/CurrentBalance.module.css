@@ -1,0 +1,43 @@
+.container {
+  min-width: 280px;
+  max-width: 357px;
+  padding: 8px 40px;
+  margin-bottom: 30px;
+  background-color: #fffefeef;
+  border-radius: 25px;
+  box-shadow: 2px 2px 12px 0 #212121a0;
+}
+
+@media screen and (max-width: 1279px) {
+  .container {
+    margin-bottom: 0;
+    padding: 8px 30px;
+  }
+}
+
+.title {
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.balance {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 45px;
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 6px 20px;
+  }
+
+  .balance {
+    font-size: 24px;
+  }
+}

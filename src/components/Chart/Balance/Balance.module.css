@@ -1,0 +1,31 @@
+.balancePositive {
+  font-family: Prompt;
+  font-weight: 700;
+  font-size: 24px;
+  z-index: 999;
+  position: absolute;
+  width: 150px;
+  height: 20px;
+  margin: 0;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #0a522a;
+}
+
+.balanceNegative {
+  font-family: Prompt;
+  font-weight: 700;
+  font-size: 24px;
+  z-index: 999;
+  position: absolute;
+  width: 150px;
+  height: 20px;
+  margin: 0;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #b32d3e;
+}

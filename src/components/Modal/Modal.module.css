@@ -1,0 +1,63 @@
+.fullScreen {
+  background: url(../../images/back.png),
+    radial-gradient(rgb(255, 254, 254, 0.95), rgba(94, 93, 93, 0.95));
+  overflow-y: scroll;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 100%;
+  border-radius: 6px;
+  padding: 25px 0;
+}
+
+.fullScreen::-webkit-scrollbar {
+  width: 0;
+}
+@media screen and (min-width: 768px) {
+  .fullScreen {
+    width: 600px;
+    height: fit-content;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.box {
+  padding: 10px;
+}
+
+.box_btn_rejected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: inherit;
+  margin-bottom: 10px;
+}
+
+.rejected {
+  background: linear-gradient(
+    45deg,
+    rgba(197, 21, 21, 0.849) 10%,
+    rgb(255, 56, 106) 43%,
+    rgba(223, 25, 25, 0.795)
+  ) !important;
+  text-transform: uppercase;
+  color: #fffefe !important;
+  font-size: 1rem !important;
+  width: 60%;
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+.box_close_btn {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  color: #fffefe;
+}
+
+.list_modal {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}

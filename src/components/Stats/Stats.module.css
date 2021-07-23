@@ -1,0 +1,29 @@
+.statisticsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 30px;
+  background-color: #fffefea0;
+  box-shadow: 0 4px 10px -2px #21212150;
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  .statisticsPage {
+    margin-top: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 780px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .statisticsPage {
+    width: 780px;
+  }
+}

@@ -1,0 +1,37 @@
+.title {
+  font-family: 'Prompt', sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: #212121e0;
+  margin: 0 auto 20px;
+  width: fit-content;
+}
+
+.doughnut canvas {
+  min-width: 270px;
+  min-height: 270px;
+}
+
+.chart {
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .chart {
+    margin-right: 25px;
+    margin-left: 25px;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+.containerChart {
+  position: relative;
+}

@@ -1,0 +1,35 @@
+.select {
+  display: inline-block;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.selectMonth:not(:last-child) {
+  /* margin-right: 10px !important; */
+}
+
+.selectMonth {
+  display: flex;
+  background-color: #fff;
+  min-width: 116px !important;
+  min-height: 58px;
+  border-radius: 29px;
+  margin-bottom: 20px !important;
+  padding-top: 15px !important;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .selectMonth {
+    min-width: 150px !important;
+  }
+
+  .selectMonth:not(:last-child) {
+    margin-right: 20px !important;
+  }
+
+  .containerSelects {
+    display: flex;
+  }
+}
