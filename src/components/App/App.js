@@ -8,11 +8,11 @@ import transactionsOperations from '../../redux/transaction/operations-transacti
 
 import { Container } from '@material-ui/core';
 import PublicRoute from '../../routes/PublicRoute';
-// import GetCurrency from '../GetCurrency/GetCurrency';
+import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
 import '@pnotify/core/dist/PNotify.css';
 import { defaults } from '@pnotify/core';
-// import Loader from '../Loader/Loader';
+import Loader from '../Loader/Loader';
 import { Default } from 'react-spinners-css';
 
 // views
@@ -32,9 +32,10 @@ function App() {
     dispatch(transactionsOperations.fetchTransactions());
   }, [dispatch]);
 
-  // setTimeout(() => sessionStorage.setItem('loaderOff', true), 2000);
-  // add background
+  setTimeout(() => sessionStorage.setItem('loaderOff', true), 2000);
+  // change pnotify default styles
   isTabletOrMobile ? defaults.width = '270px' : defaults.width = '340px';
+  // add background
   if (!localStorage.color) localStorage.setItem('color', '	#0162b1');
   document.body.style.backgroundColor = localStorage.color;
 
@@ -46,7 +47,7 @@ function App() {
         minHeight: '100vh',
       }}
     >
-      {/* <GetCurrency /> */}
+      <GetCurrency />
 
       <Suspense
         fallback={

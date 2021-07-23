@@ -12,13 +12,12 @@ import styles from './Stats.module.css';
 
 const Stats = () => {
   const theme = useTheme();
-
-  const { getAllCategoriesFromTransactions } = transactionsSelectors;
-  const categoriesFromState = useSelector(getAllCategoriesFromTransactions);
-  const balance = categoriesFromState.balance;
-  const categoriesWithBD = categoriesFromState.categories;
-  const months = theme.months;
   const allCategoriesWithColors = theme.categories;
+  const months = theme.months;
+
+  const categoriesFromState = useSelector(transactionsSelectors.getAllCategoriesFromTransactions);
+  const categoriesWithBD = categoriesFromState.categories;
+  const balance = categoriesFromState.balance;
 
   const visibleCategories = allCategoriesWithColors.map(el => {
     const arrCategoriesWithDB = categoriesWithBD
@@ -27,13 +26,13 @@ const Stats = () => {
     if (arrCategoriesWithDB.includes(el.value)) {
       return el;
     }
+    return el;
   });
 
-  const filteredVisibleCategories = visibleCategories.filter(
+  const color = visibleCategories.filter(
     e => e !== undefined,
-  );
-
-  const color = filteredVisibleCategories.map(el => el.color);
+  ).map(el => el.color);
+ 
 
   const arrMoney = categoriesWithBD
     ? categoriesWithBD.map(trans => trans.sum)

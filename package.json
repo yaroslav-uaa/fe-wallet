@@ -51,7 +51,6 @@
     "react-toastify": "^7.0.4",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.0",
-    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "use-file-upload": "^1.0.9",
     "uuid": "^8.3.2",

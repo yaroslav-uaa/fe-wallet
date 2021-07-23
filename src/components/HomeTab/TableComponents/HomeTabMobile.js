@@ -107,19 +107,14 @@ export default function HomeTabMobile({
   
   const s = useStyles();
   const theme = useTheme();
-  
+  const allCategoriesWithColors = theme.categories;
+
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangeRowsPerPage = e => {
     setRowsPerPage(parseInt(e.target.value, 5));
     setPage(0);
   };
-
-  function getRandomColor() {
-    const color = theme.palette.arrColors;
-    const index = Math.floor(Math.random() * color.length);
-    return color[index];
-  }
 
   return (
     <>
@@ -194,11 +189,14 @@ export default function HomeTabMobile({
                         <TableCell
                           style={{
                             width: '7px',
-                            backgroundColor: getRandomColor(),
+                            backgroundColor: allCategoriesWithColors
+                              .filter(el => el.value === category)
+                              .map(el => el.color),
                             padding: '10px',
                             borderBottom: 0,
                           }}
-                        ></TableCell>
+                        >
+                        </TableCell>
                         <TableCell
                           style={{
                             paddingTop: 0,

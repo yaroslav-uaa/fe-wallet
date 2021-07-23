@@ -19,22 +19,24 @@ import sortBy from 'lodash.sortby';
 function HomeTab() {
     const dispatch = useDispatch();
     const theme = useTheme();
+  
+
     const isMobile = useMediaQuery(
     theme.breakpoints.down(theme.breakpoints.values.md),
   );
 
-  const [itemSort, setItemSort] = useState([]);
-  const [isOn, toggleIsOn] = useToggle();
-  const [page, setPage] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [transactionForEdit, setTransactionForEdit] = useState(null);
+    const [itemSort, setItemSort] = useState([]);
+    const [isOn, toggleIsOn] = useToggle();
+    const [page, setPage] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [transactionForEdit, setTransactionForEdit] = useState(null);
 
-  const transactionList = useSelector(transactionsSelectors.filterTransactions);
-  const totalTransactions = useSelector(
+    const transactionList = useSelector(transactionsSelectors.filterTransactions);
+    const totalTransactions = useSelector(
     transactionsSelectors.totalTransactions,
   );
 
-  const deleteTransaction = useCallback(
+    const deleteTransaction = useCallback(
     id => dispatch(transactionsOperations.deleteTransaction(id)),
     [dispatch],
   );
@@ -95,7 +97,7 @@ function HomeTab() {
 
   return <>{
     isMobile
-    ? <HomeTabMobile
+      ? <HomeTabMobile
       toggleIsOn={toggleIsOn}
       setPage={setPage}
       isOn={isOn}
