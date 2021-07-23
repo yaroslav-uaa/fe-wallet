@@ -9,10 +9,8 @@
 
 @media screen and (min-width: 1280px) {
   .box_user {
-    display: flex;
     padding: 20px;
     width: 780px;
-    min-height: 375px;
   }
 }
 

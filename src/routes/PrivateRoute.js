@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router';
 import authSelectors from '../redux/auth/auth-selectors';
 
 function PrivateRoute({ component: Component, redirectTo, ...routeProps }) {
-  const isAuth = useSelector(authSelectors.getIsAuthenticated);
+  const isAuth = useSelector(authSelectors.getToken);
   return (
     <Route
       {...routeProps}

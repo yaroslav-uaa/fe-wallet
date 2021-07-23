@@ -11,6 +11,7 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import f from './Currency.module.css';
 import Skeleton from 'react-loading-skeleton';
+import fetchInfo from '../../services/currencyExchange';
 
 const useStyles = makeStyles({
   table: {
@@ -66,25 +67,29 @@ const useStyles = makeStyles({
 function Currency() {
   const isDesktopOrTablet = useMediaQuery({ minWidth: 1280 });
   const s = useStyles();
-  const [currency, setCurrency] = useState('');
+  const [currency, setCurrency] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetch = async () => {
+    try {
+      const data = await fetchInfo();
+      const sliced = data.slice(0, -1);
+      setCurrency([...sliced]);
+      setIsLoading(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = JSON.parse(sessionStorage.getItem('currency'));
-        setCurrency(data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    getData();
+    fetch();
   }, []);
 
   return (
     <>
       <div className={f.sidebar}>
         <TableContainer className={s.table}>
-          {!currency ? (
+          {!isLoading ? (
             <Skeleton
               style={{
                 background:

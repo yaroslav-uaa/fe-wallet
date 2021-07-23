@@ -1,11 +1,9 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router';
+import { Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
-
 import { Container } from '@material-ui/core';
 import PublicRoute from '../../routes/PublicRoute';
-import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
 import '@pnotify/core/dist/PNotify.css';
 
@@ -25,13 +23,16 @@ const MainPageMobile = lazy(() =>
 function App() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
+  const [loaderOff, setLoaderOff] = useState(false);
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
   }, [dispatch]);
 
-  setTimeout(() => sessionStorage.setItem('loaderOff', true), 2000);
+  setTimeout(() => setLoaderOff(true), 2000);
+
   // change pnotify default styles
-  isTabletOrMobile ? defaults.width = '270px' : defaults.width = '340px';
+  isTabletOrMobile ? (defaults.width = '270px') : (defaults.width = '340px');
+
   // add background
   if (!localStorage.color) localStorage.setItem('color', '	#0162b1');
   document.body.style.backgroundColor = localStorage.color;
@@ -44,7 +45,7 @@ function App() {
         minHeight: '100vh',
       }}
     >
-      <GetCurrency />
+      {!loaderOff && <Loader />}
 
       <Suspense
         fallback={
@@ -62,10 +63,6 @@ function App() {
         <Switch>
           <PublicRoute path="/signin" exact component={SignInPage} restricted />
           <PublicRoute path="/signup" exact component={SignUpPage} restricted />
-          {/* <Route
-            path="/"
-            component={isTabletOrMobile ? MainPageMobile : MainPage}
-          /> */}
           <PrivateRoute
             path="/"
             component={isTabletOrMobile ? MainPageMobile : MainPage}

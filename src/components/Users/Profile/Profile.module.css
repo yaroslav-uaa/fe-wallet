@@ -2,6 +2,7 @@
   height: 100%;
   padding: 20px;
   margin: 0 auto;
+  border-bottom: 1px solid #fffefe;
 }
 
 .user_avatar {
@@ -76,11 +77,6 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .user_menu {
-    border-bottom: 1px solid #fffefe;
-    margin: 0 auto;
-  }
-
   .user_avatar,
   .profile_list {
     width: 280px;
@@ -110,7 +106,6 @@
 
 @media screen and (min-width: 1280px) {
   .user_menu {
-    border-right: 1px solid #fffefe;
     padding: 20px 20px 20px 0;
   }
 
