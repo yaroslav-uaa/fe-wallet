@@ -5,7 +5,6 @@ import s from './Header.module.css';
 import authSelectors from '../../redux/auth/auth-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operations';
-import GetCurrency from '../GetCurrency/GetCurrency';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 function Header() {
@@ -16,7 +15,6 @@ function Header() {
   }, [dispatch]);
   return (
     <>
-      <GetCurrency />
       <header className={s.header}>
         <div className={s.header__box}>
           <a href="/" className={s.logo}>
