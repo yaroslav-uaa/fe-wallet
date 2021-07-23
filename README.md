@@ -1,10 +1,10 @@
-![](https://img.shields.io/badge/React_IT-blueviolet)
+![](https://img.shields.io/badge/CatsRevenants-blueviolet)
 
 # Wallet
 
-> My final project from hw of React GOIT.
+> Team project from GOIT.
 
-![screenshot]()
+![screenshot](./src/images/readme.jpg)
 
 Additional description about the project and its features.
 
@@ -29,9 +29,15 @@ Additional description about the project and its features.
 
 ## Live Demo
 
-[Live Demo Link](https://)
+[Live Demo Link](https://wallet-of-success.netlify.app/)
 
 ## Authors
+
+<a href="https://github.com/yaroslav-uaa/fe-wallet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=yaroslav-uaa/fe-wallet" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
 
 ## Show your support
 

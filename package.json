@@ -60,8 +60,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "netlify deploy -p",
-    "api-server": "json-server --port 4040 --delay 300 --watch db.json"
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [
