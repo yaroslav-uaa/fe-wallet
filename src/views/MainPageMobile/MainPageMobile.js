@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router';
 import Header from '../../components/Header';
@@ -6,6 +6,9 @@ import SideBar from '../../components/SideBar';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import '../ViewsAnimate.css';
 import { Ripple } from 'react-spinners-css';
+import { useDispatch } from 'react-redux';
+import capitalOperations from '../../redux/capital/operations-capital';
+import transactionsOperations from '../../redux/transaction/operations-transactions';
 
 // views
 const DashboardPage = lazy(() => import('../DashboardPage/DashboardPage'));
@@ -15,6 +18,13 @@ const CurrencyPage = lazy(() => import('../CurrencyPage/CurrencyPage'));
 
 function MainPageMobile() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(capitalOperations.getCapital());
+    dispatch(transactionsOperations.fetchTransactions());
+  }, [dispatch]);
+
   return (
     <>
       <Header />

@@ -1,6 +1,5 @@
 import React, { lazy, useEffect, Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router';
-import PrivateRoute from '../../routes/PrivateRoute';
 import { useDispatch } from 'react-redux';
 
 import capitalOperations from '../../redux/capital/operations-capital';
