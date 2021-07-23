@@ -1,14 +1,16 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// redux
 
 import operations from '../../../../redux/capital/operations-capital';
 import getCapital from '../../../../redux/capital/selectors-capital';
 import operationTransactions from '../../../../redux/transaction/operations-transactions';
-
+// materia
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { useMediaQuery } from 'react-responsive';
 import EditIcon from '@material-ui/icons/Edit';
 import { IconButton } from '@material-ui/core';
+// styles
 import s from '../../Profile/Profile.module.css';
 
 export default function Capital() {

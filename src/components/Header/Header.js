@@ -9,7 +9,6 @@ import GetCurrency from '../GetCurrency/GetCurrency';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 function Header() {
-  // const name = useSelector(authSelectors.getUserName);
   const user = useSelector(authSelectors.getUser);
   const dispatch = useDispatch();
   const onLogout = useCallback(() => {

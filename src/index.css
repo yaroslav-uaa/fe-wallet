@@ -1,8 +1,12 @@
 body {
   background-image: linear-gradient(
-    to bottom,
-    rgba(33, 33, 33, 0.25),
-    rgba(255, 254, 254, 0.6)
+    130deg,
+    transparent,
+    rgba(33, 33, 33, 0.35),
+    #51649a96,
+    #529b7785,
+    #8f9a51b6,
+    rgba(255, 254, 254, 0.7)
   );
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -70,6 +74,19 @@ body {
 }
 
 @media screen and (min-width: 1280px) {
+  body {
+    width: 100vw;
+  }
+
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
   .content {
     padding: 100px 0 4vh;
     height: 100%;

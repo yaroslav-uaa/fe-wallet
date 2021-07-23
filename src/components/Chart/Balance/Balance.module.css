@@ -11,7 +11,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #24cca7;
+  color: #0a522a;
 }
 
 .balanceNegative {
@@ -27,5 +27,5 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ff6596;
+  color: #b32d3e;
 }

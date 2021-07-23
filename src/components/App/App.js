@@ -3,16 +3,15 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import authOperations from '../../redux/auth/auth-operations';
 
-import capitalOperations from '../../redux/capital/operations-capital';
-import transactionsOperations from '../../redux/transaction/operations-transactions';
-
 import { Container } from '@material-ui/core';
 import PublicRoute from '../../routes/PublicRoute';
 import GetCurrency from '../GetCurrency/GetCurrency';
 import { useMediaQuery } from 'react-responsive';
 import '@pnotify/core/dist/PNotify.css';
+
 import { defaults } from '@pnotify/core';
 import Loader from '../Loader/Loader';
+import PrivateRoute from '../../routes/PrivateRoute';
 import { Default } from 'react-spinners-css';
 
 // views
@@ -28,8 +27,6 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
-    dispatch(capitalOperations.getCapital());
-    dispatch(transactionsOperations.fetchTransactions());
   }, [dispatch]);
 
   setTimeout(() => sessionStorage.setItem('loaderOff', true), 2000);
@@ -64,10 +61,12 @@ function App() {
       >
         <Switch>
           <PublicRoute path="/signin" exact component={SignInPage} restricted />
-
           <PublicRoute path="/signup" exact component={SignUpPage} restricted />
-
-          <Route
+          {/* <Route
+            path="/"
+            component={isTabletOrMobile ? MainPageMobile : MainPage}
+          /> */}
+          <PrivateRoute
             path="/"
             component={isTabletOrMobile ? MainPageMobile : MainPage}
           />

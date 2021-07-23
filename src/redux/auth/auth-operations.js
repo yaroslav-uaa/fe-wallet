@@ -14,6 +14,15 @@ const token = {
   },
 };
 
+const resetToken = {
+  set(resetToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${resetToken}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
+
 const signUp = user => async dispatch => {
   dispatch(authActions.regRequest());
 
@@ -73,6 +82,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
     const r = await axios.get('/users/current');
     dispatch(authActions.getCurrentUserSuccess(r.data));
   } catch (err) {
+    token.unset();
     dispatch(authActions.getCurrentUserError(err.message));
   }
 };
@@ -102,6 +112,7 @@ const uploadAvatar = file => async dispatch => {
 
 const authOperations = {
   token,
+  resetToken,
   signUp,
   signIn,
   signOut,
