@@ -1,5 +1,5 @@
 import React, { lazy, useEffect, Suspense } from 'react';
-import { Switch, useLocation } from 'react-router';
+import { Route, Switch, useLocation } from 'react-router';
 import PrivateRoute from '../../routes/PrivateRoute';
 import { useDispatch } from 'react-redux';
 
@@ -54,9 +54,9 @@ function MainPage() {
                 unmountOnExit
               >
                 <Switch location={location}>
-                  <PrivateRoute path="/" exact component={DashboardPage} />
-                  <PrivateRoute path="/stats" exact component={StatsPage} />
-                  <PrivateRoute path="/user" exact component={UserPage} />
+                  <Route path="/" exact component={DashboardPage} />
+                  <Route path="/stats" exact component={StatsPage} />
+                  <Route path="/user" exact component={UserPage} />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
