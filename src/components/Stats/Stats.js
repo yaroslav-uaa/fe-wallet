@@ -9,41 +9,50 @@ import DiagramTab from '../../components/DiagramTab/DiagramTab';
 import SelectForStats from '../../components/SelectForStats/SelectForStats';
 
 import styles from './Stats.module.css';
+import { el } from 'date-fns/locale';
 
 const Stats = () => {
   const theme = useTheme();
   const allCategoriesWithColors = theme.categories;
   const months = theme.months;
 
-  const categoriesFromState = useSelector(transactionsSelectors.getAllCategoriesFromTransactions);
-  const categoriesWithBD = categoriesFromState.categories;
-  const balance = categoriesFromState.balance;
+  const categoriesFromState = useSelector(
+    transactionsSelectors.getAllCategoriesFromTransactions,
+  );
+  const categoriesWithDB = categoriesFromState.categories;
+  const consumption = categoriesFromState.consumption;
 
-  const visibleCategories = allCategoriesWithColors.map(el => {
-    const arrCategoriesWithDB = categoriesWithBD
-      ? categoriesWithBD.map(trans => trans.category)
-      : [];
-    if (arrCategoriesWithDB.includes(el.value)) {
-      return el;
-    }
-    return el;
-  });
+  const DB = categoriesWithDB ? categoriesWithDB : [];
 
-  const color = visibleCategories.filter(
-    e => e !== undefined,
-  ).map(el => el.color);
- 
+  let allArray = [];
 
-  const arrMoney = categoriesWithBD
-    ? categoriesWithBD.map(trans => trans.sum)
-    : null;
+  function createArrDBWithState() {
+    allCategoriesWithColors.forEach(el1 => {
+      DB.forEach(el2 => {
+        if (el1.value === el2.category) {
+          const sum = el2.sum;
+          allArray.push({ ...el1, sum });
+        }
+      });
+    });
+  }
+
+  createArrDBWithState();
+
+  const colors = allArray.map(el => el.color);
+
+  const arrMoney = allArray.map(el => el.sum);
   return (
     <>
       <div className={styles.statisticsPage}>
-        <Chart arrColors={color} arrMoney={arrMoney} balance={balance} />
+        <Chart
+          arrColors={colors}
+          arrMoney={arrMoney}
+          consumption={consumption}
+        />
         <div>
           <SelectForStats months={months} />
-          <DiagramTab arrColors={color} />
+          <DiagramTab allArray={allArray} />
         </div>
       </div>
     </>
