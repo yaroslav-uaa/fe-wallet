@@ -3,7 +3,7 @@ import authActions from './auth-actions';
 import { alert } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 
-axios.defaults.baseURL = 'https://be-wallet.herokuapp.com/api';
+axios.defaults.baseURL = 'http://localhost:4040/api';
 
 const token = {
   set(token) {
@@ -30,10 +30,15 @@ const signUp = user => async dispatch => {
     const r = await axios.post('/users/signup', user);
     token.set(r.data.token);
     dispatch(authActions.regSuccess(r.data));
-  } catch (err) {
-    dispatch(authActions.regError(err.message));
     alert({
-      text: 'Invalid data',
+      text: `${r.data.message}. Pls go to your http://${r.data.user.email} to verify it`,
+      type: 'success',
+      delay: 5000,
+    });
+  } catch (err) {
+    dispatch(authActions.regError(err.response.data.message));
+    alert({
+      text: `${err.response.data.message}. Please clear localstorage & refresh this page. We will solve this problem very soon`,
       type: 'error',
       delay: 2000,
     });
@@ -44,14 +49,14 @@ const signIn = user => async dispatch => {
   dispatch(authActions.signInRequest());
 
   try {
-    const r = await axios.post('/users/signin', user);
-    token.set(r.data.token);
+    const { data } = await axios.post('/users/signin', user);
+    token.set(data.token);
 
-    dispatch(authActions.signInSuccess(r.data));
+    dispatch(authActions.signInSuccess(data));
   } catch (err) {
-    dispatch(authActions.signInError(err.message));
+    dispatch(authActions.signInError(err.response.data.message));
     alert({
-      text: 'Invalid credentials',
+      text: `${err.response.data.message}`,
       type: 'error',
       delay: 2000,
     });
@@ -66,6 +71,11 @@ const signOut = () => async dispatch => {
     dispatch(authActions.signOutSuccess());
   } catch (err) {
     dispatch(authActions.signOutError(err.message));
+    alert({
+      text: `${err.message}`,
+      type: 'error',
+      delay: 2000,
+    });
   }
 };
 
@@ -84,6 +94,11 @@ const getCurrentUser = () => async (dispatch, getState) => {
   } catch (err) {
     token.unset();
     dispatch(authActions.getCurrentUserError(err.message));
+    alert({
+      text: `${err.response.data.message}`,
+      type: 'error',
+      delay: 2000,
+    });
   }
 };
 
@@ -94,6 +109,11 @@ const updateUser = user => async dispatch => {
     dispatch(authActions.updateUserSuccess(res.data.result));
   } catch (err) {
     dispatch(authActions.updateUserError(err.message));
+    alert({
+      text: `${err.response.data.message}`,
+      type: 'error',
+      delay: 2000,
+    });
   }
 };
 
@@ -105,6 +125,11 @@ const uploadAvatar = file => async dispatch => {
     fd.append('avatar', file);
     const res = await axios.patch('/users/avatars', fd);
     dispatch(authActions.uploadAvatarSuccess(res.data));
+    alert({
+      text: `Success upload avatar`,
+      type: 'success',
+      delay: 2000,
+    });
   } catch (err) {
     dispatch(authActions.uploadAvatarError(err.message));
   }
