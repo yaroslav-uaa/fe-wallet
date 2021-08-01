@@ -3,11 +3,10 @@ import { transactionsSelectors } from '../../redux/transaction';
 import { useSelector } from 'react-redux';
 import styles from './DiagramTab.module.css';
 
-export default function DiagramTab({ arrColors }) {
-  
-  const categoriesFromState = useSelector(transactionsSelectors.getAllCategoriesFromTransactions);
-
-  const categories = categoriesFromState.categories;
+export default function DiagramTab({ allArray }) {
+  const categoriesFromState = useSelector(
+    transactionsSelectors.getAllCategoriesFromTransactions,
+  );
 
   return (
     <div className={styles.container}>
@@ -17,20 +16,20 @@ export default function DiagramTab({ arrColors }) {
       </ul>
 
       <ul className={styles.listTransaction}>
-        {categories?.length > 0 ? (
-          categories.map(({ category, sum }, index) => {
+        {allArray?.length > 0 ? (
+          allArray.map(({ value, sum, color }) => {
             return (
-              <li className={styles.elementTransaction} key={index}>
+              <li className={styles.elementTransaction}>
                 <div
                   style={{
-                    backgroundColor: `${arrColors[index]}`,
+                    backgroundColor: `${color}`,
                     width: '24px',
                     minHeight: '24px',
                     borderRadius: '12px',
                     marginRight: '15px',
                   }}
                 ></div>
-                <div className={styles.category}>{category}</div>
+                <div className={styles.category}>{value}</div>
                 <div className={styles.sum}>{sum}</div>
               </li>
             );
